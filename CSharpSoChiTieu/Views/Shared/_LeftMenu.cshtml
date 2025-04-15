@@ -1,0 +1,93 @@
+﻿@* Thêm class d-none d-lg-block vào đây *@
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2 bg-white my-2 d-none d-lg-block" id="sidenav-main">
+    <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand px-4 py-3 m-0" asp-controller="Home" asp-action="Index">
+            <img src="~/assets/img/logo.png" class="navbar-brand-img" width="26" height="26" alt="main_logo">
+            <span class="ms-1 text-sm text-dark">Quản lý thu chi</span>
+        </a>
+    </div>
+
+    <div class="px-4 py-3 user-profile">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="d-flex align-items-center">
+                <img src="~/assets/img/avatar.jpg" class="avatar avatar-md rounded-circle me-2" alt="avatar">
+                <div>
+                    <h6 class="mb-0 text-sm">@User.Identity.Name</h6>
+                    <span class="text-xs text-muted">Quản trị viên</span>
+                </div>
+            </div>
+            <div class="mt-3 d-flex justify-content-between">
+                <a asp-controller="Account" asp-action="Profile" class="btn btn-sm btn-outline-dark mb-0 w-48">Hồ sơ</a>
+                <form asp-controller="Account" asp-action="Logout" method="post">
+                    <button type="submit" class="btn btn-sm btn-outline-danger mb-0 w-48">Đăng xuất</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="text-center">
+                <p class="text-sm mb-3">Bạn chưa đăng nhập</p>
+                <div class="d-flex justify-content-between">
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-sm btn-outline-primary mb-0 w-48">Đăng nhập</a>
+                    <a asp-controller="Account" asp-action="Register" class="btn btn-sm btn-outline-secondary mb-0 w-48">Đăng ký</a>
+                </div>
+            </div>
+        }
+    </div>
+
+    <hr class="horizontal dark mt-0 mb-2">
+
+    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "IncomeExpenses" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="IncomeExpenses" asp-action="Index">
+                    <i class="material-symbols-rounded opacity-5">dashboard</i>
+                    <span class="nav-link-text ms-1">Tổng quan</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "IncomeExpenses" && ViewContext.RouteData.Values["Action"].ToString() == "Income" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="IncomeExpenses" asp-action="Income">
+                    <i class="material-symbols-rounded opacity-5">payments</i>
+                    <span class="nav-link-text ms-1">Khoản thu</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "IncomeExpenses" && ViewContext.RouteData.Values["Action"].ToString() == "Expense" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="IncomeExpenses" asp-action="Expense">
+                    <i class="material-symbols-rounded opacity-5">receipt_long</i>
+                    <span class="nav-link-text ms-1">Khoản chi</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "IncomeExpenses" && ViewContext.RouteData.Values["Action"].ToString() == "Reports" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="IncomeExpenses" asp-action="Reports">
+                    <i class="material-symbols-rounded opacity-5">analytics</i>
+                    <span class="nav-link-text ms-1">Báo cáo</span>
+                </a>
+            </li>
+            <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-5">Quản lý</h6>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "IncomeExpenses" && ViewContext.RouteData.Values["Action"].ToString() == "Categories" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="IncomeExpenses" asp-action="Categories">
+                    <i class="material-symbols-rounded opacity-5">category</i>
+                    <span class="nav-link-text ms-1">Danh mục</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Account" && ViewContext.RouteData.Values["Action"].ToString() == "Settings" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="Account" asp-action="Settings">
+                    <i class="material-symbols-rounded opacity-5">settings</i>
+                    <span class="nav-link-text ms-1">Cài đặt</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="sidenav-footer position-absolute w-100 bottom-0">
+        <div class="mx-3">
+            <div class="text-center text-xs text-muted mb-2">
+                Phiên bản 1.0.0
+            </div>
+        </div>
+    </div>
+</aside>
