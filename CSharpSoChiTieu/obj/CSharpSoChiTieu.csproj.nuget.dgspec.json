@@ -146,6 +146,10 @@
               "target": "Package",
               "version": "[1.68.0.3427, )"
             },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            },
             "MimeKit": {
               "target": "Package",
               "version": "[4.11.0, )"

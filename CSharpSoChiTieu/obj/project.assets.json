@@ -2290,6 +2290,7 @@
           "AutoMapper": "14.0.0",
           "CSharpSoChiTieu.Data": "1.0.0",
           "Google.Apis.Gmail.v1": "1.68.0.3427",
+          "Microsoft.AspNetCore.Http": "2.3.0",
           "MimeKit": "4.11.0"
         },
         "compile": {

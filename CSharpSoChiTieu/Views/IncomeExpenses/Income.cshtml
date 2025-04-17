@@ -1,575 +1,121 @@
-﻿@*
+﻿﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
     ViewData["Title"] = "Thêm Khoản Thu";
 }
 
-<partial name="_NavbarIncomeExpenses" />
 
-<div class="row">
-    <div class="col-lg-7 col-md-12 mt-md-4 mt-3">
-        <div class="card mb-4 shadow-sm">
-            <div class="card-header pb-2 px-3">
-                <h6 class="mb-0 text-success"><i class="fas fa-plus-circle me-2"></i>Thêm khoản thu mới</h6>
-            </div>
-            <div class="card-body p-3">
-                <form id="addIncomeForm" class="needs-validation" novalidate>
-                    <div class="d-flex align-items-center mb-3">
-                        <label for="income-date" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ngày thu <span class="text-danger">*</span></label>
-                        <div class="input-group input-group-static flex-grow-1">
-                            <span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
-                            <input type="date" class="form-control" id="income-date" name="IncomeDate" required value="@DateTime.Now.ToString("yyyy-MM-dd")">
-                            <div class="invalid-feedback ms-2">Vui lòng chọn ngày thu.</div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex align-items-center mb-1">
-                        <label for="income-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Số tiền <span class="text-danger">*</span></label>
-                        <div class="input-group input-group-static flex-grow-1">
-                            <input type="text" class="form-control" id="income-amount" name="Amount" placeholder="0" required inputmode="decimal">
-                            <span class="input-group-text">VNĐ</span>
-                            <div class="invalid-feedback ms-2">Vui lòng nhập số tiền.</div>
-                        </div>
-                    </div>
-                    <small class="text-muted form-text d-block mb-3 ms-auto" style="padding-left: 88px;">Ví dụ: 10000000</small>
-
-                    <div class="d-flex align-items-center mb-3">
-                        <label for="income-note" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ghi chú</label>
-                        <div class="input-group input-group-static flex-grow-1">
-                            <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
-                            <input type="text" class="form-control" id="income-note" name="Note" placeholder="Mô tả nguồn thu (vd: Lương T4, Thưởng...)">
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold mb-1">Danh mục <span class="text-danger">*</span></label>
-                        <div class="card border">
-                            <!-- Thêm thanh cuộn ngang ở đây -->
-                            <div class="card-body p-2" style="overflow-x: auto;">
-                                <div class="d-flex gap-2" style="min-width: max-content;">
-                                    <button type="button" class="btn btn-sm btn-category d-flex align-items-center px-3 py-2 active" data-category-id="10" data-category-name="salary">
-                                        <div class="icon icon-shape icon-xs bg-primary shadow text-white text-center rounded-circle me-2">
-                                            <i class="material-symbols-rounded fs-6">payments</i>
-                                        </div>
-                                        <span class="text-nowrap">Lương</span>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-category d-flex align-items-center px-3 py-2" data-category-id="11" data-category-name="bonus">
-                                        <div class="icon icon-shape icon-xs bg-info shadow text-white text-center rounded-circle me-2">
-                                            <i class="material-symbols-rounded fs-6">military_tech</i>
-                                        </div>
-                                        <span class="text-nowrap">Thưởng</span>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-category d-flex align-items-center px-3 py-2" data-category-id="12" data-category-name="selling">
-                                        <div class="icon icon-shape icon-xs bg-warning shadow text-white text-center rounded-circle me-2">
-                                            <i class="material-symbols-rounded fs-6">storefront</i>
-                                        </div>
-                                        <span class="text-nowrap">Bán hàng</span>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-category d-flex align-items-center px-3 py-2" data-category-id="13" data-category-name="investment">
-                                        <div class="icon icon-shape icon-xs bg-success shadow text-white text-center rounded-circle me-2">
-                                            <i class="material-symbols-rounded fs-6">trending_up</i>
-                                        </div>
-                                        <span class="text-nowrap">Đầu tư</span>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-category d-flex align-items-center px-3 py-2" data-category-id="14" data-category-name="gift">
-                                        <div class="icon icon-shape icon-xs bg-danger shadow text-white text-center rounded-circle me-2">
-                                            <i class="material-symbols-rounded fs-6">card_giftcard</i>
-                                        </div>
-                                        <span class="text-nowrap">Quà tặng</span>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-category d-flex align-items-center px-3 py-2" data-category-id="19" data-category-name="other_income">
-                                        <div class="icon icon-shape icon-xs bg-secondary shadow text-white text-center rounded-circle me-2">
-                                            <i class="material-symbols-rounded fs-6">more_horiz</i>
-                                        </div>
-                                        <span class="text-nowrap">Thu nhập khác</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="hidden" id="income-category-id" name="IncomeCategoryId" value="10" required />
-                        <div class="invalid-feedback" id="category-validation-feedback" style="display: none; margin-top:-10px; margin-bottom: 10px;">Vui lòng chọn một danh mục.</div>
-                    </div>
-
-                    <div class="mt-4">
-                        <button type="submit" class="btn btn-success w-100 py-2 fw-bold">
-                            <i class="fas fa-save me-2"></i> Lưu khoản thu
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+<div class="card mb-4 shadow-sm">
+    <div class="card-header pb-2 px-3">
+        <h6 class="mb-0 text-success"><i class="fas fa-plus-circle me-2"></i>Thêm khoản thu mới</h6>
     </div>
+    <div class="card-body p-3">
+        <form id="addIncomeForm" class="needs-validation" novalidate>
+            <!-- Ngày thu -->
+            <div class="d-flex align-items-center mb-3">
+                <label for="income-date" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ngày thu <span class="text-danger">*</span></label>
+                <div class="input-group input-group-static flex-grow-1">
+                    <span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
+                    <input type="date" class="form-control" id="income-date" name="IncomeDate" required value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                    <div class="invalid-feedback ms-2">Vui lòng chọn ngày thu.</div>
+                </div>
+            </div>
 
-    <div class="col-lg-5 col-md-12 mt-md-4 mt-3">
-        <div class="card h-100 shadow-sm">
-            <div class="card-header pb-0 px-3">
-                <div class="row align-items-center mb-2">
-                    <div class="col-6">
-                        <h6 class="mb-0 text-info"><i class="fas fa-list-ul me-2"></i>Thu nhập gần đây</h6>
-                    </div>
-                    <div class="col-6 d-flex justify-content-end">
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle text-nowrap px-2 py-1" type="button" id="dateRangeDropdownIncome" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="material-symbols-rounded align-middle fs-6 me-1">calendar_month</i>
-                                <span class="d-none d-sm-inline">Tháng này</span>
-                                <span class="d-inline d-sm-none">T.Này</span>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dateRangeDropdownIncome">
-                                <li><a class="dropdown-item" href="#" data-range="today">Hôm nay</a></li>
-                                <li><a class="dropdown-item" href="#" data-range="week">Tuần này</a></li>
-                                <li><a class="dropdown-item active" href="#" data-range="month">Tháng này</a></li>
-                                <li><a class="dropdown-item" href="#" data-range="custom">Tuỳ chọn...</a></li>
-                            </ul>
-                        </div>
+            <!-- Số tiền -->
+            <div class="d-flex align-items-center mb-1">
+                <label for="income-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Số tiền <span class="text-danger">*</span></label>
+                <div class="input-group input-group-static flex-grow-1">
+                    <input type="text" class="form-control" id="income-amount" name="Amount" placeholder="0" required inputmode="decimal">
+                    <span class="input-group-text">VNĐ</span>
+                    <div class="invalid-feedback ms-2">Vui lòng nhập số tiền.</div>
+                </div>
+            </div>
+
+            <!-- Ghi chú -->
+            <div class="d-flex align-items-center mb-3">
+                <label for="income-note" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ghi chú</label>
+                <div class="input-group input-group-static flex-grow-1">
+                    <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
+                    <input type="text" class="form-control" id="income-note" name="Note" placeholder="Mô tả nguồn thu (vd: Lương T4, Thưởng...)">
+                </div>
+            </div>
+
+            <!-- Danh mục -->
+            <label class="form-label small fw-bold mb-1">Danh mục <span class="text-danger">*</span></label>
+            <div class="card border">
+                <div class="card-body p-2" style="overflow-x: auto;">
+                    <div class="d-flex gap-2" style="min-width: max-content;">
+                        @{
+                            var categories = new[]{
+                        new { Id=1, Name="food", Text="Ăn uống", Icon="restaurant", Color="success" },
+                        new { Id=2, Name="transport", Text="Di chuyển", Icon="directions_car", Color="primary" },
+                        new { Id=3, Name="entertainment", Text="Giải trí", Icon="sports_esports", Color="info" },
+                        new { Id=4, Name="shopping", Text="Mua sắm", Icon="shopping_bag", Color="warning" },
+                        new { Id=5, Name="health", Text="Y tế", Icon="favorite", Color="danger" },
+                        };
+
+                            foreach (var cat in categories)
+                            {
+                                <button type="button" class="btn btn-sm btn-category border d-flex align-items-center px-3 py-2 @(cat.Id == 1 ? "active" : "")"
+                                        data-category-id="@cat.Id" data-category-name="@cat.Name">
+                                    <div class="icon icon-shape icon-xs bg-@cat.Color shadow text-white text-center rounded-circle me-2">
+                                        <i class="material-symbols-rounded fs-6">@cat.Icon</i>
+                                    </div>
+                                    <span class="text-nowrap">@cat.Text</span>
+                                </button>
+                            }
+                        }
                     </div>
                 </div>
             </div>
-            <div class="card-body pt-2 p-3">
-                <div class="alert alert-light border-success border-start border-4 py-2 px-3 mb-3" role="alert">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <span class="text-xs text-uppercase fw-bold text-success">Tổng thu:</span>
-                        <span class="fw-bolder fs-6 text-dark" id="total-income-display">15,000,000 ₫</span>
-                    </div>
-                </div>
+            <input type="hidden" id="expense-category-id" name="CategoryId" value="1" required />
+            <div class="invalid-feedback" id="category-validation-feedback" style="display:none; margin-top:-10px; margin-bottom: 10px;">Vui lòng chọn một danh mục.</div>
 
-                <!-- Đã xóa thanh cuộn dọc ở đây -->
-                <div class="income-list-container">
-                    <ul class="list-group list-group-flush" id="income-list">
-                        <li class="list-group-item border-0 d-flex justify-content-between align-items-center ps-1 pe-1 mb-1">
-                            <div class="d-flex align-items-center">
-                                <div class="icon icon-shape icon-xs bg-primary text-white text-center rounded-circle me-2 shadow-sm flex-shrink-0">
-                                    <i class="material-symbols-rounded fs-6">payments</i>
-                                </div>
-                                <div class="d-flex flex-column text-truncate">
-                                    <h6 class="mb-0 text-dark text-sm">Lương tháng 4</h6>
-                                    <span class="text-xs text-muted">05/04/2025</span>
-                                </div>
-                            </div>
-                            <div class="text-success text-gradient text-sm fw-bold ms-2 text-nowrap">
-                                +10,000,000&nbsp;₫
-                            </div>
-                        </li>
-                        <li class="list-group-item border-0 d-flex justify-content-between align-items-center ps-1 pe-1 mb-1">
-                            <div class="d-flex align-items-center">
-                                <div class="icon icon-shape icon-xs bg-info text-white text-center rounded-circle me-2 shadow-sm flex-shrink-0">
-                                    <i class="material-symbols-rounded fs-6">military_tech</i>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <h6 class="mb-0 text-dark text-sm">Thưởng hiệu suất</h6>
-                                    <span class="text-xs text-muted">10/04/2025</span>
-                                </div>
-                            </div>
-                            <div class="text-success text-gradient text-sm fw-bold ms-2 text-nowrap">
-                                +5,000,000&nbsp;₫
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="text-center mt-3" id="load-more-income-container" style="display: none;">
-                    <button class="btn btn-sm btn-outline-secondary">Tải thêm thu nhập</button>
-                </div>
+            <div class="mt-4">
+                <button type="submit" class="btn btn-success w-100 py-2 fw-bold">
+                    <i class="fas fa-save me-2"></i> Lưu khoản thu
+                </button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
-<div class="modal fade" id="dateRangeModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header py-2">
-                <h6 class="modal-title">Chọn khoảng thời gian</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body py-2">
-                <div class="mb-2">
-                    <label class="form-label small">Từ ngày</label>
-                    <input type="date" class="form-control form-control-sm" id="startDate">
-                </div>
-                <div class="mb-2">
-                    <label class="form-label small">Đến ngày</label>
-                    <input type="date" class="form-control form-control-sm" id="endDate">
-                </div>
-            </div>
-            <div class="modal-footer py-1">
-                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-                <button type="button" class="btn btn-sm btn-primary" id="applyDateRange">Áp dụng</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <style>
-    /* === PHẦN SỬA LỖI CHỌN DANH MỤC === */
-    .btn-category {
-        border: 1px solid #dee2e6;
-        background-color: #f8f9fa;
-        transition: all 0.2s;
-        opacity: 0.8;
+    /* Begin: Danh Mục */
+
+    .btn-category.active {
+        background-color: #0d6efd; /* Màu xanh dương khi active */
+        color: white;
     }
-
-        .btn-category:hover {
-            transform: translateY(-1px);
-            border-color: #adb5bd;
-            opacity: 1;
-        }
-
-        .btn-category.active {
-            font-weight: 600;
-            color: #fff !important;
-            border: 1px solid transparent !important;
-            opacity: 1;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-        }
-
-        /* Màu sắc cho từng loại danh mục khi active */
-        .btn-category[data-category-name="salary"].active {
-            background-color: var(--bs-primary) !important;
-        }
-
-        .btn-category[data-category-name="bonus"].active {
-            background-color: var(--bs-info) !important;
-        }
-
-        .btn-category[data-category-name="selling"].active {
-            background-color: var(--bs-warning) !important;
-            color: #212529 !important;
-        }
-
-        .btn-category[data-category-name="investment"].active {
-            background-color: var(--bs-success) !important;
-        }
-
-        .btn-category[data-category-name="gift"].active {
-            background-color: var(--bs-danger) !important;
-        }
-
-        .btn-category[data-category-name="other_income"].active {
-            background-color: var(--bs-secondary) !important;
-        }
-
-        /* Icon trong nút active */
-        .btn-category.active .icon-shape {
-            background-color: rgba(255,255,255,0.25) !important;
-        }
-
-            .btn-category.active .icon-shape i {
-                color: #fff !important;
-            }
-
-        /* Riêng selling (warning) active */
-        .btn-category[data-category-name="selling"].active .icon-shape {
-            background-color: rgba(0,0,0,0.15) !important;
-        }
-
-            .btn-category[data-category-name="selling"].active .icon-shape i {
-                color: #212529 !important;
-            }
-
-    /* CSS cho thanh cuộn ngang danh mục */
-    .card-body[style*="overflow-x"] {
-        scrollbar-width: thin;
-        scrollbar-color: #adb5bd #f8f9fa;
-    }
-
-    .card-body::-webkit-scrollbar {
-        height: 5px;
-        background-color: #f8f9fa;
-    }
-
-    .card-body::-webkit-scrollbar-thumb {
-        background-color: #adb5bd;
-        border-radius: 5px;
-    }
-
-        .card-body::-webkit-scrollbar-thumb:hover {
-            background-color: #6c757d;
-        }
-
-    /* Đảm bảo các button không bị wrap */
-    .d-flex[style*="max-content"] {
-        flex-wrap: nowrap;
-    }
-
-    /* Xóa thanh cuộn dọc ở phần thu nhập gần đây */
-    .income-list-container {
-        max-height: none;
-        overflow-y: visible;
-    }
-
-    /* Style cho nút danh mục */
-    .btn-category {
-        border: 1px solid #dee2e6;
-        background-color: #f8f9fa;
-        transition: all 0.2s;
-    }
-
-        .btn-category:hover {
-            background-color: #e9ecef;
-        }
-
-        .btn-category.active {
-            border: 2px solid #0d6efd !important;
-            background-color: #e7f1ff !important;
-            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-        }
-
-        /* Style riêng cho từng loại danh mục */
-        .btn-category[data-category-name="salary"].active {
-            background-color: var(--bs-primary) !important;
-            color: white !important;
-        }
-
-        .btn-category[data-category-name="bonus"].active {
-            background-color: var(--bs-info) !important;
-            color: white !important;
-        }
-
-        .btn-category[data-category-name="selling"].active {
-            background-color: var(--bs-warning) !important;
-            color: #212529 !important;
-        }
-
-        .btn-category[data-category-name="investment"].active {
-            background-color: var(--bs-success) !important;
-            color: white !important;
-        }
-
-        .btn-category[data-category-name="gift"].active {
-            background-color: var(--bs-danger) !important;
-            color: white !important;
-        }
-
-        .btn-category[data-category-name="other_income"].active {
-            background-color: var(--bs-secondary) !important;
-            color: white !important;
-        }
+    /* End: Danh Mục */
 
     /* Responsive adjustments */
     @@media (max-width: 767.98px) {
-        .card-body
+        .card-body {
+            padding: 0.8rem !important;
+        }
 
-    {
-        padding: 0.8rem !important;
-    }
-
-    .form-label {
-        margin-bottom: 0.25rem !important;
-    }
-
+        .form-label {
+            margin-bottom: 0.25rem !important;
+        }
     }
 </style>
 
 <script>
+    $(document).ready(function() {
+        clickDanhMucDoiMau();
+    });
 
-    // === PHẦN SỬA LỖI XỬ LÝ CHỌN DANH MỤC ===
-    document.addEventListener('DOMContentLoaded', function() {
-        const categoryButtons = document.querySelectorAll('.btn-category');
-        const incomeCategoryIdInput = document.getElementById('income-category-id');
-        const categoryValidationFeedback = document.getElementById('category-validation-feedback');
+    function clickDanhMucDoiMau() {
+        // Sự kiện click cho tất cả các nút danh mục
+        $(".btn-category").click(function() {
+            // Xóa lớp "active" khỏi tất cả các nút
+            $(".btn-category").removeClass("active");
 
-        // Xử lý khi click chọn danh mục
-        categoryButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-
-                // Xóa active tất cả button
-                categoryButtons.forEach(btn => {
-                    btn.classList.remove('active');
-                    btn.style.opacity = '0.8';
-                });
-
-                // Thêm active cho button được chọn
-                this.classList.add('active');
-                this.style.opacity = '1';
-
-                // Cập nhật giá trị hidden input
-                const categoryId = this.getAttribute('data-category-id');
-                incomeCategoryIdInput.value = categoryId;
-
-                // Ẩn thông báo lỗi nếu có
-                if(categoryValidationFeedback) {
-                    categoryValidationFeedback.style.display = 'none';
-                }
-            });
+            // Thêm lớp "active" vào nút đang được click
+            $(this).addClass("active");
         });
-
-        // Chọn danh mục mặc định (nếu có)
-        const defaultCategory = document.querySelector('.btn-category.active');
-        if(defaultCategory && incomeCategoryIdInput) {
-            incomeCategoryIdInput.value = defaultCategory.getAttribute('data-category-id');
-        }
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-        // === Xử lý định dạng tiền tệ ===
-        const amountInput = document.getElementById('income-amount');
-        let numericValue = 0;
-
-        if (amountInput) {
-            function formatCurrency(value) {
-                if (isNaN(value) || value === null) return '';
-                return new Intl.NumberFormat('vi-VN').format(value);
-            }
-
-            function parseCurrency(formattedValue) {
-                if (!formattedValue) return 0;
-                return parseInt(formattedValue.replace(/\./g, ''), 10) || 0;
-            }
-
-            amountInput.addEventListener('input', function (e) {
-                let rawValue = e.target.value.replace(/[^0-9]/g, '');
-                numericValue = parseInt(rawValue, 10) || 0;
-                e.target.value = formatCurrency(numericValue);
-                amountInput.classList.remove('is-invalid');
-            });
-
-            amountInput.addEventListener('focus', function (e) {
-                if (numericValue === 0) {
-                    e.target.value = '';
-                } else {
-                    e.target.value = numericValue;
-                }
-            });
-
-            amountInput.addEventListener('blur', function (e) {
-                if(e.target.value !== '') {
-                    numericValue = parseInt(e.target.value.replace(/[^0-9]/g, ''), 10) || 0;
-                    e.target.value = formatCurrency(numericValue);
-                } else {
-                    numericValue = 0;
-                }
-            });
-        }
-
-        // === Xử lý chọn danh mục ===
-        const categoryButtonsWrapper = document.querySelector('.category-buttons-wrapper');
-        const incomeCategoryIdInput = document.getElementById('income-category-id');
-        const categoryValidationFeedback = document.getElementById('category-validation-feedback');
-
-        if (categoryButtonsWrapper && incomeCategoryIdInput) {
-            categoryButtonsWrapper.addEventListener('click', function(e) {
-                const button = e.target.closest('.btn-category');
-                if (!button) return;
-
-                e.preventDefault();
-                categoryButtonsWrapper.querySelectorAll('.btn-category').forEach(el => el.classList.remove('active'));
-                button.classList.add('active');
-
-                const categoryId = button.getAttribute('data-category-id');
-                incomeCategoryIdInput.value = categoryId;
-
-                if(categoryValidationFeedback) {
-                    categoryValidationFeedback.style.display = 'none';
-                }
-                incomeCategoryIdInput.classList.remove('is-invalid');
-            });
-
-            // Chọn danh mục mặc định
-            const initialCategoryId = incomeCategoryIdInput.value ||
-                                    categoryButtonsWrapper.querySelector('.btn-category')?.getAttribute('data-category-id') || '';
-            incomeCategoryIdInput.value = initialCategoryId;
-
-            const initialActiveButton = categoryButtonsWrapper.querySelector(`.btn-category[data-category-id="${initialCategoryId}"]`);
-            if (initialActiveButton) {
-                initialActiveButton.classList.add('active');
-            }
-        }
-
-        // === Xử lý form ===
-        const form = document.getElementById('addIncomeForm');
-
-        if (form) {
-            form.addEventListener('submit', function (event) {
-                event.preventDefault();
-                event.stopPropagation();
-
-                let isFormValid = form.checkValidity();
-                let isCategorySelected = false;
-
-                // Kiểm tra đã chọn danh mục chưa
-                const selectedCategoryButton = categoryButtonsWrapper?.querySelector('.btn-category.active');
-                if (selectedCategoryButton && incomeCategoryIdInput.value) {
-                    isCategorySelected = true;
-                    if(categoryValidationFeedback) {
-                        categoryValidationFeedback.style.display = 'none';
-                    }
-                    incomeCategoryIdInput.classList.remove('is-invalid');
-                } else {
-                    isFormValid = false;
-                    if(categoryValidationFeedback) {
-                        categoryValidationFeedback.style.display = 'block';
-                    }
-                    incomeCategoryIdInput.classList.add('is-invalid');
-                }
-
-                // Tạo input ẩn chứa giá trị số
-                let hiddenAmountInput = form.querySelector('input[name="AmountNumeric"]');
-                if (!hiddenAmountInput) {
-                    hiddenAmountInput = document.createElement('input');
-                    hiddenAmountInput.type = 'hidden';
-                    hiddenAmountInput.name = 'AmountNumeric';
-                    form.appendChild(hiddenAmountInput);
-                }
-                hiddenAmountInput.value = numericValue;
-
-                if (isFormValid) {
-                    console.log("Form hợp lệ. Dữ liệu:", {
-                        IncomeDate: form.elements['IncomeDate'].value,
-                        Amount: numericValue,
-                        Note: form.elements['Note'].value,
-                        IncomeCategoryId: form.elements['IncomeCategoryId'].value
-                    });
-
-                    // Gửi form (có thể thay bằng AJAX)
-                    alert('Form hợp lệ, sẵn sàng gửi đi! (Xem console log)');
-                    // form.submit();
-                }
-
-                form.classList.add('was-validated');
-            }, false);
-        }
-
-        // Đặt ngày mặc định
-        const incomeDateInput = document.getElementById('income-date');
-        if (incomeDateInput && !incomeDateInput.value) {
-            incomeDateInput.value = new Date().toISOString().split('T')[0];
-        }
-
-        // Xử lý dropdown chọn khoảng thời gian
-        const dateRangeModal = new bootstrap.Modal(document.getElementById('dateRangeModal'));
-        const dateRangeDropdown = document.getElementById('dateRangeDropdownIncome');
-
-        if (dateRangeDropdown) {
-            dateRangeDropdown.addEventListener('click', function() {
-                // Logic xử lý khi click vào dropdown
-            });
-
-            document.querySelectorAll('#dateRangeDropdownIncome + .dropdown-menu .dropdown-item[data-range]').forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const range = this.getAttribute('data-range');
-
-                    if (range === 'custom') {
-                        dateRangeModal.show();
-                    } else {
-                        // Cập nhật text trên button
-                        const rangeText = this.textContent.trim();
-                        dateRangeDropdown.querySelector('span').textContent = rangeText;
-
-                        // Load dữ liệu theo khoảng thời gian
-                        loadIncomeData(range);
-                    }
-                });
-            });
-        }
-
-        // Hàm load dữ liệu thu nhập
-        function loadIncomeData(range) {
-            console.log("Loading income data for range:", range);
-            // Thực hiện AJAX request để lấy dữ liệu
-            // Sau đó cập nhật giao diện
-        }
-    });
+    }
 </script>

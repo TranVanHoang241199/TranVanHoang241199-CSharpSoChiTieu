@@ -20,6 +20,9 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
     @* @await RenderSectionAsync("Styles", required: false) *@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     @section Styles {
@@ -29,17 +32,9 @@
 <body class="g-sidenav-show  bg-gray-100">
 
         @{
-            await Html.RenderPartialAsync("_LeftMenu");
+        await Html.RenderPartialAsync("_ControlSideBar");
         }
         <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-            
-            @* @{
-                await Html.RenderPartialAsync("_Header");
-            } *@
-
-            @{
-                await Html.RenderPartialAsync("_Navbar");
-            }
 
             <div class="container-fluid py-2">
 
@@ -60,7 +55,7 @@
         </section> *@
 
     @{
-        await Html.RenderPartialAsync("_FooterMenu");
+        await Html.RenderPartialAsync("_ControlFooter");
     }
     
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -339,5 +334,11 @@
             };
         </script>
     }
+
+    <script>
+        $(document).ready(function () {
+            $('.sidebar-menu').tree()
+        })
+    </script>
 </body>
 </html>

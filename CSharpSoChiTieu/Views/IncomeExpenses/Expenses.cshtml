@@ -5,497 +5,125 @@
     ViewData["Title"] = "Thêm Khoản Chi"; // Đặt tiêu đề trang
 }
 
-<partial name="_NavbarIncomeExpenses" />
 
-<div class="row">
-    <div class="col-lg-7 col-md-12 mt-md-4 mt-3">
-        <div class="card mb-4 shadow-sm">
-            <div class="card-header pb-2 px-3">
-                <h6 class="mb-0 text-primary"><i class="fas fa-edit me-2"></i>Thêm khoản chi mới</h6>
-            </div>
-            <div class="card-body p-3">
-                <form id="addExpenseForm" class="needs-validation" novalidate>
-                    @* Bỏ row g-3, dùng margin bottom cho từng group *@
 
-                    <div class="d-flex align-items-center mb-3">
-                        @* <<< Dùng Flexbox *@
-                        <label for="expense-date" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ngày chi <span class="text-danger">*</span></label>  @* <<< Label: cố định width, không xuống dòng, không co lại *@
-                        <div class="input-group input-group-static flex-grow-1">
-                            @* <<< Input group chiếm phần còn lại *@
-                            <span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
-                            <input type="date" class="form-control" id="expense-date" name="ExpenseDate" required value="@DateTime.Now.ToString("yyyy-MM-dd")">
-                            <div class="invalid-feedback ms-2">Vui lòng chọn ngày.</div> @* Feedback đặt sau input group *@
-                        </div>
-                    </div>
-
-                    <div class="d-flex align-items-center mb-1">
-                        @* Giảm mb *@
-                        <label for="expense-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Số tiền <span class="text-danger">*</span></label>
-                        <div class="input-group input-group-static flex-grow-1">
-                            <input type="text" class="form-control" id="expense-amount" name="Amount" placeholder="0" required inputmode="decimal"> @* Bỏ pattern vì JS xử lý format *@
-                            <span class="input-group-text">VNĐ</span>
-                            <div class="invalid-feedback ms-2">Vui lòng nhập số tiền.</div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex align-items-center mb-3">
-                        <label for="expense-note" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ghi chú</label>
-                        <div class="input-group input-group-static flex-grow-1">
-                            <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
-                            <input type="text" class="form-control" id="expense-note" name="Note" placeholder="Mô tả ngắn (vd: ăn trưa...)">
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        @* Thêm mb cho khoảng cách *@
-                        <label class="form-label small fw-bold mb-1">Danh mục <span class="text-danger">*</span></label>
-                        <div class="card border">
-                            <div class="card-body p-2 category-scroll-container">
-                                <div class="d-flex gap-2 category-buttons-wrapper">
-                                    <button type="button" class="btn btn-sm btn-category d-flex align-items-center px-3 py-2 active" data-category-id="1" data-category-name="food">
-                                        <div class="icon icon-shape icon-xs bg-success shadow text-white text-center rounded-circle me-2"> <i class="material-symbols-rounded fs-6">restaurant</i> </div> <span class="text-nowrap">Ăn uống</span>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-category d-flex align-items-center px-3 py-2" data-category-id="2" data-category-name="transport">
-                                        <div class="icon icon-shape icon-xs bg-primary shadow text-white text-center rounded-circle me-2"> <i class="material-symbols-rounded fs-6">directions_car</i> </div> <span class="text-nowrap">Di chuyển</span>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-category d-flex align-items-center px-3 py-2" data-category-id="3" data-category-name="entertainment">
-                                        <div class="icon icon-shape icon-xs bg-purple shadow text-white text-center rounded-circle me-2"> <i class="material-symbols-rounded fs-6">sports_esports</i> </div> <span class="text-nowrap">Giải trí</span>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-category d-flex align-items-center px-3 py-2" data-category-id="4" data-category-name="shopping">
-                                        <div class="icon icon-shape icon-xs bg-warning shadow text-white text-center rounded-circle me-2"> <i class="material-symbols-rounded fs-6">shopping_bag</i> </div> <span class="text-nowrap">Mua sắm</span>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-category d-flex align-items-center px-3 py-2" data-category-id="5" data-category-name="health">
-                                        <div class="icon icon-shape icon-xs bg-danger shadow text-white text-center rounded-circle me-2"> <i class="material-symbols-rounded fs-6">favorite</i> </div> <span class="text-nowrap">Y tế</span>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-category d-flex align-items-center px-3 py-2" data-category-id="6" data-category-name="other">
-                                        <div class="icon icon-shape icon-xs bg-secondary shadow text-white text-center rounded-circle me-2"> <i class="material-symbols-rounded fs-6">more_horiz</i> </div> <span class="text-nowrap">Khác</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="hidden" id="expense-category-id" name="CategoryId" value="1" required />
-                        <div class="invalid-feedback" id="category-validation-feedback" style="display: none; margin-top:-10px; margin-bottom: 10px;">Vui lòng chọn một danh mục.</div>
-                    </div>
-
-                    <div class="mt-4">
-                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">
-                            <i class="fas fa-save me-2"></i> Lưu chi tiêu
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+<div class="card mb-4 shadow-sm">
+    <div class="card-header pb-2 px-3">
+        <h6 class="mb-0 text-primary"><i class="fas fa-edit me-2"></i>Thêm khoản chi mới</h6>
     </div>
+    <div class="card-body p-3">
+        <form id="addExpenseForm" class="needs-validation" novalidate>
 
-    <div class="col-lg-5 col-md-12 mt-md-4 mt-3">
-        @* Nội dung box bên phải giữ nguyên như trước *@
-        <div class="card h-100 shadow-sm">
-            <div class="card-header pb-0 px-3">
-                <div class="row align-items-center mb-2">
-                    <div class="col-6">
-                        <h6 class="mb-0 text-info"><i class="fas fa-list-ul me-2"></i>Chi tiêu gần đây</h6>
-                    </div>
-                    <div class="col-6 d-flex justify-content-end">
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle text-nowrap px-2 py-1" type="button" id="dateRangeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="material-symbols-rounded align-middle fs-6 me-1">calendar_month</i> <span class="d-none d-sm-inline">Tháng này</span>
-                                <span class="d-inline d-sm-none">T.Này</span>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dateRangeDropdown">
-                                <li><a class="dropdown-item" href="#" data-range="today">Hôm nay</a></li>
-                                <li><a class="dropdown-item" href="#" data-range="week">Tuần này</a></li>
-                                <li><a class="dropdown-item active" href="#" data-range="month">Tháng này</a></li>
-                                <li><a class="dropdown-item" href="#" data-range="custom">Tuỳ chọn...</a></li>
-                            </ul>
-                        </div>
+            @* Ngày Thu *@
+            <div class="d-flex align-items-center mb-3">
+                <label for="income-date" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ngày thu <span class="text-danger">*</span></label>
+                <div class="input-group input-group-static flex-grow-1">
+                    <span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
+                    <input type="date" class="form-control" id="income-date" name="IncomeDate" required value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                    <div class="invalid-feedback ms-2">Vui lòng chọn ngày thu.</div>
+                </div>
+            </div>
+
+            @* Số tiền *@
+            <div class="d-flex align-items-center mb-1">
+                <label for="income-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Số tiền <span class="text-danger">*</span></label>
+                <div class="input-group input-group-static flex-grow-1">
+                    <input type="text" class="form-control" id="income-amount" name="Amount" placeholder="0" required inputmode="decimal">
+                    <span class="input-group-text">VNĐ</span>
+                    <div class="invalid-feedback ms-2">Vui lòng nhập số tiền.</div>
+                </div>
+            </div>
+
+            @* Ghi chú *@
+            <div class="d-flex align-items-center mb-3">
+                <label for="income-note" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ghi chú</label>
+                <div class="input-group input-group-static flex-grow-1">
+                    <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
+                    <input type="text" class="form-control" id="income-note" name="Note" placeholder="Mô tả">
+                </div>
+            </div>
+
+            <!-- Danh mục -->
+            <label class="form-label fw-bold mb-1">Danh mục <span class="text-danger">*</span></label>
+            <div class="card border mb-3">
+                <div class="card-body p-2 overflow-auto">
+                    <div class="d-inline-flex gap-2" style="min-width: max-content;">
+                        @{
+                            var categories = new[]{
+                        new { Id=1, Name="food", Text="Ăn uống", Icon="restaurant", Color="success" },
+                        new { Id=2, Name="transport", Text="Di chuyển", Icon="directions_car", Color="primary" },
+                        new { Id=3, Name="entertainment", Text="Giải trí", Icon="sports_esports", Color="primary" },
+                        new { Id=4, Name="shopping", Text="Mua sắm", Icon="shopping_bag", Color="warning" },
+                        new { Id=5, Name="health", Text="Y tế", Icon="favorite", Color="danger" },
+                        };
+
+                            foreach (var cat in categories)
+                            {
+                                <button type="button" class="btn btn-sm btn-category border d-flex align-items-center px-3 py-2 @(cat.Id == 1 ? "active" : "")"
+                                        data-category-id="@cat.Id" data-category-name="@cat.Name">
+                                    <div class="icon icon-xs bg-@cat.Color shadow text-white rounded-circle me-2">
+                                        <i class="material-symbols-rounded fs-6">@cat.Icon</i>
+                                    </div>
+                                    <span>@cat.Text</span>
+                                </button>
+                            }
+                        }
                     </div>
                 </div>
             </div>
-            <div class="card-body pt-2 p-3">
-                <div class="alert alert-light border-danger border-start border-4 py-2 px-3 mb-3" role="alert">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <span class="text-xs text-uppercase fw-bold text-danger">Tổng chi:</span>
-                        <span class="fw-bolder fs-6 text-dark" id="total-expense">5,500,000 ₫</span>
-                    </div>
-                </div>
 
-                <div class="expense-list-container" style="max-height: 400px; overflow-y: auto;">
-                    <ul class="list-group list-group-flush" id="expense-list">
-                        <li class="list-group-item border-0 d-flex justify-content-between align-items-center ps-1 pe-1 mb-1">
-                            <div class="d-flex align-items-center">
-                                <div class="icon icon-shape icon-xs bg-danger text-white text-center rounded-circle me-2 shadow-sm flex-shrink-0">
-                                    <i class="material-symbols-rounded fs-6">shopping_cart</i>
-                                </div>
-                                <div class="d-flex flex-column text-truncate">
-                                    <h6 class="mb-0 text-dark text-sm">Mua sắm online tiki lazada shopee gì đó rất dài</h6>
-                                    <span class="text-xs text-muted">Hôm nay, 14:30</span>
-                                </div>
-                            </div>
-                            <div class="text-danger text-gradient text-sm fw-bold ms-2 text-nowrap">
-                                -1,200,000&nbsp;₫
-                            </div>
-                        </li>
-                        <li class="list-group-item border-0 d-flex justify-content-between align-items-center ps-1 pe-1 mb-1">
-                            <div class="d-flex align-items-center">
-                                <div class="icon icon-shape icon-xs bg-success text-white text-center rounded-circle me-2 shadow-sm flex-shrink-0">
-                                    <i class="material-symbols-rounded fs-6">restaurant</i>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <h6 class="mb-0 text-dark text-sm">Ăn trưa cơm gà</h6>
-                                    <span class="text-xs text-muted">Hôm nay, 12:15</span>
-                                </div>
-                            </div>
-                            <div class="text-danger text-gradient text-sm fw-bold ms-2 text-nowrap">
-                                -35,000&nbsp;₫
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+            <input type="hidden" id="expense-category-id" name="CategoryId" value="1" required />
+            <div class="invalid-feedback" id="category-validation-feedback" style="display:none; margin-top:-10px; margin-bottom: 10px;">Vui lòng chọn một danh mục.</div>
 
-                <div class="text-center mt-3" id="load-more-container" style="display: none;">
-                    <button class="btn btn-sm btn-outline-secondary">Tải thêm</button>
-                </div>
-            </div>
-        </div>
+            <!-- Nút lưu -->
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold mt-3">
+                <i class="fas fa-save me-2"></i> Lưu chi tiêu
+            </button>
+
+        </form>
     </div>
 </div>
 
-<div class="modal fade" id="dateRangeModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header py-2"> <h6 class="modal-title">Chọn khoảng thời gian</h6> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> </div>
-            <div class="modal-body py-2">
-                <div class="mb-2"> <label class="form-label small">Từ ngày</label> <input type="date" class="form-control form-control-sm" id="startDate"> </div>
-                <div class="mb-2"> <label class="form-label small">Đến ngày</label> <input type="date" class="form-control form-control-sm" id="endDate"> </div>
-            </div>
-            <div class="modal-footer py-1"> <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Huỷ</button> <button type="button" class="btn btn-sm btn-primary" id="applyDateRange">Áp dụng</button> </div>
-        </div>
-    </div>
-</div>
+
 
 
 <style>
-    /* --- Category Buttons --- */
-    .category-scroll-container {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-        padding-bottom: 8px;
-        margin-bottom: -8px
-    }
+    /* Begin: Danh Mục */
 
-        .category-scroll-container::-webkit-scrollbar {
-            display: none
-        }
+    .btn-category.active {
+    background-color: #0d6efd; /* Màu xanh dương khi active */
+    color: white;
+}
+    /* End: Danh Mục */
 
-    .category-buttons-wrapper {
-        display: flex;
-        flex-wrap: nowrap
-    }
-
-        .category-buttons-wrapper .btn-category {
-            flex-shrink: 0;
-            border: 1px solid #dee2e6;
-            background-color: #fff;
-            color: #495057;
-            transition: all .2s ease-in-out;
-            opacity: .8;
-            font-size: .8rem
-        }
-
-            .category-buttons-wrapper .btn-category .icon-shape {
-                width: 20px;
-                height: 20px;
-                box-shadow: none
-            }
-
-                .category-buttons-wrapper .btn-category .icon-shape i {
-                    font-size: .9rem
-                }
-
-            .category-buttons-wrapper .btn-category:hover {
-                transform: translateY(-1px);
-                border-color: #adb5bd;
-                opacity: 1
-            }
-
-            .category-buttons-wrapper .btn-category.active {
-                font-weight: 600;
-                color: #fff;
-                border: 1px solid transparent;
-                opacity: 1;
-                box-shadow: 0 3px 6px rgba(0,0,0,.1);
-                transform: translateY(-1px)
-            }
-
-    .btn-category[data-category-name=food].active {
-        background-color: var(--bs-success)
-    }
-
-    .btn-category[data-category-name=transport].active {
-        background-color: var(--bs-primary)
-    }
-
-    .btn-category[data-category-name=entertainment].active {
-        background-color: #9c27b0
-    }
-
-    .btn-category[data-category-name=shopping].active {
-        background-color: var(--bs-warning);
-        color: #212529 !important
-    }
-
-    .btn-category[data-category-name=health].active {
-        background-color: var(--bs-danger)
-    }
-
-    .btn-category[data-category-name=other].active {
-        background-color: var(--bs-secondary)
-    }
-
-    .category-buttons-wrapper .btn-category.active .icon-shape {
-        background-color: rgba(255,255,255,.25) !important
-    }
-
-        .category-buttons-wrapper .btn-category.active .icon-shape i {
-            color: #fff !important
-        }
-
-    .btn-category[data-category-name=shopping].active .icon-shape {
-        background-color: rgba(0,0,0,.15) !important
-    }
-
-        .btn-category[data-category-name=shopping].active .icon-shape i {
-            color: #212529 !important
-        }
-    /* --- Expense List --- */
-    .expense-list-container { /* CSS cho cuộn dọc nếu cần */
-    }
-
-    .list-group-item h6 {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 180px
-    }
-
-    @@media (min-width:576px) {
-        .list-group-item h6 {
-            max-width: 250px
-        }
-    }
-    /* --- Responsive adjustments --- */
-    @@media (max-width:767.98px) {
+    /* Responsive adjustments */
+    @@media (max-width: 767.98px) {
         .card-body {
-            padding: .8rem !important
-        }
-    }
-
-    .form-label {
-        margin-bottom: .25rem !important
-    }
-    /* Tăng khoảng cách chạm cho input group trên mobile */
-    /* Input group mặc định của bootstrap 5 đã khá ổn, không cần min-height */
-    /* .input-group { min-height: 40px; } */
-
-    /* CSS cho layout label-input inline */
-    /* Áp dụng cho màn hình nhỏ hơn lg (dưới 992px) */
-    @@media (max-width: 991.98px) {
-        .form-label-inline {
-            width: 75px; /* Độ rộng cố định cho label */
-            margin-bottom: 0; /* Bỏ margin bottom mặc định */
-            margin-right: 0.75rem; /* Khoảng cách với input */
-            text-align: right; /* Căn lề phải label (tùy chọn) */
-            flex-shrink: 0; /* Không co label */
+            padding: 0.8rem !important;
         }
 
-        .form-inline-group {
-            display: flex;
-            align-items: center; /* Căn giữa theo chiều dọc */
-            margin-bottom: 0.75rem; /* Khoảng cách giữa các hàng */
+        .form-label {
+            margin-bottom: 0.25rem !important;
         }
-
-            .form-inline-group .input-group {
-                flex-grow: 1; /* Input group chiếm phần còn lại */
-            }
-            /* Điều chỉnh feedback và text hướng dẫn */
-            .form-inline-group .invalid-feedback,
-            .form-inline-group .form-text {
-                margin-left: 87px; /* 75px (label width) + 12px (margin) */
-                display: block; /* Đảm bảo hiển thị */
-                width: auto; /* Tự động chiều rộng */
-            }
-
-            .form-inline-group .form-text {
-                margin-top: -5px; /* Kéo lên gần hơn */
-                margin-bottom: 5px;
-            }
     }
-
 </style>
 
-
-
-
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    $(document).ready(function() {
+        clickDanhMucDoiMau();
 
-        // === Input Formatting (Currency) ===
-        const amountInput = document.getElementById('expense-amount');
-         let numericValue = 0; // Di chuyển ra ngoài để truy cập được ở submit
-
-        if (amountInput) {
-            function formatCurrency(value) { /* ... giữ nguyên ... */
-                 if (isNaN(value) || value === null) return '';
-                 return new Intl.NumberFormat('vi-VN').format(value);
-             }
-             function parseCurrency(formattedValue) { /* ... giữ nguyên ... */
-                  if (!formattedValue) return 0;
-                  return parseInt(formattedValue.replace(/\./g, ''), 10) || 0;
-             }
-
-            amountInput.addEventListener('input', function (e) {
-                let rawValue = e.target.value.replace(/[^0-9]/g, '');
-                numericValue = parseInt(rawValue, 10) || 0;
-                e.target.value = formatCurrency(numericValue);
-                amountInput.classList.remove('is-invalid'); // Xóa lỗi khi người dùng nhập
-            });
-            amountInput.addEventListener('focus', function (e) {
-                if (numericValue === 0) { e.target.value = ''; }
-                else { e.target.value = numericValue; }
-            });
-            amountInput.addEventListener('blur', function (e) {
-                // Chỉ format nếu input không rỗng sau khi focus ra
-                 if(e.target.value !== '') {
-                     // Parse lại giá trị số phòng trường hợp người dùng sửa số khi focus
-                     numericValue = parseInt(e.target.value.replace(/[^0-9]/g, ''), 10) || 0;
-                     e.target.value = formatCurrency(numericValue);
-                 } else {
-                      numericValue = 0; // Nếu người dùng xóa hết thì giá trị là 0
-                 }
-            });
-        }
-
-        // === Category Button Handling ===
-         const categoryButtonsWrapper = document.querySelector('.category-buttons-wrapper');
-         const expenseCategoryIdInput = document.getElementById('expense-category-id');
-         const categoryValidationFeedback = document.getElementById('category-validation-feedback');
-
-        if (categoryButtonsWrapper && expenseCategoryIdInput) { /* ... giữ nguyên logic ... */
-             categoryButtonsWrapper.addEventListener('click', function(e) {
-                const button = e.target.closest('.btn-category');
-                if (!button) return;
-                e.preventDefault();
-                categoryButtonsWrapper.querySelectorAll('.btn-category').forEach(el => el.classList.remove('active'));
-                button.classList.add('active');
-                const categoryId = button.getAttribute('data-category-id');
-                expenseCategoryIdInput.value = categoryId;
-                if(categoryValidationFeedback) categoryValidationFeedback.style.display = 'none';
-                expenseCategoryIdInput.classList.remove('is-invalid'); // Giả sử input ẩn có class này khi lỗi
-            });
-             const initialCategoryId = expenseCategoryIdInput.value || categoryButtonsWrapper.querySelector('.btn-category')?.getAttribute('data-category-id') || ''; // Lấy giá trị đầu tiên nếu input rỗng
-             expenseCategoryIdInput.value = initialCategoryId; // Đảm bảo input ẩn có giá trị
-             const initialActiveButton = categoryButtonsWrapper.querySelector(`.btn-category[data-category-id="${initialCategoryId}"]`);
-             if (initialActiveButton) { initialActiveButton.classList.add('active'); }
-        }
+    });
 
 
-        // === Date Range Dropdown Handling ===
-        /* ... giữ nguyên logic ... */
-         let dateRangeModalInstance = null;
-         const dateRangeModalEl = document.getElementById('dateRangeModal');
-         if(dateRangeModalEl) { dateRangeModalInstance = new bootstrap.Modal(dateRangeModalEl); }
-         const dateRangeDropdownButton = document.getElementById('dateRangeDropdown');
-         document.querySelectorAll('.dropdown-item[data-range]').forEach(item => { /* ... */ });
-         document.getElementById('applyDateRange')?.addEventListener('click', function() { /* ... */ });
-         function updateDateRangeButtonText(text, isCustom = false) { /* ... */ }
-         function formatDate(dateString) { /* ... */ }
 
+    function clickDanhMucDoiMau() {
+        // Sự kiện click cho tất cả các nút danh mục
+        $(".btn-category").click(function() {
+            // Xóa lớp "active" khỏi tất cả các nút
+            $(".btn-category").removeClass("active");
 
-        // === Form Validation (Bootstrap 5) ===
-        const form = document.getElementById('addExpenseForm');
-         if (form) {
-            form.addEventListener('submit', function (event) {
-                event.preventDefault(); // Luôn ngăn chặn submit mặc định trước
-                event.stopPropagation();
-
-                let isFormValid = form.checkValidity(); // Kiểm tra validation HTML5
-
-                // Kiểm tra category
-                let isCategorySelected = false;
-                const selectedCategoryButton = categoryButtonsWrapper?.querySelector('.btn-category.active');
-                if (selectedCategoryButton && expenseCategoryIdInput.value) {
-                     isCategorySelected = true;
-                     if(categoryValidationFeedback) categoryValidationFeedback.style.display = 'none';
-                     expenseCategoryIdInput.classList.remove('is-invalid');
-                } else {
-                     isFormValid = false; // Nếu category chưa chọn -> form không hợp lệ
-                     if(categoryValidationFeedback) categoryValidationFeedback.style.display = 'block';
-                      expenseCategoryIdInput.classList.add('is-invalid'); // Thêm class lỗi cho input ẩn để Bootstrap biết
-                }
-
-                 // Gán giá trị số thực vào input ẩn TRƯỚC KHI kiểm tra validity lần cuối
-                 let hiddenAmountInput = form.querySelector('input[name="AmountNumeric"]');
-                 if (!hiddenAmountInput) {
-                    hiddenAmountInput = document.createElement('input');
-                    hiddenAmountInput.type = 'hidden';
-                    hiddenAmountInput.name = 'AmountNumeric';
-                    form.appendChild(hiddenAmountInput);
-                 }
-                 hiddenAmountInput.value = numericValue; // Gán giá trị số đã parse
-
-
-                if (!isFormValid) {
-                     console.log("Form invalid");
-                } else {
-                     console.log("Form is valid. Submitting...");
-                     console.log("Data:", {
-                         ExpenseDate: form.elements['ExpenseDate'].value,
-                         Amount: numericValue, // Gửi giá trị số
-                         Note: form.elements['Note'].value,
-                         CategoryId: form.elements['CategoryId'].value
-                     });
-                     // ==> Gửi AJAX request ở đây <==
-                     // Ví dụ:
-                     // fetch('/YourController/AddExpense', {
-                     //     method: 'POST',
-                     //     headers: {
-                     //         'Content-Type': 'application/json',
-                     //         // Thêm RequestVerificationToken nếu dùng
-                     //     },
-                     //     body: JSON.stringify({
-                     //         ExpenseDate: form.elements['ExpenseDate'].value,
-                     //         Amount: numericValue,
-                     //         Note: form.elements['Note'].value,
-                     //         CategoryId: parseInt(form.elements['CategoryId'].value, 10)
-                     //     })
-                     // })
-                     // .then(response => response.json())
-                     // .then(data => {
-                     //     console.log('Success:', data);
-                     //     alert('Thêm chi tiêu thành công!');
-                     //     // Reset form hoặc cập nhật UI
-                     // })
-                     // .catch((error) => {
-                     //     console.error('Error:', error);
-                     //     alert('Có lỗi xảy ra!');
-                     // });
-
-                     alert('Form hợp lệ, sẵn sàng gửi đi! (Xem console log)'); // Thông báo tạm
-                }
-
-                form.classList.add('was-validated'); // Hiển thị trạng thái validation của Bootstrap
-
-                // Reset category validation feedback on next click
-                 if (categoryButtonsWrapper) { /* ... giữ nguyên listener reset ... */ }
-
-            }, false); // end form submit listener
-         } // end if(form)
-
-         // === Set default date ===
-         const expenseDateInput = document.getElementById('expense-date');
-         if (expenseDateInput && !expenseDateInput.value) { expenseDateInput.value = new Date().toISOString().split('T')[0]; }
-
-    }); // end DOMContentLoaded
+            // Thêm lớp "active" vào nút đang được click
+            $(this).addClass("active");
+        });
+    }
 </script>

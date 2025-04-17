@@ -52,7 +52,7 @@ namespace CSharpSoChiTieu.Business.Services
             {
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.Role, user.Role),
-                new Claim("IdUser", user.Id.ToString())
+                new Claim("UserId", user.Id.ToString())
             };
 
                 return new AuthenticationResult
