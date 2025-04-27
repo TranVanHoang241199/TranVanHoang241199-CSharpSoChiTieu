@@ -7,14 +7,11 @@ namespace CSharpSoChiTieu.Data
     {
 
         /// <summary>
-        /// Tên khoản chi
-        /// </summary>
-        public string? Name { get; set; }
-
-        /// <summary>
         /// Số tiền
         /// </summary>
         public decimal Amount { get; set; }
+
+        public string? Currency {  get; set; }
 
         /// <summary>
         /// Ngày chi
@@ -31,7 +28,7 @@ namespace CSharpSoChiTieu.Data
         /// 0: chi
         /// 1: thu
         /// </summary>
-        public int Status { get; set; }
+        public int Type { get; set; }
 
         /// <summary>
         /// 

@@ -21,6 +21,8 @@ namespace CSharpSoChiTieu.Data
         /// </summary>
         public string Color { get; set; } = "#000000";
 
+        public int Type { get; set; } = 1;
+
         public ICollection<ct_IncomeExpense>? ct_IncomeExpenses { get; set; }
 
         // Các trường từ EntityBase đã bao gồm:

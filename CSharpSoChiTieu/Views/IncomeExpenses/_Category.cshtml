@@ -1,0 +1,22 @@
+﻿@using CSharpSoChiTieu.Business.Services
+@model List<CategoryViewModel>
+
+<label class="form-label small fw-bold mb-1">Danh mục <span class="text-danger">*</span></label>
+<div class="card border">
+	<div class="card-body p-2" style="overflow-x: auto;">
+		<div class="d-flex gap-2" style="min-width: max-content;">
+			@foreach (var cat in Model)
+			{
+				<button type="button" class="btn btn-sm btn-category border d-flex align-items-center px-3 py-2"
+						data-category-id="@cat.Id" data-category-name="@cat.Name">
+					<div class="icon icon-shape icon-xs bg-@cat.Color shadow text-white text-center rounded-circle me-2">
+						<i class="material-symbols-rounded fs-6">@cat.Icon</i>
+					</div>
+					<span class="text-nowrap">@cat.Text</span>
+				</button>
+			}
+		</div>
+	</div>
+</div>
+
+

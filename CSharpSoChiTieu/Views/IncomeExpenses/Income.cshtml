@@ -2,120 +2,178 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Thêm Khoản Thu";
+	ViewData["Title"] = "Thêm Khoản Thu";
 }
 
 
 <div class="card mb-4 shadow-sm">
-    <div class="card-header pb-2 px-3">
-        <h6 class="mb-0 text-success"><i class="fas fa-plus-circle me-2"></i>Thêm khoản thu mới</h6>
-    </div>
-    <div class="card-body p-3">
-        <form id="addIncomeForm" class="needs-validation" novalidate>
-            <!-- Ngày thu -->
-            <div class="d-flex align-items-center mb-3">
-                <label for="income-date" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ngày thu <span class="text-danger">*</span></label>
-                <div class="input-group input-group-static flex-grow-1">
-                    <span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
-                    <input type="date" class="form-control" id="income-date" name="IncomeDate" required value="@DateTime.Now.ToString("yyyy-MM-dd")">
-                    <div class="invalid-feedback ms-2">Vui lòng chọn ngày thu.</div>
-                </div>
-            </div>
+	<div class="card-header pb-2 px-3">
+		<h6 class="mb-0 text-success"><i class="fas fa-plus-circle me-2"></i>Thêm khoản thu mới</h6>
+	</div>
+	<div class="card-body p-3">
+		<form id="addIncomeForm" class="needs-validation" novalidate>
+			<!-- Ngày thu -->
+			<div class="d-flex align-items-center mb-3">
+				<label for="income-date" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ngày thu <span class="text-danger">*</span></label>
+				<div class="input-group input-group-static flex-grow-1">
+					<span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
+					<input type="date" class="form-control" id="income-date" name="IncomeDate" required value="@DateTime.Now.ToString("yyyy-MM-dd")">
+					<div class="invalid-feedback ms-2">Vui lòng chọn ngày thu.</div>
+				</div>
+			</div>
 
-            <!-- Số tiền -->
-            <div class="d-flex align-items-center mb-1">
-                <label for="income-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Số tiền <span class="text-danger">*</span></label>
-                <div class="input-group input-group-static flex-grow-1">
-                    <input type="text" class="form-control" id="income-amount" name="Amount" placeholder="0" required inputmode="decimal">
-                    <span class="input-group-text">VNĐ</span>
-                    <div class="invalid-feedback ms-2">Vui lòng nhập số tiền.</div>
-                </div>
-            </div>
+			<!-- Số tiền -->
+			<div class="d-flex align-items-center mb-1">
+				<label for="income-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Số tiền <span class="text-danger">*</span></label>
+				<div class="input-group input-group-static flex-grow-1">
+					<input type="text" class="form-control" id="income-amount" name="Amount" placeholder="0" required inputmode="decimal">
+					<span class="input-group-text">VNĐ</span>
+					<div class="invalid-feedback ms-2">Vui lòng nhập số tiền.</div>
+				</div>
+			</div>
 
-            <!-- Ghi chú -->
-            <div class="d-flex align-items-center mb-3">
-                <label for="income-note" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ghi chú</label>
-                <div class="input-group input-group-static flex-grow-1">
-                    <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
-                    <input type="text" class="form-control" id="income-note" name="Note" placeholder="Mô tả nguồn thu (vd: Lương T4, Thưởng...)">
-                </div>
-            </div>
+			<!-- Ghi chú -->
+			<div class="d-flex align-items-center mb-3">
+				<label for="income-note" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ghi chú</label>
+				<div class="input-group input-group-static flex-grow-1">
+					<span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
+					<input type="text" class="form-control" id="income-note" name="Note" placeholder="Mô tả nguồn thu (vd: Lương T4, Thưởng...)">
+				</div>
+			</div>
 
-            <!-- Danh mục -->
-            <label class="form-label small fw-bold mb-1">Danh mục <span class="text-danger">*</span></label>
-            <div class="card border">
-                <div class="card-body p-2" style="overflow-x: auto;">
-                    <div class="d-flex gap-2" style="min-width: max-content;">
-                        @{
-                            var categories = new[]{
-                        new { Id=1, Name="food", Text="Ăn uống", Icon="restaurant", Color="success" },
-                        new { Id=2, Name="transport", Text="Di chuyển", Icon="directions_car", Color="primary" },
-                        new { Id=3, Name="entertainment", Text="Giải trí", Icon="sports_esports", Color="info" },
-                        new { Id=4, Name="shopping", Text="Mua sắm", Icon="shopping_bag", Color="warning" },
-                        new { Id=5, Name="health", Text="Y tế", Icon="favorite", Color="danger" },
-                        };
+			<!-- Danh mục -->
+			<!-- Danh mục -->
+			<div id="IncomeExpensesCateogry"></div>
 
-                            foreach (var cat in categories)
-                            {
-                                <button type="button" class="btn btn-sm btn-category border d-flex align-items-center px-3 py-2 @(cat.Id == 1 ? "active" : "")"
-                                        data-category-id="@cat.Id" data-category-name="@cat.Name">
-                                    <div class="icon icon-shape icon-xs bg-@cat.Color shadow text-white text-center rounded-circle me-2">
-                                        <i class="material-symbols-rounded fs-6">@cat.Icon</i>
-                                    </div>
-                                    <span class="text-nowrap">@cat.Text</span>
-                                </button>
-                            }
-                        }
-                    </div>
-                </div>
-            </div>
-            <input type="hidden" id="expense-category-id" name="CategoryId" value="1" required />
-            <div class="invalid-feedback" id="category-validation-feedback" style="display:none; margin-top:-10px; margin-bottom: 10px;">Vui lòng chọn một danh mục.</div>
+			<input type="hidden" id="expense-category-id" name="CategoryId" value="C4EF079D-C335-48DF-A790-20F28272D03D" required />
+			<div class="invalid-feedback" id="category-validation-feedback" style="display:none; margin-top:-10px; margin-bottom: 10px;">Vui lòng chọn một danh mục.</div>
 
-            <div class="mt-4">
-                <button type="submit" class="btn btn-success w-100 py-2 fw-bold">
-                    <i class="fas fa-save me-2"></i> Lưu khoản thu
-                </button>
-            </div>
-        </form>
-    </div>
+			<div class="mt-4">
+				<button type="submit" class="btn btn-success w-100 py-2 fw-bold">
+					<i class="fas fa-save me-2"></i> Lưu khoản thu
+				</button>
+			</div>
+		</form>
+	</div>
 </div>
 
 
 <style>
-    /* Begin: Danh Mục */
+	/* Begin: Danh Mục */
 
-    .btn-category.active {
-        background-color: #0d6efd; /* Màu xanh dương khi active */
-        color: white;
-    }
-    /* End: Danh Mục */
+	.btn-category.active {
+		background-color: #0d6efd; /* Màu xanh dương khi active */
+		color: white;
+	}
+	/* End: Danh Mục */
 
-    /* Responsive adjustments */
-    @@media (max-width: 767.98px) {
-        .card-body {
-            padding: 0.8rem !important;
-        }
+	/* Responsive adjustments */
+	@@media (max-width: 767.98px) {
+		.card-body {
+			padding: 0.8rem !important;
+		}
 
-        .form-label {
-            margin-bottom: 0.25rem !important;
-        }
-    }
+		.form-label {
+			margin-bottom: 0.25rem !important;
+		}
+	}
 </style>
 
 <script>
-    $(document).ready(function() {
-        clickDanhMucDoiMau();
-    });
+	$(document).ready(function() {
 
-    function clickDanhMucDoiMau() {
-        // Sự kiện click cho tất cả các nút danh mục
-        $(".btn-category").click(function() {
-            // Xóa lớp "active" khỏi tất cả các nút
-            $(".btn-category").removeClass("active");
+		clickDanhMucDoiMau();
 
-            // Thêm lớp "active" vào nút đang được click
-            $(this).addClass("active");
-        });
-    }
+		addDataIncome();
+		
+		loadFormCategoryEI(1);
+
+		loadFormHistory();
+
+		updateSummary();
+	});
+
+	function clickDanhMucDoiMau() {
+		// Sự kiện click cho tất cả các nút danh mục
+		$(".btn-category").click(function() {
+			// Xóa lớp "active" khỏi tất cả các nút
+			$(".btn-category").removeClass("active");
+
+			// Thêm lớp "active" vào nút đang được click
+			$(this).addClass("active");
+		});
+	}
+
+		function loadFormCategoryEI(type) {
+		$.ajax({
+			url: "/IncomeExpenses/Category?type=" + type,
+			type: "GET",
+			success: function (data) {
+				$("#IncomeExpensesCateogry").html(data);
+			},
+			error: function () {
+				alert("Không tải được danh mục.");
+			}
+		});
+	}
+
+		function addDataIncome() {
+		$("#addIncomeForm").submit(function (e) {
+			e.preventDefault();
+
+			var form = $(this);
+			form.removeClass("was-validated"); // reset Bootstrap validation
+
+			// Lấy dữ liệu từ form
+			var formData = {
+				Amount: parseFloat($("#income-amount").val().replace(/,/g, "")),
+				Date: $("#income-date").val(),
+				Description: $("#income-note").val(),
+				CategoryId: $("#expense-category-id").val(),
+				Type: "Income"
+			};
+
+			// Kiểm tra danh mục đã chọn chưa
+			if (!formData.CategoryId || formData.CategoryId === "") {
+				$("#category-validation-feedback").show();
+				return;
+			} else {
+				$("#category-validation-feedback").hide();
+			}
+
+			$.ajax({
+				url: "/IncomeExpenses/Save",
+				type: "POST",
+				data: formData,
+				success: function (res) {
+					alert("Lưu khoản thu thành công!");
+					form.trigger("reset");
+					form.removeClass("was-validated");
+					loadForm("income"); // nếu có chức năng load lại danh sách khoản thu
+				},
+				error: function (xhr) {
+					form.addClass("was-validated");
+
+					// Gỡ lỗi cũ
+					$(".field-validation-error").remove();
+					$(".is-invalid").removeClass("is-invalid");
+
+					if (xhr.responseJSON && xhr.responseJSON.errors) {
+						let errors = xhr.responseJSON.errors;
+						for (let key in errors) {
+							let input = $("[name='" + key + "']");
+							if (input.length > 0) {
+								input.addClass("is-invalid");
+								input.after(`<div class="field-validation-error text-danger">${errors[key]}</div>`);
+							}
+						}
+					} else {
+						alert("Có lỗi xảy ra khi lưu dữ liệu.");
+					}
+				}
+			});
+		});
+	}
+
+
 </script>

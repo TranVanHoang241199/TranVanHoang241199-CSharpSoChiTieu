@@ -51,12 +51,11 @@ namespace CSharpSoChiTieu.Data
             modelBuilder.Entity<ct_IncomeExpense>(entity =>
             {
                 // Cấu hình cột Name, Amount, Description, ...
-                entity.Property(e => e.Name).HasMaxLength(100).IsRequired();
                 entity.Property(e => e.Amount).HasColumnType("decimal(18,2)").IsRequired();
                 entity.Property(e => e.Description).HasMaxLength(255);
 
                 // Cấu hình Status (Thu hoặc Chi)
-                entity.Property(e => e.Status).IsRequired();
+                entity.Property(e => e.Type).IsRequired();
 
                 // Cấu hình quan hệ với bảng `ct_IncomeExpenseCategory`
                 entity.HasOne(e => e.Category) // Một khoản thu chi thuộc một danh mục

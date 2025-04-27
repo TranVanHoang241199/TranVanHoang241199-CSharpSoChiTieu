@@ -33,11 +33,10 @@ namespace CSharpSoChiTieu.Business.Services
                 var entity = new ct_IncomeExpense
                 {
                     Id = Guid.NewGuid(),
-                    Name = model.Name,
                     Date = DateTime.Now,
                     Amount = model.Amount,
                     Description = model.Description,
-                    Status = (int)model.Type,
+                    Type = (int)model.Type,
                     CategoryId = model.CategoryId,
 
                     //---------
@@ -104,8 +103,7 @@ namespace CSharpSoChiTieu.Business.Services
                     .Select(test => new IncomeExpenseViewModel
                     {
                         Id = test.Id,
-                        Name = test.Name,
-                        Type = (TransactionType)test.Status,
+                        Type = (TransactionType)test.Type,
                         Date = test.Date,
                         Description = test.Description,
                         Amount = test.Amount,
@@ -131,39 +129,45 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
-        public async Task<OperationResult> Gets(Guid userId, int? status = null, string search = "")
+
+
+        public async Task<OperationResult> Gets(int? Type = null, string search = "")
         {
             try
             {
-                // Lấy ID của người dùng hiện tại
                 var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
 
-                // Truy vấn dữ liệu từ cơ sở dữ liệu sử dụng LINQ
-                var query = _context.ct_IncomeExpenses.Where(o => o.CreatedBy.Equals(currentUserId)).AsQueryable();
+                var query = _context.ct_IncomeExpenses
+                                    .Where(o => o.CreatedBy.Equals(currentUserId))
+                                    .AsQueryable();
 
-                // Áp dụng bộ lọc nếu có
-                if (status.HasValue)
-                {
-                    query = query.Where(o => o.Status == status);
-                }
+                if (Type != null)
+                    query = query.Where(o => o.Type == Type);
 
-                // Áp dụng bộ lọc nếu có
                 if (!string.IsNullOrEmpty(search))
-                {
-                    query = query.Where(o => o.Name.Contains(search.Trim()));
-                }
+                    query = query.Where(o => o.Description.Contains(search.Trim()));
 
-                // Lấy tổng số lượng phần tử
-                var totalItems = await query.CountAsync();
-
-                // Phân trang và lấy dữ liệu cho trang hiện tại
+                // Lấy dữ liệu
                 var data = await query
-                    .OrderBy(o => o.Name)
+                    .OrderByDescending(o => o.Date)
                     .ToListAsync();
 
-                var result = _mapper.Map<List<IncomeExpenseViewModel>>(data).ToList();
+                // Nhóm dữ liệu theo ngày
+                var grouped = data
+                    .GroupBy(o => o.Date.Date)
+                    .Select(g => new IEGroupViewModel
+                    {
+                        Date = g.Key,
+                        Items = g.Select(i => new IncomeExpenseViewModel
+                        {
+                            Amount = i.Amount,
+                            Date = i.Date,
+                            Type = (TransactionType)i.Type,
+                            Description = i.Description
+                        }).ToList()
+                    }).ToList();
 
-                return new OperationResultList<IncomeExpenseViewModel>(result);
+                return new OperationResultList<IEGroupViewModel>(grouped);
             }
             catch (Exception ex)
             {
@@ -171,10 +175,39 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
-        public Task<OperationResult> GetSummary(Guid userId, int moth)
+
+        public async Task<OperationResult> GetSummary(int month)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Lấy ID của user hiện tại
+                var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
+
+                // Lọc các khoản thu chi của user theo tháng
+                var transactions = await _context.ct_IncomeExpenses
+                    .Where(o => o.CreatedBy == currentUserId
+                                && o.Date.Month == month
+                                && o.Date.Year == DateTime.Now.Year)
+                    .ToListAsync();
+
+                // Tính tổng thu và chi
+                var totalIncome = transactions.Where(o => o.Type == (int)TransactionType.Income).Sum(o => o.Amount);
+                var totalExpense = transactions.Where(o => o.Type == (int)TransactionType.Expense).Sum(o => o.Amount);
+
+                var summary = new IncomeExpenseSummaryViewModel
+                {
+                    TotalIncome = totalIncome,
+                    TotalExpense = totalExpense,
+                };
+
+                return new OperationResult<IncomeExpenseSummaryViewModel>(summary);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResultError(HttpStatusCode.InternalServerError, "Đã xảy ra lỗi: " + ex.Message);
+            }
         }
+
 
         public async Task<OperationResult> Update(Guid id, IncomeExpenseCreateUpdateModel model)
         {
@@ -185,9 +218,8 @@ namespace CSharpSoChiTieu.Business.Services
                 if (incomeExpenseUpdate == null)
                     return new OperationResultError(HttpStatusCode.NotFound, "Không tìm thấy bản ghi");
 
-                incomeExpenseUpdate.Name = model.Name;
                 incomeExpenseUpdate.Amount = model.Amount;
-                incomeExpenseUpdate.Status = (int)model.Type;
+                incomeExpenseUpdate.Type = (int)model.Type;
                 incomeExpenseUpdate.Date = model.Date;
                 incomeExpenseUpdate.CategoryId = model.CategoryId;
                 incomeExpenseUpdate.Description = model.Description;

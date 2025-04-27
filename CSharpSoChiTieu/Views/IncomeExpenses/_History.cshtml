@@ -1,26 +1,32 @@
 ﻿@using CSharpSoChiTieu.Business.Services;
-@model List<IncomeGroupViewModel>
+@model List<IEGroupViewModel>
 
-<div class="card-body pt-2 p-3">
+<div class="card-body pt-2 p-3" style="max-height: 400px; overflow-y: auto;">
     @foreach (var group in Model)
     {
         <label>Ngày @group.Date.ToString("dd/MM/yyyy")</label>
-        <div class="income-list-container">
+        <div class="income-list-container mb-3">    
             <ul class="list-group list-group-flush">
                 @foreach (var item in group.Items)
                 {
+                    var amountClass = item.Type == TransactionType.Income
+                    ? "text-success"
+                    : "text-danger";
+
                     <li class="list-group-item border-0 d-flex justify-content-between align-items-center ps-1 pe-1 mb-1">
                         <div class="d-flex align-items-center">
                             <div class="icon icon-shape icon-xs bg-primary text-white text-center rounded-circle me-2 shadow-sm flex-shrink-0">
-                                <i class="material-symbols-rounded fs-6">@item.Type</i>
+                                <i class="material-symbols-rounded fs-6">
+                                    @(item.Type == TransactionType.Income ? "payments" : "shopping_cart")
+                                </i>
                             </div>
                             <div class="d-flex flex-column text-truncate">
-                                <h6 class="mb-0 text-dark text-sm">@item.Label</h6>
-                                <span class="text-xs text-muted">@item.Date.ToString("dd/MM/yyyy")</span>
+                                <h6 class="mb-0 text-dark text-sm">@item.Description</h6>
+                                <span class="text-xs text-muted">@item.Date?.ToString("dd/MM/yyyy")</span>
                             </div>
                         </div>
-                        <div class="text-success text-gradient text-sm fw-bold ms-2 text-nowrap">
-                            +@item.Amount.ToString("N0")&nbsp;₫
+                        <div class="@amountClass text-gradient text-sm fw-bold ms-2 text-nowrap">
+                            @(item.Type == TransactionType.Income ? "+" : "-")@item.Amount.ToString("N0") ₫
                         </div>
                     </li>
                 }
@@ -28,3 +34,6 @@
         </div>
     }
 </div>
+
+
+
