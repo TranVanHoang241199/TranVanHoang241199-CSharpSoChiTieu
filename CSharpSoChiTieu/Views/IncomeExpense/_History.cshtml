@@ -5,7 +5,7 @@
 
 
 <div class="card h-100 shadow-sm">
-	
+
 	@* Begin: header *@
 	<div class="card-header pb-0 px-3">
 		<div class="row align-items-center mb-2">
@@ -16,21 +16,18 @@
 			</div>
 
 			<div class="col-6 d-flex justify-content-end">
-				 <select id="select-range" class="form-select form-select-sm shadow-none" style="border-radius: 0.5rem; min-width: 80px;">
-
-        <option value="today">Hôm nay</option>
-        <option value="week">Tuần này</option>
-        <option value="month">Tháng này</option>
-        <option value="year">Năm này</option>
-    </select>
+				<select id="select-range" class="form-select form-select-sm shadow-none" style="border-radius: 0.5rem; min-width: 80px;">
+					<option value="today">Hôm nay</option>
+					<option value="week">Tuần này</option>
+					<option value="month">Tháng này</option>
+					<option value="year">Năm này</option>
+				</select>
 			</div>
-
 		</div>
 	</div>
 	@* End: header *@
 
 
-	@* ** Hiển thị danh sách thu chi ** *@
 	@* ** Hiển thị danh sách thu chi ** *@
 	<div class="card-body pt-2 p-3" style="max-height: 400px; overflow-y: auto;" id="history_id">
 		@foreach (var group in Model)
@@ -54,7 +51,13 @@
 							_ => "fas fa-box",                   // Mặc định nếu không khớp
 						};
 
-						<li class="list-group-item border-0 d-flex justify-content-between align-items-center ps-1 pe-1 mb-1">
+						<li class="list-group-item border-0 d-flex justify-content-between align-items-center ps-1 pe-1 mb-1 income-item"
+							data-id="@item.Id"
+							data-type="@item.Type"
+							data-amount="@item.Amount"
+							data-description="@item.Description"
+							data-date="@item.Date?.ToString("yyyy-MM-dd")"
+							style="cursor: pointer;">
 							<div class="d-flex align-items-center">
 								<div class="icon icon-shape icon-xs @item.CategoryColor text-white text-center rounded-circle me-2 shadow-sm flex-shrink-0">
 									<i class="@iconClass"></i>
@@ -74,44 +77,186 @@
 		}
 	</div>
 
-	
+
 </div>
+
+<!-- Small Action Dialog -->
+<div id="actionDialog" class="position-fixed bg-white shadow-sm rounded" style="display: none; z-index: 1000; min-width: 120px;">
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item py-1 px-2 action-edit" style="cursor: pointer; font-size: 0.875rem;">
+			<i class="material-symbols-rounded align-middle me-1" style="font-size: 1rem;">edit</i>
+			Chỉnh sửa
+		</li>
+		<li class="list-group-item py-1 px-2 action-delete" style="cursor: pointer; font-size: 0.875rem;">
+			<i class="material-symbols-rounded align-middle me-1" style="font-size: 1rem;">delete</i>
+			Xóa
+		</li>
+	</ul>
+</div>
+
+<!-- Modal Dialog -->
+<div class="modal fade" id="incomeExpenseModal" tabindex="-1" aria-labelledby="incomeExpenseModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="incomeExpenseModalLabel">Chỉnh sửa giao dịch</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form id="incomeExpenseForm">
+					<input type="hidden" id="itemId" name="id" />
+					<div class="mb-3">
+						<label class="form-label">Loại</label>
+						<select class="form-select" id="itemType" name="type">
+							<option value="Income">Thu nhập</option>
+							<option value="Expense">Chi tiêu</option>
+						</select>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Số tiền</label>
+						<input type="number" class="form-control" id="itemAmount" name="amount" required>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Mô tả</label>
+						<input type="text" class="form-control" id="itemDescription" name="description" required>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Ngày</label>
+						<input type="date" class="form-control" id="itemDate" name="date" required>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+				<button type="button" class="btn btn-primary" id="btnSave">Lưu</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.action-edit:hover {
+		background-color: #f8f9fa;
+	}
+
+	.action-delete:hover {
+		background-color: #f8f9fa;
+		color: #dc3545;
+	}
+
+	#actionDialog {
+		border: 1px solid rgba(0,0,0,.1);
+	}
+
+		#actionDialog .list-group-item {
+			border: none;
+			border-radius: 0;
+		}
+
+			#actionDialog .list-group-item:first-child {
+				border-top-left-radius: 0.25rem;
+				border-top-right-radius: 0.25rem;
+			}
+
+			#actionDialog .list-group-item:last-child {
+				border-bottom-left-radius: 0.25rem;
+				border-bottom-right-radius: 0.25rem;
+			}
+</style>
 
 <script>
 	$(document).ready(function () {
-		getDataHistoryIE();
+		var modal = new bootstrap.Modal(document.getElementById('incomeExpenseModal'));
+		var currentItemId = null;
+		var actionDialog = $('#actionDialog');
+		var currentItem = null;
 
-		var selectedRange = '@ViewBag.RangeType';  // Assuming ViewBag.RangeType is available
-		$('#select-range').val(selectedRange);  // This sets the value of the <select> element
-
-		// GẮN SỰ KIỆN CHO SELECT
+		// Xử lý chọn khoảng thời gian
 		$("#select-range").change(function () {
 			var selectedRange = $(this).val();
 			updateSummary(selectedRange);
 		});
-	});
 
-	function getDataHistoryIE() {
-		$('#select-range').change(function () {
-			var range = $(this).val();
+		// Xử lý click vào item
+		$('.income-item').click(function(e) {
+			e.stopPropagation();
+			currentItem = $(this);
+			currentItemId = currentItem.data('id');
 
-			// Loading nhẹ trong đúng cái box thu chi
-			$('#history_id').html('<div class="text-center p-5"><div class="spinner-border text-primary"></div></div>');
+			// Đóng dialog cũ nếu có
+			actionDialog.hide();
+
+			// Tính toán vị trí hiển thị dialog
+			var rect = currentItem[0].getBoundingClientRect();
+			actionDialog.css({
+				'top': rect.bottom + 'px',
+				'left': rect.left + 'px',
+				'min-width': rect.width + 'px'
+			}).show();
+		});
+
+		// Đóng dialog khi click ra ngoài
+		$(document).click(function() {
+			actionDialog.hide();
+		});
+
+		// Xử lý click vào nút chỉnh sửa
+		$('.action-edit').click(function(e) {
+			e.stopPropagation();
+			actionDialog.hide();
+
+			// Hiển thị modal chỉnh sửa
+			$('#itemId').val(currentItemId);
+			$('#itemType').val(currentItem.data('type'));
+			$('#itemAmount').val(currentItem.data('amount'));
+			$('#itemDescription').val(currentItem.data('description'));
+			$('#itemDate').val(currentItem.data('date'));
+			modal.show();
+		});
+
+		// Xử lý click vào nút xóa
+		$('.action-delete').click(function(e) {
+			e.stopPropagation();
+			if (confirm('Bạn có chắc chắn muốn xóa giao dịch này?')) {
+				$.ajax({
+					url: '/IncomeExpense/Delete/' + currentItemId,
+					type: 'DELETE',
+					success: function(response) {
+						currentItem.remove();
+						actionDialog.hide();
+					},
+					error: function() {
+						alert('Có lỗi xảy ra khi xóa');
+					}
+				});
+			}
+		});
+
+		// Xử lý nút Lưu trong modal
+		$('#btnSave').click(function() {
+			var formData = {
+				id: $('#itemId').val(),
+				type: $('#itemType').val(),
+				amount: $('#itemAmount').val(),
+				description: $('#itemDescription').val(),
+				date: $('#itemDate').val()
+			};
 
 			$.ajax({
-				url: '/IncomeExpense/History',
-				type: 'GET',
-				data: { range: range },
-				success: function (result) {
-					var newContent = $(result).find('#history_id').html();
-					$('#history_id').html(newContent); // ✨ Chỉ thay nội dung trong #history_id thôi
+				url: '/IncomeExpense/Update',
+				type: 'PUT',
+				data: formData,
+				success: function(response) {
+					// Cập nhật UI
+					modal.hide();
+					location.reload(); // hoặc cập nhật item cụ thể
 				},
-				error: function () {
-					$('#history_id').html('<div class="text-danger text-center p-4">Lỗi khi tải dữ liệu.</div>');
+				error: function() {
+					alert('Có lỗi xảy ra khi cập nhật');
 				}
 			});
 		});
-	}
+	});
 </script>
 
 

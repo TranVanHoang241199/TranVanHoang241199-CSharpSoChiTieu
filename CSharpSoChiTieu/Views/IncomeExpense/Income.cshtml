@@ -17,7 +17,6 @@
 				<div class="input-group input-group-static flex-grow-1">
 					<span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
 					<input type="date" class="form-control" id="income-date" name="IncomeDate" required value="@DateTime.Now.ToString("yyyy-MM-dd")">
-					<div class="invalid-feedback ms-2">Vui lòng chọn ngày thu.</div>
 				</div>
 			</div>
 
@@ -27,7 +26,6 @@
 				<div class="input-group input-group-static flex-grow-1">
 					<input type="text" class="form-control" id="income-amount" name="Amount" placeholder="0" required inputmode="decimal">
 					<span class="input-group-text">VNĐ</span>
-					<div class="invalid-feedback ms-2">Vui lòng nhập số tiền.</div>
 				</div>
 			</div>
 
@@ -37,7 +35,6 @@
 				<div class="input-group input-group-static flex-grow-1">
 					<span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
 					<input type="text" class="form-control" id="income-note" name="Note" placeholder="Mô tả nguồn thu ">
-					<div class="invalid-feedback ms-2">Vui lòng nhập mô tả.</div>
 				</div>
 			</div>
 
@@ -45,7 +42,6 @@
 			<div id="IncomeExpenseCateogry"></div>
 
 			<input type="hidden" id="IncomeExpense-category-id" name="CategoryId" value="" required />
-			<div class="invalid-feedback" id="category-validation-feedback" style="display:none; margin-top:-10px; margin-bottom: 10px;">Vui lòng chọn một danh mục.</div>
 
 			<div class="mt-4">
 				<button type="submit" class="btn btn-success w-100 py-2 fw-bold">
@@ -86,7 +82,7 @@
 		EventGanIdChoCategory();
 
 		addDataIncome();
-		
+
 		loadFormCategoryEI(1);
 
 		loadFormHistory();
@@ -123,39 +119,56 @@
 			e.preventDefault();
 
 			var form = $(this);
-			form.removeClass("was-validated"); // reset Bootstrap validation
+			form.removeClass("was-validated");
 
-			// Lấy dữ liệu từ form
+				var categoryId = $("#IncomeExpense-category-id").val();
+				var incomeDate = $("#income-date").val();
+				var incomeAmount = $("#income-amount").val();
+				var incomeNote = $("#income-note").val();
+
+				// Gom lỗi vào 1 mảng
+				var errors = [];
+
+				if (!incomeDate) {
+					errors.push("* Bạn chưa nhập ngày thu.");
+				}
+				if (!incomeAmount) {
+					errors.push("* Bạn chưa nhập số tiền khoản thu.");
+				}
+				if (!incomeNote) {
+					errors.push("* Bạn chưa nhập  mô tả khoản thu.");
+				}
+				if (!categoryId) {
+					errors.push("* Bạn chưa chọn một danh mục khoản thu.");
+				}
+
+				// Nếu có lỗi thì hiển thị chung
+				if (errors.length > 0) {
+					var errorMessage = errors.join("<br>");
+					showDialog(errorMessage);
+					return;
+				}
+
+			// Chuẩn bị dữ liệu
 			var formData = {
-				Amount: parseFloat($("#income-amount").val().replace(/,/g, "")),
-				Date: $("#income-date").val(),
+				Amount: parseFloat(incomeAmount.replace(/,/g, "")),
+				Date: incomeDate,
 				Description: $("#income-note").val(),
-				CategoryId: $("#IncomeExpense-category-id").val(),
+				CategoryId: categoryId,
 				Type: "Income"
 			};
-
-			// Kiểm tra danh mục đã chọn chưa
-			if (!formData.CategoryId || formData.CategoryId === "") {
-				$("#category-validation-feedback").show();
-				return;
-			} else {
-				$("#category-validation-feedback").hide();
-			}
 
 			$.ajax({
 				url: "/IncomeExpense/Save",
 				type: "POST",
 				data: formData,
 				success: function (res) {
-					alert("Lưu khoản thu thành công!");
 					form.trigger("reset");
 					form.removeClass("was-validated");
-					loadForm("income"); // nếu có chức năng load lại danh sách khoản thu
+					loadForm("income"); // Load lại danh sách
 				},
 				error: function (xhr) {
 					form.addClass("was-validated");
-
-					// Gỡ lỗi cũ
 					$(".field-validation-error").remove();
 					$(".is-invalid").removeClass("is-invalid");
 
@@ -168,8 +181,6 @@
 								input.after(`<div class="field-validation-error text-danger">${errors[key]}</div>`);
 							}
 						}
-					} else {
-						alert("Có lỗi xảy ra khi lưu dữ liệu.");
 					}
 				}
 			});
@@ -193,4 +204,34 @@
 		});
 	}
 
+
+	function showDialog(message) {
+		var dialogHtml = `
+			<div class="modal fade" id="validationModal" tabindex="-1" aria-labelledby="validationModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="validationModalLabel">Thông báo</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+						</div>
+						<div class="modal-body">
+							${message}
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		`;
+
+		$("body").append(dialogHtml);
+
+		var modal = new bootstrap.Modal(document.getElementById('validationModal'));
+		modal.show();
+
+		$('#validationModal').on('hidden.bs.modal', function () {
+			$(this).remove(); // Xóa modal khỏi DOM khi đóng
+		});
+	}
 </script>

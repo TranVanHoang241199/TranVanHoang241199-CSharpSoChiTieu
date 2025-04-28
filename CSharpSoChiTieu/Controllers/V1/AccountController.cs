@@ -146,24 +146,6 @@ namespace CSharpSoChiTieu.Controllers
             return View(model);
         }
 
-
-
-
-        //private void SendResetPasswordEmail(string email, string resetLink)
-        //{
-        //    var mailMessage = new MailMessage();
-        //    mailMessage.To.Add(email);
-        //    mailMessage.Subject = "Yêu cầu thay đổi mật khẩu";
-        //    mailMessage.Body = $"Click vào đường link để thay đổi mật khẩu: {resetLink}";
-        //    mailMessage.IsBodyHtml = true;
-
-        //    using (var smtpClient = new SmtpClient("smtp.yourserver.com"))
-        //    {
-        //        smtpClient.Send(mailMessage);
-        //    }
-        //}
-
-
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync("MyCookieAuth");

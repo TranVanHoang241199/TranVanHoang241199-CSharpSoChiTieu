@@ -1,11 +1,9 @@
 ﻿using System.Net;
 using API_HotelManagement.common;
 using CSharpSoChiTieu.Business.Services;
-using CSharpSoChiTieu.common;
 using CSharpSoChiTieu.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CSharpSoChiTieu.Controllers
 {

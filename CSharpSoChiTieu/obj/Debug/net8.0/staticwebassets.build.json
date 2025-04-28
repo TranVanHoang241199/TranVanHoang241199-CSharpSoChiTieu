@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "cQyjIPNrADTHqpeG/Q9ueBM4rx09udXOrj9IfGYfBAw=",
+  "Hash": "np5saBfCWDoi37Fa9ocZ5OxwsW9S09sk8vAakwwkxqw=",
   "Source": "CSharpSoChiTieu",
   "BasePath": "_content/CSharpSoChiTieu",
   "Mode": "Default",
@@ -6819,6 +6819,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\wwwroot\\img\\avatar.jpg",
+      "SourceId": "CSharpSoChiTieu",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\wwwroot\\",
+      "BasePath": "_content/CSharpSoChiTieu",
+      "RelativePath": "img/avatar#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "o70nyg00lj",
+      "Integrity": "LP387iNBbHLLL+ziN5ybOj7SYIYehUc1cgNPCZW7VbU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\avatar.jpg"
+    },
+    {
+      "Identity": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\wwwroot\\img\\logo1.jpg",
+      "SourceId": "CSharpSoChiTieu",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\wwwroot\\",
+      "BasePath": "_content/CSharpSoChiTieu",
+      "RelativePath": "img/logo1#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "sjo8gr3dzv",
+      "Integrity": "uAWLjlAADyac1FuC2OVU6JBDP8QHsBmGgbSIn47FCPE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\logo1.jpg"
     },
     {
       "Identity": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\wwwroot\\js\\income-expenses.js",
@@ -34626,6 +34668,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+        }
+      ]
+    },
+    {
+      "Route": "img/avatar.jpg",
+      "AssetFile": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\wwwroot\\img\\avatar.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2529"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LP387iNBbHLLL+ziN5ybOj7SYIYehUc1cgNPCZW7VbU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 28 Apr 2025 16:05:57 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-LP387iNBbHLLL+ziN5ybOj7SYIYehUc1cgNPCZW7VbU="
+        }
+      ]
+    },
+    {
+      "Route": "img/avatar.o70nyg00lj.jpg",
+      "AssetFile": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\wwwroot\\img\\avatar.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2529"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LP387iNBbHLLL+ziN5ybOj7SYIYehUc1cgNPCZW7VbU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 28 Apr 2025 16:05:57 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "o70nyg00lj"
+        },
+        {
+          "Name": "label",
+          "Value": "img/avatar.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-LP387iNBbHLLL+ziN5ybOj7SYIYehUc1cgNPCZW7VbU="
+        }
+      ]
+    },
+    {
+      "Route": "img/logo1.jpg",
+      "AssetFile": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\wwwroot\\img\\logo1.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "350088"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"uAWLjlAADyac1FuC2OVU6JBDP8QHsBmGgbSIn47FCPE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 28 Apr 2025 16:17:27 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-uAWLjlAADyac1FuC2OVU6JBDP8QHsBmGgbSIn47FCPE="
+        }
+      ]
+    },
+    {
+      "Route": "img/logo1.sjo8gr3dzv.jpg",
+      "AssetFile": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\wwwroot\\img\\logo1.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "350088"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"uAWLjlAADyac1FuC2OVU6JBDP8QHsBmGgbSIn47FCPE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 28 Apr 2025 16:17:27 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "sjo8gr3dzv"
+        },
+        {
+          "Name": "label",
+          "Value": "img/logo1.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-uAWLjlAADyac1FuC2OVU6JBDP8QHsBmGgbSIn47FCPE="
         }
       ]
     },

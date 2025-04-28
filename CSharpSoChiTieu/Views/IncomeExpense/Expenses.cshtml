@@ -43,7 +43,6 @@
 			<div id="IncomeExpenseCateogry"></div>
 
 			<input type="hidden" id="IncomeExpense-category-id" name="CategoryId" value="" required />
-			<div class="invalid-feedback" id="category-validation-feedback" style="display:none; margin-top:-10px; margin-bottom: 10px;">Vui lòng chọn một danh mục.</div>
 
 			<!-- Nút lưu -->
 			<button type="submit" class="btn btn-primary w-100 py-2 fw-bold mt-3">
@@ -58,6 +57,13 @@
 
 
 <style>
+	#category-validation-feedback {
+		color: red;
+		font-size: 0.875rem;
+		margin-top: 0.25rem;
+		margin-bottom: 10px;
+	}
+
 	/* Begin: Danh Mục */
 
 	.btn-category.active {
@@ -98,33 +104,57 @@
 			e.preventDefault();
 
 			var form = $(this);
-			form.removeClass("was-validated"); // reset Bootstrap validation
+			form.removeClass("was-validated");
 
-			// Lấy dữ liệu từ form
-				var formData = {
-					Amount: parseFloat($("#income-amount").val().replace(/,/g, "")),
-					Date: $("#income-date").val(),
-					Description: $("#income-note").val(),
-					CategoryId: $("#IncomeExpense-category-id").val(),
-					Type: "Expense"
-				};
+			var categoryId = $("#IncomeExpense-category-id").val();
+				var incomeDate = $("#income-date").val();
+				var incomeAmount = $("#income-amount").val();
+				var incomeNote = $("#income-note").val();
+
+				// Gom lỗi vào 1 mảng
+				var errors = [];
+
+				if (!incomeDate) {
+					errors.push("* Bạn chưa nhập ngày thu.");
+				}
+				if (!incomeAmount) {
+					errors.push("* Bạn chưa nhập số tiền khoản thu.");
+				}
+				if (!incomeNote) {
+					errors.push("* Bạn chưa nhập  mô tả khoản thu.");
+				}
+				if (!categoryId) {
+					errors.push("* Bạn chưa chọn một danh mục khoản thu.");
+				}
+
+				// Nếu có lỗi thì hiển thị chung
+				if (errors.length > 0) {
+					var errorMessage = errors.join("<br>");
+					showDialog(errorMessage);
+					return;
+				}
+
+
+			// Chuẩn bị dữ liệu
+			var formData = {
+				Amount: parseFloat(incomeAmount.replace(/,/g, "")),
+				Date: incomeDate,
+				Description: $("#income-note").val(),
+				CategoryId: categoryId,
+				Type: "Expense"
+			};
 
 			$.ajax({
 				url: "/IncomeExpense/Save",
 				type: "POST",
 				data: formData,
 				success: function (res) {
-					// Hiển thị thông báo thành công hoặc reset form
-					//alert("Lưu thành công!");
 					form.trigger("reset");
 					form.removeClass("was-validated");
-					// Load lại danh sách (nếu cần)
-					loadForm("expense");
+					loadForm("expense"); // Load lại danh sách
 				},
 				error: function (xhr) {
 					form.addClass("was-validated");
-
-					// Gỡ lỗi cũ
 					$(".field-validation-error").remove();
 					$(".is-invalid").removeClass("is-invalid");
 
@@ -137,13 +167,13 @@
 								input.after(`<div class="field-validation-error text-danger">${errors[key]}</div>`);
 							}
 						}
-					} else {
-						//alert("Có lỗi xảy ra khi lưu dữ liệu.");
 					}
 				}
 			});
 		});
 	}
+
+
 
 
 	function clickDanhMucDoiMau() {
@@ -188,5 +218,34 @@
 		});
 	}
 
+		function showDialog(message) {
+		var dialogHtml = `
+			<div class="modal fade" id="validationModal" tabindex="-1" aria-labelledby="validationModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="validationModalLabel">Thông báo</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+						</div>
+						<div class="modal-body">
+							${message}
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		`;
+
+		$("body").append(dialogHtml);
+
+		var modal = new bootstrap.Modal(document.getElementById('validationModal'));
+		modal.show();
+
+		$('#validationModal').on('hidden.bs.modal', function () {
+			$(this).remove(); // Xóa modal khỏi DOM khi đóng
+		});
+	}
 
 </script>

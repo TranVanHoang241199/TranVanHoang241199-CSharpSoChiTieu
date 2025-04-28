@@ -320,6 +320,8 @@ wwwroot\assets\scss\material-dashboard\variables\_virtual-reality.scss
 wwwroot\css\income-expenses.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\img\avatar.jpg
+wwwroot\img\logo1.jpg
 wwwroot\js\income-expenses.js
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css

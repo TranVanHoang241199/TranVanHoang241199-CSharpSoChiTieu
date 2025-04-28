@@ -50,7 +50,7 @@ namespace CSharpSoChiTieu.Business.Services
 
                 var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Name, user.FullName),
                 new Claim(ClaimTypes.Role, user.Role),
                 new Claim("UserId", user.Id.ToString())
             };
