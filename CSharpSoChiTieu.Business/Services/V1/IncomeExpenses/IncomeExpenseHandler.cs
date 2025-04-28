@@ -1,6 +1,8 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using API_HotelManagement.common;
 using AutoMapper;
+using CSharpSoChiTieu.common;
 using CSharpSoChiTieu.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -36,7 +38,7 @@ namespace CSharpSoChiTieu.Business.Services
                     Date = DateTime.Now,
                     Amount = model.Amount,
                     Description = model.Description,
-                    Type = (int)model.Type,
+                    Type = model.Type,
                     CategoryId = model.CategoryId,
 
                     //---------
@@ -46,7 +48,7 @@ namespace CSharpSoChiTieu.Business.Services
                 };
 
                 // Thêm đối tượng vào DbContext
-                _context.ct_IncomeExpenses.Add(entity);
+                _context.ct_IncomeExpense.Add(entity);
 
                 // Lưu thay đổi vào database
                 var status = await _context.SaveChangesAsync();
@@ -69,14 +71,14 @@ namespace CSharpSoChiTieu.Business.Services
         {
             try
             {
-                var serviceToDelete = await _context.ct_IncomeExpenses.FindAsync(id);
+                var serviceToDelete = await _context.ct_IncomeExpense.FindAsync(id);
 
                 if (serviceToDelete == null)
                 {
                     return new OperationResultError(HttpStatusCode.NotFound, "Không tìm thấy bản ghi.");
                 }
 
-                _context.ct_IncomeExpenses.Remove(serviceToDelete);
+                _context.ct_IncomeExpense.Remove(serviceToDelete);
 
                 var status = await _context.SaveChangesAsync();
 
@@ -98,12 +100,12 @@ namespace CSharpSoChiTieu.Business.Services
             try
             {
                 // Truy vấn dữ liệu từ cơ sở dữ liệu sử dụng LINQ
-                var result = await _context.ct_IncomeExpenses
+                var result = await _context.ct_IncomeExpense
                     .Where(test => test.Id == id)
                     .Select(test => new IncomeExpenseViewModel
                     {
                         Id = test.Id,
-                        Type = (TransactionType)test.Type,
+                        Type = test.Type,
                         Date = test.Date,
                         Description = test.Description,
                         Amount = test.Amount,
@@ -131,28 +133,61 @@ namespace CSharpSoChiTieu.Business.Services
 
 
 
-        public async Task<OperationResult> Gets(int? Type = null, string search = "")
+        public async Task<OperationResult> Gets(IncomeExpenseType Type = 0, string search = "", string range = "month")
         {
             try
             {
                 var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
+                var now = DateTime.Now;
 
-                var query = _context.ct_IncomeExpenses
-                                    .Where(o => o.CreatedBy.Equals(currentUserId))
-                                    .AsQueryable();
+                // Câu truy vấn cơ bản
+                var query = _context.ct_IncomeExpense
+                    .Where(o => o.CreatedBy.Equals(currentUserId));
 
-                if (Type != null)
-                    query = query.Where(o => o.Type == Type);
+                // Xử lý filter theo range
+                DateTime startDate, endDate;
 
-                if (!string.IsNullOrEmpty(search))
-                    query = query.Where(o => o.Description.Contains(search.Trim()));
+                switch (range)
+                {
+                    case "today":
+                        startDate = now.Date;
+                        endDate = now.Date.AddDays(1).AddTicks(-1);
+                        break;
+
+                    case "week":
+                        var diff = (7 + (now.DayOfWeek - DayOfWeek.Monday)) % 7;
+                        startDate = now.AddDays(-diff).Date;
+                        endDate = startDate.AddDays(7).AddTicks(-1);
+                        break;
+
+                    case "month":
+                        startDate = new DateTime(now.Year, now.Month, 1);
+                        endDate = startDate.AddMonths(1).AddTicks(-1);
+                        break;
+
+                    case "year":
+                        startDate = new DateTime(now.Year, 1, 1);
+                        endDate = new DateTime(now.Year, 12, 31).AddDays(1).AddTicks(-1);
+                        break;
+
+                    default:
+                        startDate = now.Date;
+                        endDate = now.Date.AddDays(1).AddTicks(-1);
+                        break;
+                }
+
+                query = query.Where(o => o.Date >= startDate && o.Date <= endDate);
+
+                // Filter theo Type nếu có
+                if (Type != 0) query = query.Where(o => o.Type == Type);
+
+                // Filter theo tìm kiếm
+                if (!string.IsNullOrEmpty(search)) query = query.Where(o => o.Description.Contains(search.Trim()));
 
                 // Lấy dữ liệu
-                var data = await query
-                    .OrderByDescending(o => o.Date)
-                    .ToListAsync();
+                var data = await query.OrderByDescending(o => o.Date).ToListAsync();
 
-                // Nhóm dữ liệu theo ngày
+                // Nhóm dữ liệu theo ngày và kết hợp thông tin Category
                 var grouped = data
                     .GroupBy(o => o.Date.Date)
                     .Select(g => new IEGroupViewModel
@@ -162,8 +197,21 @@ namespace CSharpSoChiTieu.Business.Services
                         {
                             Amount = i.Amount,
                             Date = i.Date,
-                            Type = (TransactionType)i.Type,
-                            Description = i.Description
+                            Type = i.Type,
+                            Description = i.Description,
+                            CategoryId = i.CategoryId,
+                            CategoryName = i.CategoryId != null ? _context.ct_IncomeExpenseCategories
+                                                            .Where(c => c.Id == i.CategoryId)
+                                                            .Select(c => c.Name)
+                                                            .FirstOrDefault() : "Unknown",
+                            CategoryColor = i.CategoryId != null ? _context.ct_IncomeExpenseCategories
+                                                            .Where(c => c.Id == i.CategoryId)
+                                                            .Select(c => c.Color)
+                                                            .FirstOrDefault() : "#000000", // Default color
+                            CategoryIcon = i.CategoryId != null ? _context.ct_IncomeExpenseCategories
+                                                            .Where(c => c.Id == i.CategoryId)
+                                                            .Select(c => c.Icon)
+                                                            .FirstOrDefault() : "default-icon" // Default icon
                         }).ToList()
                     }).ToList();
 
@@ -176,31 +224,64 @@ namespace CSharpSoChiTieu.Business.Services
         }
 
 
-        public async Task<OperationResult> GetSummary(int month)
+
+        public async Task<OperationResult> GetSummary(string? range = "month")
         {
             try
             {
                 // Lấy ID của user hiện tại
                 var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
 
-                // Lọc các khoản thu chi của user theo tháng
-                var transactions = await _context.ct_IncomeExpenses
+                // Xử lý filter theo range
+                DateTime now = DateTime.Now;
+                DateTime startDate = now.Date;
+                DateTime endDate = now.Date.AddDays(1).AddTicks(-1); // cuối ngày hôm nay (23:59:59)
+
+                if (range == "today")
+                {
+                    startDate = now.Date;
+                    endDate = now.Date.AddDays(1).AddTicks(-1);
+                }
+                else if (range == "week")
+                {
+                    int diff = (7 + (now.DayOfWeek - DayOfWeek.Monday)) % 7;
+                    startDate = now.AddDays(-diff).Date;
+                    endDate = startDate.AddDays(7).AddTicks(-1);
+                }
+                else if (range == "month")
+                {
+                    startDate = new DateTime(now.Year, now.Month, 1);
+                    endDate = startDate.AddMonths(1).AddTicks(-1);
+                }
+                else if (range == "year")
+                {
+                    startDate = new DateTime(now.Year, 1, 1);
+                    endDate = new DateTime(now.Year, 12, 31).AddDays(1).AddTicks(-1);
+                }
+
+                // Lọc các khoản thu chi theo khoảng thời gian
+                var transactions = await _context.ct_IncomeExpense
                     .Where(o => o.CreatedBy == currentUserId
-                                && o.Date.Month == month
-                                && o.Date.Year == DateTime.Now.Year)
+                                && o.Date >= startDate
+                                && o.Date <= endDate)
                     .ToListAsync();
 
                 // Tính tổng thu và chi
-                var totalIncome = transactions.Where(o => o.Type == (int)TransactionType.Income).Sum(o => o.Amount);
-                var totalExpense = transactions.Where(o => o.Type == (int)TransactionType.Expense).Sum(o => o.Amount);
+                var totalIncome = transactions
+                    .Where(o => o.Type == IncomeExpenseType.Income)
+                    .Sum(o => o.Amount);
 
-                var summary = new IncomeExpenseSummaryViewModel
+                var totalExpense = transactions
+                    .Where(o => o.Type == IncomeExpenseType.Expense)
+                    .Sum(o => o.Amount);
+
+                var summary = new IncomeExpenseummaryViewModel
                 {
                     TotalIncome = totalIncome,
                     TotalExpense = totalExpense,
                 };
 
-                return new OperationResult<IncomeExpenseSummaryViewModel>(summary);
+                return new OperationResult<IncomeExpenseummaryViewModel>(summary);
             }
             catch (Exception ex)
             {
@@ -209,17 +290,18 @@ namespace CSharpSoChiTieu.Business.Services
         }
 
 
+
         public async Task<OperationResult> Update(Guid id, IncomeExpenseCreateUpdateModel model)
         {
             try
             {
-                var incomeExpenseUpdate = await _context.ct_IncomeExpenses.FindAsync(id);
+                var incomeExpenseUpdate = await _context.ct_IncomeExpense.FindAsync(id);
 
                 if (incomeExpenseUpdate == null)
                     return new OperationResultError(HttpStatusCode.NotFound, "Không tìm thấy bản ghi");
 
                 incomeExpenseUpdate.Amount = model.Amount;
-                incomeExpenseUpdate.Type = (int)model.Type;
+                incomeExpenseUpdate.Type = model.Type;
                 incomeExpenseUpdate.Date = model.Date;
                 incomeExpenseUpdate.CategoryId = model.CategoryId;
                 incomeExpenseUpdate.Description = model.Description;

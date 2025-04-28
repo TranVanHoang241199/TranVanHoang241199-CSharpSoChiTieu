@@ -5,6 +5,44 @@
 }
 
 <footer class="footer py-4  ">
+    <div class="marquee bg-light p-2">
+        <div class="marquee-text">
+            * Bạn có thể nhấy đúp chuột vào các mục thu chi gần đây để chỉnh sửa
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            * Bạn có thể thêm khoản thu khoản chi 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            * Bạn có thể cho tôi biết cảm nghĩ của bạn hay cần cải thiện gì để tôi chỉnh sửa
+        </div>
+    </div>
+
+    <style>
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
+        }
+
+        .marquee-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 30s linear infinite;
+            font-size: 20px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        @@keyframes marquee {
+            0% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+
     <div class="container-fluid">
         <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">

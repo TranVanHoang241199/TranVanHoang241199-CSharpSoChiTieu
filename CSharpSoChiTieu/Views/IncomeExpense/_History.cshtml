@@ -1,0 +1,118 @@
+﻿@using CSharpSoChiTieu.Business.Services;
+@using CSharpSoChiTieu.common;
+@model List<IEGroupViewModel>
+
+
+
+<div class="card h-100 shadow-sm">
+	
+	@* Begin: header *@
+	<div class="card-header pb-0 px-3">
+		<div class="row align-items-center mb-2">
+			<div class="col-6">
+				<h6 class="mb-0 text-primary">
+					<i class="fas fa-history me-2"></i>Thu chi gần đây
+				</h6>
+			</div>
+
+			<div class="col-6 d-flex justify-content-end">
+				 <select id="select-range" class="form-select form-select-sm shadow-none" style="border-radius: 0.5rem; min-width: 80px;">
+
+        <option value="today">Hôm nay</option>
+        <option value="week">Tuần này</option>
+        <option value="month">Tháng này</option>
+        <option value="year">Năm này</option>
+    </select>
+			</div>
+
+		</div>
+	</div>
+	@* End: header *@
+
+
+	@* ** Hiển thị danh sách thu chi ** *@
+	@* ** Hiển thị danh sách thu chi ** *@
+	<div class="card-body pt-2 p-3" style="max-height: 400px; overflow-y: auto;" id="history_id">
+		@foreach (var group in Model)
+		{
+			<label>Ngày @group.Date.ToString("dd/MM/yyyy")</label>
+			<div class="income-list-container mb-3">
+				<ul class="list-group list-group-flush">
+					@foreach (var item in group.Items)
+					{
+						var amountClass = item.Type == IncomeExpenseType.Income
+						? "text-success"
+						: "text-danger";
+
+						// Chọn icon dựa trên CategoryName
+						var iconClass = item.CategoryIcon switch
+						{
+							"Food" => "fas fa-utensils",          // Ví dụ: danh mục "Food"
+							"Transport" => "fas fa-car",         // Ví dụ: danh mục "Transport"
+							"Entertainment" => "fas fa-film",    // Ví dụ: danh mục "Entertainment"
+							"Salary" => "fas fa-wallet",         // Ví dụ: danh mục "Salary"
+							_ => "fas fa-box",                   // Mặc định nếu không khớp
+						};
+
+						<li class="list-group-item border-0 d-flex justify-content-between align-items-center ps-1 pe-1 mb-1">
+							<div class="d-flex align-items-center">
+								<div class="icon icon-shape icon-xs @item.CategoryColor text-white text-center rounded-circle me-2 shadow-sm flex-shrink-0">
+									<i class="@iconClass"></i>
+								</div>
+								<div class="d-flex flex-column text-truncate">
+									<h6 class="mb-0 text-dark text-sm">@item.Description</h6>
+									<span class="text-xs text-muted">@item.CategoryName</span>
+								</div>
+							</div>
+							<div class="@amountClass text-gradient text-sm fw-bold ms-2 text-nowrap">
+								@(item.Type == IncomeExpenseType.Income ? "+" : "-")@item.Amount.ToString("N0") ₫
+							</div>
+						</li>
+					}
+				</ul>
+			</div>
+		}
+	</div>
+
+	
+</div>
+
+<script>
+	$(document).ready(function () {
+		getDataHistoryIE();
+
+		var selectedRange = '@ViewBag.RangeType';  // Assuming ViewBag.RangeType is available
+		$('#select-range').val(selectedRange);  // This sets the value of the <select> element
+
+		// GẮN SỰ KIỆN CHO SELECT
+		$("#select-range").change(function () {
+			var selectedRange = $(this).val();
+			updateSummary(selectedRange);
+		});
+	});
+
+	function getDataHistoryIE() {
+		$('#select-range').change(function () {
+			var range = $(this).val();
+
+			// Loading nhẹ trong đúng cái box thu chi
+			$('#history_id').html('<div class="text-center p-5"><div class="spinner-border text-primary"></div></div>');
+
+			$.ajax({
+				url: '/IncomeExpense/History',
+				type: 'GET',
+				data: { range: range },
+				success: function (result) {
+					var newContent = $(result).find('#history_id').html();
+					$('#history_id').html(newContent); // ✨ Chỉ thay nội dung trong #history_id thôi
+				},
+				error: function () {
+					$('#history_id').html('<div class="text-danger text-center p-4">Lỗi khi tải dữ liệu.</div>');
+				}
+			});
+		});
+	}
+</script>
+
+
+

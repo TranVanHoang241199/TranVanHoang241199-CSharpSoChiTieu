@@ -20,4 +20,8 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CSharpSoChiTieu.common\CSharpSoChiTieu.common.csproj" />
+  </ItemGroup>
+
 </Project>

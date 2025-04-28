@@ -1,0 +1,189 @@
+﻿using System.Net;
+using API_HotelManagement.common;
+using CSharpSoChiTieu.Business.Services;
+using CSharpSoChiTieu.common;
+using CSharpSoChiTieu.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace CSharpSoChiTieu.Controllers
+{
+    [Authorize]
+    public class IncomeExpenseController : Controller
+    {
+        private readonly IIncomeExpenseHandler _IncomeExpenseHandler;
+
+        private const string IE_SESSION_KEY = "IncomeExpenseSession";
+
+        public IncomeExpenseController(IIncomeExpenseHandler IncomeExpenseHandler)
+        {
+            _IncomeExpenseHandler = IncomeExpenseHandler;
+        }
+
+        public IActionResult Index()
+        {
+            var sessionModel = HttpContext.Session.GetObjectFromJson<IncomeExpenseSessionModel>(IE_SESSION_KEY)
+                        ?? new IncomeExpenseSessionModel(); // Nếu chưa có thì dùng mặc định
+
+            ViewBag.FormType = sessionModel.FormType;
+            ViewBag.RangeType = sessionModel.RangeType;
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult LoadForm(string type)
+        {
+            var sessionModel = HttpContext.Session.GetObjectFromJson<IncomeExpenseSessionModel>(IE_SESSION_KEY)
+                                 ?? new IncomeExpenseSessionModel();
+
+            HttpContext.Session.SetObjectAsJson(IE_SESSION_KEY, sessionModel);
+
+            if (type == "income")
+            {
+                ViewBag.Title = "Thêm khoản thu mới"; // sửa lại tên đúng nhé
+                return PartialView("Income");
+            }
+            else if (type == "expense")
+            {
+                ViewBag.Title = "Thêm khoản chi mới"; // sửa lại tên đúng nhé
+                return PartialView("Expenses");
+            }
+            else
+            {
+                return Content("Form không tồn tại!");
+            }
+        }
+
+
+
+
+        public async Task<IActionResult> History(string? range = "month")
+        {
+            var sessionModel = HttpContext.Session.GetObjectFromJson<IncomeExpenseSessionModel>(IE_SESSION_KEY)
+                          ?? new IncomeExpenseSessionModel();
+
+            if (!string.IsNullOrEmpty(range)) // chỉ update nếu range có giá trị
+            {
+                sessionModel.RangeType = range;
+                HttpContext.Session.SetObjectAsJson(IE_SESSION_KEY, sessionModel);
+            }
+
+            // Nếu không truyền range, thì lấy từ session
+            var currentRange = sessionModel.RangeType ?? "month"; // phòng trường hợp null
+
+            ViewBag.RangeType = currentRange;
+
+            var result = await _IncomeExpenseHandler.Gets(0, "", currentRange);
+
+            if (result.Status != HttpStatusCode.OK)
+                return Content("Lỗi khi lấy dữ liệu: " + result.Message);
+
+            var data = (result as OperationResultList<IEGroupViewModel>)?.Data ?? new List<IEGroupViewModel>();
+
+            return PartialView("_History", data);
+        }
+
+
+
+        public IActionResult Category(int type)
+        {
+            var data = new List<CategoryViewModel>();
+
+            if (type == 1) // income
+            {
+                data = new List<CategoryViewModel>
+                {
+                    new CategoryViewModel { Id = Guid.Parse("686f739a-daa2-4412-aedd-e4bb76a3d825"), Name = "salary", Text = "Lương", Icon = "attach_money", Color = "success" },
+                    new CategoryViewModel { Id = Guid.Parse("686f739a-daa2-4412-aedd-e4bb76a3d825"), Name = "bonus", Text = "Thưởng", Icon = "card_giftcard", Color = "info" },
+                    new CategoryViewModel { Id = Guid.Parse("686f739a-daa2-4412-aedd-e4bb76a3d825"), Name = "other", Text = "Khác", Icon = "more_horiz", Color = "secondary" },
+                };
+            }
+            else if (type == 2) // expense
+            {
+                data = new List<CategoryViewModel>
+                {
+                    new CategoryViewModel { Id = Guid.Parse("c4ef079d-c335-48df-a790-20f28272d03d"), Name = "food", Text = "Ăn uống", Icon = "restaurant", Color = "danger" },
+                    new CategoryViewModel { Id = Guid.Parse("c4ef079d-c335-48df-a790-20f28272d03d"), Name = "transport", Text = "Di chuyển", Icon = "directions_car", Color = "primary" },
+                    new CategoryViewModel { Id = Guid.Parse("c4ef079d-c335-48df-a790-20f28272d03d"), Name = "shopping", Text = "Mua sắm", Icon = "shopping_cart", Color = "warning" },
+                };
+            }
+
+            return PartialView("_Category", data);
+        }
+
+
+        
+
+        [HttpGet]
+        public async Task<IActionResult> GetSummary(string? range = "month")
+        {
+            var result = await _IncomeExpenseHandler.GetSummary(range);
+
+            if (result is OperationResult<IncomeExpenseummaryViewModel> summaryResult)
+            {
+                var model = summaryResult.Data;
+                return Json(new
+                {
+                    totalIncomeFormatted = $"{model.TotalIncome:N0} đ",
+                    totalExpenseFormatted = $"{model.TotalExpense:N0} đ",
+                    remainingBalanceFormatted = $"{model.Balance:N0} đ"
+                });
+            }
+
+            return Json(new
+            {
+                totalIncomeFormatted = "0 đ",
+                totalExpenseFormatted = "0 đ",
+                remainingBalanceFormatted = "0 đ"
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Save(IncomeExpenseCreateUpdateModel model)
+        {
+            // Kiểm tra lỗi dữ liệu
+            if (string.IsNullOrWhiteSpace(model.Description))
+                ModelState.AddModelError(nameof(model.Description), "Vui lòng nhập mô tả");
+
+            if (model.Amount <= 0)
+                ModelState.AddModelError(nameof(model.Amount), "Số tiền phải lớn hơn 0");
+
+            if (model.Date == default)
+                ModelState.AddModelError(nameof(model.Date), "Ngày tháng không hợp lệ");
+
+            if (model.CategoryId == Guid.Empty)
+                ModelState.AddModelError(nameof(model.CategoryId), "Vui lòng chọn loại");
+
+            if (!ModelState.IsValid)
+            {
+                // Gửi lỗi về dạng JSON cho client
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Any())
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.First().ErrorMessage
+                    );
+
+                return BadRequest(new { errors });
+            }
+
+            if (model.Id == Guid.Empty)
+            {
+                var result = await _IncomeExpenseHandler.Create(model);
+                if (result.Status != HttpStatusCode.OK)
+                    return Json(new { success = false, message = "Không thể tạo mới khoản chi tiêu." });
+            }
+            else
+            {
+                var result = await _IncomeExpenseHandler.Update(model.Id, model);
+                if (result.Status != HttpStatusCode.OK)
+                    return Json(new { success = false, message = "Không thể cập nhật khoản chi tiêu." });
+            }
+
+            return Json(new { success = true });
+        }
+
+    }
+}

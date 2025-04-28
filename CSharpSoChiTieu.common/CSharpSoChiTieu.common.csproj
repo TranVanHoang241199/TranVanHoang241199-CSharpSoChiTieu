@@ -10,11 +10,8 @@
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="Google.Apis.Gmail.v1" Version="1.68.0.3427" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.3.0" />
     <PackageReference Include="MimeKit" Version="4.11.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-	  <ProjectReference Include="..\CSharpSoChiTieu.Data\CSharpSoChiTieu.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>

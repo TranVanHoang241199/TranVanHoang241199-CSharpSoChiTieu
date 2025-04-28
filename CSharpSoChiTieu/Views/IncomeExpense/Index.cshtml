@@ -38,7 +38,7 @@
 
 			@* Begin: Title *@
 			<div class="mx-auto text-center order-lg-2 d-none d-lg-block">
-				<a class="navbar-brand font-weight-bolder text-dark m-0 p-0" style="font-size: 1.1rem;" asp-controller="IncomeExpenses" asp-action="Index">
+				<a class="navbar-brand font-weight-bolder text-dark m-0 p-0" style="font-size: 1.1rem;" asp-controller="IncomeExpense" asp-action="Index">
 					QUẢN LÝ THU CHI
 				</a>
 			</div>
@@ -89,42 +89,12 @@
 
 	@* Begin: Hiển thị danh sách chọn *@
 	<div class="col-lg-5 col-md-12 mt-md-4 mt-3">
-		<div class="card h-100 shadow-sm">
-			<div class="card-header pb-0 px-3">
-				<div class="row align-items-center mb-2">
-					<div class="col-6">
-						<h6 class="mb-0 text-info"><i class="fas fa-list-ul me-2"></i>Thu chi gần đây</h6>
-					</div>
-					<div class="col-6 d-flex justify-content-end">
-						<div class="dropdown">
-							<button class="btn btn-sm btn-outline-secondary dropdown-toggle text-nowrap px-2 py-1"
-									type="button"
-									id="dateRangeDropdownIncome"
-									data-bs-toggle="dropdown"
-									aria-expanded="false">
-								<i class="material-symbols-rounded align-middle fs-6 me-1">calendar_month</i>
-								<span id="selectedRangeLabel" class="d-none d-sm-inline">Tháng này</span>
-								<span id="selectedRangeLabelShort" class="d-inline d-sm-none">T.Này</span>
-							</button>
-							<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dateRangeDropdownIncome">
-								<li><a class="dropdown-item" href="#" data-range="today">Hôm nay</a></li>
-								<li><a class="dropdown-item" href="#" data-range="week">Tuần này</a></li>
-								<li><a class="dropdown-item active" href="#" data-range="month">Tháng này</a></li>
-								<li><a class="dropdown-item" href="#" data-range="custom">Tuỳ chọn...</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			@* ** Hiển thị danh sách thu chi ** *@
-			<div id="IncomeExpensesHistory"></div>
-
-		</div>
+		<div id="IncomeExpenseHistory"></div>
 	</div>
 	@* End: Hiển thị danh sách chọn *@
 
 </div>
+
 
 
 
@@ -133,10 +103,9 @@
 	$(document).ready(function () {
 
 		var formType = '@ViewBag.FormType';
+		var rangeType = '@ViewBag.RangeType';
 
-		// Load form và set lại nút active ban đầu
-		loadForm(formType);
-		setActiveButton(formType);
+		// Begin: sự kiện header ------------------------
 
 		// Gắn sự kiện click
 		$("#btn-income").click(function () {
@@ -149,20 +118,33 @@
 			setActiveButton("expense");
 		});
 
-		loadFormHistory();
+		// Khi mới vào trang, gọi updateSummary với range mặc định
+		updateSummary($("#select-range").val());
 
-		updateSummary();
+		// /end: sự kiện header 
 
-		chonNgayThangTuan();
+		// Begin: Sự kiện box left ------------------------
 
-		// Mặc định chọn nút Khoản Thu
+		// Load form và set lại nút active ban đầu
+		loadForm(formType); 
+		setActiveButton(formType);
+
 		clickDoiMau();
 		$("#btn-expense").click();
+		// End: Sự kiện box left
+
+		// Begin: Sự kiện box Right ------------------------
+		loadFormHistory(rangeType);
+
+
+		// End: Sự kiện box Right
+
+		// Load form và set lại nút active ban đầu
 
 	});
 
 		function loadForm(type) {
-		var url = "IncomeExpenses/LoadForm";
+		var url = "IncomeExpense/LoadForm";
 		var postData = { type: type };
 
 		$.ajax({
@@ -189,10 +171,11 @@
 		}
 	}
 
-	function updateSummary() {
+		function updateSummary(range) {
 		$.ajax({
-			url: "IncomeExpenses/GetSummary",
+			url: "IncomeExpense/GetSummary",
 			type: "GET",
+			data: { range: range },
 			success: function (data) {
 				$("#total-income").text(data.totalIncomeFormatted);
 				$("#total-expense").text(data.totalExpenseFormatted);
@@ -202,49 +185,23 @@
 	}
 
 
-	function loadFormHistory() {
-		var url = "IncomeExpenses/History";
+
+	function loadFormHistory(range) {
+		console.log(range)
 		$.ajax({
-			url: url,
+			url: "IncomeExpense/History",
 			type: "GET",
+			data: { range: range },
+			success: function (data) {
+				$("#IncomeExpenseHistory").html(data);
+			},
 			error: function () {
 				alert("Lỗi tải form!");
-			},
-			success: function (data) {
-				console.log(data);
-				$("#IncomeExpensesHistory").html(data);
 			}
 		});
 	}
 
 
-	function chonNgayThangTuan() {
-		$(".dropdown-menu a").click(function (e) {
-			e.preventDefault();
-
-			var selectedText = $(this).text(); // Lấy text của item
-			var selectedRange = $(this).data("range"); // Lấy data-range (nếu cần dùng)
-
-			// Cập nhật hiển thị trên nút
-			$("#selectedRangeLabel").text(selectedText);
-
-			// Cập nhật bản rút gọn nếu thích
-			let shortText = selectedText;
-			if (selectedRange === "today") shortText = "H.Nay";
-			else if (selectedRange === "week") shortText = "T.Này";
-			else if (selectedRange === "month") shortText = "T.Này";
-			else if (selectedRange === "custom") shortText = "Tuỳ";
-
-			$("#selectedRangeLabelShort").text(shortText);
-
-			// Đánh dấu active mục đang chọn
-			$(".dropdown-menu a").removeClass("active");
-			$(this).addClass("active");
-
-			// Load lại dữ liệu (nếu cần)
-			loadFormHistory(selectedRange);
-		});
-	}
 </script>
 
 

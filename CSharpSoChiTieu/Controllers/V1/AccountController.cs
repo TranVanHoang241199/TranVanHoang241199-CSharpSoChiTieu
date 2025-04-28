@@ -37,7 +37,7 @@ namespace CSharpSoChiTieu.Controllers
 
                     return result.User.Role == "admin"
                         ? RedirectToAction("Dashboard", "Admin")
-                        : RedirectToAction("Index", "IncomeExpenses");
+                        : RedirectToAction("Index", "IncomeExpense");
                 }
 
                 ModelState.AddModelError("", result.ErrorMessage);
@@ -66,7 +66,7 @@ namespace CSharpSoChiTieu.Controllers
                     // Chuyển hướng dựa vào role
                     return result.User.Role == "admin"
                         ? RedirectToAction("Dashboard", "Admin")
-                        : RedirectToAction("Index", "IncomeExpenses");
+                        : RedirectToAction("Index", "IncomeExpense");
                 }
 
                 ModelState.AddModelError("", result.ErrorMessage);

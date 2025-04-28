@@ -1,15 +1,12 @@
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.common\bin\Debug\net8.0\CSharpSoChiTieu.common.deps.json
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.common\bin\Debug\net8.0\CSharpSoChiTieu.common.dll
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.common\bin\Debug\net8.0\CSharpSoChiTieu.common.pdb
-D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.common\bin\Debug\net8.0\CSharpSoChiTieu.Data.dll
-D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.common\bin\Debug\net8.0\CSharpSoChiTieu.Data.pdb
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.common\obj\Debug\net8.0\CSharpSoChiTieu.common.csproj.AssemblyReference.cache
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.common\obj\Debug\net8.0\CSharpSoChiTieu.common.GeneratedMSBuildEditorConfig.editorconfig
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.common\obj\Debug\net8.0\CSharpSoChiTieu.common.AssemblyInfoInputs.cache
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.common\obj\Debug\net8.0\CSharpSoChiTieu.common.AssemblyInfo.cs
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.common\obj\Debug\net8.0\CSharpSoChiTieu.common.csproj.CoreCompileInputs.cache
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.common\obj\Debug\net8.0\CSharpSoChiTieu.common.sourcelink.json
-D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.common\obj\Debug\net8.0\CSharpSo.FBDE1BC2.Up2Date
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.common\obj\Debug\net8.0\CSharpSoChiTieu.common.dll
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.common\obj\Debug\net8.0\refint\CSharpSoChiTieu.common.dll
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.common\obj\Debug\net8.0\CSharpSoChiTieu.common.pdb

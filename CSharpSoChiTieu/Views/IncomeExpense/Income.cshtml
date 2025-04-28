@@ -5,10 +5,9 @@
 	ViewData["Title"] = "Thêm Khoản Thu";
 }
 
-
 <div class="card mb-4 shadow-sm">
 	<div class="card-header pb-2 px-3">
-		<h6 class="mb-0 text-success"><i class="fas fa-plus-circle me-2"></i>Thêm khoản thu mới</h6>
+		<h6 class="mb-0 text-success"><i class="fas fa-plus-circle me-2"></i>@ViewBag.Title</h6>
 	</div>
 	<div class="card-body p-3">
 		<form id="addIncomeForm" class="needs-validation" novalidate>
@@ -34,23 +33,23 @@
 
 			<!-- Ghi chú -->
 			<div class="d-flex align-items-center mb-3">
-				<label for="income-note" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ghi chú</label>
+				<label for="income-note" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Mô tả</label>
 				<div class="input-group input-group-static flex-grow-1">
 					<span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
-					<input type="text" class="form-control" id="income-note" name="Note" placeholder="Mô tả nguồn thu (vd: Lương T4, Thưởng...)">
+					<input type="text" class="form-control" id="income-note" name="Note" placeholder="Mô tả nguồn thu ">
+					<div class="invalid-feedback ms-2">Vui lòng nhập mô tả.</div>
 				</div>
 			</div>
 
 			<!-- Danh mục -->
-			<!-- Danh mục -->
-			<div id="IncomeExpensesCateogry"></div>
+			<div id="IncomeExpenseCateogry"></div>
 
-			<input type="hidden" id="expense-category-id" name="CategoryId" value="C4EF079D-C335-48DF-A790-20F28272D03D" required />
+			<input type="hidden" id="IncomeExpense-category-id" name="CategoryId" value="" required />
 			<div class="invalid-feedback" id="category-validation-feedback" style="display:none; margin-top:-10px; margin-bottom: 10px;">Vui lòng chọn một danh mục.</div>
 
 			<div class="mt-4">
 				<button type="submit" class="btn btn-success w-100 py-2 fw-bold">
-					<i class="fas fa-save me-2"></i> Lưu khoản thu
+					<i class="fas fa-save me-2"></i> Thêm khoản thu
 				</button>
 			</div>
 		</form>
@@ -84,6 +83,8 @@
 
 		clickDanhMucDoiMau();
 
+		EventGanIdChoCategory();
+
 		addDataIncome();
 		
 		loadFormCategoryEI(1);
@@ -106,10 +107,10 @@
 
 		function loadFormCategoryEI(type) {
 		$.ajax({
-			url: "/IncomeExpenses/Category?type=" + type,
+			url: "/IncomeExpense/Category?type=" + type,
 			type: "GET",
 			success: function (data) {
-				$("#IncomeExpensesCateogry").html(data);
+				$("#IncomeExpenseCateogry").html(data);
 			},
 			error: function () {
 				alert("Không tải được danh mục.");
@@ -117,7 +118,7 @@
 		});
 	}
 
-		function addDataIncome() {
+	function addDataIncome() {
 		$("#addIncomeForm").submit(function (e) {
 			e.preventDefault();
 
@@ -129,7 +130,7 @@
 				Amount: parseFloat($("#income-amount").val().replace(/,/g, "")),
 				Date: $("#income-date").val(),
 				Description: $("#income-note").val(),
-				CategoryId: $("#expense-category-id").val(),
+				CategoryId: $("#IncomeExpense-category-id").val(),
 				Type: "Income"
 			};
 
@@ -142,7 +143,7 @@
 			}
 
 			$.ajax({
-				url: "/IncomeExpenses/Save",
+				url: "/IncomeExpense/Save",
 				type: "POST",
 				data: formData,
 				success: function (res) {
@@ -175,5 +176,21 @@
 		});
 	}
 
+
+	function EventGanIdChoCategory() {
+		// Do loadFormCategoryEI(2) có thể load thêm danh mục mới
+		// nên phải dùng .on('click') để gán sự kiện động
+		$(document).on("click", ".btn-category", function () {
+			var categoryId = $(this).data("category-id"); // Lấy id
+			$("#IncomeExpense-category-id").val(categoryId);    // Gán vào input hidden
+
+			// Ẩn thông báo lỗi nếu có
+			$("#category-validation-feedback").hide();
+
+			// Đổi màu nút: clear tất cả, active cái được chọn
+			$(".btn-category").removeClass("btn-primary").addClass("btn-light");
+			$(this).removeClass("btn-light").addClass("btn-primary");
+		});
+	}
 
 </script>

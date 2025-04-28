@@ -1,30 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CSharpSoChiTieu.common;
+using CSharpSoChiTieu.Data;
 
 namespace CSharpSoChiTieu.Business.Services
 {
-    public class CategoryViewModel1
+    public class CategoryViewModel : EntityBase
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Icon { get; set; }
-        public string ColorClass { get; set; }
-        public bool IsIncome { get; set; }
+        public string? Name { get; set; }         // tên hệ thống (food, transport, ...)
+        public string? Text { get; set; }         // tên hiển thị (Ăn uống, Di chuyển, ...)
+        public string? Icon { get; set; }         // icon material
+        public string? Color { get; set; }        // success, primary, warning, ...
         public int Order { get; set; }
-    }
 
-    public class CategoryViewModel
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }         // tên hệ thống (food, transport, ...)
-        public string Text { get; set; }         // tên hiển thị (Ăn uống, Di chuyển, ...)
-        public string Icon { get; set; }         // icon material
-        public string Color { get; set; }        // success, primary, warning, ...
-        public int Order { get; set; }
+        public IncomeExpenseType Type { get; set; }
     }
 
     public class CategoryInputModel

@@ -27,7 +27,7 @@ namespace CSharpSoChiTieu.Data
         /// Test Table
         /// </summary>
         public DbSet<ct_User> ct_Users { get; set; } // User dang nhap
-        public DbSet<ct_IncomeExpense> ct_IncomeExpenses { get; set; }
+        public DbSet<ct_IncomeExpense> ct_IncomeExpense { get; set; }
         public DbSet<ct_IncomeExpenseCategory> ct_IncomeExpenseCategories { get; set; }
         #endregion DBSet
 
@@ -75,7 +75,7 @@ namespace CSharpSoChiTieu.Data
             // Foreign key {N ct_IncomeExpense - 1 ct_CategoryIncomeExpense}
             modelBuilder.Entity<ct_IncomeExpense>()
                 .HasOne(c => c.Category)
-                .WithMany(c => c.ct_IncomeExpenses)
+                .WithMany(c => c.ct_IncomeExpense)
                 .HasForeignKey(c => c.CategoryId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 

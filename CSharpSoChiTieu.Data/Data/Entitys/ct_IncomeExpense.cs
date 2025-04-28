@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using CSharpSoChiTieu.common;
 
 namespace CSharpSoChiTieu.Data
 {
     [Table("ct_IncomeExpense")]
     public class ct_IncomeExpense : EntityBase
     {
-
         /// <summary>
         /// Số tiền
         /// </summary>
@@ -28,7 +28,7 @@ namespace CSharpSoChiTieu.Data
         /// 0: chi
         /// 1: thu
         /// </summary>
-        public int Type { get; set; }
+        public IncomeExpenseType Type { get; set; }
 
         /// <summary>
         /// 
@@ -42,8 +42,5 @@ namespace CSharpSoChiTieu.Data
         // - CreatedBy (Guid)
         // - ModifiedDate (DateTime?)
         // - ModifiedBy (Guid?)
-
     }
-
-    
 }

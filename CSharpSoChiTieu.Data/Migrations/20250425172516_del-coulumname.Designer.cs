@@ -182,7 +182,7 @@ namespace CSharpSoChiTieu.Data.Migrations
             modelBuilder.Entity("CSharpSoChiTieu.Data.ct_IncomeExpense", b =>
                 {
                     b.HasOne("CSharpSoChiTieu.Data.ct_IncomeExpenseCategory", "Category")
-                        .WithMany("ct_IncomeExpenses")
+                        .WithMany("ct_IncomeExpense")
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
@@ -190,7 +190,7 @@ namespace CSharpSoChiTieu.Data.Migrations
 
             modelBuilder.Entity("CSharpSoChiTieu.Data.ct_IncomeExpenseCategory", b =>
                 {
-                    b.Navigation("ct_IncomeExpenses");
+                    b.Navigation("ct_IncomeExpense");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,20 +8,20 @@
     <div class="container-fluid d-flex justify-content-around px-1">
         @* Giảm padding ngang container *@
 
-        <a class="nav-link text-center @(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "IncomeExpenses" ? "active" : "")"
-           asp-controller="IncomeExpenses" asp-action="Index" title="Tổng quan">
+        <a class="nav-link text-center @(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "IncomeExpense" ? "active" : "")"
+           asp-controller="IncomeExpense" asp-action="Index" title="Tổng quan">
             <i class="material-symbols-rounded nav-icon">dashboard</i>
             <span class="nav-text">Tổng quan</span>
         </a>
 
-        <a class="nav-link text-center @(ViewContext.RouteData.Values["Action"].ToString() == "Expense" && ViewContext.RouteData.Values["Controller"].ToString() == "IncomeExpenses" ? "active" : "")"
-           asp-controller="IncomeExpenses" asp-action="Expense" title="Khoản chi">
+        <a class="nav-link text-center @(ViewContext.RouteData.Values["Action"].ToString() == "Expense" && ViewContext.RouteData.Values["Controller"].ToString() == "IncomeExpense" ? "active" : "")"
+           asp-controller="IncomeExpense" asp-action="Expense" title="Khoản chi">
             <i class="material-symbols-rounded nav-icon">receipt_long</i>
             <span class="nav-text">Khoản chi</span>
         </a>
 
-        <a class="nav-link text-center @(ViewContext.RouteData.Values["Action"].ToString() == "Reports" && ViewContext.RouteData.Values["Controller"].ToString() == "IncomeExpenses" ? "active" : "")"
-           asp-controller="IncomeExpenses" asp-action="Reports" title="Báo cáo">
+        <a class="nav-link text-center @(ViewContext.RouteData.Values["Action"].ToString() == "Reports" && ViewContext.RouteData.Values["Controller"].ToString() == "IncomeExpense" ? "active" : "")"
+           asp-controller="IncomeExpense" asp-action="Reports" title="Báo cáo">
             <i class="material-symbols-rounded nav-icon">analytics</i>
             <span class="nav-text">Báo cáo</span>
         </a>
@@ -61,12 +61,12 @@
                     </li>
                     <li><hr class="dropdown-divider my-1"></li>
                     <li>
-                        <a class="dropdown-item" asp-controller="IncomeExpenses" asp-action="Categories">
+                        <a class="dropdown-item" asp-controller="IncomeExpense" asp-action="Categories">
                             <i class="material-symbols-rounded">category</i> Danh mục
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" asp-controller="IncomeExpenses" asp-action="Income">
+                        <a class="dropdown-item" asp-controller="IncomeExpense" asp-action="Income">
                             <i class="material-symbols-rounded">payments</i> Khoản thu
                         </a>
                     </li>
@@ -84,8 +84,8 @@
                     <li> <a class="dropdown-item" asp-controller="Account" asp-action="Login"><i class="material-symbols-rounded">login</i> Đăng nhập</a> </li>
                     <li> <a class="dropdown-item" asp-controller="Account" asp-action="Register"><i class="material-symbols-rounded">person_add</i> Đăng ký</a> </li>
                     <li><hr class="dropdown-divider my-1"></li>
-                    <li> <a class="dropdown-item" asp-controller="IncomeExpenses" asp-action="Categories"><i class="material-symbols-rounded">category</i> Danh mục</a> </li>
-                    <li> <a class="dropdown-item" asp-controller="IncomeExpenses" asp-action="Income"><i class="material-symbols-rounded">payments</i> Khoản thu</a></li>
+                    <li> <a class="dropdown-item" asp-controller="IncomeExpense" asp-action="Categories"><i class="material-symbols-rounded">category</i> Danh mục</a> </li>
+                    <li> <a class="dropdown-item" asp-controller="IncomeExpense" asp-action="Income"><i class="material-symbols-rounded">payments</i> Khoản thu</a></li>
                 }
             </ul>
         </div>
