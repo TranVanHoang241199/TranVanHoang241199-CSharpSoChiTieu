@@ -6,6 +6,7 @@ using CSharpSoChiTieu.Data;
 
 namespace CSharpSoChiTieu.Business.Services
 {
+
     public class CategoryViewModel : EntityBase
     {
         public string? Name { get; set; }         // tên hệ thống (food, transport, ...)

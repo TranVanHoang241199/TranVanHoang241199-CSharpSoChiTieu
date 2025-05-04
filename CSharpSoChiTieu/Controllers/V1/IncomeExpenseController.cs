@@ -36,6 +36,7 @@ namespace CSharpSoChiTieu.Controllers
             var sessionModel = HttpContext.Session.GetObjectFromJson<IncomeExpenseSessionModel>(IE_SESSION_KEY)
                                  ?? new IncomeExpenseSessionModel();
 
+            sessionModel.FormType = type;
             HttpContext.Session.SetObjectAsJson(IE_SESSION_KEY, sessionModel);
 
             if (type == "income")
@@ -179,6 +180,20 @@ namespace CSharpSoChiTieu.Controllers
                 if (result.Status != HttpStatusCode.OK)
                     return Json(new { success = false, message = "Không thể cập nhật khoản chi tiêu." });
             }
+
+            return Json(new { success = true });
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            if (id == Guid.Empty)
+                return BadRequest(new { message = "ID không hợp lệ" });
+
+            var result = await _IncomeExpenseHandler.Delete(id);
+
+            if (result.Status != HttpStatusCode.OK)
+                return Json(new { success = false, message = result.Message });
 
             return Json(new { success = true });
         }

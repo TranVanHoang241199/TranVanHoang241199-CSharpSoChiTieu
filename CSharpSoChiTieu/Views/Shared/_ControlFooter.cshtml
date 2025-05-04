@@ -1,7 +1,7 @@
 ﻿@* Partial View: _FooterMenu.cshtml - Menu dưới cùng cho Mobile *@
 @{
     // Giả sử bạn có cách lấy đường dẫn avatar thực tế, nếu không dùng ảnh mặc định
-    var userAvatarUrl = User.FindFirst("AvatarUrl")?.Value ?? "~/assets/img/avatar.jpg"; // Lấy từ claim hoặc dùng default
+    var userAvatarUrl = User.FindFirst("AvatarUrl")?.Value ?? "~/img/avatar.jpg"; // Lấy từ claim hoặc dùng default
 }
 
 <nav class="navbar fixed-bottom navbar-light bg-white d-lg-none bottom-nav shadow">

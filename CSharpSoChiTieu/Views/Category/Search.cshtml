@@ -1,0 +1,73 @@
+﻿@model CSharpSoChiTieu.Models.CategorySearchOutput
+@{
+    Layout = null;
+}
+
+@*Kết quả tìm kiếm *@
+<p style="margin-top:5px;">
+    Có <strong>@Model.RowCount</strong> loại hàng trong tổng số <strong>@Model.PageCount</strong> trang
+</p>
+
+@*Hiển thì thông tin nhà cc *@
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr class="bg-primary">
+                <th>Tên loại hàng</th>
+                <th>Icon</th>
+                <th>Mô tả</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Loại 1</td>
+                <td>icon 1</td>
+                <td>Dây là loại 1</td>
+                <td class="text-center">
+                    <a href="~/Category/Edit/1" class="btn btn-xs btn-primary">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="~/Category/delete/1" class="btn btn-xs btn-danger">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            @foreach (var item in Model.Data)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Text</td>
+                    <td>@item.Text</td>
+                    <td class="text-center">
+                        <a href="~/Category/Edit/@item.Text" class="btn btn-xs btn-primary">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a href="~/Category/delete/@item.Text" class="btn btn-xs btn-danger">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+@*Phân trang*@
+<div class="text-center">
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            if (i == Model.Page)
+            {
+                <li class="active"><a href="#">@i</a></li>
+            }
+            else
+            {
+                <li><a href="javacript:;" onclick="doSearch(@i)">@i</a></li>
+            }
+        }
+    </ul>
+</div>
+

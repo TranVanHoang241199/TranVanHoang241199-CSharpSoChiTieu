@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using API_HotelManagement.common;
 using AutoMapper;
 using CSharpSoChiTieu.common;
@@ -35,7 +34,7 @@ namespace CSharpSoChiTieu.Business.Services
                 var entity = new ct_IncomeExpense
                 {
                     Id = Guid.NewGuid(),
-                    Date = DateTime.Now,
+                    Date = model.Date,
                     Amount = model.Amount,
                     Description = model.Description,
                     Type = model.Type,
@@ -195,6 +194,7 @@ namespace CSharpSoChiTieu.Business.Services
                         Date = g.Key,
                         Items = g.Select(i => new IncomeExpenseViewModel
                         {
+                            Id = i.Id,
                             Amount = i.Amount,
                             Date = i.Date,
                             Type = i.Type,

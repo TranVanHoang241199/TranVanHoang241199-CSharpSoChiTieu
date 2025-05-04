@@ -1,4 +1,4 @@
-﻿@using CSharpSoChiTieu.Business.Services;
+﻿﻿@using CSharpSoChiTieu.Business.Services;
 @using CSharpSoChiTieu.common;
 @model List<IEGroupViewModel>
 
@@ -19,7 +19,7 @@
 				<select id="select-range" class="form-select form-select-sm shadow-none" style="border-radius: 0.5rem; min-width: 80px;">
 					<option value="today">Hôm nay</option>
 					<option value="week">Tuần này</option>
-					<option value="month">Tháng này</option>
+					<option value="month" selected>Tháng này</option>
 					<option value="year">Năm này</option>
 				</select>
 			</div>
@@ -175,7 +175,26 @@
 		$("#select-range").change(function () {
 			var selectedRange = $(this).val();
 			updateSummary(selectedRange);
+			getDataHistoryIE(selectedRange);
 		});
+
+		function getDataHistoryIE(range) {
+		// Loading nhẹ trong đúng cái box thu chi
+		$('#history_id').html('<div class="text-center p-5"><div class="spinner-border text-primary"></div></div>');
+
+		$.ajax({
+			url: '/IncomeExpense/History',
+			type: 'GET',
+			data: { range: range },
+			success: function (result) {
+				var newContent = $(result).find('#history_id').html();
+				$('#history_id').html(newContent); // ✨ Chỉ thay nội dung trong #history_id thôi
+			},
+			error: function () {
+				$('#history_id').html('<div class="text-danger text-center p-4">Lỗi khi tải dữ liệu.</div>');
+			}
+		});
+	}
 
 		// Xử lý click vào item
 		$('.income-item').click(function(e) {
@@ -258,6 +277,3 @@
 		});
 	});
 </script>
-
-
-
