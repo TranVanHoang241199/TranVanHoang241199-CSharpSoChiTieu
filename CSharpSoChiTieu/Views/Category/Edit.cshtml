@@ -1,0 +1,112 @@
+﻿@using CSharpSoChiTieu.common
+@using Newtonsoft.Json
+@model CSharpSoChiTieu.Business.Services.CategoryViewModel
+
+<div class="box box-primary">
+    <div class="box-body">
+        <form class="form-horizontal" action="~/Category/Save" method="post">
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" value="@Model.Id" name="Id" />
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Tên loại hàng:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="@Model.Name" name="Name" autofocus>
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* Chọn loại *@
+            <div class="form-group">
+                <label class="control-label col-sm-2">Chọn loại:</label>
+                <div class="col-sm-10">
+                    <select id="TypeSelect" class="form-control" name="Type">
+                        <option value="1" selected="@(Model.Type == IncomeExpenseType.Income ? "selected" : null)">Khoản thu</option>
+                        <option value="2" selected="@(Model.Type == IncomeExpenseType.Expense ? "selected" : null)">Khoản chi</option>
+                    </select>
+                    @Html.ValidationMessageFor(m => m.Type, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Ghi chú:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="@Model.Text" name="Text" autofocus>
+                    @Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Thứ tự hiển thị:</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" value="@Model.Order" name="Order" autofocus>
+                    @Html.ValidationMessageFor(m => m.Order, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* Icon (load động) *@
+            <div class="form-group">
+                <label class="control-label col-sm-2">Chọn icon:</label>
+                <div class="col-sm-10">
+                    <select id="IconSelect" asp-for="Icon" class="form-control">
+                        <!-- Options sẽ được JS populate -->
+                    </select>
+                    @Html.ValidationMessageFor(m => m.Icon, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* Màu sắc *@
+            <div class="form-group">
+                <label class="control-label col-sm-2">Chọn màu sắc:</label>
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(m => m.Color, (IEnumerable<SelectListItem>)ViewBag.ColorList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Color, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-floppy-disk"></i> Lưu dữ liệu
+                    </button>
+
+                    <a href="~/Category" class="btn btn-warning">Quay lại</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        // Chuyển ViewBag sang JS object
+        const iconLists = {
+            '@((int)IncomeExpenseType.Income)': @Html.Raw(JsonConvert.SerializeObject(ViewBag.IconIncomeList)),
+            '@((int)IncomeExpenseType.Expense)': @Html.Raw(JsonConvert.SerializeObject(ViewBag.IconExpenseList))
+        };
+
+        function populateIcons(typeValue) {
+            const iconSelect = document.getElementById('IconSelect');
+            iconSelect.innerHTML = ''; // xóa hết
+            const list = iconLists[typeValue] || [];
+            list.forEach(item => {
+                const opt = document.createElement('option');
+                opt.value = item.Value;
+                opt.text = item.Text;
+                if (item.Value === '@Model.Icon') {
+                    opt.selected = true;
+                }
+                iconSelect.appendChild(opt);
+            });
+        }
+
+        // Khi đổi Type
+        document.getElementById('TypeSelect')
+                .addEventListener('change', e => populateIcons(e.target.value));
+
+        // Khởi tạo ban đầu
+        populateIcons(document.getElementById('TypeSelect').value);
+    </script>
+}

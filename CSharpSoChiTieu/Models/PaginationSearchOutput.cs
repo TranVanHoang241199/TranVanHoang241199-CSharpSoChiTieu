@@ -63,4 +63,9 @@ namespace CSharpSoChiTieu.Models
     {
         public List<CategoryViewModel>? Data { get; set; }
     }
+
+    public class IncomeExpenseSearchOutput : PaginationSearchOutput
+    {
+        public List<IncomeExpenseViewModel>? Data { get; set; }
+    }
 }

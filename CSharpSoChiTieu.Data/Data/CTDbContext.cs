@@ -10,7 +10,7 @@ namespace CSharpSoChiTieu.Data
         public CTDbContext(IConfiguration configuration)
         {
             Configuration = configuration;
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
         /// <summary>   
@@ -56,12 +56,6 @@ namespace CSharpSoChiTieu.Data
 
                 // Cấu hình Status (Thu hoặc Chi)
                 entity.Property(e => e.Type).IsRequired();
-
-                // Cấu hình quan hệ với bảng `ct_IncomeExpenseCategory`
-                entity.HasOne(e => e.Category) // Một khoản thu chi thuộc một danh mục
-                      .WithMany() // Một danh mục có thể có nhiều khoản thu chi
-                      .HasForeignKey(e => e.CategoryId) // Liên kết thông qua CategoryId
-                      .OnDelete(DeleteBehavior.SetNull); // Khi xóa danh mục, set CategoryId thành null (Nếu cần)
             });
 
             modelBuilder.Entity<ct_IncomeExpenseCategory>(entity =>

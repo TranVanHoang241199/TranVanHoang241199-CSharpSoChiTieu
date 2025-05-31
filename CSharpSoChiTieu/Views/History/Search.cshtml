@@ -1,0 +1,129 @@
+﻿@model CSharpSoChiTieu.Models.IncomeExpenseSearchOutput
+@using CSharpSoChiTieu.common;
+@{
+    Layout = null;
+}
+
+<div class="table-responsive p-0">
+    <div class="d-flex justify-content-between align-items-center px-3 py-2">
+        <p class="text-sm mb-0">
+            Hiển thị <strong>@Model.RowCount</strong> danh mục trong tổng số <strong>@Model.PageCount</strong> trang
+        </p>
+    </div>
+
+    <table class="table align-items-center mb-0">
+        <thead>
+            <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mô tả</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số tiền</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Loại chi thu</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Data != null && Model.Data.Any())
+            {
+                foreach (var item in Model.Data)
+                {
+                    <tr id="category-row-@item.Id">
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm">@item.Description</h6>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm">@item.Amount</h6>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm">@item.Date</h6>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge badge-sm @(item.Type == IncomeExpenseType.Income ? "bg-gradient-success" : "bg-gradient-danger")">
+                                @(item.Type == IncomeExpenseType.Income ? "Khoản thu" : "Khoản chi")
+                            </span>
+                        </td>
+
+                        <td class="align-middle text-center">
+                            <a href="~/Category/Edit/@item.Id" class="btn btn-link text-primary text-gradient px-3 mb-0" title="Chỉnh sửa">
+                                <i class="material-symbols-rounded">edit</i>
+                            </a>
+                            <button type="button" class="btn btn-link text-danger text-gradient px-3 mb-0 delete-category"
+                                    data-id="@item.Id" data-name="@item.Description" title="Xóa">
+                                <i class="material-symbols-rounded">delete</i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7" class="text-center text-muted py-4">
+                        <i class="material-symbols-rounded opacity-5">search_off</i>
+                        <p class="mt-2 mb-0">Không tìm thấy dữ liệu</p>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (Model.PageCount > 1)
+    {
+        <div class="d-flex justify-content-center mt-4">
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-info">
+                    @for (int i = 1; i <= Model.PageCount; i++)
+                    {
+                        if (i == Model.Page)
+                        {
+                            <li class="page-item active">
+                                <a class="page-link" href="javascript:;">@i</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="javascript:;" onclick="doSearch(@i)">@i</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </nav>
+        </div>
+    }
+</div>
+
+<!-- Modal Xác nhận xóa -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xác nhận xóa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa danh mục "<span id="categoryName"></span>"?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">
+                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    <span class="btn-text">Xóa</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

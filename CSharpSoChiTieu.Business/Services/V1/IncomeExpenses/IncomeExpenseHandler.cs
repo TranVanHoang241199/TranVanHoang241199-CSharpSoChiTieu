@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using API_HotelManagement.common;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using CSharpSoChiTieu.common;
 using CSharpSoChiTieu.Data;
 using Microsoft.AspNetCore.Http;
@@ -19,6 +20,30 @@ namespace CSharpSoChiTieu.Business.Services
             _context = dbContext;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
+        }
+
+        public async Task<OperationResult> Count(string searchValue = "")
+        {
+            try
+            {
+                var query = _context.ct_IncomeExpense.AsQueryable();
+
+                var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
+                query = query.Where(o => o.CreatedBy.Equals(currentUserId));
+
+                if (!string.IsNullOrWhiteSpace(searchValue))
+                {
+                    query = query.Where(x => x.Description.Contains(searchValue));
+                }
+
+                int count = await query.CountAsync();
+
+                return new OperationResult<int>(count);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResultError(HttpStatusCode.InternalServerError, "Đã xảy ra lỗi: " + ex.Message);
+            }
         }
 
         public async Task<OperationResult> Create(IncomeExpenseCreateUpdateModel model)
@@ -223,7 +248,72 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
+        public async Task<OperationResult> Gets(int page, int pageSize, string searchValue, IncomeExpenseType type = IncomeExpenseType.Null, string range = "")
+        {
+            try
+            {
+                var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
+                var now = DateTime.Now;
 
+                // Câu truy vấn cơ bản
+                var query = _context.ct_IncomeExpense
+                    .Where(o => o.CreatedBy.Equals(currentUserId)).AsQueryable();
+
+                //// Xử lý filter theo range
+                //DateTime startDate, endDate;
+
+                //switch (range)
+                //{
+                //    case "today":
+                //        startDate = now.Date;
+                //        endDate = now.Date.AddDays(1).AddTicks(-1);
+                //        break;
+
+                //    case "week":
+                //        var diff = (7 + (now.DayOfWeek - DayOfWeek.Monday)) % 7;
+                //        startDate = now.AddDays(-diff).Date;
+                //        endDate = startDate.AddDays(7).AddTicks(-1);
+                //        break;
+
+                //    case "month":
+                //        startDate = new DateTime(now.Year, now.Month, 1);
+                //        endDate = startDate.AddMonths(1).AddTicks(-1);
+                //        break;
+
+                //    case "year":
+                //        startDate = new DateTime(now.Year, 1, 1);
+                //        endDate = new DateTime(now.Year, 12, 31).AddDays(1).AddTicks(-1);
+                //        break;
+
+                //    default:
+                //        startDate = now.Date;
+                //        endDate = now.Date.AddDays(1).AddTicks(-1);
+                //        break;
+                //}
+
+                //query = query.Where(o => o.Date >= startDate && o.Date <= endDate);
+
+                //// Filter theo Type nếu có
+                //if (type != 0) query = query.Where(o => o.Type == type);
+
+                // Filter theo tìm kiếm
+                if (!string.IsNullOrEmpty(searchValue)) query = query.Where(o => o.Description.Contains(searchValue.Trim()));
+
+                // Nhóm dữ liệu theo ngày và kết hợp thông tin Category
+                var result = await query
+                    .OrderByDescending(x => x.CreatedDate)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ProjectTo<IncomeExpenseViewModel>(_mapper.ConfigurationProvider)
+                    .ToListAsync();
+
+                return new OperationResultList<IncomeExpenseViewModel>(result);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResultError(HttpStatusCode.InternalServerError, "Đã xảy ra lỗi: " + ex.Message);
+            }
+        }
 
         public async Task<OperationResult> GetSummary(string? range = "month")
         {
@@ -289,7 +379,10 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
-
+        public Task<OperationResult> InUsed(Guid? id = null)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<OperationResult> Update(Guid id, IncomeExpenseCreateUpdateModel model)
         {

@@ -1,73 +1,288 @@
 ﻿@model CSharpSoChiTieu.Models.CategorySearchOutput
+@using CSharpSoChiTieu.common;
 @{
     Layout = null;
 }
 
-@*Kết quả tìm kiếm *@
-<p style="margin-top:5px;">
-    Có <strong>@Model.RowCount</strong> loại hàng trong tổng số <strong>@Model.PageCount</strong> trang
-</p>
+<div class="table-responsive p-0">
+    <div class="d-flex justify-content-between align-items-center px-3 py-2">
+        <p class="text-sm mb-0">
+            Hiển thị <strong>@Model.RowCount</strong> danh mục trong tổng số <strong>@Model.PageCount</strong> trang
+        </p>
+    </div>
 
-@*Hiển thì thông tin nhà cc *@
-<div class="table-responsive">
-    <table class="table table-bordered table-striped table-hover">
+    <table class="table align-items-center mb-0">
         <thead>
-            <tr class="bg-primary">
-                <th>Tên loại hàng</th>
-                <th>Icon</th>
-                <th>Mô tả</th>
-                <th></th>
+            <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên danh mục</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Loại</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Icon</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Màu sắc</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thứ tự</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Mô tả</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thao tác</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Loại 1</td>
-                <td>icon 1</td>
-                <td>Dây là loại 1</td>
-                <td class="text-center">
-                    <a href="~/Category/Edit/1" class="btn btn-xs btn-primary">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <a href="~/Category/delete/1" class="btn btn-xs btn-danger">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                </td>
-            </tr>
-            @foreach (var item in Model.Data)
+            @if (Model.Data != null && Model.Data.Any())
             {
-                <tr>
-                    <td>@item.Name</td>
-                    <td>@item.Text</td>
-                    <td>@item.Text</td>
-                    <td class="text-center">
-                        <a href="~/Category/Edit/@item.Text" class="btn btn-xs btn-primary">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <a href="~/Category/delete/@item.Text" class="btn btn-xs btn-danger">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-            }
-
-        </tbody>
-    </table>
-</div>
-
-@*Phân trang*@
-<div class="text-center">
-    <ul class="pagination">
-        @for (int i = 1; i <= Model.PageCount; i++)
-        {
-            if (i == Model.Page)
-            {
-                <li class="active"><a href="#">@i</a></li>
+                foreach (var item in Model.Data)
+                {
+                    <tr id="category-row-@item.Id">
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm">@item.Name</h6>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge badge-sm @(item.Type == IncomeExpenseType.Income ? "bg-gradient-success" : "bg-gradient-danger")">
+                                @(item.Type == IncomeExpenseType.Income ? "Khoản thu" : "Khoản chi")
+                            </span>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                            <i class="material-symbols-rounded">@item.Icon</i>
+                            <i class="@item.Icon"></i>
+                        </td>
+                        <td class="align-middle text-center">
+                            <div class="color-preview" style="width: 24px; height: 24px; border-radius: 4px; background-color:@item.Color; margin: 0 auto; border: 1px solid #ccc;"></div>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                            @item.Order
+                        </td>
+                        <td>
+                            <p class="text-xs text-secondary mb-0">@item.Text</p>
+                        </td>
+                        <td class="align-middle text-center">
+                            <a href="~/Category/Edit/@item.Id" class="btn btn-link text-primary text-gradient px-3 mb-0" title="Chỉnh sửa">
+                                <i class="material-symbols-rounded">edit</i>
+                            </a>
+                            <button type="button" class="btn btn-link text-danger text-gradient px-3 mb-0 delete-category"
+                                    data-id="@item.Id" data-name="@item.Name" title="Xóa">
+                                <i class="material-symbols-rounded">delete</i>
+                            </button>
+                        </td>
+                    </tr>
+                }
             }
             else
             {
-                <li><a href="javacript:;" onclick="doSearch(@i)">@i</a></li>
+                <tr>
+                    <td colspan="7" class="text-center text-muted py-4">
+                        <i class="material-symbols-rounded opacity-5">search_off</i>
+                        <p class="mt-2 mb-0">Không tìm thấy dữ liệu</p>
+                    </td>
+                </tr>
             }
-        }
-    </ul>
+        </tbody>
+    </table>
+
+    @if (Model.PageCount > 1)
+    {
+        <div class="d-flex justify-content-center mt-4">
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-info">
+                    @for (int i = 1; i <= Model.PageCount; i++)
+                    {
+                        if (i == Model.Page)
+                        {
+                            <li class="page-item active">
+                                <a class="page-link" href="javascript:;">@i</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="javascript:;" onclick="doSearch(@i)">@i</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </nav>
+        </div>
+    }
 </div>
 
+<!-- Modal Xác nhận xóa -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xác nhận xóa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa danh mục "<span id="categoryName"></span>"?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">
+                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    <span class="btn-text">Xóa</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .color-preview {
+        transition: transform 0.2s;
+    }
+
+        .color-preview:hover {
+            transform: scale(1.2);
+        }
+
+    .pagination-info .page-link {
+        color: #344767;
+    }
+
+    .pagination-info .page-item.active .page-link {
+        background-color: #344767;
+        border-color: #344767;
+    }
+
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #344767;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    @@keyframes spin {
+        0%
+
+    {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+    }
+
+    .search-btn {
+        position: relative;
+    }
+
+        .search-btn .spinner-border {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .search-btn.loading .btn-text {
+            visibility: hidden;
+        }
+
+        .search-btn.loading .spinner-border {
+            display: inline-block !important;
+        }
+</style>
+
+<script>
+    $(document).ready(function() {
+        let categoryIdToDelete = null;
+        const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+
+        // Xử lý click nút xóa
+        $('.delete-category').click(function() {
+            const id = $(this).data('id');
+            const name = $(this).data('name');
+            categoryIdToDelete = id;
+            $('#categoryName').text(name);
+            deleteModal.show();
+        });
+
+        // Xử lý xác nhận xóa
+        $('#confirmDelete').click(function() {
+            if (categoryIdToDelete) {
+                const $btn = $(this);
+                const $spinner = $btn.find('.spinner-border');
+                const $btnText = $btn.find('.btn-text');
+
+                // Disable nút và hiển thị loading
+                $btn.prop('disabled', true);
+                $spinner.removeClass('d-none');
+                $btnText.text('Đang xóa...');
+
+                $.ajax({
+                    url: '/Category/Delete/' + categoryIdToDelete,
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.success) {
+                            // Hiển thị thông báo thành công
+                            toastr.success(response.message);
+
+                            // Gọi lại hàm doSearch để load lại dữ liệu
+                            if (typeof window.parent.doSearch === 'function') {
+                                doSearch(@Model.Page);
+                            } else {
+                                // Nếu không tìm thấy hàm doSearch, reload trang
+                                window.location.reload();
+                            }
+                        } else {
+                            toastr.error(response.message);
+                        }
+                    },
+                    error: function() {
+                        toastr.error('Có lỗi xảy ra khi xóa danh mục');
+                    },
+                    complete: function() {
+                        // Reset trạng thái nút xóa
+                        $btn.prop('disabled', false);
+                        $spinner.addClass('d-none');
+                        $btnText.text('Xóa');
+
+                        deleteModal.hide();
+                        categoryIdToDelete = null;
+                    }
+                });
+            }
+        });
+    });
+
+    function doSearch(page) {
+        var url = $("#formSearch").prop("action");
+        var postData = $("#formSearch").serializeArray();
+        postData.push({ "name": "page", "value": page });
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: postData,
+            error: function () {
+                toastr.error("Có lỗi xảy ra khi tìm kiếm!");
+                // Reset trạng thái nút search
+                const $searchBtn = $('#formSearch button[type="submit"]');
+                $searchBtn.removeClass('loading');
+            },
+            success: function (data) {
+                $("#searchResult").html(data);
+                // Reset trạng thái nút search
+                const $searchBtn = $('#formSearch button[type="submit"]');
+                $searchBtn.removeClass('loading');
+            }
+        });
+    }
+</script>

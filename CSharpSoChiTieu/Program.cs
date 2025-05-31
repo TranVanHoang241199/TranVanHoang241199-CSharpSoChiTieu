@@ -12,6 +12,7 @@ builder.Services.AddControllersWithViews();
  */
 builder.Services.AddScoped<CTDbContext>();
 
+
 builder.Services.AddScoped<IAccountHandler, AccountHandler>();
 builder.Services.AddScoped<IIncomeExpenseHandler, IncomeExpenseHandler>();
 builder.Services.AddScoped<ICategoryHandler, CategoryHandler>();
