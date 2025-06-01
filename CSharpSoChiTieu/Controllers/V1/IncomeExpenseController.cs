@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using API_HotelManagement.common;
 using CSharpSoChiTieu.Business.Services;
+using CSharpSoChiTieu.common;
 using CSharpSoChiTieu.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -86,28 +87,15 @@ namespace CSharpSoChiTieu.Controllers
 
 
 
-        public IActionResult Category(int type)
+        public async Task<IActionResult> Category(IncomeExpenseType type = 0)
         {
-            var data = new List<CategoryViewModel>();
 
-            if (type == 1) // income
-            {
-                data = new List<CategoryViewModel>
-                {
-                    new CategoryViewModel { Id = Guid.Parse("686f739a-daa2-4412-aedd-e4bb76a3d825"), Name = "salary", Text = "Lương", Icon = "attach_money", Color = "success" },
-                    new CategoryViewModel { Id = Guid.Parse("686f739a-daa2-4412-aedd-e4bb76a3d825"), Name = "bonus", Text = "Thưởng", Icon = "card_giftcard", Color = "info" },
-                    new CategoryViewModel { Id = Guid.Parse("686f739a-daa2-4412-aedd-e4bb76a3d825"), Name = "other", Text = "Khác", Icon = "more_horiz", Color = "secondary" },
-                };
-            }
-            else if (type == 2) // expense
-            {
-                data = new List<CategoryViewModel>
-                {
-                    new CategoryViewModel { Id = Guid.Parse("c4ef079d-c335-48df-a790-20f28272d03d"), Name = "food", Text = "Ăn uống", Icon = "restaurant", Color = "danger" },
-                    new CategoryViewModel { Id = Guid.Parse("c4ef079d-c335-48df-a790-20f28272d03d"), Name = "transport", Text = "Di chuyển", Icon = "directions_car", Color = "primary" },
-                    new CategoryViewModel { Id = Guid.Parse("c4ef079d-c335-48df-a790-20f28272d03d"), Name = "shopping", Text = "Mua sắm", Icon = "shopping_cart", Color = "warning" },
-                };
-            }
+            var result = await _IncomeExpenseHandler.GetCategorys(type);
+
+            if (result.Status != HttpStatusCode.OK)
+                return Content("Lỗi khi lấy dữ liệu: " + result.Message);
+
+            var data = (result as OperationResultList<CategoryViewModel>)?.Data ?? new List<CategoryViewModel>();
 
             return PartialView("_Category", data);
         }

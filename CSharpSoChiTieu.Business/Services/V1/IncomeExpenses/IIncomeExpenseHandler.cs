@@ -7,6 +7,7 @@ namespace CSharpSoChiTieu.Business.Services
     {
         Task<OperationResult> Gets(IncomeExpenseType type = 0, string search = "", string range = "month");
         Task<OperationResult> Gets(int page, int pageSize, string searchValue, IncomeExpenseType type = 0, string range = "month");
+        Task<OperationResult> GetCategorys(IncomeExpenseType type = 0);
         Task<OperationResult> Count(string searchValue = "");
         Task<OperationResult> GetIncomeExpenseById(Guid id);
         Task<OperationResult> Create(IncomeExpenseCreateUpdateModel model);

@@ -119,6 +119,42 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
+        public async Task<OperationResult> GetCategorys(IncomeExpenseType type = IncomeExpenseType.Null)
+        {
+            try
+            {
+                var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
+
+                var query = _context.ct_IncomeExpenseCategories
+                    .Where(o => o.CreatedBy.Equals(currentUserId) && o.Type == type)
+                    .OrderBy(o => o.Order)
+                    .Select(x => new CategoryViewModel
+                    {
+                        Id = x.Id,
+                        Type = x.Type,
+                        Text = x.Text,
+                        Icon = x.Icon,
+                        Color = x.Color,
+                        Order = x.Order,
+                        Name = x.Name,
+                        CreatedBy = x.CreatedBy,
+                        CreatedDate = x.CreatedDate,
+                        ModifiedBy = x.ModifiedBy,
+                        ModifiedDate = x.ModifiedDate
+                    });
+
+                var result = await query.ToListAsync();
+
+                return new OperationResultList<CategoryViewModel>(result);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResultError(HttpStatusCode.InternalServerError, "Đã xảy ra lỗi: " + ex.Message);
+            }
+        }
+
+
+
         public async Task<OperationResult> GetIncomeExpenseById(Guid id)
         {
             try

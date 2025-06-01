@@ -1,6 +1,286 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model CSharpSoChiTieu.Business.Services.ReportViewModel
+@using CSharpSoChiTieu.common;
+
+<div class="container-fluid py-4">
+    <!-- Thống kê tổng quan -->
+    <div class="row">
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng thu</p>
+                                <h5 class="font-weight-bolder text-success">
+                                    @Model.TotalIncome.ToString("N0") đ
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-success shadow text-center border-radius-md">
+                                <i class="material-symbols-rounded text-lg opacity-10">arrow_upward</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng chi</p>
+                                <h5 class="font-weight-bolder text-danger">
+                                    @Model.TotalExpense.ToString("N0") đ
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-danger shadow text-center border-radius-md">
+                                <i class="material-symbols-rounded text-lg opacity-10">arrow_downward</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Số dư</p>
+                                <h5 class="font-weight-bolder @(Model.Balance >= 0 ? "text-success" : "text-danger")">
+                                    @Model.Balance.ToString("N0") đ
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                <i class="material-symbols-rounded text-lg opacity-10">account_balance</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Số giao dịch</p>
+                                <h5 class="font-weight-bolder">
+                                    @Model.TotalTransactions
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-warning shadow text-center border-radius-md">
+                                <i class="material-symbols-rounded text-lg opacity-10">receipt_long</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Biểu đồ và bảng thống kê -->
+    <div class="row mt-4">
+        <!-- Biểu đồ thu chi theo tháng -->
+        <div class="col-lg-8 mb-lg-0 mb-4">
+            <div class="card">
+                <div class="card-header pb-0 p-3">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="mb-2">Thống kê thu chi theo tháng</h6>
+                        <div class="dropdown">
+                            <button class="btn btn-link text-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="material-symbols-rounded">more_vert</i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="javascript:void(0)" onclick="updateChart('month')">Theo tháng</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)" onclick="updateChart('quarter')">Theo quý</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)" onclick="updateChart('year')">Theo năm</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-3">
+                    <div class="chart">
+                        <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Biểu đồ tròn phân bố chi tiêu -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header pb-0 p-3">
+                    <h6 class="mb-0">Phân bố chi tiêu theo danh mục</h6>
+                </div>
+                <div class="card-body p-3">
+                    <div class="chart">
+                        <canvas id="chart-pie" class="chart-canvas" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bảng thống kê chi tiết -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h6>Thống kê chi tiết theo danh mục</h6>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Danh mục</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Loại</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Số tiền</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tỷ lệ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.CategoryStats)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">@item.CategoryName</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-sm @(item.Type == IncomeExpenseType.Income ? "bg-success" : "bg-danger")">
+                                                @item.Type
+                                            </span>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="text-@(item.Type == IncomeExpenseType.Income ? "success" : "danger") font-weight-bold">
+                                                @item.Amount.ToString("N0") đ
+                                            </span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <div class="progress-wrapper w-75 mx-auto">
+                                                <div class="progress-info">
+                                                    <div class="progress-percentage">
+                                                        <span class="text-xs font-weight-bold">@item.Percentage%</span>
+                                                    </div>
+                                                </div>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-@(item.Type == IncomeExpenseType.Income ? "success" : "danger")"
+                                                         role="progressbar"
+                                                         aria-valuenow="@item.Percentage"
+                                                         aria-valuemin="0"
+                                                         aria-valuemax="100"
+                                                         style="width: @item.Percentage%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Dữ liệu cho biểu đồ
+        var lineChartData = {
+            labels: @Html.Raw(Json.Serialize(Model.MonthlyStats.Select(x => x.Month))),
+            datasets: [
+                {
+                    label: 'Thu',
+                    data: @Html.Raw(Json.Serialize(Model.MonthlyStats.Select(x => x.Income))),
+                    borderColor: '#2dce89',
+                    tension: 0.4
+                },
+                {
+                    label: 'Chi',
+                    data: @Html.Raw(Json.Serialize(Model.MonthlyStats.Select(x => x.Expense))),
+                    borderColor: '#f5365c',
+                    tension: 0.4
+                }
+            ]
+        };
+
+        var pieChartData = {
+            labels: @Html.Raw(Json.Serialize(Model.CategoryStats.Select(x => x.CategoryName))),
+            datasets: [{
+                data: @Html.Raw(Json.Serialize(Model.CategoryStats.Select(x => x.Amount))),
+                backgroundColor: [
+                    '#2dce89', '#f5365c', '#fb6340', '#11cdef', '#5e72e4', '#8898aa'
+                ]
+            }]
+        };
+
+        // Khởi tạo biểu đồ
+        var lineChart = new Chart(
+            document.getElementById('chart-line'),
+            {
+                type: 'line',
+                data: lineChartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            }
+        );
+
+        var pieChart = new Chart(
+            document.getElementById('chart-pie'),
+            {
+                type: 'pie',
+                data: pieChartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        }
+                    }
+                }
+            }
+        );
+
+        // Hàm cập nhật biểu đồ theo thời gian
+        function updateChart(period) {
+            $.ajax({
+                url: '/Report/GetChartData',
+                type: 'GET',
+                data: { period: period },
+                success: function (data) {
+                    lineChart.data.labels = data.labels;
+                    lineChart.data.datasets[0].data = data.income;
+                    lineChart.data.datasets[1].data = data.expense;
+                    lineChart.update();
+                }
+            });
+        }
+    </script>
 }
-<h1>Báo cáo thống kê</h1>

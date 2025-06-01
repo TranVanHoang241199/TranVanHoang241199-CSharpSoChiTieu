@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CSharpSoChiTieu.Data.Data.Entitys;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace CSharpSoChiTieu.Data
@@ -29,6 +30,7 @@ namespace CSharpSoChiTieu.Data
         public DbSet<ct_User> ct_Users { get; set; } // User dang nhap
         public DbSet<ct_IncomeExpense> ct_IncomeExpense { get; set; }
         public DbSet<ct_IncomeExpenseCategory> ct_IncomeExpenseCategories { get; set; }
+        public DbSet<ct_Emoji> ct_Emojis { get; set; }
         #endregion DBSet
 
 

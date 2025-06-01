@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CSharpSoChiTieu.Business.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CSharpSoChiTieu.Controllers
@@ -6,9 +7,24 @@ namespace CSharpSoChiTieu.Controllers
     [Authorize]
     public class ReportController : Controller
     {
-        public IActionResult Index()
+        private readonly IReportHandler _reportHandler;
+
+        public ReportController(IReportHandler reportHandler)
         {
-            return View();
+            _reportHandler = reportHandler;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var result = await _reportHandler.GetReportData();
+            return View(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetChartData(string period)
+        {
+            var result = await _reportHandler.GetChartData(period);
+            return Json(result);
         }
     }
 }
