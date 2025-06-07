@@ -1,32 +1,6 @@
 ﻿	@using CSharpSoChiTieu.Business.Services
 	@model List<CategoryViewModel>
-	@functions {
-		string GetEmoji(string icon)
-		{
-			return icon switch
-			{
-				"salary" => "💰",
-				"food" => "🍔",
-				"car" => "🚗",
-				"home" => "🏠",
-				"entertainment" => "🎮",
-				"electric" => "💡",
-				"water" => "💧",
-				"phone" => "📱",
-				"gift" => "🎁",
-				"shopping" => "🧾",
-				"health" => "🧘",
-				"debt" => "��",
-				"bonus" => "💵",
-				"interest" => "🏦",
-				"sales" => "📦",
-				"extra-income" => "💸",
-				"family-support" => "👨‍👩‍👧‍👦",
-				"refund" => "🔄",
-				_ => null
-			};
-		}
-	}
+	
 
 	<label class="form-label small fw-bold mb-1">Danh mục <span class="text-danger">*</span></label>
 	<div class="card border">
@@ -34,18 +8,10 @@
 			<div class="d-flex gap-2" style="min-width: max-content;">
 				@foreach (var cat in Model)
 				{
-					var emoji = GetEmoji(cat.Icon);
 					<button type="button" class="btn btn-sm btn-category border d-flex align-items-center px-3 py-2"
 							data-category-id="@cat.Id" data-category-name="@cat.Name">
 						<div class="icon icon-shape icon-xs text-center rounded-circle me-2" style="background-color: @cat.Color; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">
-							@if (!string.IsNullOrEmpty(emoji))
-							{
-								<span style="font-size: 18px;">@emoji</span>
-							}
-							else
-							{
-								<i class="material-symbols-rounded fs-6 text-white">@cat.Icon</i>
-							}
+							<span style="font-size: 18px;">@cat.Icon</span>
 						</div>
 						<span class="text-nowrap">@cat.Name</span>
 					</button>

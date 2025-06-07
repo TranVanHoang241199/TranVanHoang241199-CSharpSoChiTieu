@@ -12,11 +12,13 @@ namespace CSharpSoChiTieu.Controllers
     {
         private readonly CTDbContext _context;
         private readonly IAccountHandler _accountHandler;
+        private readonly ICategoryHandler _categoryHandler;
 
-        public AccountController(CTDbContext context, IAccountHandler accountHandler)
+        public AccountController(CTDbContext context, IAccountHandler accountHandler, ICategoryHandler categoryHandler)
         {
             _context = context;
             _accountHandler = accountHandler;
+            _categoryHandler = categoryHandler;
         }
 
         public IActionResult Login() => View();
@@ -62,6 +64,9 @@ namespace CSharpSoChiTieu.Controllers
                     var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
                     await HttpContext.SignInAsync("MyCookieAuth", claimsPrincipal);
+
+                    // Thêm loại mặt định
+                    await _categoryHandler.Adddefault(result.Id);
 
                     // Chuyển hướng dựa vào role
                     return result.User.Role == "admin"

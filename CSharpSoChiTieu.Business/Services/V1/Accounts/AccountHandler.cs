@@ -130,6 +130,7 @@ namespace CSharpSoChiTieu.Business.Services
 
                 return new RegistrationResult
                 {
+                    Id = user.Id,
                     Success = true,
                     User = userViewModel,
                     Claims = claims

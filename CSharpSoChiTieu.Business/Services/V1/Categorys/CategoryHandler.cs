@@ -5,6 +5,8 @@ using CSharpSoChiTieu.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper.QueryableExtensions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using CSharpSoChiTieu.common;
 
 namespace CSharpSoChiTieu.Business.Services
 {
@@ -42,6 +44,49 @@ namespace CSharpSoChiTieu.Business.Services
                 return new OperationResultError(HttpStatusCode.InternalServerError, "Đã xảy ra lỗi: " + ex.Message);
             }
         }
+
+        public async Task<OperationResult> Adddefault(Guid userId)
+        {
+            try
+            {
+                var defaultCategories = new List<CategoryInputModel>
+                {
+                    // Income (Thu nhập)
+                    new CategoryInputModel { Name = "Lương", Text = "Thu nhập từ lương", Type = IncomeExpenseType.Income, Icon = "💰", Color = "#4CAF50", Order = 1 },
+                    new CategoryInputModel { Name = "Thưởng", Text = "Tiền thưởng", Type = IncomeExpenseType.Income, Icon = "🎉", Color = "#8BC34A", Order = 2 },
+                    new CategoryInputModel { Name = "Đầu tư", Text = "Lãi đầu tư", Type = IncomeExpenseType.Income, Icon = "📈", Color = "#009688", Order = 3 },
+                    new CategoryInputModel { Name = "Bán hàng", Text = "Thu nhập bán hàng", Type = IncomeExpenseType.Income, Icon = "🛒", Color = "#2196F3", Order = 4 },
+                    new CategoryInputModel { Name = "Khác", Text = "Thu nhập khác", Type = IncomeExpenseType.Income, Icon = "➕", Color = "#3F51B5", Order = 5 },
+
+                    // Expense (Chi tiêu)
+                    new CategoryInputModel { Name = "Ăn uống", Text = "Chi cho ăn uống", Type = IncomeExpenseType.Expense, Icon = "🍔", Color = "#FF5722", Order = 1 },
+                    new CategoryInputModel { Name = "Đi lại", Text = "Chi phí di chuyển", Type = IncomeExpenseType.Expense, Icon = "🚗", Color = "#795548", Order = 2 },
+                    new CategoryInputModel { Name = "Mua sắm", Text = "Chi phí mua đồ", Type = IncomeExpenseType.Expense, Icon = "🛍️", Color = "#9C27B0", Order = 3 },
+                    new CategoryInputModel { Name = "Hóa đơn", Text = "Điện nước, Internet...", Type = IncomeExpenseType.Expense, Icon = "💡", Color = "#FFC107", Order = 4 },
+                    new CategoryInputModel { Name = "Giải trí", Text = "Xem phim, du lịch...", Type = IncomeExpenseType.Expense, Icon = "🎮", Color = "#E91E63", Order = 5 },
+                };
+
+                var entities = _mapper.Map<List<ct_IncomeExpenseCategory>>(defaultCategories);
+
+                foreach (var item in entities)
+                {
+                    item.Id = Guid.NewGuid();
+                    item.CreatedDate = DateTime.UtcNow;
+                    item.CreatedBy = userId;
+                }
+
+                _context.ct_IncomeExpenseCategories.AddRange(entities);
+                await _context.SaveChangesAsync();
+
+                var result = _mapper.Map<List<CategoryViewModel>>(entities);
+                return new OperationResult<List<CategoryViewModel>>(result);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResultError(HttpStatusCode.InternalServerError, "Đã xảy ra lỗi: " + ex.Message);
+            }
+        }
+
 
 
         public async Task<OperationResult> Count(string searchValue = "")

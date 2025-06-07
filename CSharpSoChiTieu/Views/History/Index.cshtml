@@ -17,6 +17,19 @@
                         <form id="formSearch" action="~/History/Search">
                             <input type="hidden" name="PageSize" value="@Model.PageSize" />
                             <div class="input-group input-group-outline">
+
+                                <select>
+                                    <option value="value">Chọn ngày</option>
+                                </select>
+
+                                <select>
+                                    <option value="value">Chọn tháng</option>
+                                </select>
+
+                                <select>
+                                    <option value="value">Chọn năm</option>
+                                </select>
+
                                 <input type="text" class="form-control" placeholder="Tìm kiếm danh mục..."
                                        name="searchValue" value="@Model.SearchValue" autofocus>
                                 <button class="btn btn-outline-primary mb-0" type="submit">

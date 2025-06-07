@@ -14,7 +14,6 @@ namespace CSharpSoChiTieu.Data
 
         public IncomeExpenseType Type { get; set; }
 
-        public ICollection<ct_IncomeExpense>? ct_IncomeExpense { get; set; }
 
         // Các trường từ EntityBase đã bao gồm:
         // - Id (Guid) key

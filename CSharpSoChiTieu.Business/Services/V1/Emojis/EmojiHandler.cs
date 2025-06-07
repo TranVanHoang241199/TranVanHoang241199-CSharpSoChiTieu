@@ -41,18 +41,17 @@ namespace CSharpSoChiTieu.Business.Services
             try
             {
                 // Nhưng ngay sau đó lại ghi đè:
-                var query = _context.ct_IncomeExpenseCategories.AsQueryable();
+                var query = _context.ct_Emojis.AsQueryable();
 
-                // Đầu tiên bạn tạo query:
-                var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
-                query = query.Where(o => o.CreatedBy.Equals(currentUserId));
+                // Filter theo Type nếu có
+                if (type != 0) query = query.Where(o => o.Type == type);
 
                 var data = await query
                     .OrderByDescending(x => x.Order)
-                    .ProjectTo<CategoryViewModel>(_mapper.ConfigurationProvider)
+                    .ProjectTo<EmojiViewModel>(_mapper.ConfigurationProvider)
                     .ToListAsync();
 
-                return new OperationResultList<CategoryViewModel>(data);
+                return new OperationResultList<EmojiViewModel>(data);
             }
             catch (Exception ex)
             {

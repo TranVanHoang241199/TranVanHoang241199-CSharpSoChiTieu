@@ -15,10 +15,12 @@ namespace CSharpSoChiTieu.Controllers
         private const int PAGE_SIZE = 5;
         private const string CATEGORY_SEARCH = "SearchCategoryCondition";
         private readonly ICategoryHandler _ICategoryHandler;
+        private readonly IEmojiHandler _emojiHandler;
 
-        public CategoryController(ICategoryHandler IncomeExpenseHandler)
+        public CategoryController(ICategoryHandler incomeExpenseHandler, IEmojiHandler emojiHandler)
         {
-            _ICategoryHandler = IncomeExpenseHandler;
+            _ICategoryHandler = incomeExpenseHandler;
+            _emojiHandler = emojiHandler;
         }
 
         public ActionResult Index()
@@ -63,7 +65,7 @@ namespace CSharpSoChiTieu.Controllers
             return View(result);
         }
 
-        public ActionResult Create()
+        public async Task<IActionResult> Create()
         {
             ViewBag.Title = "Bổ sung loại sản phẩm";
             var data = new CategoryViewModel()
@@ -74,7 +76,7 @@ namespace CSharpSoChiTieu.Controllers
                 Type = IncomeExpenseType.Expense,
             };
 
-            ShowViewBag();
+            await ShowViewBag();
 
             return View("Edit", data);
         }
@@ -92,39 +94,22 @@ namespace CSharpSoChiTieu.Controllers
             if (data == null)
                 return RedirectToAction("Index");
 
-            ShowViewBag();
+            await ShowViewBag();
 
             ViewBag.Title = "Cập nhật loại sản phẩm";
             return View(data);
         }
-        private void ShowViewBag()
-        {
-            ViewBag.IconExpenseList = new List<SelectListItem>
-            {
-                new SelectListItem { Text = "🍔 Ăn uống", Value = "food" },
-                new SelectListItem { Text = "🚗 Di chuyển", Value = "car" },
-                new SelectListItem { Text = "🏠 Nhà cửa", Value = "home" },
-                new SelectListItem { Text = "🎮 Giải trí", Value = "entertainment" },
-                new SelectListItem { Text = "💡 Hóa đơn điện", Value = "electric" },
-                new SelectListItem { Text = "💧 Nước sinh hoạt", Value = "water" },
-                new SelectListItem { Text = "📱 Điện thoại", Value = "phone" },
-                new SelectListItem { Text = "🎁 Quà tặng", Value = "gift" },
-                new SelectListItem { Text = "🧾 Mua sắm", Value = "shopping" },
-                new SelectListItem { Text = "🧘 Sức khỏe", Value = "health" },
-                new SelectListItem { Text = "💳 Trả nợ", Value = "debt" }
-            };
 
-            ViewBag.IconIncomeList = new List<SelectListItem>
-            {
-                new SelectListItem { Text = "💰 Lương", Value = "salary" },
-                new SelectListItem { Text = "💵 Thưởng", Value = "bonus" },
-                new SelectListItem { Text = "🏦 Lãi ngân hàng", Value = "interest" },
-                new SelectListItem { Text = "📦 Bán hàng", Value = "sales" },
-                new SelectListItem { Text = "🎁 Quà tặng", Value = "gift" },
-                new SelectListItem { Text = "💸 Thu nhập thêm", Value = "extra-income" },
-                new SelectListItem { Text = "👨‍👩‍👧‍👦 Người thân cho", Value = "family-support" },
-                new SelectListItem { Text = "🔄 Hoàn tiền", Value = "refund" }
-            };
+        private async Task ShowViewBag()
+        {
+            var IconExpenseList = new List<EmojiViewModel>();
+            var IconIncomeList = new List<EmojiViewModel>();
+
+            IconExpenseList = (await _emojiHandler.Gets(IncomeExpenseType.Expense, "") as OperationResultList<EmojiViewModel>)?.Data ?? new List<EmojiViewModel>();
+            IconIncomeList = (await _emojiHandler.Gets(IncomeExpenseType.Income, "") as OperationResultList<EmojiViewModel>)?.Data ?? new List<EmojiViewModel>();
+
+            ViewBag.IconExpenseList = IconExpenseList;
+            ViewBag.IconIncomeList = IconIncomeList;
 
             ViewBag.ColorList = new List<SelectListItem>
             {

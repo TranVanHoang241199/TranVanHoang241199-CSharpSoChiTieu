@@ -167,17 +167,15 @@
         border-radius: 50%;
         animation: spin 1s linear infinite;
     }
+
     @@keyframes spin {
-        0%
+        0% {
+            transform: rotate(0deg);
+        }
 
-    {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-
+        100% {
+            transform: rotate(360deg);
+        }
     }
 
     .search-btn {
@@ -230,19 +228,20 @@
                     url: '/Category/Delete/' + categoryIdToDelete,
                     type: 'POST',
                     success: function(response) {
-                        if (response.success) {
+                        console.log("đã vào1" + response.status);
+                        if (response.success) { // HttpStatusCode.OK = 200
+                            console.log("đã vào2" + response.status);
                             // Hiển thị thông báo thành công
-                            toastr.success(response.message);
+                            //toastr.success(response.message);
 
-                            // Gọi lại hàm doSearch để load lại dữ liệu
-                            if (typeof window.parent.doSearch === 'function') {
-                                doSearch(@Model.Page);
-                            } else {
-                                // Nếu không tìm thấy hàm doSearch, reload trang
-                                window.location.reload();
-                            }
+                            // Ẩn modal xóa
+                            deleteModal.hide();
+                            categoryIdToDelete = null;
+
+                            window.parent.doSearch(@Model.Page);
+                            
                         } else {
-                            toastr.error(response.message);
+                            toastr.error(response.message || 'Có lỗi xảy ra khi xóa danh mục');
                         }
                     },
                     error: function() {
@@ -253,36 +252,9 @@
                         $btn.prop('disabled', false);
                         $spinner.addClass('d-none');
                         $btnText.text('Xóa');
-
-                        deleteModal.hide();
-                        categoryIdToDelete = null;
                     }
                 });
             }
         });
     });
-
-    function doSearch(page) {
-        var url = $("#formSearch").prop("action");
-        var postData = $("#formSearch").serializeArray();
-        postData.push({ "name": "page", "value": page });
-
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: postData,
-            error: function () {
-                toastr.error("Có lỗi xảy ra khi tìm kiếm!");
-                // Reset trạng thái nút search
-                const $searchBtn = $('#formSearch button[type="submit"]');
-                $searchBtn.removeClass('loading');
-            },
-            success: function (data) {
-                $("#searchResult").html(data);
-                // Reset trạng thái nút search
-                const $searchBtn = $('#formSearch button[type="submit"]');
-                $searchBtn.removeClass('loading');
-            }
-        });
-    }
 </script>

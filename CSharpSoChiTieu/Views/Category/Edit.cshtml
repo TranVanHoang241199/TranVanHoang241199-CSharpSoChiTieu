@@ -2,82 +2,159 @@
 @using Newtonsoft.Json
 @model CSharpSoChiTieu.Business.Services.CategoryViewModel
 
-<div class="box box-primary">
-    <div class="box-body">
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">@ViewBag.Title</h3>
+    </div>
+    <div class="card-body">
         <form class="form-horizontal" action="~/Category/Save" method="post">
             @Html.AntiForgeryToken()
 
             <input type="hidden" value="@Model.Id" name="Id" />
 
-            <div class="form-group">
-                <label class="control-label col-sm-2">Tên loại hàng:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" value="@Model.Name" name="Name" autofocus>
-                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            <div class="form-group mb-3">
+                <div class="form-floating border rounded">
+                    <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" placeholder="Tên danh mục" autofocus>
+                    <label for="Name">Tên loại hàng</label>
                 </div>
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger mt-1" })
             </div>
 
-            @* Chọn loại *@
-            <div class="form-group">
-                <label class="control-label col-sm-2">Chọn loại:</label>
-                <div class="col-sm-10">
-                    <select id="TypeSelect" class="form-control" name="Type">
+
+            <div class="form-group row mb-3 border rounded p-3">
+                <label for="TypeSelect" class="col-sm-3 col-form-label">Chọn loại:</label>
+                <div class="col-sm-9">
+                    <select id="TypeSelect" class="form-select" name="Type">
                         <option value="1" selected="@(Model.Type == IncomeExpenseType.Income ? "selected" : null)">Khoản thu</option>
                         <option value="2" selected="@(Model.Type == IncomeExpenseType.Expense ? "selected" : null)">Khoản chi</option>
                     </select>
-                    @Html.ValidationMessageFor(m => m.Type, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(m => m.Type, "", new { @class = "text-danger mt-1" })
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="control-label col-sm-2">Ghi chú:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" value="@Model.Text" name="Text" autofocus>
-                    @Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger" })
+            <div class="form-group mb-3">
+                <div class="form-floating border rounded">
+                    <input type="text" class="form-control" id="Text" name="Text" value="@Model.Text" placeholder="Ghi chú">
+                    <label for="Text">Ghi chú</label>
+                </div>
+                @Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger mt-1" })
+            </div>
+
+
+            <div class="form-group mb-3">
+                <div class="form-floating border rounded">
+                    <input type="number" class="form-control" id="Order" name="Order" value="@Model.Order" placeholder="Thứ tự hiển thị">
+                    <label for="Order">Thứ tự hiển thị</label>
+                </div>
+                @Html.ValidationMessageFor(m => m.Order, "", new { @class = "text-danger mt-1" })
+            </div>
+
+
+
+            @* Icon và Màu sắc trên cùng một hàng *@
+            <div class="form-group row mb-3 border rounded p-3">
+                <label class="col-sm-3 col-form-label">Tùy chỉnh hiển thị(chọn icon, màu):</label>
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-md-6 mb-2 mb-md-0">
+                            <div class="input-group icon-color-group">
+                                <span class="input-group-text">
+                                    <i id="selectedIcon" class=""></i>
+                                </span>
+                                <select id="IconSelect" asp-for="Icon" class="form-select icon-select">
+                                    <!-- Options sẽ được JS populate -->
+                                </select>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Icon, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group icon-color-group">
+                                <span class="input-group-text">
+                                    <div id="colorPreview" style="width: 20px; height: 20px; border-radius: 4px;"></div>
+                                </span>
+                                @Html.DropDownListFor(m => m.Color, (IEnumerable<SelectListItem>)ViewBag.ColorList, new { @class = "form-select" })
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Color, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="control-label col-sm-2">Thứ tự hiển thị:</label>
-                <div class="col-sm-10">
-                    <input type="number" class="form-control" value="@Model.Order" name="Order" autofocus>
-                    @Html.ValidationMessageFor(m => m.Order, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            @* Icon (load động) *@
-            <div class="form-group">
-                <label class="control-label col-sm-2">Chọn icon:</label>
-                <div class="col-sm-10">
-                    <select id="IconSelect" asp-for="Icon" class="form-control">
-                        <!-- Options sẽ được JS populate -->
-                    </select>
-                    @Html.ValidationMessageFor(m => m.Icon, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            @* Màu sắc *@
-            <div class="form-group">
-                <label class="control-label col-sm-2">Chọn màu sắc:</label>
-                <div class="col-sm-10">
-                    @Html.DropDownListFor(m => m.Color, (IEnumerable<SelectListItem>)ViewBag.ColorList, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Color, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+            <div class="form-group row">
+                <div class="col-sm-9 offset-sm-3">
                     <button type="submit" class="btn btn-primary">
-                        <i class="glyphicon glyphicon-floppy-disk"></i> Lưu dữ liệu
+                        <i class="fas fa-save me-1"></i> Lưu dữ liệu
                     </button>
-
-                    <a href="~/Category" class="btn btn-warning">Quay lại</a>
+                    <a href="~/Category" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-1"></i> Quay lại
+                    </a>
                 </div>
             </div>
         </form>
     </div>
 </div>
 
+<style>
+    .icon-select {
+        font-family: 'Material Icons';
+        font-size: 20px;
+    }
+
+        .icon-select option {
+            font-family: 'Material Icons';
+            font-size: 20px;
+            padding: 8px;
+        }
+
+    .input-group-text {
+        background-color: #f8f9fa;
+    }
+
+    #selectedIcon {
+        font-size: 24px;
+    }
+
+    .card {
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        border: none;
+    }
+
+    .card-header {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+    }
+
+    .icon-color-group {
+        border: 1px solid #ced4da;
+        border-radius: 0.375rem;
+        overflow: hidden;
+    }
+
+        .icon-color-group .input-group-text {
+            border: none;
+            border-right: 1px solid #ced4da;
+        }
+
+        .icon-color-group .form-select {
+            border: none;
+        }
+
+    .col-form-label {
+        font-weight: 500;
+    }
+
+    @@media (max-width: 768px) {
+        .col-md-6 {
+            margin-bottom: 1rem;
+        }
+    }
+</style>
 
 @section Scripts {
     <script>
@@ -87,26 +164,76 @@
             '@((int)IncomeExpenseType.Expense)': @Html.Raw(JsonConvert.SerializeObject(ViewBag.IconExpenseList))
         };
 
+        function updateIconPreview(iconClass) {
+            const selectedIcon = document.getElementById('selectedIcon');
+            selectedIcon.className = iconClass;
+        }
+
+        function updateColorPreview(colorValue) {
+            const colorPreview = document.getElementById('colorPreview');
+            colorPreview.style.backgroundColor = colorValue;
+        }
+
         function populateIcons(typeValue) {
             const iconSelect = document.getElementById('IconSelect');
             iconSelect.innerHTML = ''; // xóa hết
             const list = iconLists[typeValue] || [];
+
+            // Chuyển đổi Model.Icon từ HTML entity sang emoji
+            const modelIcon = '@Model.Icon'.replace(/&#x([0-9A-F]+);/gi, (_, code) =>
+                String.fromCodePoint(parseInt(code, 16))
+            );
+
             list.forEach(item => {
                 const opt = document.createElement('option');
-                opt.value = item.Value;
-                opt.text = item.Text;
-                if (item.Value === '@Model.Icon') {
+                opt.value = item.Icon;
+                opt.text = item.Icon + " " + item.Name;
+                console.log('@Model.Icon = ' + item.Icon);
+                if (item.Icon === modelIcon) {
                     opt.selected = true;
                 }
                 iconSelect.appendChild(opt);
             });
+
+            // Cập nhật preview
+            updateIconPreview(iconSelect.value);
         }
 
         // Khi đổi Type
         document.getElementById('TypeSelect')
                 .addEventListener('change', e => populateIcons(e.target.value));
 
+        // Khi đổi Icon
+        document.getElementById('IconSelect')
+                .addEventListener('change', e => updateIconPreview(e.target.value));
+
+        // Khi đổi Color
+        document.getElementById('Color')
+                .addEventListener('change', e => updateColorPreview(e.target.value));
+
         // Khởi tạo ban đầu
-        populateIcons(document.getElementById('TypeSelect').value);
+        document.addEventListener('DOMContentLoaded', function() {
+            const typeSelect = document.getElementById('TypeSelect');
+            const iconSelect = document.getElementById('IconSelect');
+            const currentIcon = '@Model.Icon';
+
+            // Populate icons based on current type
+            populateIcons(typeSelect.value);
+
+            // If we have a current icon, make sure it's selected
+            if (currentIcon) {
+                const options = iconSelect.options;
+                for (let i = 0; i < options.length; i++) {
+                    if (options[i].value === currentIcon) {
+                        iconSelect.selectedIndex = i;
+                        updateIconPreview(currentIcon);
+                        break;
+                    }
+                }
+            }
+
+            // Update color preview
+            updateColorPreview(document.getElementById('Color').value);
+        });
     </script>
 }

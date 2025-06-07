@@ -69,11 +69,11 @@ namespace CSharpSoChiTieu.Data
             #region Nối bản
 
             // Foreign key {N ct_IncomeExpense - 1 ct_CategoryIncomeExpense}
-            modelBuilder.Entity<ct_IncomeExpense>()
-                .HasOne(c => c.Category)
-                .WithMany(c => c.ct_IncomeExpense)
-                .HasForeignKey(c => c.CategoryId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+            //modelBuilder.Entity<ct_IncomeExpense>()
+            //    .HasOne(c => c.Category)
+            //    .WithMany(c => c.ct_IncomeExpense)
+            //    .HasForeignKey(c => c.CategoryId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull);
 
 
 

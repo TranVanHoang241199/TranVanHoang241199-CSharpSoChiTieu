@@ -86,6 +86,7 @@ namespace CSharpSoChiTieu.Business.Services
 
     public class RegistrationResult
     {
+        public Guid Id { get; set; }
         public bool Success { get; set; }
         public string ErrorMessage { get; set; }
         public UserViewModel User { get; set; }

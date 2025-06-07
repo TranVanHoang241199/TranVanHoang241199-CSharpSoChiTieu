@@ -4,6 +4,7 @@ using CSharpSoChiTieu.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CSharpSoChiTieu.Data.Migrations
 {
     [DbContext(typeof(CTDbContext))]
-    partial class CTDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250603025747_UpdateEmoji")]
+    partial class UpdateEmoji
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,6 +101,8 @@ namespace CSharpSoChiTieu.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("ct_IncomeExpense");
                 });
@@ -215,6 +220,20 @@ namespace CSharpSoChiTieu.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("ct_User");
+                });
+
+            modelBuilder.Entity("CSharpSoChiTieu.Data.ct_IncomeExpense", b =>
+                {
+                    b.HasOne("CSharpSoChiTieu.Data.ct_IncomeExpenseCategory", "Category")
+                        .WithMany("ct_IncomeExpense")
+                        .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("CSharpSoChiTieu.Data.ct_IncomeExpenseCategory", b =>
+                {
+                    b.Navigation("ct_IncomeExpense");
                 });
 #pragma warning restore 612, 618
         }

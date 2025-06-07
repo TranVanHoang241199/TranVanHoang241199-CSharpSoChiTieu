@@ -57,11 +57,21 @@ namespace CSharpSoChiTieu.Business.Services
 
             // Lấy thống kê theo danh mục
             var categoryStats = await _context.ct_IncomeExpense
-                .GroupBy(x => new { x.CategoryId, x.Category.Name, x.Type })
+                .Join(_context.ct_IncomeExpenseCategories,
+                    ie => ie.CategoryId,
+                    c => c.Id,
+                    (ie, c) => new
+                    {
+                        CategoryId = ie.CategoryId,
+                        CategoryName = c.Name,
+                        Type = ie.Type,
+                        Amount = ie.Amount
+                    })
+                .GroupBy(x => new { x.CategoryId, x.CategoryName, x.Type })
                 .Select(g => new
                 {
                     CategoryId = g.Key.CategoryId,
-                    CategoryName = g.Key.Name,
+                    CategoryName = g.Key.CategoryName,
                     Type = g.Key.Type,
                     Amount = g.Sum(x => x.Amount)
                 })

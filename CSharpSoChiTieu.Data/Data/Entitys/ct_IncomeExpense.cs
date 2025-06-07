@@ -34,7 +34,7 @@ namespace CSharpSoChiTieu.Data
         /// 
         /// </summary>
         public Guid? CategoryId { get; set; }  // Thay đổi từ Guid sang Guid?
-        public ct_IncomeExpenseCategory? Category { get; set; }
+        //public ct_IncomeExpenseCategory? Category { get; set; }
 
         // Các trường từ EntityBase đã bao gồm:
         // - Id (Guid) key

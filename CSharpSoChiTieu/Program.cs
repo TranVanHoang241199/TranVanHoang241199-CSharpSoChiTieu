@@ -17,6 +17,7 @@ builder.Services.AddScoped<IAccountHandler, AccountHandler>();
 builder.Services.AddScoped<IIncomeExpenseHandler, IncomeExpenseHandler>();
 builder.Services.AddScoped<ICategoryHandler, CategoryHandler>();
 builder.Services.AddScoped<IReportHandler, ReportHandler>();
+builder.Services.AddScoped<IEmojiHandler, EmojiHandler>();
 
 builder.Services.AddHttpContextAccessor();
 
