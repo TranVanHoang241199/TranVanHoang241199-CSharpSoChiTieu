@@ -49,11 +49,11 @@ namespace CSharpSoChiTieu.Business.Services
                 var user = _mapper.Map<UserViewModel>(entity);
 
                 var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.FullName),
-                new Claim(ClaimTypes.Role, user.Role),
-                new Claim("UserId", user.Id.ToString())
-            };
+                {
+                    new Claim(ClaimTypes.Name, user.FullName),
+                    new Claim(ClaimTypes.Role, user.Role),
+                    new Claim("UserId", user.Id.ToString())
+                };
 
                 return new AuthenticationResult
                 {
@@ -122,11 +122,11 @@ namespace CSharpSoChiTieu.Business.Services
 
                 // Tạo claims cho user mới
                 var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Role, user.Role),
-                new Claim("IdUser", user.Id.ToString())
-            };
+                {
+                    new Claim(ClaimTypes.Name, user.FullName),
+                    new Claim(ClaimTypes.Role, user.Role),
+                    new Claim("UserId", user.Id.ToString())
+                };
 
                 return new RegistrationResult
                 {

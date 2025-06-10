@@ -166,7 +166,14 @@ namespace CSharpSoChiTieu.Controllers
             return View();
         }
 
-        
+        [Authorize]
+        public IActionResult Profile()
+        {
+            return View();
+        }
+
+
+
     }
 
 }

@@ -1,5 +1,7 @@
-﻿using CSharpSoChiTieu.common;
+﻿using API_HotelManagement.common;
+using CSharpSoChiTieu.common;
 using CSharpSoChiTieu.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace CSharpSoChiTieu.Business.Services
@@ -7,34 +9,41 @@ namespace CSharpSoChiTieu.Business.Services
     public class ReportHandler : IReportHandler
     {
         private readonly CTDbContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ReportHandler(CTDbContext context)
+        public ReportHandler(CTDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<ReportViewModel> GetReportData()
         {
             var result = new ReportViewModel();
 
+            var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
+
             // Lấy tổng thu
             result.TotalIncome = await _context.ct_IncomeExpense
-                .Where(x => x.Type == IncomeExpenseType.Income)
+                .Where(x => x.Type == IncomeExpenseType.Income && x.CreatedBy == currentUserId)
                 .SumAsync(x => x.Amount);
 
             // Lấy tổng chi
             result.TotalExpense = await _context.ct_IncomeExpense
-                .Where(x => x.Type == IncomeExpenseType.Expense)
+                .Where(x => x.Type == IncomeExpenseType.Expense && x.CreatedBy == currentUserId)
                 .SumAsync(x => x.Amount);
 
             // Tính số dư
             result.Balance = result.TotalIncome - result.TotalExpense;
 
             // Lấy tổng số giao dịch
-            result.TotalTransactions = await _context.ct_IncomeExpense.CountAsync();
+            result.TotalTransactions = await _context.ct_IncomeExpense
+                .Where(x => x.CreatedBy == currentUserId)
+                .CountAsync();
 
             // Lấy thống kê theo tháng
             var monthlyData = await _context.ct_IncomeExpense
+                .Where(x => x.CreatedBy == currentUserId)
                 .GroupBy(x => new { x.Date.Year, x.Date.Month })
                 .Select(g => new
                 {
@@ -57,6 +66,7 @@ namespace CSharpSoChiTieu.Business.Services
 
             // Lấy thống kê theo danh mục
             var categoryStats = await _context.ct_IncomeExpense
+                .Where(x => x.CreatedBy == currentUserId)
                 .Join(_context.ct_IncomeExpenseCategories,
                     ie => ie.CategoryId,
                     c => c.Id,
@@ -94,7 +104,10 @@ namespace CSharpSoChiTieu.Business.Services
         public async Task<ChartDataViewModel> GetChartData(string period)
         {
             var result = new ChartDataViewModel();
-            var query = _context.ct_IncomeExpense.AsQueryable();
+            var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
+            var query = _context.ct_IncomeExpense
+                .Where(x => x.CreatedBy == currentUserId)
+                .AsQueryable();
 
             switch (period.ToLower())
             {

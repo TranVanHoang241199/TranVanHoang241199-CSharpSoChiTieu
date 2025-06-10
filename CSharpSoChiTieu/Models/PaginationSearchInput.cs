@@ -16,23 +16,29 @@ namespace CSharpSoChiTieu.Models
         /// <summary>
         /// Gía trị tìm kiếm 
         /// </summary>
-        public string SearchValue { get; set; }
+        public string? SearchValue { get; set; }
+    }
 
 
-        // Trạng thái order
-
-        //public int Status { get; set; } = 0;
-
-        //Product
+    public class PaginationHistorySearchInput
+    {
+        /// <summary>
+        /// Trang cần hiển thị
+        /// </summary>
+        public int Page { get; set; }
 
         /// <summary>
-        /// 
+        /// Số dòng trên mỗi trang
         /// </summary>
-        public int CategoryID { get; set; }
+        public int PageSize { get; set; }
 
         /// <summary>
-        /// 
+        /// Gía trị tìm kiếm 
         /// </summary>
-        public int SupplierID { get; set; }
+        public string? SearchValue { get; set; }
+
+        public int? Year { get; set; }
+        public int? Month { get; set; }
+        public int? Day { get; set; }
     }
 }

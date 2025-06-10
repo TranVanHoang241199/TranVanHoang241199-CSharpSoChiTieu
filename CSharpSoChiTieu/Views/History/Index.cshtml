@@ -1,4 +1,4 @@
-﻿@model CSharpSoChiTieu.Models.PaginationSearchInput
+﻿@model CSharpSoChiTieu.Models.PaginationHistorySearchInput
 
 <div class="container-fluid py-4">
     <div class="row">
@@ -9,32 +9,35 @@
                         <div class="col-6 d-flex align-items-center">
                             <h6 class="mb-0">Lịch sử thu chi</h6>
                         </div>
-                       
                     </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="p-3">
                         <form id="formSearch" action="~/History/Search">
                             <input type="hidden" name="PageSize" value="@Model.PageSize" />
-                            <div class="input-group input-group-outline">
-
-                                <select>
-                                    <option value="value">Chọn ngày</option>
-                                </select>
-
-                                <select>
-                                    <option value="value">Chọn tháng</option>
-                                </select>
-
-                                <select>
-                                    <option value="value">Chọn năm</option>
-                                </select>
-
+                            <div class="input-group input-group-outline mb-2">
                                 <input type="text" class="form-control" placeholder="Tìm kiếm danh mục..."
                                        name="searchValue" value="@Model.SearchValue" autofocus>
                                 <button class="btn btn-outline-primary mb-0" type="submit">
                                     <i class="material-symbols-rounded">search</i>
                                 </button>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col-4">
+                                    <select id="yearSelect" name="year" class="form-select">
+                                        <option value="">Chọn năm</option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <select id="monthSelect" name="month" class="form-select">
+                                        <option value="">Chọn tháng</option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <select id="daySelect" name="day" class="form-select">
+                                        <option value="">Chọn ngày</option>
+                                    </select>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -50,13 +53,60 @@
 @section scripts {
     <script>
         $(document).ready(function () {
+            // Khởi tạo năm
+            const currentYear = new Date().getFullYear();
+            const yearSelect = $('#yearSelect');
+            for (let year = currentYear; year >= currentYear - 10; year--) {
+                yearSelect.append(`<option value="${year}">${year}</option>`);
+            }
+
+            // Khởi tạo tháng
+            const monthSelect = $('#monthSelect');
+            for (let month = 1; month <= 12; month++) {
+                monthSelect.append(`<option value="${month}">${month}</option>`);
+            }
+
+            // Hàm cập nhật số ngày dựa trên tháng và năm
+            function updateDays() {
+                const year = parseInt($('#yearSelect').val());
+                const month = parseInt($('#monthSelect').val());
+                const daySelect = $('#daySelect');
+
+                // Xóa tất cả options hiện tại
+                daySelect.empty();
+                daySelect.append('<option value="">Chọn ngày</option>');
+
+                if (year && month) {
+                    // Tính số ngày trong tháng
+                    const daysInMonth = new Date(year, month, 0).getDate();
+
+                    // Thêm các options cho ngày
+                    for (let day = 1; day <= daysInMonth; day++) {
+                        daySelect.append(`<option value="${day}">${day}</option>`);
+                    }
+                }
+            }
+
+            // Xử lý sự kiện khi thay đổi tháng hoặc năm
+            $('#monthSelect, #yearSelect').change(function() {
+                updateDays();
+                doSearch(1);
+            });
+
+            // Xử lý sự kiện khi thay đổi ngày
+            $('#daySelect').change(function() {
+                doSearch(1);
+            });
+
             $("#formSearch").submit(function (e) {
                 e.preventDefault();
                 doSearch(1);
                 return;
             });
+
             doSearch(@Model.Page);
-        })
+        });
+
         function doSearch(page) {
             var url = $("#formSearch").prop("action");
             var postData = $("#formSearch").serializeArray();
@@ -78,7 +128,3 @@
         }
     </script>
 }
-
-
-
-

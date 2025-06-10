@@ -20,7 +20,8 @@ namespace CSharpSoChiTieu.Data
         /// <param name="options"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlServer(Configuration.GetConnectionString("WebSoChiTieuDbManagement_SqlServer"));
+            //options.UseSqlServer(Configuration.GetConnectionString("WebSoChiTieuDbManagement_SqlServer"));
+            options.UseSqlServer(Configuration.GetConnectionString("WebSoChiTieuDbManagement_SqlServer_Online"));
         }
 
         #region DBSet

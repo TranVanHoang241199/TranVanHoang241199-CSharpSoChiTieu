@@ -44,18 +44,6 @@ namespace CSharpSoChiTieu.Models
             }
         }
 
-        //Product
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int CategoryID { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int SupplierID { get; set; }
-
     }
 
 
@@ -67,5 +55,15 @@ namespace CSharpSoChiTieu.Models
     public class IncomeExpenseSearchOutput : PaginationSearchOutput
     {
         public List<IncomeExpenseViewModel>? Data { get; set; }
+    }
+
+    public class HistorySearchOutput : PaginationSearchOutput
+    {
+        public int? Year { get; set; }
+        public int? Month { get; set; }
+        public int? Day { get; set; }
+
+        public List<IncomeExpenseViewModel>? Data { get; set; }
+
     }
 }

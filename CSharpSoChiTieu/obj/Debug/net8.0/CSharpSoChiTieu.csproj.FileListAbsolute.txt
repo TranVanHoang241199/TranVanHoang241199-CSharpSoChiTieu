@@ -187,12 +187,6 @@ D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj\Debug\net8.0\staticwebassets.build.json
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj\Debug\net8.0\staticwebassets.development.json
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj\Debug\net8.0\staticwebassets\msbuild.CSharpSoChiTieu.Microsoft.AspNetCore.StaticWebAssets.props
-D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj\Debug\net8.0\staticwebassets\msbuild.CSharpSoChiTieu.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj\Debug\net8.0\staticwebassets\msbuild.build.CSharpSoChiTieu.props
-D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.CSharpSoChiTieu.props
-D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.CSharpSoChiTieu.props
-D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj\Debug\net8.0\staticwebassets.pack.json
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj\Debug\net8.0\CSharpSo.56DF09F7.Up2Date
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj\Debug\net8.0\CSharpSoChiTieu.dll
@@ -200,3 +194,4 @@ D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj\Debug\net8.0\CSharpSoChiTieu.pdb
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj\Debug\net8.0\CSharpSoChiTieu.genruntimeconfig.cache
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj\Debug\net8.0\ref\CSharpSoChiTieu.dll
+D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu\obj\Debug\net8.0\staticwebassets.build.json.cache
