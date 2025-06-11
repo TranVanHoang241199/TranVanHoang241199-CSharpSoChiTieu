@@ -1,10 +1,11 @@
-﻿using System.Security.Claims;
-using CSharpSoChiTieu.Business.Services;
+﻿using CSharpSoChiTieu.Business.Services;
 using CSharpSoChiTieu.common;
 using CSharpSoChiTieu.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CSharpSoChiTieu.Controllers
 {
@@ -26,6 +27,7 @@ namespace CSharpSoChiTieu.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+
             if (ModelState.IsValid)
             {
                 var result = _accountHandler.Authenticate(model);
@@ -44,6 +46,11 @@ namespace CSharpSoChiTieu.Controllers
 
                 ModelState.AddModelError("", result.ErrorMessage);
             }
+
+            //Kiểm tra dữ liệu đầu vào
+            if (string.IsNullOrWhiteSpace(model.UserName) || string.IsNullOrWhiteSpace(model.Password))
+                ModelState.AddModelError("", "Hình như bạn chưa nhập đầy đủ thông tin");
+
             return View(model);
         }
 
@@ -76,6 +83,10 @@ namespace CSharpSoChiTieu.Controllers
 
                 ModelState.AddModelError("", result.ErrorMessage);
             }
+
+            //Kiểm tra dữ liệu đầu vào
+            if (string.IsNullOrWhiteSpace(model.UserName) || string.IsNullOrWhiteSpace(model.Password))
+                ModelState.AddModelError("", "Hình như bạn chưa nhập đầy đủ thông tin");
 
             return View(model);
         }

@@ -19,8 +19,8 @@
 				<h6 class="mb-1 d-block d-lg-none fw-bolder text-dark" style="font-size: 0.9rem;">
 					QUẢN LÝ THU CHI
 				</h6>
-				<ul class="navbar-nav d-flex flex-row">
-					<li class="nav-item me-2">
+				<ul class="navbar-nav d-flex flex-column flex-lg-row">
+					<li class="nav-item me-2 mb-2 mb-lg-0">
 						<button class="btn px-3 py-1 d-flex align-items-center justify-content-center border btn-outline-success" style="min-width: 120px; height: 100%;"
 								id="btn-income">
 							Khoản Thu
@@ -94,10 +94,6 @@
 	@* End: Hiển thị danh sách chọn *@
 
 </div>
-<form asp-controller="Account" asp-action="Logout" method="post">
-	<button type="submit" class="btn btn-sm btn-outline-danger mb-0 w-48">Đăng xuất</button>
-</form>
-
 
 
 <!-- Script của bạn -->
@@ -123,12 +119,12 @@
 		// Khi mới vào trang, gọi updateSummary với range mặc định
 		updateSummary($("#select-range").val());
 
-		// /end: sự kiện header 
+		// /end: sự kiện header
 
 		// Begin: Sự kiện box left ------------------------
 
 		// Load form và set lại nút active ban đầu
-		loadForm(formType); 
+		loadForm(formType);
 		setActiveButton(formType);
 
 		$("#btn-expense").click();

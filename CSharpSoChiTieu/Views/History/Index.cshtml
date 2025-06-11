@@ -3,38 +3,39 @@
 <div class="container-fluid py-4">
     <div class="row">
         <div class="col-12">
-            <div class="card mb-4">
-                <div class="card-header pb-0">
+            <div class="card mb-4 shadow-lg border-0">
+                <div class="card-header pb-0 bg-gradient-primary text-white">
                     <div class="row">
                         <div class="col-6 d-flex align-items-center">
-                            <h6 class="mb-0">Lịch sử thu chi</h6>
+                            <h6 class="mb-0 text-white font-weight-bold">Lịch sử thu chi</h6>
                         </div>
                     </div>
                 </div>
-                <div class="card-body px-0 pt-0 pb-2">
+                <div class="card-body px-4 pt-2 pb-2">
                     <div class="p-3">
                         <form id="formSearch" action="~/History/Search">
                             <input type="hidden" name="PageSize" value="@Model.PageSize" />
-                            <div class="input-group input-group-outline mb-2">
-                                <input type="text" class="form-control" placeholder="Tìm kiếm danh mục..."
+                            <div class="input-group input-group-outline mb-4">
+                                <input type="text" class="form-control border-radius-lg"
+                                       placeholder="Tìm kiếm danh mục..."
                                        name="searchValue" value="@Model.SearchValue" autofocus>
-                                <button class="btn btn-outline-primary mb-0" type="submit">
+                                <button class="btn btn-primary mb-0 border-radius-lg" type="submit">
                                     <i class="material-symbols-rounded">search</i>
                                 </button>
                             </div>
-                            <div class="row g-2">
-                                <div class="col-4">
-                                    <select id="yearSelect" name="year" class="form-select">
+                            <div class="row g-3">
+                                <div class="col-md-4 col-sm-4">
+                                    <select id="yearSelect" name="year" class="form-select border-radius-lg shadow-sm">
                                         <option value="">Chọn năm</option>
                                     </select>
                                 </div>
-                                <div class="col-4">
-                                    <select id="monthSelect" name="month" class="form-select">
+                                <div class="col-md-4 col-sm-4">
+                                    <select id="monthSelect" name="month" class="form-select border-radius-lg shadow-sm">
                                         <option value="">Chọn tháng</option>
                                     </select>
                                 </div>
-                                <div class="col-4">
-                                    <select id="daySelect" name="day" class="form-select">
+                                <div class="col-md-4 col-sm-4">
+                                    <select id="daySelect" name="day" class="form-select border-radius-lg shadow-sm">
                                         <option value="">Chọn ngày</option>
                                     </select>
                                 </div>

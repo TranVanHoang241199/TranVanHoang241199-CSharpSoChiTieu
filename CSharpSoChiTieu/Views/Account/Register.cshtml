@@ -53,26 +53,27 @@
                                     <p class="mb-0">Tạo tài khoản nếu bạn chưa có</p>
                                 </div>
                                 <div class="card-body">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     <form asp-action="Register" method="post" role="form">
                                         <div class="input-group input-group-outline mb-3">
-                                            <label asp-for="UserName" class="form-label">Tài khoản</label>
                                             <input asp-for="UserName" type="text" class="form-control">
+                                            <label asp-for="UserName" class="form-label">Tài khoản</label>
                                         </div>
                                         <div class="input-group input-group-outline mb-3">
-                                            <label asp-for="Password" class="form-label">Mật khẩu</label>
                                             <input asp-for="Password" type="password" class="form-control">
+                                            <label asp-for="Password" class="form-label">Mật khẩu</label>
                                         </div>
                                         <div class="input-group input-group-outline mb-3">
-                                            <label asp-for="FullName" class="form-label">Họ và Tên</label>
                                             <input asp-for="FullName" type="text" class="form-control">
+                                            <label asp-for="FullName" class="form-label">Họ và Tên</label>
                                         </div>
                                         <div class="input-group input-group-outline mb-3">
-                                            <label asp-for="Phone" class="form-label">Số điện thoại</label>
                                             <input asp-for="Phone" class="form-control">
+                                            <label asp-for="Phone" class="form-label">Số điện thoại</label>
                                         </div>
                                         <div class="input-group input-group-outline mb-3">
-                                            <label asp-for="Email" class="form-label">Email</label>
                                             <input asp-for="Email" type="email" class="form-control">
+                                            <label asp-for="Email" class="form-label">Email</label>
                                         </div>
                                         <div hidden class="input-group input-group-outline mb-3">
                                             <select asp-for="Role" class="form-control">
@@ -119,6 +120,18 @@
           }
           Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
+    </script>
+
+    <script>
+        document.querySelectorAll('.input-group input').forEach(function(input) {
+            input.addEventListener('input', function() {
+                if (this.value) {
+                    this.nextElementSibling.classList.add('d-none');
+                } else {
+                    this.nextElementSibling.classList.remove('d-none');
+                }
+            });
+        });
     </script>
     <!-- Github buttons -->
     @* <script async defer src="https://buttons.github.io/buttons.js"></script> *@

@@ -3,27 +3,27 @@
     var userAvatarUrl = User.FindFirst("AvatarUrl")?.Value ?? "~/img/default-avatar.jpg";
 }
 
-<nav class="navbar fixed-bottom navbar-light bg-white d-lg-none bottom-nav shadow">
-    <div class="container-fluid d-flex justify-content-around px-1">
-        <a class="nav-link text-center @(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "IncomeExpense" ? "active" : "")"
+<nav class="navbar fixed-bottom navbar-light bg-white  d-xl-none bottom-nav shadow">
+    <div class="container-fluid d-flex justify-content-between px-1">
+        <a class="nav-link text-center flex-grow-1 @(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "IncomeExpense" ? "active" : "")"
            asp-controller="IncomeExpense" asp-action="Index" title="Tổng quan">
             <i class="material-symbols-rounded nav-icon">dashboard</i>
             <span class="nav-text">Tổng quan</span>
         </a>
 
-        <a class="nav-link text-center @(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "History" ? "active" : "")"
+        <a class="nav-link text-center flex-grow-1 @(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "History" ? "active" : "")"
            asp-controller="History" asp-action="Index" title="Lịch sử">
             <i class="material-symbols-rounded nav-icon">receipt_long</i>
             <span class="nav-text">Lịch sử</span>
         </a>
 
-        <a class="nav-link text-center @(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Report" ? "active" : "")"
+        <a class="nav-link text-center flex-grow-1 @(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Report" ? "active" : "")"
            asp-controller="Report" asp-action="Index" title="Báo cáo">
             <i class="material-symbols-rounded nav-icon">analytics</i>
             <span class="nav-text">Báo cáo</span>
         </a>
 
-        <div class="nav-item dropup">
+        <div class="nav-link text-center flex-grow-1">
             <a class="nav-link text-center" href="#" id="navbarDropdownDetails" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Menu">
                 <i class="material-symbols-rounded nav-icon">menu</i>
                 <span class="nav-text">Menu</span>
@@ -58,13 +58,25 @@
                     </div>
                 </div>
 
+                <div class="settings-group">
+                    <label class="settings-label">Vị trí menu</label>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="navPositionSwitch">
+                    </div>
+                </div>
+
+
+                <a class="dropdown-item" asp-controller="Category" asp-action="Index">
+                    <i class="material-symbols-rounded">account_circle</i> Thêm danh mục
+                </a>
+
                 <div class="settings-footer">
                     @if (User.Identity.IsAuthenticated)
                     {
                         <a class="dropdown-item" asp-controller="Account" asp-action="Profile">
                             <i class="material-symbols-rounded">account_circle</i> Hồ sơ
                         </a>
-                        <a class="dropdown-item" asp-controller="Account" asp-action="Settings">
+                        <a class="dropdown-item" asp-controller="Setting" asp-action="index">
                             <i class="material-symbols-rounded">settings</i> Cài đặt
                         </a>
                         <form class="dropdown-item-form" asp-controller="Account" asp-action="Logout" method="post">
@@ -93,8 +105,9 @@
         background-color: var(--bs-white);
         border-top: 1px solid var(--bs-gray-200);
         padding: 0.1rem 0;
-        min-height: 56px;
+        height: 10vh;
         z-index: 1030;
+        margin-bottom: 10%; /* vài bựa nhớ xoá */
     }
 
         .bottom-nav .nav-link {
@@ -113,12 +126,12 @@
         }
 
             .bottom-nav .nav-link .nav-icon {
-                font-size: 1.5rem;
+                font-size: 2.2rem;
                 margin-bottom: 0;
             }
 
             .bottom-nav .nav-link .nav-text {
-                font-size: 0.65rem;
+                font-size: 0.75rem;
                 margin-top: 1px;
                 font-weight: 500;
                 white-space: nowrap;
@@ -134,12 +147,22 @@
             }
 
     /* Settings Panel Styles */
-    .settings-panel {
-        width: 280px;
-        padding: 0;
-        border: 1px solid var(--bs-gray-200);
-        box-shadow: 0 -0.3rem 1rem rgba(0, 0, 0, 0.1);
-    }
+        .settings-panel {
+    width: 280px;
+    position: absolute;
+    bottom: 56px;
+    right: 0;
+    left: auto;
+    transform: translateX(-20px); /* đẩy nhẹ sang trái */
+    z-index: 1050;
+    border-radius: 0.5rem;
+}
+
+
+
+        .settings-panel.show {
+            transform: translateY(0);
+        }
 
     .settings-header {
         padding: 0.75rem 1rem;
@@ -185,7 +208,7 @@
         padding: 0.25rem 2rem 0.25rem 0.5rem;
     }
 
-    @@media (max-width: 991.98px) {
+    @@media (max-width: 1200px) {
         body
 
     {
@@ -193,4 +216,122 @@
     }
 
     }
+
+    /* Khi menu ở trên cùng */
+    .top-nav {
+        top: 0;
+        bottom: auto;
+        border-top: none;
+        border-bottom: 1px solid var(--bs-gray-200);
+    }
+
+    .settings-panel {
+        width: 280px;
+        position: absolute;
+        right: 0;
+        left: auto;
+        z-index: 1050;
+        border-radius: 0.5rem;
+        transition: transform 0.2s ease;
+        background-color: antiquewhite;
+        height: max-content;
+    }
+
+    /* Khi menu ở dưới */
+    .bottom-nav .settings   -panel {
+        bottom: 56px;
+        transform: translateX(-20px);
+    }
+
+    /* Khi menu ở trên */
+    .top-nav .settings-panel {
+        top: 56px;
+        transform: translateX(-20px);
+    }
+
+
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuButton = document.getElementById('navbarDropdownDetails');
+        const settingsPanel = document.querySelector('.settings-panel');
+
+        menuButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            settingsPanel.classList.toggle('show');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!menuButton.contains(e.target) && !settingsPanel.contains(e.target)) {
+                settingsPanel.classList.remove('show');
+            }
+        });
+
+
+        const navPositionSwitch = document.getElementById('navPositionSwitch');
+        const navbar = document.querySelector('.bottom-nav');
+
+        // Đọc trạng thái từ localStorage (nếu có)
+        if (localStorage.getItem('navPosition') === 'top') {
+            navbar.classList.add('top-nav');
+        }
+
+        // Xử lý khi chuyển đổi công tắc
+        navPositionSwitch.checked = navbar.classList.contains('top-nav');
+
+        navPositionSwitch.addEventListener('change', function () {
+            if (this.checked) {
+                navbar.classList.add('top-nav');
+                localStorage.setItem('navPosition', 'top');
+            } else {
+                navbar.classList.remove('top-nav');
+                localStorage.setItem('navPosition', 'bottom');
+            }
+        });
+
+            document.addEventListener('DOMContentLoaded', function () {
+        const menuButton = document.getElementById('navbarDropdownDetails');
+        const settingsPanel = document.querySelector('.settings-panel');
+        const navPositionSwitch = document.getElementById('navPositionSwitch');
+        const navbar = document.querySelector('.bottom-nav');
+
+        // Gán vị trí menu từ localStorage
+        if (localStorage.getItem('navPosition') === 'top') {
+            navbar.classList.add('top-nav');
+        }
+
+        // Khởi tạo trạng thái switch
+        navPositionSwitch.checked = navbar.classList.contains('top-nav');
+
+        // Toggle menu hiển thị
+        menuButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            settingsPanel.classList.toggle('show');
+        });
+
+        // Đóng khi click ngoài
+        document.addEventListener('click', function (e) {
+            if (!menuButton.contains(e.target) && !settingsPanel.contains(e.target)) {
+                settingsPanel.classList.remove('show');
+            }
+        });
+
+        // Xử lý chuyển đổi vị trí menu
+        navPositionSwitch.addEventListener('change', function () {
+            if (this.checked) {
+                navbar.classList.add('top-nav');
+                localStorage.setItem('navPosition', 'top');
+            } else {
+                navbar.classList.remove('top-nav');
+                localStorage.setItem('navPosition', 'bottom');
+            }
+        });
+    });
+
+
+    });
+
+
+</script>

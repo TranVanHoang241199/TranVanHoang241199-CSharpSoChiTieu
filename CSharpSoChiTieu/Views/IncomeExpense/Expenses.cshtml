@@ -25,7 +25,7 @@
 			<div class="d-flex align-items-center mb-1">
 				<label for="income-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Số tiền <span class="text-danger">*</span></label>
 				<div class="input-group input-group-static flex-grow-1">
-					<input type="text" class="form-control" id="income-amount" name="Amount" placeholder="0" required inputmode="decimal">
+					<input type="text" class="form-control" id="income-amount" name="Amount" placeholder="0" required inputmode="decimal" onkeyup="formatNumber(this)">
 					<span class="input-group-text">VNĐ</span>
 				</div>
 			</div>
@@ -53,9 +53,6 @@
 	</div>
 </div>
 
-
-
-
 <style>
 	#category-validation-feedback {
 		color: red;
@@ -65,7 +62,6 @@
 	}
 
 	/* Begin: Danh Mục */
-
 	.btn-category.active {
 		background-color: #0d6efd; /* Màu xanh dương khi active */
 		color: white;
@@ -87,17 +83,50 @@
 <script>
 	$(document).ready(function() {
 		clickDanhMucDoiMau();
-
 		EventGanIdChoCategory(); // Gắn sự kiện click cho danh mục
-
 		addDataExpenses();
-
 		loadFormCategoryEI(2);
-
 		loadFormHistory();
-
 		updateSummary();
+
+		// Thêm sự kiện format số tiền và chỉ cho phép nhập số
+		$("#income-amount").on('input', function(e) {
+			// Chỉ cho phép nhập số
+			let value = $(this).val().replace(/[^\d]/g, '');
+
+			// Nếu giá trị không phải số thì xóa hết
+			if (!/^\d*$/.test(value)) {
+				$(this).val('');
+				return;
+			}
+
+			// Format số với dấu phân cách hàng nghìn
+			if (value) {
+				value = parseInt(value).toLocaleString('vi-VN');
+				$(this).val(value);
+			}
+		});
+
+		// Ngăn chặn paste text không phải số
+		$("#income-amount").on('paste', function(e) {
+			e.preventDefault();
+			let pastedText = (e.originalEvent.clipboardData || window.clipboardData).getData('text');
+			if (!/^\d*$/.test(pastedText)) {
+				return false;
+			}
+		});
 	});
+
+	function formatNumber(input) {
+		// Xóa tất cả các ký tự không phải số
+		let value = input.value.replace(/[^\d]/g, '');
+
+		// Thêm dấu chấm ngăn cách hàng nghìn
+		value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+		// Cập nhật giá trị input
+		input.value = value;
+	}
 
 	function addDataExpenses() {
 		$("#addExpenseForm").submit(function (e) {
@@ -107,37 +136,36 @@
 			form.removeClass("was-validated");
 
 			var categoryId = $("#IncomeExpense-category-id").val();
-				var incomeDate = $("#income-date").val();
-				var incomeAmount = $("#income-amount").val();
-				var incomeNote = $("#income-note").val();
+			var incomeDate = $("#income-date").val();
+			var incomeAmount = $("#income-amount").val();
+			var incomeNote = $("#income-note").val();
 
-				// Gom lỗi vào 1 mảng
-				var errors = [];
+			// Gom lỗi vào 1 mảng
+			var errors = [];
 
-				if (!incomeDate) {
-					errors.push("* Bạn chưa nhập ngày thu.");
-				}
-				if (!incomeAmount) {
-					errors.push("* Bạn chưa nhập số tiền khoản thu.");
-				}
-				if (!incomeNote) {
-					errors.push("* Bạn chưa nhập  mô tả khoản thu.");
-				}
-				if (!categoryId) {
-					errors.push("* Bạn chưa chọn một danh mục khoản thu.");
-				}
+			if (!incomeDate) {
+				errors.push("* Bạn chưa nhập ngày thu.");
+			}
+			if (!incomeAmount) {
+				errors.push("* Bạn chưa nhập số tiền khoản thu.");
+			}
+			if (!incomeNote) {
+				errors.push("* Bạn chưa nhập  mô tả khoản thu.");
+			}
+			if (!categoryId) {
+				errors.push("* Bạn chưa chọn một danh mục khoản thu.");
+			}
 
-				// Nếu có lỗi thì hiển thị chung
-				if (errors.length > 0) {
-					var errorMessage = errors.join("<br>");
-					showDialog(errorMessage);
-					return;
-				}
-
+			// Nếu có lỗi thì hiển thị chung
+			if (errors.length > 0) {
+				var errorMessage = errors.join("<br>");
+				showDialog(errorMessage);
+				return;
+			}
 
 			// Chuẩn bị dữ liệu
 			var formData = {
-				Amount: parseFloat(incomeAmount.replace(/,/g, "")),
+				Amount: parseFloat(incomeAmount.replace(/\./g, "")),
 				Date: incomeDate,
 				Description: $("#income-note").val(),
 				CategoryId: categoryId,
@@ -173,9 +201,6 @@
 		});
 	}
 
-
-
-
 	function clickDanhMucDoiMau() {
 		// Sự kiện click cho tất cả các nút danh mục
 		$(".btn-category").click(function() {
@@ -187,8 +212,7 @@
 		});
 	}
 
-
-		function loadFormCategoryEI(type) {
+	function loadFormCategoryEI(type) {
 		$.ajax({
 			url: "/IncomeExpense/Category?type=" + type,
 			type: "GET",
@@ -200,7 +224,6 @@
 			}
 		});
 	}
-
 
 	function EventGanIdChoCategory() {
 		// Do loadFormCategoryEI(2) có thể load thêm danh mục mới

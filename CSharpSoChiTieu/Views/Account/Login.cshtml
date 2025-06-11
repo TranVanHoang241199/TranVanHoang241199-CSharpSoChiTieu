@@ -66,15 +66,16 @@
                                 </div>
                             </div>
                             <div class="card-body">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <form asp-action="Login" method="post" role="form" class="text-start">
 
                                     <div class="input-group input-group-outline my-3">
-                                        <label asp-for="UserName" class="form-label">Mật khẩu</label>
-                                        <input asp-for="UserName" type="text" class="form-control">
+                                        <input asp-for="UserName" type="text" class="form-control" autocomplete="off">
+                                        <label asp-for="UserName" class="form-label">Tài khoản</label>
                                     </div>
                                     <div class="input-group input-group-outline mb-3">
+                                        <input asp-for="Password" type="password" class="form-control" autocomplete="off">
                                         <label asp-for="Password" class="form-label">Mật khẩu</label>
-                                        <input asp-for="Password" type="password" class="form-control">
                                     </div>
                                     <div class="form-check form-switch d-flex align-items-center mb-3">
                                         <input class="form-check-input" type="checkbox" id="rememberMe" checked>
@@ -139,6 +140,17 @@
     @* <script async defer src="https://buttons.github.io/buttons.js"></script> *@
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/material-dashboard.min.js?v=3.2.0"></script>
+    <script>
+        document.querySelectorAll('.input-group input').forEach(function(input) {
+            input.addEventListener('input', function() {
+                if (this.value) {
+                    this.nextElementSibling.classList.add('d-none');
+                } else {
+                    this.nextElementSibling.classList.remove('d-none');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

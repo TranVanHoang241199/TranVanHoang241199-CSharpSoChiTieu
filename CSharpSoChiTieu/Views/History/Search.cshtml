@@ -34,8 +34,8 @@
                             </div>
                         </td>
                         <td>
-                            <span class="badge badge-sm @(item.Type == IncomeExpenseType.Income ? "bg-success" : "bg-danger")">
-                                @item.Type
+                            <span class="badge badge-sm @(item.Type == IncomeExpenseType.Income ? "bg-gradient-success" : "bg-gradient-danger")">
+                                @(item.Type == IncomeExpenseType.Income ? "Khoản thu" : "Khoản chi")
                             </span>
                         </td>
                         <td class="align-middle text-center text-sm">
