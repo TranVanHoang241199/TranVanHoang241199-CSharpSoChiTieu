@@ -13,10 +13,19 @@
 		<form id="addIncomeForm" class="needs-validation" novalidate>
 			<!-- Ngày thu -->
 			<div class="d-flex align-items-center mb-3">
-				<label for="income-date" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ngày thu <span class="text-danger">*</span></label>
+				<label for="income-date" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ngày <span class="text-danger">*</span></label>
 				<div class="input-group input-group-static flex-grow-1">
 					<span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
 					<input type="date" class="form-control" id="income-date" name="IncomeDate" required value="@DateTime.Now.ToString("yyyy-MM-dd")">
+				</div>
+			</div>
+
+			<!-- Ghi chú -->
+			<div class="d-flex align-items-center mb-3">
+				<label for="income-note" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ghi chú <span class="text-danger">*</span></label>
+				<div class="input-group input-group-static flex-grow-1">
+					<span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
+					<input type="text" class="form-control" id="income-note" name="Note" placeholder="Ghi chú ">
 				</div>
 			</div>
 
@@ -29,14 +38,7 @@
 				</div>
 			</div>
 
-			<!-- Ghi chú -->
-			<div class="d-flex align-items-center mb-3">
-				<label for="income-note" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Mô tả</label>
-				<div class="input-group input-group-static flex-grow-1">
-					<span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
-					<input type="text" class="form-control" id="income-note" name="Note" placeholder="Mô tả nguồn thu ">
-				</div>
-			</div>
+			
 
 			<!-- Danh mục -->
 			<div id="IncomeExpenseCateogry"></div>

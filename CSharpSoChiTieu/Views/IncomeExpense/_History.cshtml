@@ -89,30 +89,45 @@
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="incomeExpenseModalLabel">Chỉnh sửa giao dịch</h5>
+				<h5 class="modal-title" id="incomeExpenseModalLabel">Chỉnh sửa</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				<form id="incomeExpenseForm">
 					<input type="hidden" id="itemId" name="id" />
-					<div class="mb-3">
-						<label class="form-label">Loại</label>
-						<select class="form-select" id="itemType" name="type">
-							<option value="Income">Thu nhập</option>
-							<option value="Expense">Chi tiêu</option>
+
+					<div class="d-flex align-items-center mb-3">
+						<label for="income-date" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ngày <span class="text-danger">*</span></label>
+						<div class="input-group input-group-static flex-grow-1">
+							<span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
+							<input type="date" class="form-control" id="income-date" name="IncomeDate" required value="@DateTime.Now.ToString("yyyy-MM-dd")">
+						</div>
+					</div>
+
+					@* Ghi chú *@
+					<div class="d-flex align-items-center mb-3">
+						<label for="income-note" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ghi chú <span class="text-danger">*</span></label>
+						<div class="input-group input-group-static flex-grow-1">
+							<span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
+							<input type="text" class="form-control" id="income-note" name="Note" placeholder="Ghi chú">
+						</div>
+					</div>
+
+					@* Số tiền *@
+					<div class="d-flex align-items-center mb-1">
+						<label for="income-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Số tiền <span class="text-danger">*</span></label>
+						<div class="input-group input-group-static flex-grow-1">
+							<input type="text" class="form-control" id="income-amount" name="Amount" placeholder="0" required inputmode="decimal" onkeyup="formatNumber(this)">
+							<span class="input-group-text">VNĐ</span>
+						</div>
+					</div>
+
+					
+					<div class="d-flex align-items-center mb-1">
+						<label for="income-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Số tiền <span class="text-danger">*</span></label>
+						<select>
+							<option value="icon">icon</option>
 						</select>
-					</div>
-					<div class="mb-3">
-						<label class="form-label">Số tiền</label>
-						<input type="number" class="form-control" id="itemAmount" name="amount" required>
-					</div>
-					<div class="mb-3">
-						<label class="form-label">Mô tả</label>
-						<input type="text" class="form-control" id="itemDescription" name="description" required>
-					</div>
-					<div class="mb-3">
-						<label class="form-label">Ngày</label>
-						<input type="date" class="form-control" id="itemDate" name="date" required>
 					</div>
 				</form>
 			</div>
@@ -233,6 +248,8 @@
 					success: function(response) {
 						currentItem.remove();
 						actionDialog.hide();
+						var selectedRange = $("#select-range").val();
+							updateSummary(selectedRange);
 					},
 					error: function() {
 						alert('Có lỗi xảy ra khi xóa');

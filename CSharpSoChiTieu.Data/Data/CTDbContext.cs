@@ -11,7 +11,6 @@ namespace CSharpSoChiTieu.Data
         public CTDbContext(IConfiguration configuration)
         {
             Configuration = configuration;
-            //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
         /// <summary>   
@@ -20,8 +19,8 @@ namespace CSharpSoChiTieu.Data
         /// <param name="options"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            //options.UseSqlServer(Configuration.GetConnectionString("WebSoChiTieuDbManagement_SqlServer"));
-            options.UseSqlServer(Configuration.GetConnectionString("WebSoChiTieuDbManagement_SqlServer_Online"));
+            options.UseSqlServer(Configuration.GetConnectionString("WebSoChiTieuDbManagement_SqlServer"));
+            //options.UseSqlServer(Configuration.GetConnectionString("WebSoChiTieuDbManagement_SqlServer_Online"));
         }
 
         #region DBSet
