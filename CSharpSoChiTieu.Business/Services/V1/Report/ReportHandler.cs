@@ -41,6 +41,14 @@ namespace CSharpSoChiTieu.Business.Services
                 .Where(x => x.CreatedBy == currentUserId)
                 .CountAsync();
 
+            result.IncomeTransactions = await _context.ct_IncomeExpense
+                .Where(x => x.CreatedBy == currentUserId && x.Type == IncomeExpenseType.Income)
+                .CountAsync();
+
+            result.ExpenseTransactions = await _context.ct_IncomeExpense
+                .Where(x => x.CreatedBy == currentUserId && x.Type == IncomeExpenseType.Expense)
+                .CountAsync();
+
             // Lấy thống kê theo tháng
             var monthlyData = await _context.ct_IncomeExpense
                 .Where(x => x.CreatedBy == currentUserId)

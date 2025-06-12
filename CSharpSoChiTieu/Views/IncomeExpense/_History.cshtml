@@ -41,16 +41,6 @@
 						? "text-success"
 						: "text-danger";
 
-						// Chọn icon dựa trên CategoryName
-						var iconClass = item.CategoryIcon switch
-						{
-							"Food" => "fas fa-utensils",          // Ví dụ: danh mục "Food"
-							"Transport" => "fas fa-car",         // Ví dụ: danh mục "Transport"
-							"Entertainment" => "fas fa-film",    // Ví dụ: danh mục "Entertainment"
-							"Salary" => "fas fa-wallet",         // Ví dụ: danh mục "Salary"
-							_ => "fas fa-box",                   // Mặc định nếu không khớp
-						};
-
 						<li class="list-group-item border-0 d-flex justify-content-between align-items-center ps-1 pe-1 mb-1 income-item"
 							data-id="@item.Id"
 							data-type="@item.Type"
@@ -59,8 +49,8 @@
 							data-date="@item.Date?.ToString("yyyy-MM-dd")"
 							style="cursor: pointer;">
 							<div class="d-flex align-items-center">
-								<div class="icon icon-shape icon-xs @item.CategoryColor text-white text-center rounded-circle me-2 shadow-sm flex-shrink-0">
-									<i class="@iconClass"></i>
+								<div class="icon icon-shape icon-xs text-center rounded-circle me-2" style="background-color: @item.CategoryColor; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">
+									@item.CategoryIcon
 								</div>
 								<div class="d-flex flex-column text-truncate">
 									<h6 class="mb-0 text-dark text-sm">@item.Description</h6>

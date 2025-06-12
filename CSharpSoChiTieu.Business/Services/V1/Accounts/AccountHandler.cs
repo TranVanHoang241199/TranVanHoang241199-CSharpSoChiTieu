@@ -68,7 +68,7 @@ namespace CSharpSoChiTieu.Business.Services
                 return new AuthenticationResult
                 {
                     Success = false,
-                    ErrorMessage = "Có lỗi xảy ra trong quá trình đăng nhập"
+                    ErrorMessage = "server đang bảo trì"
                 };
             }
         }

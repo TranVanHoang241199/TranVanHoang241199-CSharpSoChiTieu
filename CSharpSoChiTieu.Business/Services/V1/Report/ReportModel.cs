@@ -12,7 +12,10 @@ namespace CSharpSoChiTieu.Business.Services
         public decimal TotalIncome { get; set; }
         public decimal TotalExpense { get; set; }
         public decimal Balance { get; set; }
+        public int IncomeTransactions { get; set; }
+        public int ExpenseTransactions { get; set; }
         public int TotalTransactions { get; set; }
+        
         public List<MonthlyStatViewModel> MonthlyStats { get; set; }
         public List<CategoryStatViewModel> CategoryStats { get; set; }
     }

@@ -13,9 +13,9 @@
     <table class="table align-items-center mb-0">
         <thead>
             <tr>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Danh mục</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Loại</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Khoản thu chi</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Số tiền</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Loại</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thao tác</th>
             </tr>
@@ -33,14 +33,14 @@
                                 </div>
                             </div>
                         </td>
-                        <td>
-                            <span class="badge badge-sm @(item.Type == IncomeExpenseType.Income ? "bg-gradient-success" : "bg-gradient-danger")">
-                                @(item.Type == IncomeExpenseType.Income ? "Khoản thu" : "Khoản chi")
-                            </span>
-                        </td>
                         <td class="align-middle text-center text-sm">
                             <span class="text-@(item.Type == IncomeExpenseType.Income ? "success" : "danger") font-weight-bold">
                                 @item.Amount.ToString("N0") đ
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge badge-sm @(item.Type == IncomeExpenseType.Income ? "bg-gradient-success" : "bg-gradient-danger")">
+                                @(item.Type == IncomeExpenseType.Income ? "Khoản thu" : "Khoản chi")
                             </span>
                         </td>
                         <td class="align-middle text-center">
