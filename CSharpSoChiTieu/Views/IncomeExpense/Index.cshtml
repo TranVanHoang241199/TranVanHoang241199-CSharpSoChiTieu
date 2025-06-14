@@ -127,6 +127,7 @@
 		loadForm(formType);
 		setActiveButton(formType);
 
+
 		$("#btn-expense").click();
 		// End: Sự kiện box left
 
@@ -141,7 +142,7 @@
 	});
 
 		function loadForm(type) {
-		var url = "IncomeExpense/LoadForm";
+		var url = "IncomeExpense/Create";
 		var postData = { type: type };
 
 		$.ajax({

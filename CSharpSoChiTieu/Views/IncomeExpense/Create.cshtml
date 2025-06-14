@@ -1,0 +1,223 @@
+﻿@using CSharpSoChiTieu.common
+@using CSharpSoChiTieu.Business.Services
+@model IncomeExpenseCreateUpdateModel
+@{
+    Layout = null;
+}
+@{
+    var isIncome = ViewBag.Type?.ToString()?.ToLower() == "income";
+    var headerColor = isIncome ? "text-success" : "text-danger";
+    var headerIcon = isIncome ? "fa-plus-circle" : "fa-minus-circle";
+    var buttonText = isIncome ? "Thêm khoản thu" : "Thêm khoản chi";
+    var categoryBtnClass = isIncome ? "btn-success" : "btn-danger";
+}
+
+<div class="card mb-4 shadow-sm">
+    <div class="card-header pb-2 px-3">
+        <h6 class="mb-0 @headerColor">
+            <i class="fas @headerIcon me-2"></i>@(ViewBag.Title ?? "Tạo giao dịch mới")
+        </h6>
+    </div>
+    <div class="card-body p-3">
+        <form id="incomeExpenseForm" class="needs-validation" novalidate>
+            <input type="hidden" name="Type" value="@(isIncome? IncomeExpenseType.Income: IncomeExpenseType.Expense)" />
+            <input type="hidden" name="Id" value="@(Model?.Id ?? Guid.Empty)" />
+
+            <div class="d-flex align-items-center mb-3">
+                <label for="transaction-date" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ngày <span class="text-danger">*</span></label>
+                <div class="input-group input-group-static flex-grow-1">
+                    <span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
+                    <input type="date" class="form-control" id="transaction-date" name="Date" required value="@(Model?.Date == default ? DateTime.Now.ToString("yyyy-MM-dd") : Model.Date.ToString("yyyy-MM-dd"))">
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center mb-3">
+                <label for="transaction-description" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ghi chú</label>
+                <div class="input-group input-group-static flex-grow-1">
+                    <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
+                    <input type="text" class="form-control" id="transaction-description" name="Description" placeholder="Ghi chú" value="@(Model?.Description ?? "")">
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center mb-1">
+                <label for="transaction-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Số tiền <span class="text-danger">*</span></label>
+                <div class="input-group input-group-static flex-grow-1">
+                    <input type="text" class="form-control" id="transaction-amount" name="Amount" placeholder="0" required inputmode="decimal" onkeyup="formatNumber(this)" value="@(Model?.Amount.ToString() ?? "0")">
+                    <span class="input-group-text">VNĐ</span>
+                </div>
+            </div>
+
+            <div id="IncomeExpenseCateogry"></div>
+            <input type="hidden" id="IncomeExpense-category-id" name="CategoryId" value="" required />
+
+            <!-- Nút lưu -->
+            <button type="submit" class="btn @(isIncome ? "btn-success" : "btn-danger") w-100 py-2 fw-bold mt-3">
+                <i class="fas fa-save me-2"></i> @buttonText
+            </button>
+        </form>
+    </div>
+</div>
+
+<style>
+    #category-validation-feedback {
+        color: red;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+        margin-bottom: 10px;
+    }
+
+    @@media (max-width: 767.98px) {
+        .card-body {
+            padding: 0.8rem !important;
+        }
+
+        .form-label {
+            margin-bottom: 0.25rem !important;
+        }
+    }
+</style>
+
+<script>
+    $(document).ready(function() {
+        addDataIE();
+        EventDoiMauCategory();
+        loadFormCategoryEI("@ViewBag.Type");
+
+        $("#transaction-amount").on('input', function(e) {
+            let value = $(this).val().replace(/[^\d]/g, '');
+            if (!/^\d*$/.test(value)) {
+                $(this).val('');
+                return;
+            }
+            if (value) {
+                value = parseInt(value).toLocaleString('vi-VN');
+                $(this).val(value);
+            }
+        });
+
+        $("#transaction-amount").on('paste', function(e) {
+            e.preventDefault();
+            let pastedText = (e.originalEvent.clipboardData || window.clipboardData).getData('text');
+            if (!/^\d*$/.test(pastedText)) {
+                return false;
+            }
+        });
+    });
+
+    function loadFormCategoryEI(type) {
+        $.ajax({
+            url: "/IncomeExpense/Category?type=" + type,
+            type: "GET",
+            success: function (data) {
+                $("#IncomeExpenseCateogry").html(data);
+            },
+            error: function () {
+                alert("Không tải được danh mục.");
+            }
+        });
+    }
+
+    function EventDoiMauCategory() {
+        // Do loadFormCategoryEI(2) có thể load thêm danh mục mới
+        // nên phải dùng .on('click') để gán sự kiện động
+        $(document).on("click", ".btn-category", function () {
+            var categoryId = $(this).data("category-id"); // Lấy id
+            $("#IncomeExpense-category-id").val(categoryId);    // Gán vào input hidden
+
+            // Ẩn thông báo lỗi nếu có
+            $("#category-validation-feedback").hide();
+
+            // Đổi màu nút: clear tất cả, active cái được chọn
+            $(".btn-category").removeClass("@(isIncome ? "btn-success" : "btn-danger")").addClass("btn-light");
+            $(this).removeClass("btn-light").addClass("@(isIncome ? "btn-success" : "btn-danger")");
+        });
+    }
+
+    function formatNumber(input) {
+        let value = input.value.replace(/[^\d]/g, '');
+        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        input.value = value;
+    }
+
+    function addDataIE() {
+
+        // Xóa sự kiện submit cũ nếu có
+        $("#incomeExpenseForm").off('submit');
+
+
+        // Thêm sự kiện submit mới
+        $("#incomeExpenseForm").on('submit', function (e) {
+            e.preventDefault();
+
+            var form = $(this);
+            form.removeClass("was-validated");
+
+            var categoryId = $("#IncomeExpense-category-id").val();
+            var transactionDate = $("#transaction-date").val();
+            var transactionAmount = $("#transaction-amount").val();
+            var transactionNote = $("#transaction-description").val();
+            var transactionId = $("input[name='Id']").val();
+
+
+            var errors = [];
+
+            if (!transactionDate) {
+                errors.push("* Bạn chưa nhập ngày.");
+            }
+            if (!transactionAmount) {
+                errors.push("* Bạn chưa nhập số tiền.");
+            }
+            if (!categoryId) {
+                errors.push("* Bạn chưa chọn một danh mục.");
+            }
+
+            if (errors.length > 0) {
+                var errorMessage = errors.join("<br>");
+                showDialog(errorMessage);
+                return;
+            }
+
+            var formData = {
+                Id: transactionId,
+                Amount: parseFloat(transactionAmount.replace(/\./g, "")),
+                Date: transactionDate,
+                Description: transactionNote,
+                CategoryId: categoryId,
+                Type: "@ViewBag.Type"
+            };
+
+            $.ajax({
+                url: "@Url.Action("Save", "IncomeExpense")",
+                type: "POST",
+                data: formData,
+                success: function (res) {
+                       form.trigger("reset");
+                        form.removeClass("was-validated");
+                        loadForm("@ViewBag.Type");
+
+                        // Refresh history and summary
+                        loadFormHistory("@ViewBag.RangeType");
+                        updateSummary("@ViewBag.RangeType");
+                },
+                error: function (xhr) {
+                    form.addClass("was-validated");
+                    $(".field-validation-error").remove();
+                    $(".is-invalid").removeClass("is-invalid");
+
+                    if (xhr.responseJSON && xhr.responseJSON.errors) {
+                        let errors = xhr.responseJSON.errors;
+                        for (let key in errors) {
+                            let input = $("[name='" + key + "']");
+                            if (input.length > 0) {
+                                input.addClass("is-invalid");
+                                input.after(`<div class="field-validation-error text-danger">${errors[key]}</div>`);
+                            }
+                        }
+                    } else {
+                        showDialog("Có lỗi xảy ra khi lưu dữ liệu.");
+                    }
+                }
+            });
+        });
+    }
+</script>

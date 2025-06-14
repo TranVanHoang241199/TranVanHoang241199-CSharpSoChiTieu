@@ -32,31 +32,48 @@ namespace CSharpSoChiTieu.Controllers
         }
 
         [HttpPost]
-        public IActionResult LoadForm(string type)
+        public IActionResult Create(string type)
         {
+            if (string.IsNullOrEmpty(type))
+            {
+                type = "expense"; // Default to expense if type is not provided
+            }
+
             var sessionModel = HttpContext.Session.GetObjectFromJson<IncomeExpenseSessionModel>(IE_SESSION_KEY)
-                                 ?? new IncomeExpenseSessionModel();
+                     ?? new IncomeExpenseSessionModel();
 
             sessionModel.FormType = type;
             HttpContext.Session.SetObjectAsJson(IE_SESSION_KEY, sessionModel);
 
-            if (type == "income")
+            // Initialize model with default values
+            var model = new IncomeExpenseCreateUpdateModel
             {
-                ViewBag.Title = "Thêm khoản thu mới"; // sửa lại tên đúng nhé
-                return PartialView("Income");
-            }
-            else if (type == "expense")
-            {
-                ViewBag.Title = "Thêm khoản chi mới"; // sửa lại tên đúng nhé
-                return PartialView("Expenses");
-            }
-            else
-            {
-                return Content("Form không tồn tại!");
-            }
+                Id = Guid.Empty,
+                Date = DateTime.Now,
+                Amount = 0,
+                Type = type == "income" ? IncomeExpenseType.Income : IncomeExpenseType.Expense
+            };
+
+            // Set view data for both types
+            ViewBag.Type = type;
+            ViewBag.Title = type == "income" ? "Tạo khoản thu" : "Tạo khoản chi";
+            ViewBag.CategoryType = type == "income" ? IncomeExpenseType.Income : IncomeExpenseType.Expense;
+
+            return View(model);
         }
 
+        public async Task<IActionResult> Category(IncomeExpenseType type = 0)
+        {
 
+            var result = await _IncomeExpenseHandler.GetCategorys(type);
+
+            if (result.Status != HttpStatusCode.OK)
+                return Content("Lỗi khi lấy dữ liệu: " + result.Message);
+
+            var data = (result as OperationResultList<CategoryViewModel>)?.Data ?? new List<CategoryViewModel>();
+
+            return PartialView("_Category", data);
+        }
 
 
         public async Task<IActionResult> History(string? range = "month")
@@ -84,22 +101,6 @@ namespace CSharpSoChiTieu.Controllers
 
             return PartialView("_History", data);
         }
-
-
-
-        public async Task<IActionResult> Category(IncomeExpenseType type = 0)
-        {
-
-            var result = await _IncomeExpenseHandler.GetCategorys(type);
-
-            if (result.Status != HttpStatusCode.OK)
-                return Content("Lỗi khi lấy dữ liệu: " + result.Message);
-
-            var data = (result as OperationResultList<CategoryViewModel>)?.Data ?? new List<CategoryViewModel>();
-
-            return PartialView("_Category", data);
-        }
-
 
         
 
@@ -130,10 +131,6 @@ namespace CSharpSoChiTieu.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(IncomeExpenseCreateUpdateModel model)
         {
-            // Kiểm tra lỗi dữ liệu
-            if (string.IsNullOrWhiteSpace(model.Description))
-                ModelState.AddModelError(nameof(model.Description), "Vui lòng nhập mô tả");
-
             if (model.Amount <= 0)
                 ModelState.AddModelError(nameof(model.Amount), "Số tiền phải lớn hơn 0");
 

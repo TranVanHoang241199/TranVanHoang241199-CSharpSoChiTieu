@@ -80,12 +80,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/CSharpSoChiTieu/CSharpSoChiTieu/Views/IncomeExpense/Expenses.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lRXhwZW5zZVxFeHBlbnNlcy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/CSharpSoChiTieu/CSharpSoChiTieu/Views/IncomeExpense/Income.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lRXhwZW5zZVxJbmNvbWUuY3NodG1s
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/CSharpSoChiTieu/CSharpSoChiTieu/Views/IncomeExpense/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lRXhwZW5zZVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/CSharpSoChiTieu/CSharpSoChiTieu/Views/IncomeExpense/Index.cshtml]
