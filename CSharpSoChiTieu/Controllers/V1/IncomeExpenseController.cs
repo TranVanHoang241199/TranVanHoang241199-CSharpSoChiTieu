@@ -49,7 +49,7 @@ namespace CSharpSoChiTieu.Controllers
             var model = new IncomeExpenseCreateUpdateModel
             {
                 Id = Guid.Empty,
-                Date = DateTime.Now,
+                Date = DateTime.UtcNow,
                 Amount = 0,
                 Type = type == "income" ? IncomeExpenseType.Income : IncomeExpenseType.Expense
             };
@@ -59,13 +59,14 @@ namespace CSharpSoChiTieu.Controllers
             ViewBag.Title = type == "income" ? "Tạo khoản thu" : "Tạo khoản chi";
             ViewBag.CategoryType = type == "income" ? IncomeExpenseType.Income : IncomeExpenseType.Expense;
 
+
             return View(model);
         }
 
         public async Task<IActionResult> Category(IncomeExpenseType type = 0)
         {
 
-            var result = await _IncomeExpenseHandler.GetCategorys(type);
+            var result = await _IncomeExpenseHandler.GetCategories(type);
 
             if (result.Status != HttpStatusCode.OK)
                 return Content("Lỗi khi lấy dữ liệu: " + result.Message);
@@ -127,6 +128,8 @@ namespace CSharpSoChiTieu.Controllers
                 remainingBalanceFormatted = "0 đ"
             });
         }
+
+        
 
         [HttpPost]
         public async Task<IActionResult> Save(IncomeExpenseCreateUpdateModel model)

@@ -109,8 +109,8 @@ namespace CSharpSoChiTieu.Business.Services
                     Email = model.Email,
                     Role = string.IsNullOrEmpty(model.Role) ? "user" : model.Role.ToLower(),
                     IsDeleted = false,
-                    PasswordUpdatedDate = DateTime.Now,
-                    CreatedDate = DateTime.Now,
+                    PasswordUpdatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.UtcNow,
                     CreatedBy = userId // Tự nhận mình là người tạo
                 };
 

@@ -125,6 +125,7 @@
                                 <i class="material-symbols-rounded">more_vert</i>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="javascript:void(0)" onclick="updateChartPeriod('week')">Theo tuần</a></li>
                                 <li><a class="dropdown-item" href="javascript:void(0)" onclick="updateChartPeriod('month')">Theo tháng</a></li>
                                 <li><a class="dropdown-item" href="javascript:void(0)" onclick="updateChartPeriod('quarter')">Theo quý</a></li>
                                 <li><a class="dropdown-item" href="javascript:void(0)" onclick="updateChartPeriod('year')">Theo năm</a></li>
@@ -222,6 +223,8 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 @section scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -375,6 +378,9 @@
                     // Cập nhật text của dropdown button
                     var buttonText = '';
                     switch(period) {
+                        case 'week':
+                            buttonText = 'Theo tuần';
+                            break;
                         case 'month':
                             buttonText = 'Theo tháng';
                             break;

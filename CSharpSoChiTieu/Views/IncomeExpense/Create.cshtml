@@ -27,7 +27,7 @@
                 <label for="transaction-date" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ngày <span class="text-danger">*</span></label>
                 <div class="input-group input-group-static flex-grow-1">
                     <span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
-                    <input type="date" class="form-control" id="transaction-date" name="Date" required value="@(Model?.Date == default ? DateTime.Now.ToString("yyyy-MM-dd") : Model.Date.ToString("yyyy-MM-dd"))">
+                    <input type="date" class="form-control" id="transaction-date" name="Date" required value="@(Model?.Date == default ? DateTime.UtcNow.ToString("yyyy-MM-dd") : Model.Date.ToString("yyyy-MM-dd"))">
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
                 <label for="transaction-description" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ghi chú</label>
                 <div class="input-group input-group-static flex-grow-1">
                     <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
-                    <input type="text" class="form-control" id="transaction-description" name="Description" placeholder="Ghi chú" value="@(Model?.Description ?? "")">
+                    <input type="text" class="form-control" id="transaction-description" name="Description" placeholder="Đã thu chi ..." value="@(Model?.Description ?? "")">
                 </div>
             </div>
 
@@ -49,6 +49,9 @@
 
             <div id="IncomeExpenseCateogry"></div>
             <input type="hidden" id="IncomeExpense-category-id" name="CategoryId" value="" required />
+
+            <!-- Thông báo lỗi -->
+            <div id="validation-errors" class="text-danger mb-2" style="display: none;"></div>
 
             <!-- Nút lưu -->
             <button type="submit" class="btn @(isIncome ? "btn-success" : "btn-danger") w-100 py-2 fw-bold mt-3">
@@ -64,6 +67,11 @@
         font-size: 0.875rem;
         margin-top: 0.25rem;
         margin-bottom: 10px;
+    }
+
+    #validation-errors {
+        font-size: 0.875rem;
+        line-height: 1.4;
     }
 
     @@media (max-width: 767.98px) {
@@ -118,16 +126,13 @@
     }
 
     function EventDoiMauCategory() {
-        // Do loadFormCategoryEI(2) có thể load thêm danh mục mới
-        // nên phải dùng .on('click') để gán sự kiện động
         $(document).on("click", ".btn-category", function () {
-            var categoryId = $(this).data("category-id"); // Lấy id
-            $("#IncomeExpense-category-id").val(categoryId);    // Gán vào input hidden
+            var categoryId = $(this).data("category-id");
+            $("#IncomeExpense-category-id").val(categoryId);
 
-            // Ẩn thông báo lỗi nếu có
             $("#category-validation-feedback").hide();
+            $("#validation-errors").hide();
 
-            // Đổi màu nút: clear tất cả, active cái được chọn
             $(".btn-category").removeClass("@(isIncome ? "btn-success" : "btn-danger")").addClass("btn-light");
             $(this).removeClass("btn-light").addClass("@(isIncome ? "btn-success" : "btn-danger")");
         });
@@ -140,24 +145,20 @@
     }
 
     function addDataIE() {
-
-        // Xóa sự kiện submit cũ nếu có
         $("#incomeExpenseForm").off('submit');
 
-
-        // Thêm sự kiện submit mới
         $("#incomeExpenseForm").on('submit', function (e) {
             e.preventDefault();
 
             var form = $(this);
             form.removeClass("was-validated");
+            $("#validation-errors").hide();
 
             var categoryId = $("#IncomeExpense-category-id").val();
             var transactionDate = $("#transaction-date").val();
             var transactionAmount = $("#transaction-amount").val();
             var transactionNote = $("#transaction-description").val();
             var transactionId = $("input[name='Id']").val();
-
 
             var errors = [];
 
@@ -173,7 +174,7 @@
 
             if (errors.length > 0) {
                 var errorMessage = errors.join("<br>");
-                showDialog(errorMessage);
+                $("#validation-errors").html(errorMessage).show();
                 return;
             }
 
@@ -191,13 +192,13 @@
                 type: "POST",
                 data: formData,
                 success: function (res) {
-                       form.trigger("reset");
-                        form.removeClass("was-validated");
-                        loadForm("@ViewBag.Type");
+                    form.trigger("reset");
+                    form.removeClass("was-validated");
+                    $("#validation-errors").hide();
+                    loadForm("@ViewBag.Type");
 
-                        // Refresh history and summary
-                        loadFormHistory("@ViewBag.RangeType");
-                        updateSummary("@ViewBag.RangeType");
+                    loadFormHistory("@ViewBag.RangeType");
+                    updateSummary("@ViewBag.RangeType");
                 },
                 error: function (xhr) {
                     form.addClass("was-validated");

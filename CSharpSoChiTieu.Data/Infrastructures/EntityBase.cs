@@ -12,7 +12,7 @@ namespace CSharpSoChiTieu.Data
         /// <summary>
         /// Thời gian tạo
         /// </summary>
-        public DateTime? CreatedDate { get; set; } = DateTime.Now;
+        public DateTime? CreatedDate { get; set; } = DateTime.UtcNow;
         /// <summary>
         /// Người Tạo 
         /// </summary>

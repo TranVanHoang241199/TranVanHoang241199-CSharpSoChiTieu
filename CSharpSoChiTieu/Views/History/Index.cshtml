@@ -1,5 +1,11 @@
 ﻿@model CSharpSoChiTieu.Models.PaginationHistorySearchInput
 
+@{
+    var totalIncomeFormatted = ViewData["TotalIncomeFormatted"]?.ToString() ?? "0 đ";
+    var totalExpenseFormatted = ViewData["TotalExpenseFormatted"]?.ToString() ?? "0 đ";
+    var remainingBalanceFormatted = ViewData["RemainingBalanceFormatted"]?.ToString() ?? "0 đ";
+}
+
 <div class="container-fluid py-4">
     <div class="row">
         <div class="col-12">
@@ -23,21 +29,47 @@
                                     <i class="material-symbols-rounded">search</i>
                                 </button>
                             </div>
-                            <div class="row g-3">
-                                <div class="col-md-4 col-sm-4">
-                                    <select id="yearSelect" name="year" class="form-select border-radius-lg shadow-sm">
-                                        <option value="">Chọn năm</option>
-                                    </select>
+                           <div class="row g-3">
+                                <!-- Chọn ngày tháng năm -->
+                                <div class="col-12 col-md-6 d-flex align-items-start align-items-md-center">
+                                    <div class="d-flex flex-column flex-md-row w-100 justify-content-start align-items-start align-items-md-center">
+                                        <div class="mb-2 mb-md-0 me-md-2 w-100 w-md-auto">
+                                            <select id="yearSelect" name="year" class="form-select border-radius-lg shadow-sm">
+                                                <option value="">Chọn năm</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-2 mb-md-0 me-md-2 w-100 w-md-auto">
+                                            <select id="monthSelect" name="month" class="form-select border-radius-lg shadow-sm">
+                                                <option value="">Chọn tháng</option>
+                                            </select>
+                                        </div>
+                                        <div class="w-100 w-md-auto">
+                                            <select id="daySelect" name="day" class="form-select border-radius-lg shadow-sm">
+                                                <option value="">Chọn ngày</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4">
-                                    <select id="monthSelect" name="month" class="form-select border-radius-lg shadow-sm">
-                                        <option value="">Chọn tháng</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4 col-sm-4">
-                                    <select id="daySelect" name="day" class="form-select border-radius-lg shadow-sm">
-                                        <option value="">Chọn ngày</option>
-                                    </select>
+
+                                <!-- Thu Chi Còn -->
+                                <div class="col-12 col-md-6 d-flex align-items-start align-items-md-center justify-content-md-end">
+                                    <div class="d-flex flex-column flex-md-row w-100 justify-content-end align-items-start align-items-md-baseline" id="summary-metrics">
+                                        <div class="mb-2 mb-md-0 me-md-3 d-flex align-items-baseline">
+                                            <i class="fas fa-wallet text-success me-1 fs-6"></i>
+                                            <span class="text-success small me-1">Thu:</span>
+                                            <span class="text-success fw-bold pe-0" id="total-income">@totalIncomeFormatted</span>
+                                        </div>
+                                        <div class="mb-2 mb-md-0 me-md-3 d-flex align-items-baseline">
+                                            <i class="fas fa-shopping-cart text-danger me-1 fs-6"></i>
+                                            <span class="text-danger small me-1">Chi:</span>
+                                            <span class="text-danger fw-bold pe-0" id="total-expense">@totalExpenseFormatted</span>
+                                        </div>
+                                        <div class="d-flex align-items-baseline">
+                                            <i class="fas fa-piggy-bank text-warning me-1 fs-6"></i>
+                                            <span class="text-warning small me-1">Còn:</span>
+                                            <span class="text-warning fw-bold pe-0" id="remaining-balance">@remainingBalanceFormatted</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -53,79 +85,107 @@
 
 @section scripts {
     <script>
-        $(document).ready(function () {
-            // Khởi tạo năm
-            const currentYear = new Date().getFullYear();
-            const yearSelect = $('#yearSelect');
-            for (let year = currentYear; year >= currentYear - 10; year--) {
-                yearSelect.append(`<option value="${year}">${year}</option>`);
-            }
+        function updateSummaryHistory() {
+            const year = $('#yearSelect').val();
+            const month = $('#monthSelect').val();
+            const day = $('#daySelect').val();
+            const searchValue = $('input[name="searchValue"]').val();
 
-            // Khởi tạo tháng
-            const monthSelect = $('#monthSelect');
-            for (let month = 1; month <= 12; month++) {
-                monthSelect.append(`<option value="${month}">${month}</option>`);
-            }
+            $.ajax({
+                url: '@Url.Action("GetSummary", "History")',
+                type: 'GET',
+                data: { year, month, day, searchValue },
+                success: function (data) {
+                    $("#total-income").text(data.totalIncomeFormatted);
+                    $("#total-expense").text(data.totalExpenseFormatted);
+                    $("#remaining-balance").text(data.remainingBalanceFormatted);
+                },
+                error: function () {
+                    $("#total-income").text("0 đ");
+                    $("#total-expense").text("0 đ");
+                    $("#remaining-balance").text("0 đ");
+                }
+            });
+        }
 
-            // Hàm cập nhật số ngày dựa trên tháng và năm
-            function updateDays() {
-                const year = parseInt($('#yearSelect').val());
-                const month = parseInt($('#monthSelect').val());
-                const daySelect = $('#daySelect');
+        function updateDaysDropdown(year, month, selectedDay) {
+            const daySelect = $('#daySelect');
+            daySelect.empty().append('<option value="">Chọn ngày</option>');
 
-                // Xóa tất cả options hiện tại
-                daySelect.empty();
-                daySelect.append('<option value="">Chọn ngày</option>');
-
-                if (year && month) {
-                    // Tính số ngày trong tháng
-                    const daysInMonth = new Date(year, month, 0).getDate();
-
-                    // Thêm các options cho ngày
-                    for (let day = 1; day <= daysInMonth; day++) {
-                        daySelect.append(`<option value="${day}">${day}</option>`);
-                    }
+            if (year && month) {
+                const daysInMonth = new Date(year, month, 0).getDate();
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const selected = selectedDay == day ? 'selected' : '';
+                    daySelect.append(`<option value="${day}" ${selected}>${day}</option>`);
                 }
             }
+        }
 
-            // Xử lý sự kiện khi thay đổi tháng hoặc năm
-            $('#monthSelect, #yearSelect').change(function() {
-                updateDays();
+        $(document).ready(function () {
+            const currentYear = new Date().getFullYear();
+            const yearSelect = $('#yearSelect');
+            const monthSelect = $('#monthSelect');
+
+            const modelYear = @Model.Year ?? currentYear;
+            const modelMonth = @Model.Month ?? (new Date().getMonth() + 1);
+            const modelDay = null;
+            // const modelDay = @Model.Day ?? null;
+
+            // Fill year dropdown
+            for (let year = currentYear; year >= currentYear - 10; year--) {
+                const selected = (year === modelYear) ? 'selected' : '';
+                yearSelect.append(`<option value="${year}" ${selected}>${year}</option>`);
+            }
+
+            // Fill month dropdown
+            for (let month = 1; month <= 12; month++) {
+                const selected = (month === modelMonth) ? 'selected' : '';
+                monthSelect.append(`<option value="${month}" ${selected}>${month}</option>`);
+            }
+
+            // Fill day dropdown sau khi month/year đã gán
+            updateDaysDropdown(modelYear, modelMonth, modelDay);
+
+            // Sự kiện thay đổi
+            $('#yearSelect, #monthSelect').change(function () {
+                const year = parseInt($('#yearSelect').val());
+                const month = parseInt($('#monthSelect').val());
+                updateDaysDropdown(year, month, null);
                 doSearch(1);
+                updateSummaryHistory();
             });
 
-            // Xử lý sự kiện khi thay đổi ngày
-            $('#daySelect').change(function() {
+            $('#daySelect').change(function () {
                 doSearch(1);
+                updateSummaryHistory();
             });
 
-            $("#formSearch").submit(function (e) {
+            $('#formSearch').submit(function (e) {
                 e.preventDefault();
                 doSearch(1);
-                return;
+                updateSummaryHistory();
             });
 
             doSearch(@Model.Page);
+            updateSummaryHistory();
         });
 
         function doSearch(page) {
-            var url = $("#formSearch").prop("action");
-            var postData = $("#formSearch").serializeArray();
+            const url = $("#formSearch").prop("action");
+            const postData = $("#formSearch").serializeArray();
             postData.push({ "name": "page", "value": page });
 
             $.ajax({
                 url: url,
                 type: "POST",
                 data: postData,
-                error: function () {
-                    alert("Your request is not valid!");
-                },
                 success: function (data) {
                     $("#searchResult").html(data);
+                },
+                error: function () {
+                    alert("Không thể tải dữ liệu, vui lòng thử lại.");
                 }
             });
-
-            return;
         }
     </script>
 }

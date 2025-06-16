@@ -103,7 +103,7 @@ namespace CSharpSoChiTieu.Controllers
                 {
                     // Tạo token reset
                     user.PasswordResetToken = Guid.NewGuid().ToString();
-                    user.PasswordResetTokenExpiry = DateTime.Now.AddHours(1);
+                    user.PasswordResetTokenExpiry = DateTime.UtcNow.AddHours(1);
 
                     _context.SaveChanges();
 
@@ -144,7 +144,7 @@ namespace CSharpSoChiTieu.Controllers
             {
                 var user = _context.ct_Users.FirstOrDefault(u =>
                             u.PasswordResetToken == model.Token
-                            && u.PasswordResetTokenExpiry > DateTime.Now);
+                            && u.PasswordResetTokenExpiry > DateTime.UtcNow);
 
                 if (user != null)
                 {

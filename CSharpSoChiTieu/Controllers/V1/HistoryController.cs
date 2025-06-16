@@ -29,9 +29,9 @@ namespace CSharpSoChiTieu.Controllers
                     Page = 1,
                     PageSize = PAGE_SIZE,
                     SearchValue = "",
-                    Year = DateTime.Now.Year,
-                    Month = DateTime.Now.Month,
-                    Day = DateTime.Now.Day
+                    Year = DateTime.UtcNow.Year,
+                    Month = DateTime.UtcNow.Month,
+                    Day = DateTime.UtcNow.Day
 
                 };
             }
@@ -41,11 +41,11 @@ namespace CSharpSoChiTieu.Controllers
         public async Task<IActionResult> Search(PaginationHistorySearchInput condition)
         {
             // Đếm số lượng
-            var operationResultCount = await _IncomeExpenseHandler.Count(condition.SearchValue);
+            var operationResultCount = await _IncomeExpenseHandler.Count(condition.SearchValue, condition.Year, condition.Month, condition.Day);
             int rowCount = (operationResultCount as OperationResult<int>)?.Data ?? 0;
 
             // Lấy danh sách
-            var operationResultData = await _IncomeExpenseHandler.Gets(condition.Page, condition.PageSize, condition.SearchValue);
+            var operationResultData = await _IncomeExpenseHandler.Gets(condition.Page, condition.PageSize, condition.SearchValue, condition.Year, condition.Month, condition.Day);
             var data = (operationResultData as OperationResultList<IncomeExpenseViewModel>)?.Data ?? new List<IncomeExpenseViewModel>();
 
             // Lọc theo ngày tháng năm nếu có
@@ -78,6 +78,30 @@ namespace CSharpSoChiTieu.Controllers
             HttpContext.Session.SetObjectAsJson(IncomeExpense_SEARCH, condition);
 
             return View(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetSummary(int? year, int? month, int? day, string searchValue)
+        {
+            var result = await _IncomeExpenseHandler.GetSummary(year, month, day, searchValue);
+
+            if (result is OperationResult<IncomeExpenseummaryViewModel> summaryResult)
+            {
+                var model = summaryResult.Data;
+                return Json(new
+                {
+                    totalIncomeFormatted = $"{model.TotalIncome:N0} đ",
+                    totalExpenseFormatted = $"{model.TotalExpense:N0} đ",
+                    remainingBalanceFormatted = $"{model.Balance:N0} đ"
+                });
+            }
+
+            return Json(new
+            {
+                totalIncomeFormatted = "0 đ",
+                totalExpenseFormatted = "0 đ",
+                remainingBalanceFormatted = "0 đ"
+            });
         }
     }
 }
