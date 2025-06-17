@@ -156,12 +156,24 @@ namespace CSharpSoChiTieu.Business.Services
         public string ConfirmPassword { get; set; }
     }
 
+    public class ProfileViewModel
+    {
+        public Guid Id { get; set; }
+        public string UserName { get; set; }
+        public string FullName { get; set; }
+        public string? Phone { get; set; }
+        public string? Email { get; set; }
+        public string? Image { get; set; }
+        public string? Role { get; set; }
+    }
+
     public class UserAutoMapper : Profile
     {
         public UserAutoMapper()
         {
             CreateMap<ct_User, UserViewModel>(); // Auto map ht_User to UserViewModel
             CreateMap<RegisterViewModel, ct_User>(); // Auto map ht_User to UserViewModel
+            CreateMap<ct_User, ProfileViewModel>();
         }
     }
 }

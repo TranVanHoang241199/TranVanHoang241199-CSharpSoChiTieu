@@ -110,19 +110,61 @@ namespace CSharpSoChiTieu.Business.Services
             return result;
         }
 
-        public async Task<ChartDataViewModel> GetChartData(string period) // Added yearWeek parameter
+        public async Task<ChartDataViewModel> GetChartData(string period)
         {
-            var result = new ChartDataViewModel();
-            var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
-            var query = _context.ct_IncomeExpense
-                .Where(x => x.CreatedBy == currentUserId)
-                .AsQueryable();
+            var userId = GetExtensions.GetUserId(_httpContextAccessor);
+            var now = DateTime.Now;
+            var startDate = now.Date;
+            var endDate = now.Date;
+            var labels = new List<string>();
+            var incomeData = new List<decimal>();
+            var expenseData = new List<decimal>();
 
             switch (period.ToLower())
             {
+                case "week":
+                    // Tính ngày đầu và cuối của tuần hiện tại
+                    startDate = now.Date.AddDays(-(int)now.DayOfWeek + 1); // Thứ 2
+                    endDate = startDate.AddDays(6); // Chủ nhật
+
+                    // Tạo danh sách các ngày trong tuần
+                    var daysInWeek = new List<string> { "T2", "T3", "T4", "T5", "T6", "T7", "CN" };
+                    labels = daysInWeek;
+
+                    // Lấy dữ liệu thu chi cho từng ngày trong tuần
+                    var dailyData = await _context.ct_IncomeExpense
+                        .Where(t => t.CreatedBy == userId &&
+                               t.Date.Date >= startDate &&
+                               t.Date.Date <= endDate)
+                        .GroupBy(t => t.Date.Date)
+                        .Select(g => new
+                        {
+                            Date = g.Key,
+                            Income = g.Where(t => t.Type == IncomeExpenseType.Income).Sum(t => t.Amount),
+                            Expense = g.Where(t => t.Type == IncomeExpenseType.Expense).Sum(t => t.Amount)
+                        })
+                        .ToListAsync();
+
+                    // Khởi tạo mảng dữ liệu với giá trị 0 cho tất cả các ngày
+                    incomeData = new List<decimal> { 0, 0, 0, 0, 0, 0, 0 };
+                    expenseData = new List<decimal> { 0, 0, 0, 0, 0, 0, 0 };
+
+                    // Cập nhật dữ liệu cho các ngày có giao dịch
+                    foreach (var data in dailyData)
+                    {
+                        var dayIndex = (int)(data.Date - startDate).TotalDays;
+                        if (dayIndex >= 0 && dayIndex < 7)
+                        {
+                            incomeData[dayIndex] = data.Income;
+                            expenseData[dayIndex] = data.Expense;
+                        }
+                    }
+                    break;
+
                 case "quarter":
                     // Your existing "quarter" logic
-                    var quarterlyData = await query
+                    var quarterlyData = await _context.ct_IncomeExpense
+                        .Where(x => x.CreatedBy == userId)
                         .GroupBy(x => new { x.Date.Year, Quarter = (x.Date.Month - 1) / 3 + 1 })
                         .Select(g => new
                         {
@@ -135,14 +177,15 @@ namespace CSharpSoChiTieu.Business.Services
                         .ThenBy(x => x.Quarter)
                         .ToListAsync();
 
-                    result.Labels = quarterlyData.Select(x => $"Q{x.Quarter}/{x.Year}").ToList();
-                    result.Income = quarterlyData.Select(x => x.Income).ToList();
-                    result.Expense = quarterlyData.Select(x => x.Expense).ToList();
+                    labels = quarterlyData.Select(x => $"Q{x.Quarter}/{x.Year}").ToList();
+                    incomeData = quarterlyData.Select(x => x.Income).ToList();
+                    expenseData = quarterlyData.Select(x => x.Expense).ToList();
                     break;
 
                 case "year":
                     // Your existing "year" logic
-                    var yearlyData = await query
+                    var yearlyData = await _context.ct_IncomeExpense
+                        .Where(x => x.CreatedBy == userId)
                         .GroupBy(x => x.Date.Year)
                         .Select(g => new
                         {
@@ -153,73 +196,15 @@ namespace CSharpSoChiTieu.Business.Services
                         .OrderBy(x => x.Year)
                         .ToListAsync();
 
-                    result.Labels = yearlyData.Select(x => x.Year.ToString()).ToList();
-                    result.Income = yearlyData.Select(x => x.Income).ToList();
-                    result.Expense = yearlyData.Select(x => x.Expense).ToList();
-                    break;
-
-                case "week": // New case for "week"
-                    if (string.IsNullOrEmpty(period))
-                    {
-                        // Handle case where week parameter is missing, maybe default to current week or throw error
-                        // For now, let's just return empty data
-                        return result;
-                    }
-
-                    var parts = period.Split("-W");
-                    if (parts.Length != 2 || !int.TryParse(parts[0], out int year) || !int.TryParse(parts[1], out int weekNumber))
-                    {
-                        // Invalid format for yearWeek
-                        return result;
-                    }
-
-                    // Calculate start and end dates of the week
-                    // Using ISO 8601 week calculation (Monday as first day)
-                    var cal = CultureInfo.CurrentCulture.Calendar;
-                    var jan1 = new DateTime(year, 1, 1);
-                    var daysOffset = DayOfWeek.Monday - jan1.DayOfWeek; // Adjust to find the Monday of Jan 1st's week
-
-                    // Get the first Monday of the year (or previous year's Monday for week 1 if it starts in Dec)
-                    var firstMonday = jan1.AddDays(daysOffset);
-                    if (firstMonday.Year < year) // If the first Monday is in the previous year (e.g., Jan 1st is a Saturday)
-                    {
-                        firstMonday = firstMonday.AddDays(7);
-                    }
-
-                    // Calculate the start date of the target week
-                    var startOfWeek = firstMonday.AddDays((weekNumber - 1) * 7);
-                    var endOfWeek = startOfWeek.AddDays(6); // End of Sunday
-
-                    // Query for daily data within this week
-                    var weeklyDailyData = await query
-                        .Where(x => x.Date >= startOfWeek && x.Date <= endOfWeek)
-                        .GroupBy(x => x.Date.Date) // Group by exact date
-                        .Select(g => new
-                        {
-                            Date = g.Key,
-                            Income = g.Where(x => x.Type == IncomeExpenseType.Income).Sum(x => x.Amount),
-                            Expense = g.Where(x => x.Type == IncomeExpenseType.Expense).Sum(x => x.Amount)
-                        })
-                        .OrderBy(x => x.Date)
-                        .ToListAsync();
-
-                    // Populate all days of the week, including those with no transactions
-                    var allDatesInWeek = Enumerable.Range(0, 7)
-                                                    .Select(offset => startOfWeek.AddDays(offset).Date)
-                                                    .ToList();
-
-                    foreach (var date in allDatesInWeek)
-                    {
-                        var dataForDay = weeklyDailyData.FirstOrDefault(d => d.Date == date);
-                        result.Labels.Add(date.ToString("ddd dd/MM", CultureInfo.CurrentCulture)); // E.g., "Mon 15/06"
-                        result.Income.Add(dataForDay?.Income ?? 0);
-                        result.Expense.Add(dataForDay?.Expense ?? 0);
-                    }
+                    labels = yearlyData.Select(x => x.Year.ToString()).ToList();
+                    incomeData = yearlyData.Select(x => x.Income).ToList();
+                    expenseData = yearlyData.Select(x => x.Expense).ToList();
                     break;
 
                 default:
                     // Your existing "month" logic
-                    var monthlyData = await query
+                    var monthlyData = await _context.ct_IncomeExpense
+                        .Where(x => x.CreatedBy == userId)
                         .GroupBy(x => new { x.Date.Year, x.Date.Month })
                         .Select(g => new
                         {
@@ -232,13 +217,18 @@ namespace CSharpSoChiTieu.Business.Services
                         .ThenBy(x => x.Month)
                         .ToListAsync();
 
-                    result.Labels = monthlyData.Select(x => $"{x.Month}/{x.Year}").ToList(); // Changed to Month/Year for better display
-                    result.Income = monthlyData.Select(x => x.Income).ToList();
-                    result.Expense = monthlyData.Select(x => x.Expense).ToList();
+                    labels = monthlyData.Select(x => $"{x.Month}/{x.Year}").ToList(); // Changed to Month/Year for better display
+                    incomeData = monthlyData.Select(x => x.Income).ToList();
+                    expenseData = monthlyData.Select(x => x.Expense).ToList();
                     break;
             }
 
-            return result;
+            return new ChartDataViewModel
+            {
+                Labels = labels,
+                Income = incomeData,
+                Expense = expenseData
+            };
         }
     }
 }

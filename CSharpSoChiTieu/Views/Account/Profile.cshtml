@@ -1,7 +1,162 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model CSharpSoChiTieu.Business.Services.ProfileViewModel
 @{
+    ViewData["Title"] = "Thông tin cá nhân";
+    Layout = "_AccountLayout";
 }
 
-<h1>Đang Phát triển</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Thông tin cá nhân</h3>
+                </div>
+                <div class="card-body">
+                    <form id="profileForm" method="post" action="@Url.Action("UpdateProfile", "Account")">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <div class="row mb-4">
+                            <div class="col-md-4 text-center">
+                                <div class="position-relative">
+                                    @if (!string.IsNullOrEmpty(Model.Image))
+                                    {
+                                        <img src="@Model.Image" alt="Profile Image" class="img-fluid rounded-circle" style="max-width: 200px;" id="profileImage" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/images/default-avatar.png" alt="Default Avatar" class="img-fluid rounded-circle" style="max-width: 200px;" id="profileImage" />
+                                    }
+                                    <div class="position-absolute bottom-0 end-0">
+                                        <label for="imageUpload" class="btn btn-sm btn-primary rounded-circle">
+                                            <i class="fas fa-camera"></i> Đổi hình nền
+                                        </label>
+                                        <input type="file" id="imageUpload" accept="image/*" style="display: none;" />
+                                    </div>
+                                    <div id="uploadProgress" class="position-absolute top-50 start-50 translate-middle" style="display: none;">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label class="form-label">Tên đăng nhập:</label>
+                                    <p class="form-control-static">@Model.UserName</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Họ và tên:</label>
+                                    <input type="text" class="form-control" name="FullName" value="@Model.FullName" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email:</label>
+                                    <input type="email" class="form-control" name="Email" value="@(Model.Email ?? "")" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Số điện thoại:</label>
+                                    <input type="tel" class="form-control" name="Phone" value="@(Model.Phone ?? "")" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Vai trò:</label>
+                                    <p class="form-control-static">@(Model.Role == "admin" ? "Quản trị viên" : "Người dùng")</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center" id="actionButtons">
+                            <a href="@Url.Action("Index", "IncomeExpense")" class="btn btn-secondary">Quay lại</a>
+                            <button type="button" class="btn btn-primary" id="editButton">Chỉnh sửa</button>
+                            <button type="submit" class="btn btn-success" id="saveButton" style="display: none;">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Disable all inputs initially
+            $('input[type="text"], input[type="email"], input[type="tel"]').prop('disabled', true);
+
+            // Handle edit button click
+            $('#editButton').click(function() {
+                $('input[type="text"], input[type="email"], input[type="tel"]').prop('disabled', false);
+                $(this).hide();
+                $('#saveButton').show();
+            });
+
+            // Handle image upload
+            $('#imageUpload').change(function(e) {
+                if (e.target.files && e.target.files[0]) {
+                    var file = e.target.files[0];
+
+                    // Show loading spinner
+                    $('#uploadProgress').show();
+
+                    // Create FormData
+                    var formData = new FormData();
+                    formData.append('image', file);
+
+                    // Upload image
+                    $.ajax({
+                        url: '@Url.Action("UploadAvatar", "Account")',
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(response) {
+                            if (response.success) {
+                                // Update image in profile page
+                                $('#profileImage').attr('src', response.imageUrl);
+
+                                // Update image in sidebar and footer
+                                $('.avatar').attr('src', response.imageUrl);
+                            } else {
+                                alert('Có lỗi xảy ra: ' + response.message);
+                            }
+                        },
+                        error: function() {
+                            alert('Có lỗi xảy ra khi tải lên ảnh!');
+                        },
+                        complete: function() {
+                            // Hide loading spinner
+                            $('#uploadProgress').hide();
+                        }
+                    });
+                }
+            });
+
+            // Handle form submit
+            $('#profileForm').submit(function(e) {
+                e.preventDefault();
+
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.success) {
+                            alert('Cập nhật thông tin thành công!');
+                            $('input[type="text"], input[type="email"], input[type="tel"]').prop('disabled', true);
+                            $('#editButton').show();
+                            $('#saveButton').hide();
+                        } else {
+                            alert('Có lỗi xảy ra: ' + response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra khi cập nhật thông tin!');
+                    }
+                });
+            });
+        });
+    </script>
+}

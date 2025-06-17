@@ -1,6 +1,13 @@
 ﻿@* Partial View: _FooterMenu.cshtml - Menu dưới cùng cho Mobile *@
+@using CSharpSoChiTieu.Business.Services
+@inject IAccountHandler AccountHandler
+
 @{
-    var userAvatarUrl = User.FindFirst("AvatarUrl")?.Value ?? "~/img/default-avatar.jpg";
+    var userIdClaim = User.FindFirst("UserId");
+    var userProfile = userIdClaim != null && Guid.TryParse(userIdClaim.Value, out Guid userId)
+        ? AccountHandler.GetProfile(userId)
+        : null;
+    var userImage = userProfile?.Image ?? "~/img/default-avatar.jpg";
 }
 
 <nav class="navbar fixed-bottom navbar-light bg-white  d-xl-none bottom-nav shadow">
@@ -31,7 +38,13 @@
 
             <div class="dropdown-menu dropdown-menu-end mb-1 settings-panel" aria-labelledby="navbarDropdownDetails">
                 <div class="settings-header">
-                    <h6 class="mb-0">Tùy chỉnh</h6>
+                    <div class="d-flex align-items-center">
+                        <img src="@Url.Content(userImage)" class="avatar avatar-sm rounded-circle me-2" alt="avatar">
+                        <div>
+                            <h6 class="mb-0 text-sm">@User.Identity.Name</h6>
+                            <span class="text-xs text-muted">@(userProfile?.Role == "admin" ? "Quản trị viên" : "Người dùng")</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="settings-body">
@@ -64,7 +77,6 @@
                         <input class="form-check-input" type="checkbox" id="navPositionSwitch">
                     </div>
                 </div>
-
 
                 <a class="dropdown-item" asp-controller="Category" asp-action="Index">
                     <i class="material-symbols-rounded">account_circle</i> Thêm danh mục
@@ -147,16 +159,16 @@
             }
 
     /* Settings Panel Styles */
-        .settings-panel {
-    width: 280px;
-    position: absolute;
-    bottom: 56px;
-    right: 0;
-    left: auto;
-    transform: translateX(-20px); /* đẩy nhẹ sang trái */
-    z-index: 1050;
-    border-radius: 0.5rem;
-}
+    .settings-panel {
+        width: 280px;
+        position: absolute;
+        bottom: 56px;
+        right: 0;
+        left: auto;
+        transform: translateX(-20px); /* đẩy nhẹ sang trái */
+        z-index: 1050;
+        border-radius: 0.5rem;
+    }
 
 
 
@@ -209,12 +221,9 @@
     }
 
     @@media (max-width: 1200px) {
-        body
-
-    {
-        padding-bottom: 60px;
-    }
-
+        body {
+            padding-bottom: 60px;
+        }
     }
 
     /* Khi menu ở trên cùng */
@@ -238,7 +247,7 @@
     }
 
     /* Khi menu ở dưới */
-    .bottom-nav .settings   -panel {
+    .bottom-nav .settings -panel {
         bottom: 56px;
         transform: translateX(-20px);
     }
@@ -248,7 +257,6 @@
         top: 56px;
         transform: translateX(-20px);
     }
-
 
 </style>
 

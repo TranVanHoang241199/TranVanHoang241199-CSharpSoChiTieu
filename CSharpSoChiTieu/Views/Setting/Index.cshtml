@@ -1,6 +1,154 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model CSharpSoChiTieu.Business.Services.SettingViewModel
 @{
+    ViewData["Title"] = "Cài đặt";
 }
-<h1>Đang phát tiển</h1>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Cài đặt hệ thống</h4>
+                </div>
+                <div class="card-body">
+                    <form id="settingForm">
+                        <input type="hidden" asp-for="UserId" />
+
+                        <!-- Dark Mode Setting -->
+                        <div class="form-group mb-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <label class="form-check-label" for="darkMode">
+                                    <i class="fas fa-moon"></i> Chế độ tối
+                                </label>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="darkMode" asp-for="DarkMode">
+                                </div>
+                            </div>
+                            <small class="text-muted">Chuyển đổi giao diện sang chế độ tối</small>
+                        </div>
+
+                        <!-- Notifications Setting -->
+                        <div class="form-group mb-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <label class="form-check-label" for="notifications">
+                                    <i class="fas fa-bell"></i> Thông báo
+                                </label>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="notifications" asp-for="Notifications">
+                                </div>
+                            </div>
+                            <small class="text-muted">Bật/tắt thông báo hệ thống</small>
+                        </div>
+
+                        <!-- Language Setting -->
+                        <div class="form-group mb-4">
+                            <label for="language">
+                                <i class="fas fa-language"></i> Ngôn ngữ
+                            </label>
+                            <select class="form-select" id="language" asp-for="Language">
+                                <option value="vi">Tiếng Việt</option>
+                                <option value="en">English</option>
+                            </select>
+                            <small class="text-muted">Chọn ngôn ngữ hiển thị</small>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Lưu cài đặt
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Xử lý form submit
+            $('#settingForm').on('submit', function (e) {
+                e.preventDefault();
+
+                var formData = {
+                    userId: $('#UserId').val(),
+                    darkMode: $('#darkMode').is(':checked'),
+                    notifications: $('#notifications').is(':checked'),
+                    language: $('#language').val()
+                };
+
+                $.ajax({
+                    url: '@Url.Action("UpdateSettings", "Setting")',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        if (response.success) {
+                            toastr.success(response.message);
+                            // Áp dụng dark mode ngay lập tức nếu thay đổi
+                            if (formData.darkMode) {
+                                $('body').addClass('dark-mode');
+                            } else {
+                                $('body').removeClass('dark-mode');
+                            }
+                        } else {
+                            toastr.error(response.message);
+                        }
+                    },
+                    error: function () {
+                        toastr.error('Có lỗi xảy ra khi cập nhật cài đặt');
+                    }
+                });
+            });
+
+            // Xử lý dark mode switch
+            $('#darkMode').change(function() {
+                if ($(this).is(':checked')) {
+                    $('body').addClass('dark-mode');
+                } else {
+                    $('body').removeClass('dark-mode');
+                }
+            });
+        });
+    </script>
+}
+
+<style>
+    .dark-mode {
+        background-color: #1a1a1a;
+        color: #ffffff;
+    }
+
+        .dark-mode .card {
+            background-color: #2d2d2d;
+            border-color: #404040;
+        }
+
+        .dark-mode .card-header {
+            background-color: #404040 !important;
+        }
+
+        .dark-mode .form-control,
+        .dark-mode .form-select {
+            background-color: #404040;
+            border-color: #505050;
+            color: #ffffff;
+        }
+
+        .dark-mode .text-muted {
+            color: #a0a0a0 !important;
+        }
+
+    .form-switch .form-check-input {
+        width: 3em;
+        height: 1.5em;
+    }
+
+        .form-switch .form-check-input:checked {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+</style>

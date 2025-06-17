@@ -26,4 +26,8 @@
     <ProjectReference Include="..\CSharpSoChiTieu.Data\CSharpSoChiTieu.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\profiles\" />
+  </ItemGroup>
+
 </Project>

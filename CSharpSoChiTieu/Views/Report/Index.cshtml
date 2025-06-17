@@ -119,9 +119,10 @@
             <div class="card">
                 <div class="card-header pb-0 p-3">
                     <div class="d-flex justify-content-between">
-                        <h6 class="mb-2">Thống kê thu chi theo tháng</h6>
+                        <h6 class="mb-2" id="chartTitle">Thống kê thu chi theo tuần</h6>
                         <div class="dropdown">
                             <button class="btn btn-link text-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span id="currentPeriod">Tuần hiện tại</span>
                                 <i class="material-symbols-rounded">more_vert</i>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -262,7 +263,7 @@
         var lineChart = new Chart(
             document.getElementById('chart-line'),
             {
-                type: 'line',
+                type: 'bar',
                 data: lineChartData,
                 options: {
                     responsive: true,
@@ -270,6 +271,14 @@
                     plugins: {
                         legend: {
                             position: 'top',
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 45
+                            }
                         }
                     }
                 }
@@ -372,31 +381,78 @@
                     lineChart.data.datasets[0].data = response.income;
                     lineChart.data.datasets[1].data = response.expense;
 
+                    // Cập nhật cấu hình biểu đồ dựa trên period
+                    if (period === 'week') {
+                        lineChart.config.type = 'bar';
+                        lineChart.options.scales.x.ticks.maxRotation = 0;
+                        lineChart.options.scales.x.ticks.minRotation = 0;
+                        lineChart.options.scales.x.maxTicksLimit = 7;
+                    } else {
+                        lineChart.config.type = 'line';
+                        lineChart.options.scales.x.ticks.maxRotation = 0;
+                        lineChart.options.scales.x.ticks.minRotation = 0;
+                        lineChart.options.scales.x.maxTicksLimit = undefined;
+                    }
+
                     // Cập nhật biểu đồ
                     lineChart.update();
 
-                    // Cập nhật text của dropdown button
+                    // Cập nhật tiêu đề và text của dropdown button
+                    var titleText = '';
                     var buttonText = '';
+                    var now = new Date();
+                    var weekNumber = getWeekNumber(now);
+
                     switch(period) {
                         case 'week':
-                            buttonText = 'Theo tuần';
+                            // Tính ngày đầu và cuối của tuần
+                            var startOfWeek = new Date(now);
+                            startOfWeek.setDate(now.getDate() - now.getDay() + 1); // Thứ 2
+                            var endOfWeek = new Date(startOfWeek);
+                            endOfWeek.setDate(startOfWeek.getDate() + 6); // Chủ nhật
+
+                            titleText = `Thống kê thu chi tuần ${weekNumber} (${formatDate(startOfWeek)} - ${formatDate(endOfWeek)})`;
+                            buttonText = `Tuần ${weekNumber} (${formatDate(startOfWeek)} - ${formatDate(endOfWeek)})`;
                             break;
                         case 'month':
+                            titleText = 'Thống kê thu chi theo tháng';
                             buttonText = 'Theo tháng';
                             break;
                         case 'quarter':
+                            titleText = 'Thống kê thu chi theo quý';
                             buttonText = 'Theo quý';
                             break;
                         case 'year':
+                            titleText = 'Thống kê thu chi theo năm';
                             buttonText = 'Theo năm';
                             break;
                     }
-                    $('#dropdownMenuButton').html(buttonText + ' <i class="material-symbols-rounded">more_vert</i>');
+                    $('#chartTitle').text(titleText);
+                    $('#currentPeriod').text(buttonText);
                 },
                 error: function(xhr, status, error) {
                     console.error('Error fetching chart data:', error);
                 }
             });
         }
+
+        // Hàm format ngày
+        function formatDate(date) {
+            return date.getDate() + '/' + (date.getMonth() + 1);
+        }
+
+        // Hàm lấy số tuần theo ISO 8601
+        function getWeekNumber(d) {
+            d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+            d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+            var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+            var weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+            return weekNo;
+        }
+
+        // Khởi tạo biểu đồ với dữ liệu tuần hiện tại
+        $(document).ready(function() {
+            updateChartPeriod('week');
+        });
     </script>
 }

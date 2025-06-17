@@ -6,5 +6,6 @@ namespace CSharpSoChiTieu.Business.Services
     {
         AuthenticationResult Authenticate(LoginViewModel model);
         RegistrationResult Register(RegisterViewModel model);
+        ProfileViewModel GetProfile(Guid userId);
     }
 }

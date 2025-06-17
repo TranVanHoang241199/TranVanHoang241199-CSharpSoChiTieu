@@ -1410,6 +1410,8 @@
           "AutoMapper": "14.0.0",
           "CSharpSoChiTieu.Data": "1.0.0",
           "CSharpSoChiTieu.common": "1.0.0",
+          "Microsoft.Extensions.Identity.Core": "8.0.15",
+          "Microsoft.Extensions.Identity.Stores": "8.0.15",
           "MimeKit": "4.11.0"
         },
         "runtime": {

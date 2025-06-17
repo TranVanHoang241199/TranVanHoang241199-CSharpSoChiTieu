@@ -125,7 +125,8 @@ namespace CSharpSoChiTieu.Business.Services
                 {
                     new Claim(ClaimTypes.Name, user.FullName),
                     new Claim(ClaimTypes.Role, user.Role),
-                    new Claim("UserId", user.Id.ToString())
+                    new Claim("UserId", user.Id.ToString()),
+                    //new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
                 };
 
                 return new RegistrationResult
@@ -145,6 +146,17 @@ namespace CSharpSoChiTieu.Business.Services
                     ErrorMessage = "Có lỗi xảy ra trong quá trình đăng ký"
                 };
             }
+        }
+
+        public ProfileViewModel GetProfile(Guid userId)
+        {
+            var user = _context.ct_Users.FirstOrDefault(u => u.Id == userId && !u.IsDeleted);
+            if (user == null)
+            {
+                return null;
+            }
+
+            return _mapper.Map<ProfileViewModel>(user);
         }
 
     }

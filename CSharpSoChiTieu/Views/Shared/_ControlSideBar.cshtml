@@ -1,4 +1,15 @@
 ﻿@* Thêm class d-none d-lg-block vào đây *@
+@using CSharpSoChiTieu.Business.Services
+@inject IAccountHandler AccountHandler
+
+@{
+    var userIdClaim = User.FindFirst("UserId");
+    var userProfile = userIdClaim != null && Guid.TryParse(userIdClaim.Value, out Guid userId)
+        ? AccountHandler.GetProfile(userId)
+        : null;
+    var userImage = userProfile?.Image ?? "~/img/default-avatar.jpg";
+}
+
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2 bg-white my-2 d-none d-lg-block" id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -11,10 +22,10 @@
         @if (User.Identity.IsAuthenticated)
         {
             <div class="d-flex align-items-center">
-                <img src="~/img/avatar.jpg" class="avatar avatar-md rounded-circle me-2" alt="avatar">
+                <img src="@Url.Content(userImage)" class="avatar avatar-md rounded-circle me-2" alt="avatar">
                 <div>
                     <h6 class="mb-0 text-sm">@User.Identity.Name</h6>
-                    <span class="text-xs text-muted">Tài khoản VIP</span>
+                    <span class="text-xs text-muted">@(userProfile?.Role == "admin" ? "Quản trị viên" : "Người dùng")</span>
                 </div>
             </div>
             <div class="mt-3 d-flex justify-content-between">
@@ -58,7 +69,7 @@
                     <span class="nav-link-text ms-1">Báo cáo</span>
                 </a>
             </li>
-            
+
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-5">Quản lý</h6>
             </li>
