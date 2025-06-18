@@ -33,9 +33,12 @@
                                 <!-- Chọn ngày tháng năm -->
                                 <div class="col-12 col-md-6 d-flex align-items-start align-items-md-center">
                                     <div class="d-flex flex-column flex-md-row w-100 justify-content-start align-items-start align-items-md-center">
-                                       @*  <div class="mb-2 mb-md-0 me-md-2 w-100 w-md-auto">
-                                            +=
-                                        </div> *@
+                                        <div class="mb-2 mb-md-0 me-md-2 w-100 w-md-auto">
+                                            <button type="button" class="btn btn-outline-primary w-100 w-md-auto" data-bs-toggle="modal" data-bs-target="#filterModal">
+                                                <i class="fas fa-filter me-1"></i> Bộ lọc
+                                            </button>
+                                        </div>
+
                                         <div class="mb-2 mb-md-0 me-md-2 w-100 w-md-auto">
                                             <select id="yearSelect" name="year" class="form-select border-radius-lg shadow-sm">
                                                 <option value="">Chọn năm</option>
@@ -86,6 +89,93 @@
     </div>
 </div>
 
+
+@* Dialog lọc *@
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content shadow">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="filterModalLabel"><i class="fas fa-filter me-2"></i>Lọc nâng cao</h5>
+                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <!-- Lọc theo loại -->
+                    <div class="col-md-6 border rounded p-2">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="filterTypeEnabled">
+                            <label class="form-check-label fw-bold text-primary" for="filterTypeEnabled">
+                                Lọc theo loại giao dịch
+                            </label>
+                        </div>
+                        <select id="typeSelect" name="type" class="form-select" disabled>
+                            <option value="">Tất cả</option>
+                            <option value="Income">Thu</option>
+                            <option value="Expense">Chi</option>
+                        </select>
+                    </div>
+
+                    <!-- Lọc theo tuần -->
+                    <div class="col-md-6 border rounded p-2">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="filterQuickDateEnabled">
+                            <label class="form-check-label fw-bold text-primary" for="filterQuickDateEnabled">
+                                Lọc nhanh theo thời gian
+                            </label>
+                        </div>
+                        <select id="quickDateSelect" name="quickDate" class="form-select" disabled>
+                            <option value="">-- Chọn --</option>
+                            <option value="today">Hôm nay</option>
+                            <option value="thisWeek">Tuần này</option>
+                            <option value="thisMonth">Tháng này</option>
+                            <option value="thisYear">Năm này</option>
+                        </select>
+                    </div>
+
+
+                    <!-- Khoảng tiền -->
+                    <div class="col-md-6 border rounded p-2">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="filterAmountEnabled">
+                            <label class="form-check-label fw-bold text-primary" for="filterAmountEnabled">
+                                Lọc theo khoảng tiền
+                            </label>
+                        </div>
+                        <input type="range" class="form-range" min="0" max="100000000" step="100000"
+                               id="amountRange" oninput="updateAmountLabel(this.value)" disabled>
+                        <div class="text-end"><small>Số tiền đến: <span id="amountLabel">0</span> đ</small></div>
+                        <input type="hidden" id="amountTo" name="amountTo" value="0" />
+                    </div>
+
+                    <!-- Ngày từ / đến -->
+                    <div class="col-md-6 border rounded p-2">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="filterDateEnabled">
+                            <label class="form-check-label fw-bold text-primary" for="filterDateEnabled">
+                                Lọc theo khoảng ngày
+                            </label>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col">
+                                <input type="date" id="fromDate" name="fromDate" class="form-control" disabled />
+                            </div>
+                            <div class="col">
+                                <input type="date" id="toDate" name="toDate" class="form-control" disabled />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary" form="formSearch">Áp dụng lọc</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section scripts {
     <script>
         function updateSummaryHistory() {
@@ -128,6 +218,25 @@
             const currentYear = new Date().getFullYear();
             const yearSelect = $('#yearSelect');
             const monthSelect = $('#monthSelect');
+
+
+            // tick bộ lọc
+            $('#filterTypeEnabled').change(function () {
+            $('#typeSelect').prop('disabled', !this.checked);
+            });
+
+            $('#filterAmountEnabled').change(function () {
+                $('#amountRange').prop('disabled', !this.checked);
+            });
+
+            $('#filterDateEnabled').change(function () {
+                $('#fromDate, #toDate').prop('disabled', !this.checked);
+            });
+
+            $('#filterQuickDateEnabled').change(function () {
+                $('#quickDateSelect').prop('disabled', !this.checked);
+            });
+
 
             const modelYear = @Model.Year ?? currentYear;
             const modelMonth = @Model.Month ?? (new Date().getMonth() + 1);
@@ -190,5 +299,13 @@
                 }
             });
         }
+
+
+        function updateAmountLabel(value) {
+            const formatted = parseInt(value).toLocaleString('vi-VN');
+            $('#amountLabel').text(formatted);
+            $('#amountTo').val(value);
+        }
+
     </script>
 }

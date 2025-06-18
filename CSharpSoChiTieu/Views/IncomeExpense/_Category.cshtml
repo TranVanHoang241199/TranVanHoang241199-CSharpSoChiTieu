@@ -1,23 +1,28 @@
-﻿	@using CSharpSoChiTieu.Business.Services
-	@model List<CategoryViewModel>
-	
+﻿@using CSharpSoChiTieu.Business.Services
+@model List<CategoryViewModel>
 
-	@* <label class="form-label small fw-bold mb-1">Danh mục <span class="text-danger">*</span></label> *@
-	<div class="card border mt-2">
-		<div class="card-body p-2" style="overflow-x: auto;">
-			<div class="d-flex gap-2" style="min-width: max-content;">
-				@foreach (var cat in Model)
-				{
-					<button type="button" class="btn btn-sm btn-category border d-flex align-items-center px-3"
-							data-category-id="@cat.Id" data-category-name="@cat.Name">
-						<div class="icon icon-shape icon-xs text-center rounded-circle me-2" style="background-color: @cat.Color; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">
-							<span style="font-size: 18px;">@cat.Icon</span>
-						</div>
-						<span class="text-nowrap">@cat.Name</span>
-					</button>
-				}
-			</div>
+<div class="card border mt-2">
+	<div class="card-body p-2" style="overflow-x: auto;">
+		<!-- Container scrollable ngang -->
+		<div class="d-flex gap-2" style="min-width: max-content;">
+			@foreach (var cat in Model)
+			{
+				<button type="button" class="btn btn-sm btn-category border d-flex align-items-center px-3"
+						data-category-id="@cat.Id" data-category-name="@cat.Name">
+					<div class="icon icon-shape icon-xs text-center rounded-circle me-2" style="background-color: @cat.Color; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">
+						<span style="font-size: 18px;">@cat.Icon</span>
+					</div>
+					<span class="text-nowrap">@cat.Name</span>
+				</button>
+			}
+
+			<!-- Nút thêm luôn nằm bên phải -->
+			<a href="/Category/Create" class="btn btn-sm btn-category border d-flex align-items-center px-3 flex-shrink-0" style="background-color: hotpink;">
+				<div class="icon icon-shape icon-xs text-center rounded-circle me-2" style="background-color: purple; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">
+					<span style="font-size: 18px;">➕</span>
+				</div>
+				<span class="text-nowrap">Thêm mới danh mục</span>
+			</a>
 		</div>
 	</div>
-
-
+</div>

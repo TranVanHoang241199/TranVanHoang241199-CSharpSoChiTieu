@@ -161,6 +161,17 @@ namespace CSharpSoChiTieu.Controllers
 
             PaginationSearchInput condition = HttpContext.Session.GetObjectFromJson<PaginationSearchInput>(CATEGORY_SEARCH);
 
+            // Kiểm tra condition có null không để tránh lỗi NullReferenceException
+            if (condition == null)
+            {
+                condition = new PaginationSearchInput()
+                {
+                    Page = 1,
+                    PageSize = PAGE_SIZE,
+                    SearchValue = ""
+                };
+            }
+
             HttpContext.Session.SetObjectAsJson(CATEGORY_SEARCH, new PaginationSearchInput()
             {
                 Page = condition.Page,

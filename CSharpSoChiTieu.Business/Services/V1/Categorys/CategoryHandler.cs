@@ -56,7 +56,7 @@ namespace CSharpSoChiTieu.Business.Services
                     new CategoryInputModel { Name = "Thưởng", Text = "Tiền thưởng", Type = IncomeExpenseType.Income, Icon = "🎉", Color = "#8BC34A", Order = 2 },
                     new CategoryInputModel { Name = "Đầu tư", Text = "Lãi đầu tư", Type = IncomeExpenseType.Income, Icon = "📈", Color = "#009688", Order = 3 },
                     new CategoryInputModel { Name = "Bán hàng", Text = "Thu nhập bán hàng", Type = IncomeExpenseType.Income, Icon = "🛒", Color = "#2196F3", Order = 4 },
-                    new CategoryInputModel { Name = "Khác", Text = "Thu nhập khác", Type = IncomeExpenseType.Income, Icon = "➕", Color = "#3F51B5", Order = 5 },
+                    new CategoryInputModel { Name = "Lãi", Text = "Tiền lã", Type = IncomeExpenseType.Income, Icon = "🛍️", Color = "#3F51B5", Order = 5 },
 
                     // Expense (Chi tiêu)
                     new CategoryInputModel { Name = "Ăn uống", Text = "Chi cho ăn uống", Type = IncomeExpenseType.Expense, Icon = "🍔", Color = "#FF5722", Order = 1 },
