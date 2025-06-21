@@ -385,3 +385,4 @@ wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
 wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
 wwwroot\uploads\profiles\6e201923-6a01-48b8-914d-ef1a5a072765_638857491841828311.jfif
 wwwroot\uploads\profiles\6e201923-6a01-48b8-914d-ef1a5a072765_638857492149865803.webp
+wwwroot\uploads\profiles\6e201923-6a01-48b8-914d-ef1a5a072765_638860952448627215.jfif

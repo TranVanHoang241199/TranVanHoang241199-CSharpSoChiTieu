@@ -15,11 +15,11 @@
 			QUẢN LÝ THU CHI
 		</h6>
 		<div class="d-flex flex-wrap justify-content-between align-items-center w-100">
-			
+
 			@* Begin: Nút bấm Thu/Chi *@
 			<div class="d-flex flex-column order-1">
 				@* ** Tiêu đề chỉ hiển thị trên Mobile (< lg) ** *@
-				
+
 				<ul class="navbar-nav d-flex flex-column flex-lg-row">
 					<li class="nav-item me-2 mb-2 mb-lg-0">
 						<button class="btn px-3 py-1 d-flex align-items-center justify-content-center border btn-outline-success" style="min-width: 120px; height: 100%;"
@@ -111,11 +111,15 @@
 		$("#btn-income").click(function () {
 			loadForm("income");
 			setActiveButton("income");
+			// Lưu trạng thái vào session
+			saveFormTypeToSession("income");
 		});
 
 		$("#btn-expense").click(function () {
 			loadForm("expense");
 			setActiveButton("expense");
+			// Lưu trạng thái vào session
+			saveFormTypeToSession("expense");
 		});
 
 		// Khi mới vào trang, gọi updateSummary với range mặc định
@@ -125,25 +129,34 @@
 
 		// Begin: Sự kiện box left ------------------------
 
-		// Load form và set lại nút active ban đầu
+		// Load form và set lại nút active ban đầu dựa trên session
 		loadForm(formType);
 		setActiveButton(formType);
 
-
-		$("#btn-expense").click();
 		// End: Sự kiện box left
 
 		// Begin: Sự kiện box Right ------------------------
 		loadFormHistory(rangeType);
 
-
 		// End: Sự kiện box Right
-
-		// Load form và set lại nút active ban đầu
 
 	});
 
-		function loadForm(type) {
+	function saveFormTypeToSession(formType) {
+		$.ajax({
+			url: "IncomeExpense/SaveFormType",
+			type: "POST",
+			data: { formType: formType },
+			success: function (data) {
+				console.log("Đã lưu trạng thái form type:", formType);
+			},
+			error: function () {
+				console.log("Lỗi khi lưu trạng thái form type");
+			}
+		});
+	}
+
+	function loadForm(type) {
 		var url = "IncomeExpense/Create";
 		var postData = { type: type };
 
@@ -171,7 +184,7 @@
 		}
 	}
 
-		function updateSummary(range) {
+	function updateSummary(range) {
 		$.ajax({
 			url: "IncomeExpense/GetSummary",
 			type: "GET",
@@ -241,6 +254,19 @@
 			font-size: 0.8rem;
 			min-width: 100px !important; /* Giảm min-width trên màn hình nhỏ */
 		}
+	}
+
+	/* Style cho nút active */
+	#btn-income.active {
+		background-color: #198754 !important;
+		color: white !important;
+		border-color: #198754 !important;
+	}
+
+	#btn-expense.active {
+		background-color: #dc3545 !important;
+		color: white !important;
+		border-color: #dc3545 !important;
 	}
 
 </style>

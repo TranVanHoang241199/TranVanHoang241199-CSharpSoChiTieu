@@ -34,7 +34,7 @@ namespace CSharpSoChiTieu.Business.Services
 
     public class IncomeExpenseSessionModel
     {
-        public string FormType { get; set; } = "income"; // "income" hoặc "expense"
+        public string FormType { get; set; } = "expense"; // "income" hoặc "expense"
         public string RangeType { get; set; } = "month"; // "today", "week", "month", "year"
     }
 

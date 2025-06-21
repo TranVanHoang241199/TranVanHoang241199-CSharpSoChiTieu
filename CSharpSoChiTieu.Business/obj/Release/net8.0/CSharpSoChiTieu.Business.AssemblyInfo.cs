@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CSharpSoChiTieu.Business")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5296019c66fc71ea3f7386ff5a99fa4e0258c1b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9e2718064d93dd3401dc38ae2a11287140db83d9")]
 [assembly: System.Reflection.AssemblyProductAttribute("CSharpSoChiTieu.Business")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CSharpSoChiTieu.Business")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

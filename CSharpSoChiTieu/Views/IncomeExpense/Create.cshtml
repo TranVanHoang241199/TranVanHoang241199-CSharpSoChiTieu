@@ -195,10 +195,19 @@
                     form.trigger("reset");
                     form.removeClass("was-validated");
                     $("#validation-errors").hide();
-                    loadForm("@ViewBag.Type");
 
-                    loadFormHistory("@ViewBag.RangeType");
-                    updateSummary("@ViewBag.RangeType");
+                    // Reload form hiện tại
+                    if (typeof loadForm === 'function') {
+                        loadForm("@ViewBag.Type");
+                    }
+
+                    // Gọi các function với range type hiện tại từ parent
+                    if (typeof loadFormHistory === 'function') {
+                        loadFormHistory("@ViewBag.RangeType");
+                    }
+                    if (typeof updateSummary === 'function') {
+                        updateSummary("@ViewBag.RangeType");
+                    }
                 },
                 error: function (xhr) {
                     form.addClass("was-validated");
@@ -215,7 +224,7 @@
                             }
                         }
                     } else {
-                        showDialog("Có lỗi xảy ra khi lưu dữ liệu.");
+                        alert("Có lỗi xảy ra khi lưu dữ liệu.");
                     }
                 }
             });

@@ -103,7 +103,7 @@ namespace CSharpSoChiTieu.Controllers
             return PartialView("_History", data);
         }
 
-        
+
 
         [HttpGet]
         public async Task<IActionResult> GetSummary(string? range = "month")
@@ -129,7 +129,7 @@ namespace CSharpSoChiTieu.Controllers
             });
         }
 
-        
+
 
         [HttpPost]
         public async Task<IActionResult> Save(IncomeExpenseCreateUpdateModel model)
@@ -184,6 +184,21 @@ namespace CSharpSoChiTieu.Controllers
                 return Json(new { success = false, message = result.Message });
 
             return Json(new { success = true });
+        }
+
+        [HttpPost]
+        public IActionResult SaveFormType(string formType)
+        {
+            if (string.IsNullOrEmpty(formType))
+                return BadRequest(new { message = "FormType không hợp lệ" });
+
+            var sessionModel = HttpContext.Session.GetObjectFromJson<IncomeExpenseSessionModel>(IE_SESSION_KEY)
+                     ?? new IncomeExpenseSessionModel();
+
+            sessionModel.FormType = formType;
+            HttpContext.Session.SetObjectAsJson(IE_SESSION_KEY, sessionModel);
+
+            return Json(new { success = true, formType = formType });
         }
 
     }

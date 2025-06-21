@@ -56,11 +56,15 @@
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     <form asp-action="Register" method="post" role="form">
                                         <div class="input-group input-group-outline mb-3">
-                                            <input asp-for="UserName" type="text" class="form-control">
+                                            <input asp-for="UserName" type="text" class="form-control"
+                                                   onkeypress="return /[a-z0-9]/i.test(event.key)"
+                                                   oninput="this.value = this.value.toLowerCase().replace(/[^a-z0-9]/g, '')">
                                             <label asp-for="UserName" class="form-label">Tài khoản</label>
                                         </div>
                                         <div class="input-group input-group-outline mb-3">
-                                            <input asp-for="Password" type="password" class="form-control">
+                                            <input asp-for="Password" type="password" class="form-control"
+                                                   onkeypress="return /[a-zA-Z0-9]/i.test(event.key)"
+                                                   oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')">
                                             <label asp-for="Password" class="form-label">Mật khẩu</label>
                                         </div>
                                         <div class="input-group input-group-outline mb-3">
