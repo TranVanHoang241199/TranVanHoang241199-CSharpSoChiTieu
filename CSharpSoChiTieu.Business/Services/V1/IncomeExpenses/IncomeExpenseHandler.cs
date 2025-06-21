@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using API_HotelManagement.common;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using CSharpSoChiTieu.common;
 using CSharpSoChiTieu.Data;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CSharpSoChiTieu.Business.Services
 {
+    /// <summary>
+    /// Xử lý phần thu chi
+    /// </summary>
     public class IncomeExpenseHandler : IIncomeExpenseHandler
     {
         private readonly CTDbContext _context;
@@ -23,7 +25,7 @@ namespace CSharpSoChiTieu.Business.Services
         }
 
         /// <summary>
-        /// Đã tối ưu
+        /// Đếm số lượng thu chi hiện có trong trang
         /// </summary>
         /// <param name="searchValue"></param>
         /// <returns></returns>
@@ -52,7 +54,14 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
-
+        /// <summary>
+        /// Đếm số lượng phục vụ hiển thị số lượng ở title trong history
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="day"></param>
+        /// <returns></returns>
         public async Task<OperationResult> Count(string searchValue = "", int? year = null, int? month = null, int? day = null)
         {
             try
@@ -93,6 +102,11 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
+        /// <summary>
+        /// Tạo khoản thu khoản chi mới
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<OperationResult> Create(IncomeExpenseCreateUpdateModel model)
         {
             try
@@ -111,6 +125,7 @@ namespace CSharpSoChiTieu.Business.Services
                     Description = model.Description,
                     Type = model.Type,
                     CategoryId = model.CategoryId,
+                    Currency = model.Currency,
 
                     //---------
                     CreatedDate = DateTime.UtcNow,
@@ -138,6 +153,11 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
+        /// <summary>
+        /// Xoá khoản chi khoản thu 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<OperationResult> Delete(Guid id)
         {
             try
@@ -211,8 +231,11 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
-
-
+        /// <summary>
+        /// Lấy khoản thu chi dựa vào id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<OperationResult> GetIncomeExpenseById(Guid id)
         {
             try
@@ -227,8 +250,20 @@ namespace CSharpSoChiTieu.Business.Services
                         Date = test.Date,
                         Description = test.Description,
                         Amount = test.Amount,
+                        Currency = test.Currency,
                         CategoryId = test.CategoryId,
-
+                        CategoryName = _context.ct_IncomeExpenseCategories
+                                            .Where(cate => cate.Id == test.CategoryId)
+                                            .Select(cate => cate.Name)
+                                            .FirstOrDefault(),
+                        CategoryIcon = _context.ct_IncomeExpenseCategories
+                                            .Where(cate => cate.Id == test.CategoryId)
+                                            .Select(cate => cate.Icon)
+                                            .FirstOrDefault(),
+                        CategoryColor = _context.ct_IncomeExpenseCategories
+                                            .Where(cate => cate.Id == test.CategoryId)
+                                            .Select(cate => cate.Color)
+                                            .FirstOrDefault(),
                         ModifiedDate = test.ModifiedDate,
                         ModifiedBy = test.ModifiedBy,
                         CreatedBy = test.CreatedBy,
@@ -250,7 +285,7 @@ namespace CSharpSoChiTieu.Business.Services
         }
 
         /// <summary>
-        /// đã tăng tốc độ
+        /// Lấy danh sách thu chi hiển thị điều khiển chính
         /// </summary>
         /// <param name="Type"></param>
         /// <param name="search"></param>
@@ -334,6 +369,7 @@ namespace CSharpSoChiTieu.Business.Services
                                 Amount = i.Amount,
                                 Date = i.Date,
                                 Type = i.Type,
+                                Currency = i.Currency,
                                 Description = i.Description,
                                 CategoryId = i.CategoryId,
                                 CategoryName = categoryInfo?.Name ?? "Unknown",
@@ -351,7 +387,16 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="searchValue"></param>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="day"></param>
+        /// <returns></returns>
         public async Task<OperationResult> Gets(int page, int pageSize, string searchValue, /*IncomeExpenseType type = IncomeExpenseType.Null, string range = "",*/ int? year = null, int? month = null, int? day = null)
         {
             try
@@ -418,6 +463,7 @@ namespace CSharpSoChiTieu.Business.Services
                                 Date = i.Date,
                                 Type = i.Type,
                                 Description = i.Description,
+                                Currency = i.Currency,
                                 CategoryId = i.CategoryId,
                                 CategoryName = categoryInfo?.Name ?? "Unknown",
                                 CategoryColor = categoryInfo?.Color ?? "#000000",
@@ -435,7 +481,7 @@ namespace CSharpSoChiTieu.Business.Services
         }
 
         /// <summary>
-        /// Đã tăng tốc độ
+        /// HIenet thị title số lượng ở màn hình chính
         /// </summary>
         /// <param name="range"></param>
         /// <returns></returns>
@@ -501,7 +547,7 @@ namespace CSharpSoChiTieu.Business.Services
         }
 
         /// <summary>
-        /// Đã tăng tốc độ
+        /// Hiển thị số lượng ở màn hình history
         /// </summary>
         /// <param name="year"></param>
         /// <param name="month"></param>
@@ -565,39 +611,50 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
-
+        /// <summary>
+        /// Kiểm tra tồn tại
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public Task<OperationResult> InUsed(Guid? id = null)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Cập nhật khoản thu chi
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<OperationResult> Update(Guid id, IncomeExpenseCreateUpdateModel model)
         {
             try
             {
-                var incomeExpenseUpdate = await _context.ct_IncomeExpense.FindAsync(id);
-
-                if (incomeExpenseUpdate == null)
-                    return new OperationResultError(HttpStatusCode.NotFound, "Không tìm thấy bản ghi");
-
-                incomeExpenseUpdate.Amount = model.Amount;
-                incomeExpenseUpdate.Type = model.Type;
-                incomeExpenseUpdate.Date = model.Date;
-                incomeExpenseUpdate.CategoryId = model.CategoryId;
-                incomeExpenseUpdate.Description = model.Description;
-
-                //-------------
-                incomeExpenseUpdate.ModifiedDate = DateTime.UtcNow;
-                incomeExpenseUpdate.ModifiedBy = GetExtensions.GetUserId(_httpContextAccessor);
-
-                var status = await _context.SaveChangesAsync();
-
-                if (status > 0)
+                var entity = await _context.ct_IncomeExpense.FindAsync(id);
+                if (entity == null)
                 {
-                    return new OperationResult<bool>(HttpStatusCode.OK, true, "Thêm mới thành công");
+                    return new OperationResultError(HttpStatusCode.NotFound, "Không tìm thấy dữ liệu.");
                 }
 
-                return new OperationResult<bool>(HttpStatusCode.NotFound, false, "Thêm mới thất bại");
+                // Cập nhật các thuộc tính từ model
+                entity.Amount = model.Amount;
+                entity.Date = model.Date;
+                entity.Description = model.Description;
+                entity.CategoryId = model.CategoryId;
+                entity.Type = model.Type;
+                entity.Currency = model.Currency;
+                entity.ModifiedDate = DateTime.UtcNow;
+                entity.ModifiedBy = GetExtensions.GetUserId(_httpContextAccessor);
+
+                var status = await _context.SaveChangesAsync();
+                if (status > 0)
+                {
+                    return new OperationResult<bool>(HttpStatusCode.OK, true, "Cập nhật thành công.");
+                }
+
+                return new OperationResult<bool>(HttpStatusCode.NotFound, false, "Cập nhật thất bại.");
             }
             catch (Exception ex)
             {

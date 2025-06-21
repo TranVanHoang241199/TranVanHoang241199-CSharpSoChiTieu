@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CSharpSoChiTieu.Controllers
 {
+    /// <summary>
+    /// Truy cập điều khiển xử lý danh mục 
+    /// </summary>
     [Authorize]
     public class HistoryController : Controller
     {

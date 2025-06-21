@@ -12,12 +12,14 @@ namespace CSharpSoChiTieu.Controllers
     public class IncomeExpenseController : Controller
     {
         private readonly IIncomeExpenseHandler _IncomeExpenseHandler;
+        private readonly ICurrencyHandler _currencyHandler;
 
         private const string IE_SESSION_KEY = "IncomeExpenseSession";
 
-        public IncomeExpenseController(IIncomeExpenseHandler IncomeExpenseHandler)
+        public IncomeExpenseController(IIncomeExpenseHandler IncomeExpenseHandler, ICurrencyHandler currencyHandler)
         {
             _IncomeExpenseHandler = IncomeExpenseHandler;
+            _currencyHandler = currencyHandler;
         }
 
         public IActionResult Index()
@@ -32,7 +34,7 @@ namespace CSharpSoChiTieu.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(string type)
+        public async Task<IActionResult> Create(string type)
         {
             if (string.IsNullOrEmpty(type))
             {
@@ -44,6 +46,11 @@ namespace CSharpSoChiTieu.Controllers
 
             sessionModel.FormType = type;
             HttpContext.Session.SetObjectAsJson(IE_SESSION_KEY, sessionModel);
+
+            // Lấy danh sách tiền tệ
+            var currencyResult = await _currencyHandler.GetAll();
+            var currencies = (currencyResult as OperationResultList<CurrencyViewModel>)?.Data ?? new List<CurrencyViewModel>();
+            ViewBag.Currencies = currencies;
 
             // Initialize model with default values
             var model = new IncomeExpenseCreateUpdateModel

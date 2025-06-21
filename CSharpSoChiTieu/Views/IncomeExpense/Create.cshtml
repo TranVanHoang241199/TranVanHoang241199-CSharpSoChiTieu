@@ -40,12 +40,43 @@
             </div>
 
             <div class="d-flex align-items-center mb-1">
-                <label for="transaction-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Số tiền <span class="text-danger">*</span></label>
-                <div class="input-group input-group-static flex-grow-1">
-                    <input type="text" class="form-control" id="transaction-amount" name="Amount" placeholder="0" required inputmode="decimal" onkeyup="formatNumber(this)" value="@(Model?.Amount.ToString() ?? "0")">
-                    <span class="input-group-text">VNĐ</span>
+                <label for="transaction-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">
+                    Số tiền <span class="text-danger">*</span>
+                </label>
+
+                <div class="input-group flex-grow-1">
+                    <input type="text"
+                           class="form-control border-end-0 rounded-end-0"
+                           id="transaction-amount"
+                           name="Amount"
+                           placeholder="0"
+                           required
+                           inputmode="decimal"
+                           onkeyup="formatNumber(this)"
+                           value="@(Model?.Amount.ToString() ?? "0")" />
+
+                    <select class="form-select border-start-0 rounded-start-0"
+                            name="Currency"
+                            id="transaction-currency"
+                            style="max-width: 90px;">
+                        @* <option value="VND" selected>VNĐ</option>
+                        <option value="USD">USD</option>
+                        <option value="LAK">LAK</option>
+                        <option value="EUR">EUR</option>
+                        <option value="JPY">JPY</option> *@
+                        @if (ViewBag.Currencies != null)
+                        {
+                            foreach (var currency in (List<CurrencyViewModel>)ViewBag.Currencies)
+                            {
+                                <option value="@currency.Code" selected="@(currency.Code == "VND" ? "selected" : null)">
+                                    @currency.Code
+                                </option>
+                            }
+                        }
+                    </select>
                 </div>
             </div>
+
 
             <div id="IncomeExpenseCateogry"></div>
             <input type="hidden" id="IncomeExpense-category-id" name="CategoryId" value="" required />
@@ -159,6 +190,7 @@
             var transactionAmount = $("#transaction-amount").val();
             var transactionNote = $("#transaction-description").val();
             var transactionId = $("input[name='Id']").val();
+            var transactionCurrency = $("#transaction-currency").val();
 
             var errors = [];
 
@@ -184,7 +216,8 @@
                 Date: transactionDate,
                 Description: transactionNote,
                 CategoryId: categoryId,
-                Type: "@ViewBag.Type"
+                Type: "@ViewBag.Type",
+                Currency: transactionCurrency
             };
 
             $.ajax({

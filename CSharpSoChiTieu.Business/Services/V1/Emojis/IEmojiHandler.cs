@@ -7,6 +7,5 @@ namespace CSharpSoChiTieu.Business.Services
     public interface IEmojiHandler
     {
         Task<OperationResult> Gets(IncomeExpenseType type, string searchValue);
-        Task<OperationResult> CreateDefault(IncomeExpenseType type);
     }
 }

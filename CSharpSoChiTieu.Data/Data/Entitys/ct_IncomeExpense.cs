@@ -11,6 +11,9 @@ namespace CSharpSoChiTieu.Data
         /// </summary>
         public decimal Amount { get; set; }
 
+        /// <summary>
+        /// Đơn vị tiền tệ
+        /// </summary>
         public string? Currency {  get; set; }
 
         /// <summary>
@@ -31,16 +34,8 @@ namespace CSharpSoChiTieu.Data
         public IncomeExpenseType Type { get; set; }
 
         /// <summary>
-        /// 
+        /// chứa đối tượng category
         /// </summary>
         public Guid? CategoryId { get; set; }  // Thay đổi từ Guid sang Guid?
-        //public ct_IncomeExpenseCategory? Category { get; set; }
-
-        // Các trường từ EntityBase đã bao gồm:
-        // - Id (Guid) key
-        // - CreatedDate (DateTime?)
-        // - CreatedBy (Guid)
-        // - ModifiedDate (DateTime?)
-        // - ModifiedBy (Guid?)
     }
 }

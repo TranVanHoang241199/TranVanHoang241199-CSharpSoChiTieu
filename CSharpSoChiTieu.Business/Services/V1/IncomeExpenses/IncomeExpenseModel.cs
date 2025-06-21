@@ -10,6 +10,7 @@ namespace CSharpSoChiTieu.Business.Services
     public class IncomeExpenseViewModel : EntityBase
     {
         public decimal Amount { get; set; }
+        public string? Currency { get; set; }
         public DateTime? Date { get; set; }
         public string? Description { get; set; }
         public IncomeExpenseType Type { get; set; } // Enum: Income/Expense
@@ -52,6 +53,7 @@ namespace CSharpSoChiTieu.Business.Services
         public decimal Amount { get; set; }
         public DateTime Date { get; set; }
         public string? Description { get; set; }
+        public string? Currency { get; set; }
         public Guid CategoryId { get; set; }
         public IncomeExpenseType Type { get; set; } // Enum: Income/Expense
     }

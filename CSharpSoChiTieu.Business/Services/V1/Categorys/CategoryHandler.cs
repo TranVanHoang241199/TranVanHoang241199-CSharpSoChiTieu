@@ -5,7 +5,6 @@ using CSharpSoChiTieu.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper.QueryableExtensions;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using CSharpSoChiTieu.common;
 
 namespace CSharpSoChiTieu.Business.Services
@@ -24,7 +23,11 @@ namespace CSharpSoChiTieu.Business.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-
+        /// <summary>
+        /// Thêm danh mục mới
+        /// </summary>
+        /// <param name="data">Thông tin của danh mục</param>
+        /// <returns></returns>
         public async Task<OperationResult> Add(CategoryInputModel data)
         {
             try
@@ -45,6 +48,11 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
+        /// <summary>
+        /// Giữ liệu mặt đinh khi tạo tài khoản
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task<OperationResult> Adddefault(Guid userId)
         {
             try
@@ -87,8 +95,11 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
-
-
+        /// <summary>
+        /// Đếm số lượng để hiển thị category search
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public async Task<OperationResult> Count(string searchValue = "")
         {
             try
@@ -113,7 +124,11 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
-
+        /// <summary>
+        /// Xoá danh mục 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<OperationResult> Delete(Guid? id = null)
         {
             try
@@ -133,7 +148,11 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
-
+        /// <summary>
+        /// lấy đối tượng danh mục dựa vào id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<OperationResult> Get(Guid? id = null)
         {
             try
@@ -150,7 +169,13 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
-
+        /// <summary>
+        /// Lấy danh sách 
+        /// </summary>
+        /// <param name="page">số trang hiện tại</param>
+        /// <param name="pageSize">Tổng số trang hiển thị</param>
+        /// <param name="searchValue">tìm kiếm theo tên và Id</param>
+        /// <returns></returns>
         public async Task<OperationResult> Gets(int page, int pageSize, string searchValue = "")
         {
             try
@@ -183,7 +208,11 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
-
+        /// <summary>
+        /// Kiểm tra danh mục có tồn tại các lớp con không
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<OperationResult> InUsed(Guid? id = null)
         {
             try
@@ -198,7 +227,11 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
-
+        /// <summary>
+        /// Cập nhật và chỉnh sửa danh mục 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public async Task<OperationResult> Update(CategoryInputModel data)
         {
             try
@@ -226,6 +259,5 @@ namespace CSharpSoChiTieu.Business.Services
                 return new OperationResultError(HttpStatusCode.InternalServerError, "Đã xảy ra lỗi: " + ex.Message);
             }
         }
-
     }
 }

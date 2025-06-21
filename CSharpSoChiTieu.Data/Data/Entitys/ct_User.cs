@@ -7,7 +7,7 @@ namespace CSharpSoChiTieu.Data
     public class ct_User : EntityBase
     {
         /// <summary>
-        /// Email tài khoản dùng đăng nhập
+        /// tài khoản dùng đăng nhập
         /// </summary>
         [Required]
         [MaxLength(255)]
@@ -65,13 +65,5 @@ namespace CSharpSoChiTieu.Data
         /// Thời gian hết hạn của token reset mật khẩu
         /// </summary>
         public DateTime? PasswordResetTokenExpiry { get; set; }
-
-        // Các trường từ EntityBase đã bao gồm:
-        // - Id (Guid) key
-        // - CreatedDate (DateTime?)
-        // - CreatedBy (Guid)
-        // - ModifiedDate (DateTime?)
-        // - ModifiedBy (Guid?)
-
     }
 }

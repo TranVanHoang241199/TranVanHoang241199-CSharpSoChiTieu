@@ -22,20 +22,13 @@ namespace CSharpSoChiTieu.Business.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<OperationResult> CreateDefault(IncomeExpenseType type)
-        {
-            try
-            {
 
-
-                return new OperationResult();
-            }
-            catch (Exception ex)
-            {
-                return new OperationResultError(HttpStatusCode.InternalServerError, "Đã xảy ra lỗi: " + ex.Message);
-            }
-        }
-
+        /// <summary>
+        /// Lấy danh sách icon hiển thị trong tạo danh mục
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public async Task<OperationResult> Gets(IncomeExpenseType type, string searchValue)
         {
             try

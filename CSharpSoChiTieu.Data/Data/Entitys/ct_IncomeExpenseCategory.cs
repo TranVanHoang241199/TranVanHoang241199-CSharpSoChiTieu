@@ -6,20 +6,27 @@ namespace CSharpSoChiTieu.Data
     [Table("ct_IncomeExpenseCategory")]
     public class ct_IncomeExpenseCategory : EntityBase
     {
-        public string? Name { get; set; }         // tên hệ thống (food, transport, ...)
-        public string? Text { get; set; }         // tên hiển thị (Ăn uống, Di chuyển, ...)
-        public string? Icon { get; set; }         // icon material
-        public string? Color { get; set; }        // success, primary, warning, ...
+        /// <summary>
+        /// tên hệ thống (food, transport, ...)
+        /// </summary>
+        public string? Name { get; set; }
+        /// <summary>
+        /// tên hiển thị (Ăn uống, Di chuyển, ...)
+        /// </summary>
+        public string? Text { get; set; }
+        /// <summary>
+        /// icon
+        /// </summary>
+        public string? Icon { get; set; }
+        /// <summary>
+        /// backgroud của icon
+        /// </summary>
+        public string? Color { get; set; }
+        /// <summary>
+        /// Vị trí hiển thị
+        /// </summary>
         public int Order { get; set; }
 
         public IncomeExpenseType Type { get; set; }
-
-
-        // Các trường từ EntityBase đã bao gồm:
-        // - Id (Guid) key
-        // - CreatedDate (DateTime?)
-        // - CreatedBy (Guid)
-        // - ModifiedDate (DateTime?)
-        // - ModifiedBy (Guid?)
     }
 }

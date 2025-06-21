@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
                                 <div class="@amountClass text-gradient text-sm fw-bold ms-2 text-nowrap">
-                                    @(item.Type == IncomeExpenseType.Income ? "+" : "-")@item.Amount.ToString("N0") ₫
+                                    @(item.Type == IncomeExpenseType.Income ? "+" : "-")@item.Amount.ToString("N0") @item.Currency
                                 </div>
                             </li>
                         }

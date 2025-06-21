@@ -31,6 +31,7 @@ namespace CSharpSoChiTieu.Data
         public DbSet<ct_IncomeExpense> ct_IncomeExpense { get; set; }
         public DbSet<ct_IncomeExpenseCategory> ct_IncomeExpenseCategories { get; set; }
         public DbSet<ct_Emoji> ct_Emojis { get; set; }
+        public DbSet<ct_Currency> ct_Currencies { get; set; }
         #endregion DBSet
 
 
@@ -63,6 +64,14 @@ namespace CSharpSoChiTieu.Data
             modelBuilder.Entity<ct_IncomeExpenseCategory>(entity =>
             {
                 entity.Property(e => e.Name).HasMaxLength(100).IsRequired();
+            });
+
+            modelBuilder.Entity<ct_Currency>(entity =>
+            {
+                entity.HasIndex(e => e.Code).IsUnique();
+                entity.Property(e => e.Code).IsRequired().HasMaxLength(10);
+                entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Symbol).HasMaxLength(10);
             });
             #endregion đặt giới hạn cho colum
 

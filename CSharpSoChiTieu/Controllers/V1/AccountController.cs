@@ -1,15 +1,16 @@
 ﻿using CSharpSoChiTieu.Business.Services;
 using CSharpSoChiTieu.common;
 using CSharpSoChiTieu.Data;
-using CSharpSoChiTieu.Data.Data.Entitys;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace CSharpSoChiTieu.Controllers
 {
+    /// <summary>
+    /// Truy cập điều khiển xử lý người dùng
+    /// </summary>
     public class AccountController : Controller
     {
         private readonly CTDbContext _context;
@@ -23,8 +24,18 @@ namespace CSharpSoChiTieu.Controllers
             _categoryHandler = categoryHandler;
         }
 
+
+        /// <summary>
+        /// 1.1. truy cập view lần đầu
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Login() => View();
 
+        /// <summary>
+        /// 1.2 DK xử lý đăng nhập
+        /// </summary>
+        /// <param name="model">Tài khoản và mật khẩu</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -55,9 +66,17 @@ namespace CSharpSoChiTieu.Controllers
             return View(model);
         }
 
-
+        /// <summary>
+        /// 2.1 Truy cập view tạo tài khoản
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Register() => View();
 
+        /// <summary>
+        /// 2.2 ĐK Xử lý tạo tài khoản
+        /// </summary>
+        /// <param name="model">Thông tin tài khoản tạo</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -92,9 +111,17 @@ namespace CSharpSoChiTieu.Controllers
             return View(model);
         }
 
-        // View Quên mật khẩu
+        /// <summary>
+        /// 3.1 Truy cập view quên mật khẩu
+        /// </summary>
+        /// <returns></returns>
         public IActionResult ForgotPassword() => View();
 
+        /// <summary>
+        /// 3.2 ĐK xử lý quên mật khẩu
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
@@ -122,7 +149,11 @@ namespace CSharpSoChiTieu.Controllers
             return View(model);
         }
 
-        // Hỗ trợ gửi email reset mật khẩu
+        /// <summary>
+        /// 3.3 Hỗ trợ gửi email khi quên mật khẩu
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="resetLink"></param>
         private void SendResetPasswordEmail(string email, string resetLink)
         {
             var service = GmailServiceHelper.GetGmailService(); // Lấy dịch vụ Gmail
@@ -135,10 +166,18 @@ namespace CSharpSoChiTieu.Controllers
             GmailServiceHelper.SendEmail(service, email, subject, body);
         }
 
-
-        // View Đổi mật khẩu
+        /// <summary>
+        /// 4.1 Truy cập view đổi mật khẩu
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
         public IActionResult ResetPassword(string token) => View(new ResetPasswordViewModel { Token = token });
 
+        /// <summary>
+        /// 4.2 ĐK xử lý đổi mật khẩu
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult ResetPassword(ResetPasswordViewModel model)
         {
@@ -163,6 +202,10 @@ namespace CSharpSoChiTieu.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// 5.1 ĐK Đăng xuất
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync("MyCookieAuth");
@@ -178,6 +221,10 @@ namespace CSharpSoChiTieu.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 5.1 Truy cập thông tin người dùng
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         public IActionResult Profile()
         {
@@ -202,6 +249,12 @@ namespace CSharpSoChiTieu.Controllers
             return View(profile);
         }
 
+        /// <summary>
+        /// 6.2 ĐK xử lý cập nhật thông tin người dùng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="Image"></param>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> UpdateProfile(ProfileViewModel model, IFormFile Image)
@@ -274,6 +327,11 @@ namespace CSharpSoChiTieu.Controllers
             }
         }
 
+        /// <summary>
+        /// 6.3 Cập nhật lại avatar trong hồ sơ điều chỉnh
+        /// </summary>
+        /// <param name="image"></param>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> UploadAvatar(IFormFile image)
@@ -338,5 +396,4 @@ namespace CSharpSoChiTieu.Controllers
             }
         }
     }
-
 }

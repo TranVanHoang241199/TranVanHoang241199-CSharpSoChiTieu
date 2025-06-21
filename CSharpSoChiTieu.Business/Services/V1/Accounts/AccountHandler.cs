@@ -5,6 +5,9 @@ using CSharpSoChiTieu.Data;
 
 namespace CSharpSoChiTieu.Business.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class AccountHandler : IAccountHandler
     {
         private readonly CTDbContext _context;
@@ -16,6 +19,11 @@ namespace CSharpSoChiTieu.Business.Services
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Xử lý đăng nhập
+        /// </summary>
+        /// <param name="model">Bao gồm user và password</param>
+        /// <returns></returns>
         public AuthenticationResult Authenticate(LoginViewModel model)
         {
             try
@@ -73,6 +81,11 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
+        /// <summary>
+        /// Tạo tài khoản mới
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public RegistrationResult Register(RegisterViewModel model)
         {
             try
@@ -148,6 +161,11 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
+        /// <summary>
+        /// Lấy thông tin user
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public ProfileViewModel GetProfile(Guid userId)
         {
             var user = _context.ct_Users.FirstOrDefault(u => u.Id == userId && !u.IsDeleted);

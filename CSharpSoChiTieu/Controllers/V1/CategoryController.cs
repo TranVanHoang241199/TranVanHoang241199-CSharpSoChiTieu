@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CSharpSoChiTieu.Controllers
 {
+    /// <summary>
+    /// Truy cập điều khiển xử lý danh mục 
+    /// </summary>
     [Authorize]
     public class CategoryController : Controller
     {
@@ -23,6 +26,10 @@ namespace CSharpSoChiTieu.Controllers
             _emojiHandler = emojiHandler;
         }
 
+        /// <summary>
+        /// 1.1 Truy cập view hiển thị danh mục
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             PaginationSearchInput condition = HttpContext.Session.GetObjectFromJson<PaginationSearchInput>(CATEGORY_SEARCH);
@@ -40,6 +47,11 @@ namespace CSharpSoChiTieu.Controllers
             return View(condition);
         }
 
+        /// <summary>
+        /// 1.2 bộ điều kiển trả danh sách dựa trên thông tin lấy từ index
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Search(PaginationSearchInput condition)
         {
             // Đếm số lượng
@@ -65,6 +77,10 @@ namespace CSharpSoChiTieu.Controllers
             return View(result);
         }
 
+        /// <summary>
+        /// 2.1 truy cập view tạo danh mục
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Create()
         {
             ViewBag.Title = "Bổ sung loại sản phẩm";
@@ -81,7 +97,11 @@ namespace CSharpSoChiTieu.Controllers
             return View("Edit", data);
         }
 
-
+        /// <summary>
+        /// 2.2 Truy cập view edit danh mục
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(Guid? id = null)
         {
 
@@ -100,6 +120,10 @@ namespace CSharpSoChiTieu.Controllers
             return View(data);
         }
 
+        /// <summary>
+        /// 2.3 View hiển thị danh sách icon và màu
+        /// </summary>
+        /// <returns></returns>
         private async Task ShowViewBag()
         {
             var IconExpenseList = new List<EmojiViewModel>();
@@ -127,7 +151,7 @@ namespace CSharpSoChiTieu.Controllers
         }
 
         /// <summary>
-        /// 
+        /// 2.4 Xử lý lưu khi chỉnh sửa và cài đặt
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
@@ -183,31 +207,9 @@ namespace CSharpSoChiTieu.Controllers
         }
 
         /// <summary>
-        /// 
+        /// 3.1 ĐK xử lý xoá danh mục
         /// </summary>
-        /// <returns></returns>
-        //public async Task<IActionResult> Delete(Guid? id = null)
-        //{
-        //    if (id == Guid.Empty)
-        //        return  RedirectToAction("Index");
-
-        //    if (Request.Method == "POST")
-        //    {
-        //        await _ICategoryHandler.Delete(id);
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    var data = _ICategoryHandler.Get(id);
-
-        //    if (data == null)
-        //        return RedirectToAction("Index");
-
-        //    return View(data);
-        //}
-
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Delete(Guid? id = null)
