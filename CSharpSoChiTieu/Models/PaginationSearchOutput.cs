@@ -64,6 +64,6 @@ namespace CSharpSoChiTieu.Models
         public int? Day { get; set; }
 
         public List<IncomeExpenseViewModel>? Data { get; set; }
-
+        public List<IEGroupViewModel>? Groups { get; set; }
     }
 }

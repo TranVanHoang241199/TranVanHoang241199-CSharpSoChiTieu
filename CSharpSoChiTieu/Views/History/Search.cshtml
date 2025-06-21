@@ -4,80 +4,69 @@
     Layout = null;
 }
 
-<div class="table-responsive">
-    <div class="d-flex justify-content-between align-items-center px-3 py-2">
-        <p class="text-sm mb-0">
-            Hiển thị <strong>@Model.RowCount</strong> danh mục trong tổng số <strong>@Model.PageCount</strong> trang
-        </p>
+<div class="card h-100 shadow-sm">
+    <div class="card-header pb-0 px-3">
+        <div class="row align-items-center mb-2">
+            <div class="col-12">
+                <h6 class="mb-0 text-primary">
+                    <i class="fas fa-history me-2"></i>Kết quả tìm kiếm thu chi
+                    <span class="text-dark ms-2">(@Model.RowCount mục)</span>
+                </h6>
+            </div>
+        </div>
     </div>
-    <table class="table align-items-center mb-0">
-        <thead>
-            <tr>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Khoản thu chi</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Số tiền</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Loại</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thao tác</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.Data != null && Model.Data.Any())
+    <div class="card-body pt-2 p-3" id="history_id">
+        @if (Model.Groups != null && Model.Groups.Any())
+        {
+            foreach (var group in Model.Groups)
             {
-                foreach (var item in Model.Data)
-                {
-                    <tr>
-                        <td>
-                            <div class="d-flex px-2 py-1">
-                                <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="mb-0 text-sm">@item.Description</h6>
+                <label>Ngày @group.Date.ToString("dd/MM/yyyy")</label>
+                <div class="income-list-container mb-3">
+                    <ul class="list-group list-group-flush">
+                        @foreach (var item in group.Items)
+                        {
+                            var amountClass = item.Type == IncomeExpenseType.Income ? "text-success" : "text-danger";
+                            <li class="list-group-item border-0 d-flex justify-content-between align-items-center ps-1 pe-1 mb-1 income-item"
+                                data-id="@item.Id"
+                                data-type="@item.Type"
+                                data-amount="@item.Amount"
+                                data-description="@item.Description"
+                                data-date="@item.Date?.ToString("yyyy-MM-dd")"
+                                style="cursor: pointer;">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon icon-shape icon-xs text-center rounded-circle me-2" style="background-color: @item.CategoryColor; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">
+                                        @item.CategoryIcon
+                                    </div>
+                                    <div class="d-flex flex-column text-truncate">
+                                        <h6 class="mb-0 text-dark text-sm">@item.CategoryName</h6>
+                                        <span class="text-xs text-muted">@item.Description</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="align-middle text-center text-sm">
-                            <span class="text-@(item.Type == IncomeExpenseType.Income ? "success" : "danger") font-weight-bold">
-                                @item.Amount.ToString("N0") đ
-                            </span>
-                        </td>
-                        <td>
-                            <span class="badge badge-sm @(item.Type == IncomeExpenseType.Income ? "bg-gradient-success" : "bg-gradient-danger")">
-                                @(item.Type == IncomeExpenseType.Income ? "Khoản thu" : "Khoản chi")
-                            </span>
-                        </td>
-                        <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">
-                                @(item.Date.HasValue ? item.Date.Value.ToString("dd/MM/yyyy") : "")
-                            </span>
-                        </td>
-                        <td class="align-middle text-center">
-                            <a href="~/History/Edit/@item.Id" class="btn btn-link text-primary mb-0">
-                                <i class="material-symbols-rounded">edit</i>
-                            </a>
-                            <a href="javascript:void(0)" onclick="deleteItem(@item.Id)" class="btn btn-link text-danger mb-0">
-                                <i class="material-symbols-rounded">delete</i>
-                            </a>
-                        </td>
-                    </tr>
-                }
+                                <div class="@amountClass text-gradient text-sm fw-bold ms-2 text-nowrap">
+                                    @(item.Type == IncomeExpenseType.Income ? "+" : "-")@item.Amount.ToString("N0") ₫
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
             }
-            else
-            {
-                <tr>
-                    <td colspan="6" class="text-center py-4">
-                        <div class="text-muted">
-                            <i class="material-symbols-rounded">search_off</i>
-                            <p class="mt-2">Không tìm thấy dữ liệu</p>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        }
+        else
+        {
+            <div class="text-center py-4">
+                <div class="text-muted">
+                    <i class="material-symbols-rounded">search_off</i>
+                    <p class="mt-2">Không tìm thấy dữ liệu</p>
+                </div>
+            </div>
+        }
+    </div>
 </div>
 
 @if (Model.Data != null && Model.Data.Any())
 {
     <div class="d-flex justify-content-center mt-4">
-        
+
         <nav aria-label="Page navigation">
             <ul class="pagination pagination-info">
                 @{
@@ -136,3 +125,5 @@
         }
     }
 </script>
+
+

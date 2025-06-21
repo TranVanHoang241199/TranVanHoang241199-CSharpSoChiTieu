@@ -9,7 +9,7 @@ namespace CSharpSoChiTieu.Controllers
     [Authorize]
     public class HistoryController : Controller
     {
-        private const int PAGE_SIZE = 5;
+        private const int PAGE_SIZE = 100000;
         private const string IncomeExpense_SEARCH = "SearchHistoryCondition";
         private readonly IIncomeExpenseHandler _IncomeExpenseHandler;
 
@@ -44,23 +44,9 @@ namespace CSharpSoChiTieu.Controllers
             var operationResultCount = await _IncomeExpenseHandler.Count(condition.SearchValue, condition.Year, condition.Month, condition.Day);
             int rowCount = (operationResultCount as OperationResult<int>)?.Data ?? 0;
 
-            // Lấy danh sách
+            // Lấy danh sách group theo ngày
             var operationResultData = await _IncomeExpenseHandler.Gets(condition.Page, condition.PageSize, condition.SearchValue, condition.Year, condition.Month, condition.Day);
-            var data = (operationResultData as OperationResultList<IncomeExpenseViewModel>)?.Data ?? new List<IncomeExpenseViewModel>();
-
-            // Lọc theo ngày tháng năm nếu có
-            if (condition.Year.HasValue || condition.Month.HasValue || condition.Day.HasValue)
-            {
-                data = data.Where(x =>
-                {
-                    if (x.CreatedDate == null) return false;
-
-                    var date = x.CreatedDate.Value;
-                    return (!condition.Year.HasValue || date.Year == condition.Year.Value) &&
-                           (!condition.Month.HasValue || date.Month == condition.Month.Value) &&
-                           (!condition.Day.HasValue || date.Day == condition.Day.Value);
-                }).ToList();
-            }
+            var data = (operationResultData as OperationResultList<IEGroupViewModel>)?.Data ?? new List<IEGroupViewModel>();
 
             // Khởi tạo kết quả trả về view
             var result = new HistorySearchOutput
@@ -69,10 +55,11 @@ namespace CSharpSoChiTieu.Controllers
                 PageSize = condition.PageSize,
                 SearchValue = condition.SearchValue,
                 RowCount = rowCount,
-                Data = data,
                 Year = condition.Year,
                 Month = condition.Month,
                 Day = condition.Day,
+                // Chuyển sang property mới cho group
+                Groups = data
             };
 
             HttpContext.Session.SetObjectAsJson(IncomeExpense_SEARCH, condition);

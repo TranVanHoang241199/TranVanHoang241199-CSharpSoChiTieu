@@ -379,55 +379,54 @@ namespace CSharpSoChiTieu.Business.Services
                     }
                 }
 
-                //// Xử lý filter theo range
-                //DateTime startDate, endDate;
-
-                //switch (range)
-                //{
-                //    case "today":
-                //        startDate = now.Date;
-                //        endDate = now.Date.AddDays(1).AddTicks(-1);
-                //        break;
-
-                //    case "week":
-                //        var diff = (7 + (now.DayOfWeek - DayOfWeek.Monday)) % 7;
-                //        startDate = now.AddDays(-diff).Date;
-                //        endDate = startDate.AddDays(7).AddTicks(-1);
-                //        break;
-
-                //    case "month":
-                //        startDate = new DateTime(now.Year, now.Month, 1);
-                //        endDate = startDate.AddMonths(1).AddTicks(-1);
-                //        break;
-
-                //    case "year":
-                //        startDate = new DateTime(now.Year, 1, 1);
-                //        endDate = new DateTime(now.Year, 12, 31).AddDays(1).AddTicks(-1);
-                //        break;
-
-                //    default:
-                //        startDate = now.Date;
-                //        endDate = now.Date.AddDays(1).AddTicks(-1);
-                //        break;
-                //}
-
-                //query = query.Where(o => o.Date >= startDate && o.Date <= endDate);
-
-                //// Filter theo Type nếu có
-                //if (type != 0) query = query.Where(o => o.Type == type);
-
                 // Filter theo tìm kiếm
                 if (!string.IsNullOrEmpty(searchValue)) query = query.Where(o => o.Description.Contains(searchValue.Trim()));
 
-                // Nhóm dữ liệu theo ngày và kết hợp thông tin Category
-                var result = await query
+                // Lấy toàn bộ danh mục ra Dictionary (Id → Thông tin)
+                var categoryDict = await _context.ct_IncomeExpenseCategories
+                    .AsNoTracking()
+                    .ToDictionaryAsync(c => c.Id, c => new
+                    {
+                        c.Name,
+                        c.Color,
+                        c.Icon
+                    });
+
+                // Lấy dữ liệu phân trang
+                var data = await query
                     .OrderByDescending(x => x.CreatedDate)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize)
-                    .ProjectTo<IncomeExpenseViewModel>(_mapper.ConfigurationProvider)
                     .ToListAsync();
 
-                return new OperationResultList<IncomeExpenseViewModel>(result);
+                // Group theo ngày
+                var grouped = data
+                    .GroupBy(o => o.Date.Date)
+                    .Select(g => new IEGroupViewModel
+                    {
+                        Date = g.Key,
+                        Items = g.Select(i =>
+                        {
+                            var categoryInfo = i.CategoryId != null && categoryDict.ContainsKey(i.CategoryId.Value)
+                                ? categoryDict[i.CategoryId.Value]
+                                : null;
+
+                            return new IncomeExpenseViewModel
+                            {
+                                Id = i.Id,
+                                Amount = i.Amount,
+                                Date = i.Date,
+                                Type = i.Type,
+                                Description = i.Description,
+                                CategoryId = i.CategoryId,
+                                CategoryName = categoryInfo?.Name ?? "Unknown",
+                                CategoryColor = categoryInfo?.Color ?? "#000000",
+                                CategoryIcon = categoryInfo?.Icon ?? "default-icon"
+                            };
+                        }).ToList()
+                    }).ToList();
+
+                return new OperationResultList<IEGroupViewModel>(grouped);
             }
             catch (Exception ex)
             {
