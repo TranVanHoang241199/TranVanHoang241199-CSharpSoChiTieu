@@ -1,6 +1,6 @@
 ﻿using CSharpSoChiTieu.common;
 
-namespace CSharpSoChiTieu.Data.Data.Entitys
+namespace CSharpSoChiTieu.Data
 {
     public class ct_Emoji : EntityBase
     {

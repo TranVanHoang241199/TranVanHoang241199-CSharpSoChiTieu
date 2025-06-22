@@ -1,5 +1,4 @@
-﻿using CSharpSoChiTieu.Data.Data.Entitys;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace CSharpSoChiTieu.Data
@@ -32,6 +31,7 @@ namespace CSharpSoChiTieu.Data
         public DbSet<ct_IncomeExpenseCategory> ct_IncomeExpenseCategories { get; set; }
         public DbSet<ct_Emoji> ct_Emojis { get; set; }
         public DbSet<ct_Currency> ct_Currencies { get; set; }
+        public DbSet<ct_UserSetting> ct_UserSettings { get; set; }
         #endregion DBSet
 
 
@@ -72,6 +72,23 @@ namespace CSharpSoChiTieu.Data
                 entity.Property(e => e.Code).IsRequired().HasMaxLength(10);
                 entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
                 entity.Property(e => e.Symbol).HasMaxLength(10);
+            });
+
+            modelBuilder.Entity<ct_UserSetting>(entity =>
+            {
+                entity.HasIndex(e => e.UserId).IsUnique();
+                entity.Property(e => e.Currency).HasMaxLength(10);
+                entity.Property(e => e.Language).HasMaxLength(10);
+                entity.Property(e => e.Theme).HasMaxLength(20);
+                entity.Property(e => e.CurrencyFormat).HasMaxLength(20);
+                entity.Property(e => e.TimeZone).HasMaxLength(50);
+
+                modelBuilder.Entity<ct_User>()
+                .HasOne(u => u.ct_UserSettings)
+                .WithOne(us => us.User)
+                .HasForeignKey<ct_UserSetting>(us => us.UserId)
+                .OnDelete(DeleteBehavior.Cascade); // hoặc Restrict, NoAction nếu lỗi vẫn xảy ra
+
             });
             #endregion đặt giới hạn cho colum
 

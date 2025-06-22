@@ -17,5 +17,19 @@ namespace CSharpSoChiTieu.Business.Services
         /// <param name="model">Model chứa thông tin cài đặt cần cập nhật</param>
         /// <returns>True nếu cập nhật thành công, False nếu thất bại</returns>
         bool UpdateSettings(SettingViewModel model);
+
+        /// <summary>
+        /// Lấy cài đặt của người dùng
+        /// </summary>
+        /// <param name="userId">ID của người dùng</param>
+        /// <returns>Cài đặt của người dùng</returns>
+        SettingViewModel GetUserSettings(Guid userId);
+
+        /// <summary>
+        /// Tạo cài đặt mặc định cho người dùng mới
+        /// </summary>
+        /// <param name="userId">ID của người dùng</param>
+        /// <returns>True nếu tạo thành công, False nếu thất bại</returns>
+        bool CreateDefaultSettings(Guid userId);
     }
 }

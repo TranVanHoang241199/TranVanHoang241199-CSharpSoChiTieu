@@ -19,29 +19,23 @@ namespace CSharpSoChiTieu.Controllers
 
         public IActionResult Index()
         {
-            var userId = User.FindFirst("UserId")?.Value;
-            if (string.IsNullOrEmpty(userId))
+            var userIdClaim = User.FindFirst("UserId")?.Value;
+            if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out Guid userId))
             {
                 _logger.LogWarning("Không tìm thấy UserId trong claims");
                 return RedirectToAction("Login", "Account");
             }
 
-            var userProfile = _settingHandler.GetUserProfile(userId);
-            if (userProfile == null)
+            try
             {
-                _logger.LogWarning($"Không tìm thấy profile cho user {userId}");
+                var settings = _settingHandler.GetUserSettings(userId);
+                return View(settings);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Lỗi khi lấy cài đặt cho user {userId}");
                 return RedirectToAction("Login", "Account");
             }
-
-            var settings = new SettingViewModel
-            {
-                UserId = userProfile.Id,
-                DarkMode = userProfile.DarkMode,
-                Notifications = userProfile.Notifications,
-                Language = userProfile.Language ?? "vi"
-            };
-
-            return View(settings);
         }
 
         [HttpPost]
@@ -49,7 +43,13 @@ namespace CSharpSoChiTieu.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return Json(new { success = false, message = "Dữ liệu không hợp lệ" });
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Any())
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.First().ErrorMessage
+                    );
+                return Json(new { success = false, message = "Dữ liệu không hợp lệ", errors });
             }
 
             try
@@ -65,6 +65,27 @@ namespace CSharpSoChiTieu.Controllers
             {
                 _logger.LogError(ex, "Lỗi khi cập nhật cài đặt");
                 return Json(new { success = false, message = "Có lỗi xảy ra khi cập nhật cài đặt" });
+            }
+        }
+
+        [HttpGet]
+        public IActionResult GetUserSettings()
+        {
+            var userIdClaim = User.FindFirst("UserId")?.Value;
+            if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out Guid userId))
+            {
+                return Json(new { success = false, message = "Không tìm thấy thông tin người dùng" });
+            }
+
+            try
+            {
+                var settings = _settingHandler.GetUserSettings(userId);
+                return Json(new { success = true, data = settings });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Lỗi khi lấy cài đặt cho user {userId}");
+                return Json(new { success = false, message = "Có lỗi xảy ra khi lấy cài đặt" });
             }
         }
     }

@@ -130,6 +130,28 @@ namespace CSharpSoChiTieu.Business.Services
                 _context.ct_Users.Add(user);
                 _context.SaveChanges();
 
+                // Tạo settings mặc định cho user mới
+                var defaultSettings = new ct_UserSetting
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = userId,
+                    Currency = "VND",
+                    Language = "vi",
+                    Theme = "light",
+                    ItemsPerPage = 10,
+                    FontSize = 14,
+                    ReceiveEmailNotifications = true,
+                    ReceivePushNotifications = true,
+                    DarkMode = false,
+                    CurrencyFormat = "N0",
+                    TimeZone = "Asia/Ho_Chi_Minh",
+                    CreatedDate = DateTime.UtcNow,
+                    CreatedBy = userId
+                };
+
+                _context.ct_UserSettings.Add(defaultSettings);
+                _context.SaveChanges();
+
                 // Map to ViewModel
                 var userViewModel = _mapper.Map<UserViewModel>(user);
 

@@ -23,6 +23,7 @@ namespace CSharpSoChiTieu.Business.Services
             try
             {
                 var user = _context.ct_Users
+                    .Include(u => u.ct_UserSettings)
                     .FirstOrDefault(u => u.Id == Guid.Parse(userId));
 
                 if (user == null)
@@ -31,7 +32,15 @@ namespace CSharpSoChiTieu.Business.Services
                     return null;
                 }
 
-                return _mapper.Map<UserProfileModel>(user);
+                var userProfile = _mapper.Map<UserProfileModel>(user);
+
+                // Nếu có settings, map settings vào profile
+                if (user.ct_UserSettings != null)
+                {
+                    _mapper.Map(user.ct_UserSettings, userProfile);
+                }
+
+                return userProfile;
             }
             catch (Exception ex)
             {
@@ -44,28 +53,109 @@ namespace CSharpSoChiTieu.Business.Services
         {
             try
             {
-                var user = _context.ct_Users
-                    .FirstOrDefault(u => u.Id == model.UserId);
+                var userSetting = _context.ct_UserSettings
+                    .FirstOrDefault(s => s.UserId == model.UserId);
 
-                if (user == null)
+                if (userSetting == null)
                 {
-                    _logger.LogWarning($"Không tìm thấy người dùng với ID: {model.UserId}");
-                    return false;
+                    // Tạo mới settings nếu chưa có
+                    userSetting = _mapper.Map<ct_UserSetting>(model);
+                    userSetting.Id = Guid.NewGuid();
+                    userSetting.CreatedDate = DateTime.UtcNow;
+                    userSetting.CreatedBy = model.UserId;
+                    _context.ct_UserSettings.Add(userSetting);
+                }
+                else
+                {
+                    // Cập nhật settings hiện có
+                    _mapper.Map(model, userSetting);
+                    userSetting.ModifiedDate = DateTime.UtcNow;
+                    userSetting.ModifiedBy = model.UserId;
+                    _context.ct_UserSettings.Update(userSetting);
                 }
 
-                // Cập nhật các cài đặt
-                //user.DarkMode = model.DarkMode;
-                //user.Notifications = model.Notifications;
-                //user.Language = model.Language;
-
-                _context.ct_Users.Update(user);
                 var result = _context.SaveChanges();
-
                 return result > 0;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Lỗi khi cập nhật cài đặt cho người dùng {model.UserId}");
+                throw;
+            }
+        }
+
+        public SettingViewModel GetUserSettings(Guid userId)
+        {
+            try
+            {
+                var userSetting = _context.ct_UserSettings
+                    .FirstOrDefault(s => s.UserId == userId);
+
+                if (userSetting == null)
+                {
+                    // Trả về settings mặc định nếu chưa có
+                    return new SettingViewModel
+                    {
+                        UserId = userId,
+                        Currency = "VND",
+                        Language = "vi",
+                        Theme = "light",
+                        ItemsPerPage = 10,
+                        FontSize = 14,
+                        ReceiveEmailNotifications = true,
+                        ReceivePushNotifications = true,
+                        DarkMode = false,
+                        CurrencyFormat = "N0",
+                        TimeZone = "Asia/Ho_Chi_Minh"
+                    };
+                }
+
+                return _mapper.Map<SettingViewModel>(userSetting);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Lỗi khi lấy cài đặt của người dùng {userId}");
+                throw;
+            }
+        }
+
+        public bool CreateDefaultSettings(Guid userId)
+        {
+            try
+            {
+                var existingSettings = _context.ct_UserSettings
+                    .FirstOrDefault(s => s.UserId == userId);
+
+                if (existingSettings != null)
+                {
+                    return true; // Đã có settings
+                }
+
+                var defaultSettings = new ct_UserSetting
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = userId,
+                    Currency = "VND",
+                    Language = "vi",
+                    Theme = "light",
+                    ItemsPerPage = 10,
+                    FontSize = 14,
+                    ReceiveEmailNotifications = true,
+                    ReceivePushNotifications = true,
+                    DarkMode = false,
+                    CurrencyFormat = "N0",
+                    TimeZone = "Asia/Ho_Chi_Minh",
+                    CreatedDate = DateTime.UtcNow,
+                    CreatedBy = userId
+                };
+
+                _context.ct_UserSettings.Add(defaultSettings);
+                var result = _context.SaveChanges();
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Lỗi khi tạo cài đặt mặc định cho người dùng {userId}");
                 throw;
             }
         }

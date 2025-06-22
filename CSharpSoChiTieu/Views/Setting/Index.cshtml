@@ -6,58 +6,172 @@
     ViewData["Title"] = "Cài đặt";
 }
 
-<div class="container mt-4">
+<div class="container-fluid py-4">
     <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Cài đặt hệ thống</h4>
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h6>Cài đặt hệ thống</h6>
+                    <p class="text-sm mb-0">
+                        <i class="fa fa-info text-info" aria-hidden="true"></i>
+                        <span class="font-weight-bold">Tùy chỉnh</span> cài đặt cá nhân của bạn
+                    </p>
                 </div>
                 <div class="card-body">
                     <form id="settingForm">
                         <input type="hidden" asp-for="UserId" />
 
-                        <!-- Dark Mode Setting -->
-                        <div class="form-group mb-4">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <label class="form-check-label" for="darkMode">
-                                    <i class="fas fa-moon"></i> Chế độ tối
-                                </label>
+                        <div class="row">
+                            <!-- Cài đặt chung -->
+                            <div class="col-md-6">
+                                <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Cài đặt chung</h6>
+
+                                <!-- Đơn vị tiền tệ -->
+                                <div class="form-group">
+                                    <label class="form-control-label" for="currency">Đơn vị tiền tệ</label>
+                                    <select class="form-control" id="currency" asp-for="Currency">
+                                        <option value="VND">VND (Việt Nam Đồng)</option>
+                                        <option value="USD">USD (US Dollar)</option>
+                                        <option value="EUR">EUR (Euro)</option>
+                                        <option value="JPY">JPY (Japanese Yen)</option>
+                                        <option value="CNY">CNY (Chinese Yuan)</option>
+                                    </select>
+                                </div>
+
+                                <!-- Ngôn ngữ -->
+                                <div class="form-group">
+                                    <label class="form-control-label" for="language">Ngôn ngữ</label>
+                                    <select class="form-control" id="language" asp-for="Language">
+                                        <option value="vi">Tiếng Việt</option>
+                                        <option value="en">English</option>
+                                        <option value="zh">中文</option>
+                                        <option value="ja">日本語</option>
+                                    </select>
+                                </div>
+
+                                <!-- Chủ đề -->
+                                <div class="form-group">
+                                    <label class="form-control-label" for="theme">Chủ đề</label>
+                                    <select class="form-control" id="theme" asp-for="Theme">
+                                        <option value="light">Sáng</option>
+                                        <option value="dark">Tối</option>
+                                        <option value="auto">Tự động</option>
+                                    </select>
+                                </div>
+
+                                <!-- Múi giờ -->
+                                <div class="form-group">
+                                    <label class="form-control-label" for="timezone">Múi giờ</label>
+                                    <select class="form-control" id="timezone" asp-for="TimeZone">
+                                        <option value="Asia/Ho_Chi_Minh">Asia/Ho_Chi_Minh (GMT+7)</option>
+                                        <option value="Asia/Bangkok">Asia/Bangkok (GMT+7)</option>
+                                        <option value="Asia/Singapore">Asia/Singapore (GMT+8)</option>
+                                        <option value="Asia/Tokyo">Asia/Tokyo (GMT+9)</option>
+                                        <option value="America/New_York">America/New_York (GMT-5)</option>
+                                        <option value="Europe/London">Europe/London (GMT+0)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Cài đặt hiển thị -->
+                            <div class="col-md-6">
+                                <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Cài đặt hiển thị</h6>
+
+                                <!-- Số lượng hiển thị trên trang -->
+                                <div class="form-group">
+                                    <label class="form-control-label" for="itemsPerPage">Số lượng hiển thị trên trang</label>
+                                    <select class="form-control" id="itemsPerPage" asp-for="ItemsPerPage">
+                                        <option value="5">5 mục</option>
+                                        <option value="10">10 mục</option>
+                                        <option value="20">20 mục</option>
+                                        <option value="50">50 mục</option>
+                                    </select>
+                                </div>
+
+                                <!-- Kích thước chữ -->
+                                <div class="form-group">
+                                    <label class="form-control-label" for="fontSize">Kích thước chữ</label>
+                                    <select class="form-control" id="fontSize" asp-for="FontSize">
+                                        <option value="12">Nhỏ (12px)</option>
+                                        <option value="14">Vừa (14px)</option>
+                                        <option value="16">Lớn (16px)</option>
+                                        <option value="18">Rất lớn (18px)</option>
+                                        <option value="20">Cực lớn (20px)</option>
+                                    </select>
+                                </div>
+
+                                <!-- Định dạng tiền tệ -->
+                                <div class="form-group">
+                                    <label class="form-control-label" for="currencyFormat">Định dạng tiền tệ</label>
+                                    <select class="form-control" id="currencyFormat" asp-for="CurrencyFormat">
+                                        <option value="N0">1,000,000 (Có dấu phẩy)</option>
+                                        <option value="N2">1,000,000.00 (Có phần thập phân)</option>
+                                        <option value="F0">1000000 (Không dấu phẩy)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="horizontal dark">
+
+                        <!-- Cài đặt thông báo -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Cài đặt thông báo</h6>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <!-- Thông báo email -->
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="receiveEmailNotifications" asp-for="ReceiveEmailNotifications">
+                                            <label class="form-check-label" for="receiveEmailNotifications">
+                                                <i class="fas fa-envelope text-info me-2"></i>
+                                                Thông báo qua email
+                                            </label>
+                                        </div>
+                                        <small class="text-muted">Nhận thông báo về các hoạt động tài khoản qua email</small>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <!-- Thông báo push -->
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="receivePushNotifications" asp-for="ReceivePushNotifications">
+                                            <label class="form-check-label" for="receivePushNotifications">
+                                                <i class="fas fa-bell text-warning me-2"></i>
+                                                Thông báo push
+                                            </label>
+                                        </div>
+                                        <small class="text-muted">Nhận thông báo real-time trên trình duyệt</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="horizontal dark">
+
+                        <!-- Cài đặt giao diện -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Cài đặt giao diện</h6>
+
+                                <!-- Chế độ tối -->
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" id="darkMode" asp-for="DarkMode">
+                                    <label class="form-check-label" for="darkMode">
+                                        <i class="fas fa-moon text-primary me-2"></i>
+                                        Chế độ tối
+                                    </label>
                                 </div>
+                                <small class="text-muted">Chuyển đổi giao diện sang chế độ tối để bảo vệ mắt</small>
                             </div>
-                            <small class="text-muted">Chuyển đổi giao diện sang chế độ tối</small>
                         </div>
 
-                        <!-- Notifications Setting -->
-                        <div class="form-group mb-4">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <label class="form-check-label" for="notifications">
-                                    <i class="fas fa-bell"></i> Thông báo
-                                </label>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="notifications" asp-for="Notifications">
-                                </div>
-                            </div>
-                            <small class="text-muted">Bật/tắt thông báo hệ thống</small>
-                        </div>
-
-                        <!-- Language Setting -->
-                        <div class="form-group mb-4">
-                            <label for="language">
-                                <i class="fas fa-language"></i> Ngôn ngữ
-                            </label>
-                            <select class="form-select" id="language" asp-for="Language">
-                                <option value="vi">Tiếng Việt</option>
-                                <option value="en">English</option>
-                            </select>
-                            <small class="text-muted">Chọn ngôn ngữ hiển thị</small>
-                        </div>
-
-                        <div class="text-end">
+                        <div class="text-end mt-4">
+                            <button type="button" class="btn btn-secondary me-2" onclick="resetToDefault()">
+                                <i class="fas fa-undo me-2"></i>Đặt lại mặc định
+                            </button>
                             <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Lưu cài đặt
+                                <i class="fas fa-save me-2"></i>Lưu cài đặt
                             </button>
                         </div>
                     </form>
@@ -76,9 +190,16 @@
 
                 var formData = {
                     userId: $('#UserId').val(),
+                    currency: $('#currency').val(),
+                    language: $('#language').val(),
+                    theme: $('#theme').val(),
+                    itemsPerPage: parseInt($('#itemsPerPage').val()),
+                    fontSize: parseInt($('#fontSize').val()),
+                    receiveEmailNotifications: $('#receiveEmailNotifications').is(':checked'),
+                    receivePushNotifications: $('#receivePushNotifications').is(':checked'),
                     darkMode: $('#darkMode').is(':checked'),
-                    notifications: $('#notifications').is(':checked'),
-                    language: $('#language').val()
+                    currencyFormat: $('#currencyFormat').val(),
+                    timeZone: $('#timezone').val()
                 };
 
                 $.ajax({
@@ -88,14 +209,17 @@
                     success: function (response) {
                         if (response.success) {
                             toastr.success(response.message);
-                            // Áp dụng dark mode ngay lập tức nếu thay đổi
-                            if (formData.darkMode) {
-                                $('body').addClass('dark-mode');
-                            } else {
-                                $('body').removeClass('dark-mode');
-                            }
+
+                            // Áp dụng các thay đổi ngay lập tức
+                            applySettings(formData);
                         } else {
                             toastr.error(response.message);
+                            if (response.errors) {
+                                // Hiển thị lỗi validation
+                                Object.keys(response.errors).forEach(function(key) {
+                                    toastr.error(response.errors[key]);
+                                });
+                            }
                         }
                     },
                     error: function () {
@@ -104,51 +228,131 @@
                 });
             });
 
-            // Xử lý dark mode switch
+            // Xử lý thay đổi chế độ tối
             $('#darkMode').change(function() {
-                if ($(this).is(':checked')) {
-                    $('body').addClass('dark-mode');
-                } else {
-                    $('body').removeClass('dark-mode');
-                }
+                applyDarkMode($(this).is(':checked'));
             });
+
+            // Xử lý thay đổi kích thước chữ
+            $('#fontSize').change(function() {
+                applyFontSize(parseInt($(this).val()));
+            });
+
+            // Xử lý thay đổi chủ đề
+            $('#theme').change(function() {
+                applyTheme($(this).val());
+            });
+        });
+
+        function applySettings(settings) {
+            applyDarkMode(settings.darkMode);
+            applyFontSize(settings.fontSize);
+            applyTheme(settings.theme);
+
+            // Lưu vào localStorage để duy trì qua các lần refresh
+            localStorage.setItem('userSettings', JSON.stringify(settings));
+        }
+
+        function applyDarkMode(isDark) {
+            if (isDark) {
+                $('body').addClass('dark-mode');
+                $('.card').addClass('bg-dark text-white');
+            } else {
+                $('body').removeClass('dark-mode');
+                $('.card').removeClass('bg-dark text-white');
+            }
+        }
+
+        function applyFontSize(size) {
+            $('body').css('font-size', size + 'px');
+        }
+
+        function applyTheme(theme) {
+            // Xử lý thay đổi chủ đề
+            if (theme === 'dark') {
+                applyDarkMode(true);
+            } else if (theme === 'light') {
+                applyDarkMode(false);
+            } else if (theme === 'auto') {
+                // Tự động dựa trên system preference
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                applyDarkMode(prefersDark);
+            }
+        }
+
+        function resetToDefault() {
+            if (confirm('Bạn có chắc chắn muốn đặt lại tất cả cài đặt về mặc định?')) {
+                $('#currency').val('VND');
+                $('#language').val('vi');
+                $('#theme').val('light');
+                $('#itemsPerPage').val(10);
+                $('#fontSize').val(14);
+                $('#receiveEmailNotifications').prop('checked', true);
+                $('#receivePushNotifications').prop('checked', true);
+                $('#darkMode').prop('checked', false);
+                $('#currencyFormat').val('N0');
+                $('#timezone').val('Asia/Ho_Chi_Minh');
+
+                // Áp dụng ngay lập tức
+                applySettings({
+                    darkMode: false,
+                    fontSize: 14,
+                    theme: 'light'
+                });
+
+                toastr.info('Đã đặt lại cài đặt về mặc định');
+            }
+        }
+
+        // Load settings từ localStorage khi trang load
+        $(document).ready(function() {
+            const savedSettings = localStorage.getItem('userSettings');
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                applySettings(settings);
+            }
         });
     </script>
 }
 
 <style>
     .dark-mode {
-        background-color: #1a1a1a;
-        color: #ffffff;
+        background-color: #1a1a1a !important;
+        color: #ffffff !important;
     }
 
-        .dark-mode .card {
-            background-color: #2d2d2d;
-            border-color: #404040;
-        }
+    .dark-mode .card {
+        background-color: #2d2d2d !important;
+        border-color: #404040 !important;
+    }
 
-        .dark-mode .card-header {
-            background-color: #404040 !important;
-        }
+    .dark-mode .card-header {
+        background-color: #404040 !important;
+        border-color: #505050 !important;
+    }
 
-        .dark-mode .form-control,
-        .dark-mode .form-select {
-            background-color: #404040;
-            border-color: #505050;
-            color: #ffffff;
-        }
+    .dark-mode .form-control,
+    .dark-mode .form-select {
+        background-color: #404040 !important;
+        border-color: #505050 !important;
+        color: #ffffff !important;
+    }
 
-        .dark-mode .text-muted {
-            color: #a0a0a0 !important;
-        }
+    .dark-mode .text-muted {
+        color: #a0a0a0 !important;
+    }
 
     .form-switch .form-check-input {
         width: 3em;
         height: 1.5em;
     }
 
-        .form-switch .form-check-input:checked {
-            background-color: #0d6efd;
-            border-color: #0d6efd;
-        }
+    .form-switch .form-check-input:checked {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+
+    .form-check-label {
+        cursor: pointer;
+    }
 </style>

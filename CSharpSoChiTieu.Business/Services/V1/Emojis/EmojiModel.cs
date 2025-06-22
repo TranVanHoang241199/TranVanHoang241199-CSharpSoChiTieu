@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using CSharpSoChiTieu.common;
 using CSharpSoChiTieu.Data;
-using CSharpSoChiTieu.Data.Data.Entitys;
 
 namespace CSharpSoChiTieu.Business.Services
 {

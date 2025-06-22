@@ -65,5 +65,10 @@ namespace CSharpSoChiTieu.Data
         /// Thời gian hết hạn của token reset mật khẩu
         /// </summary>
         public DateTime? PasswordResetTokenExpiry { get; set; }
+
+        /// <summary>
+        /// Navigation property cho UserSetting
+        /// </summary>
+        public virtual ct_UserSetting ct_UserSettings { get; set; }
     }
 }
