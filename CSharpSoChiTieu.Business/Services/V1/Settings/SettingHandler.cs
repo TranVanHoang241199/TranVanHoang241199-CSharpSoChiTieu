@@ -1,5 +1,7 @@
-﻿using AutoMapper;
+﻿using API_HotelManagement.common;
+using AutoMapper;
 using CSharpSoChiTieu.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -10,12 +12,14 @@ namespace CSharpSoChiTieu.Business.Services
         private readonly CTDbContext _context;
         private readonly IMapper _mapper;
         private readonly ILogger<SettingHandler> _logger;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public SettingHandler(CTDbContext context, IMapper mapper, ILogger<SettingHandler> logger)
+        public SettingHandler(CTDbContext context, IMapper mapper, ILogger<SettingHandler> logger, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _mapper = mapper;
             _logger = logger;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public UserProfileModel GetUserProfile(string userId)
@@ -84,19 +88,21 @@ namespace CSharpSoChiTieu.Business.Services
             }
         }
 
-        public SettingViewModel GetUserSettings(Guid userId)
+        public SettingViewModel GetUserSettings()
         {
             try
             {
+                var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
+
                 var userSetting = _context.ct_UserSettings
-                    .FirstOrDefault(s => s.UserId == userId);
+                    .FirstOrDefault(s => s.UserId == currentUserId);
 
                 if (userSetting == null)
                 {
                     // Trả về settings mặc định nếu chưa có
                     return new SettingViewModel
                     {
-                        UserId = userId,
+                        UserId = currentUserId,
                         Currency = "VND",
                         Language = "vi",
                         Theme = "light",
@@ -114,17 +120,19 @@ namespace CSharpSoChiTieu.Business.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Lỗi khi lấy cài đặt của người dùng {userId}");
+                _logger.LogError(ex, $"Lỗi khi lấy cài đặt của người dùng");
                 throw;
             }
         }
 
-        public bool CreateDefaultSettings(Guid userId)
+        public bool CreateDefaultSettings()
         {
             try
             {
+                var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
+
                 var existingSettings = _context.ct_UserSettings
-                    .FirstOrDefault(s => s.UserId == userId);
+                    .FirstOrDefault(s => s.UserId == currentUserId);
 
                 if (existingSettings != null)
                 {
@@ -134,7 +142,7 @@ namespace CSharpSoChiTieu.Business.Services
                 var defaultSettings = new ct_UserSetting
                 {
                     Id = Guid.NewGuid(),
-                    UserId = userId,
+                    UserId = currentUserId,
                     Currency = "VND",
                     Language = "vi",
                     Theme = "light",
@@ -146,7 +154,7 @@ namespace CSharpSoChiTieu.Business.Services
                     CurrencyFormat = "N0",
                     TimeZone = "Asia/Ho_Chi_Minh",
                     CreatedDate = DateTime.UtcNow,
-                    CreatedBy = userId
+                    CreatedBy = currentUserId
                 };
 
                 _context.ct_UserSettings.Add(defaultSettings);
@@ -155,9 +163,25 @@ namespace CSharpSoChiTieu.Business.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Lỗi khi tạo cài đặt mặc định cho người dùng {userId}");
+                _logger.LogError(ex, $"Lỗi khi tạo cài đặt mặc định cho người dùng");
                 throw;
             }
+        }
+
+        public bool UpdateCurrency(string currencyCode)
+        {
+
+            var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
+
+            var setting = _context.ct_UserSettings.FirstOrDefault(s => s.UserId == currentUserId);
+            if (setting == null)
+            {
+                return false;
+            }
+
+            setting.Currency = currencyCode;
+            _context.SaveChanges();
+            return true;
         }
     }
 }

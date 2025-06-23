@@ -291,7 +291,7 @@ namespace CSharpSoChiTieu.Business.Services
         /// <param name="search"></param>
         /// <param name="range"></param>
         /// <returns></returns>
-        public async Task<OperationResult> Gets(IncomeExpenseType Type = 0, string search = "", string range = "month")
+        public async Task<OperationResult> Gets(IncomeExpenseType Type = 0, string search = "", string range = "month", string currency = null)
         {
             try
             {
@@ -340,6 +340,9 @@ namespace CSharpSoChiTieu.Business.Services
                     .AsNoTracking()
                     .Where(o => o.CreatedBy == currentUserId &&
                                 o.Date >= startDate && o.Date <= endDate);
+
+                if (!string.IsNullOrEmpty(currency))
+                    query = query.Where(o => o.Currency == currency);
 
                 if (Type != 0)
                     query = query.Where(o => o.Type == Type);
@@ -397,7 +400,7 @@ namespace CSharpSoChiTieu.Business.Services
         /// <param name="month"></param>
         /// <param name="day"></param>
         /// <returns></returns>
-        public async Task<OperationResult> Gets(int page, int pageSize, string searchValue, /*IncomeExpenseType type = IncomeExpenseType.Null, string range = "",*/ int? year = null, int? month = null, int? day = null)
+        public async Task<OperationResult> Gets(int page, int pageSize, string searchValue, /*IncomeExpenseType type = IncomeExpenseType.Null, string range = "",*/ int? year = null, int? month = null, int? day = null, string currency = null)
         {
             try
             {
@@ -423,6 +426,9 @@ namespace CSharpSoChiTieu.Business.Services
                         }
                     }
                 }
+
+                if (!string.IsNullOrEmpty(currency))
+                    query = query.Where(o => o.Currency == currency);
 
                 // Filter theo tìm kiếm
                 if (!string.IsNullOrEmpty(searchValue)) query = query.Where(o => o.Description.Contains(searchValue.Trim()));
@@ -485,7 +491,7 @@ namespace CSharpSoChiTieu.Business.Services
         /// </summary>
         /// <param name="range"></param>
         /// <returns></returns>
-        public async Task<OperationResult> GetSummary(string? range = "month")
+        public async Task<OperationResult> GetSummary(string? range = "month", string currency = null)
         {
             try
             {
@@ -523,7 +529,8 @@ namespace CSharpSoChiTieu.Business.Services
                 var summaryData = await _context.ct_IncomeExpense
                     .Where(o => o.CreatedBy == currentUserId &&
                                 o.Date >= startDate &&
-                                o.Date <= endDate)
+                                o.Date <= endDate && 
+                                o.Currency == currency)
                     .GroupBy(o => 1) // Gom tất cả vào 1 nhóm
                     .Select(g => new
                     {
@@ -554,7 +561,7 @@ namespace CSharpSoChiTieu.Business.Services
         /// <param name="day"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
-        public async Task<OperationResult> GetSummary(int? year, int? month, int? day, string searchValue)
+        public async Task<OperationResult> GetSummary(int? year, int? month, int? day, string searchValue, string currency)
         {
             try
             {
@@ -586,6 +593,9 @@ namespace CSharpSoChiTieu.Business.Services
                     var keyword = searchValue.Trim();
                     query = query.Where(o => o.Description.Contains(keyword));
                 }
+
+                if (!string.IsNullOrEmpty(currency))
+                    query = query.Where(o => o.Currency == currency);
 
                 // Truy vấn tổng trực tiếp trên database
                 var summaryData = await query

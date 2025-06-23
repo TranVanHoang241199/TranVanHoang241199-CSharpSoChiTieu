@@ -1,10 +1,11 @@
 ﻿using API_HotelManagement.common;
-using System.Threading.Tasks;
 
 namespace CSharpSoChiTieu.Business.Services
 {
     public interface ICurrencyHandler
     {
         Task<OperationResult> GetAll();
+        Task<SettingViewModel> GetSetting(Guid userId);
+        Task<string> GetSymbolByCodeAsync(string code);
     }
 }

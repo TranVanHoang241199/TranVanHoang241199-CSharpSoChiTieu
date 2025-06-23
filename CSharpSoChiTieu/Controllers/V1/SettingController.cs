@@ -28,7 +28,7 @@ namespace CSharpSoChiTieu.Controllers
 
             try
             {
-                var settings = _settingHandler.GetUserSettings(userId);
+                var settings = _settingHandler.GetUserSettings();
                 return View(settings);
             }
             catch (Exception ex)
@@ -79,13 +79,37 @@ namespace CSharpSoChiTieu.Controllers
 
             try
             {
-                var settings = _settingHandler.GetUserSettings(userId);
+                var settings = _settingHandler.GetUserSettings();
                 return Json(new { success = true, data = settings });
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Lỗi khi lấy cài đặt cho user {userId}");
                 return Json(new { success = false, message = "Có lỗi xảy ra khi lấy cài đặt" });
+            }
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCurrency(string currencyCode)
+        {
+            if (string.IsNullOrEmpty(currencyCode))
+            {
+                return Json(new { success = false, message = "Mã tiền tệ không hợp lệ" });
+            }
+
+            try
+            {
+                var result = _settingHandler.UpdateCurrency(currencyCode);
+                if (result)
+                {
+                    return Json(new { success = true, message = "Cập nhật tiền tệ thành công" });
+                }
+                return Json(new { success = false, message = "Cập nhật tiền tệ thất bại" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Lỗi khi cập nhật tiền tệ");
+                return Json(new { success = false, message = "Có lỗi xảy ra khi cập nhật tiền tệ" });
             }
         }
     }

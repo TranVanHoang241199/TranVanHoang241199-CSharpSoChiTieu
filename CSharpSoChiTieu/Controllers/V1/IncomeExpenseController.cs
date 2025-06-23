@@ -13,13 +13,17 @@ namespace CSharpSoChiTieu.Controllers
     {
         private readonly IIncomeExpenseHandler _IncomeExpenseHandler;
         private readonly ICurrencyHandler _currencyHandler;
+        private readonly ISettingHandler _settingHandler;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         private const string IE_SESSION_KEY = "IncomeExpenseSession";
 
-        public IncomeExpenseController(IIncomeExpenseHandler IncomeExpenseHandler, ICurrencyHandler currencyHandler)
+        public IncomeExpenseController(IIncomeExpenseHandler IncomeExpenseHandler, ICurrencyHandler currencyHandler, ISettingHandler settingHandler, IHttpContextAccessor httpContextAccessor)
         {
             _IncomeExpenseHandler = IncomeExpenseHandler;
             _currencyHandler = currencyHandler;
+            _settingHandler = settingHandler;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public IActionResult Index()
@@ -52,6 +56,10 @@ namespace CSharpSoChiTieu.Controllers
             var currencies = (currencyResult as OperationResultList<CurrencyViewModel>)?.Data ?? new List<CurrencyViewModel>();
             ViewBag.Currencies = currencies;
 
+            // Lấy đơn vị tiền tệ đang lưu trong user setting
+            var userSetting = _settingHandler.GetUserSettings();
+            ViewBag.SelectedCurrency = userSetting?.Currency ?? "VND";
+
             // Initialize model with default values
             var model = new IncomeExpenseCreateUpdateModel
             {
@@ -65,7 +73,6 @@ namespace CSharpSoChiTieu.Controllers
             ViewBag.Type = type;
             ViewBag.Title = type == "income" ? "Tạo khoản thu" : "Tạo khoản chi";
             ViewBag.CategoryType = type == "income" ? IncomeExpenseType.Income : IncomeExpenseType.Expense;
-
 
             return View(model);
         }
@@ -100,7 +107,13 @@ namespace CSharpSoChiTieu.Controllers
 
             ViewBag.RangeType = currentRange;
 
-            var result = await _IncomeExpenseHandler.Gets(0, "", currentRange);
+            // Lấy toàn bộ symbol cho các loại currency
+            var allCurrencies = await _currencyHandler.GetAll() as OperationResultList<CurrencyViewModel>;
+            var symbolDict = allCurrencies?.Data?.ToDictionary(c => c.Code, c => c.Symbol) ?? new Dictionary<string, string>();
+            ViewBag.Symbols = symbolDict;
+
+            var userSetting = _settingHandler.GetUserSettings();
+            var result = await _IncomeExpenseHandler.Gets(0, "", currentRange, userSetting.Currency);
 
             if (result.Status != HttpStatusCode.OK)
                 return Content("Lỗi khi lấy dữ liệu: " + result.Message);
@@ -115,24 +128,32 @@ namespace CSharpSoChiTieu.Controllers
         [HttpGet]
         public async Task<IActionResult> GetSummary(string? range = "month")
         {
-            var result = await _IncomeExpenseHandler.GetSummary(range);
+            // Lấy userId hiện tại
+            var userId = _httpContextAccessor.GetUserId();
+            var userSetting = _settingHandler.GetUserSettings();
+            var currency = userSetting?.Currency ?? "VND";
+
+            // Lấy symbol
+            var symbol = await _currencyHandler.GetSymbolByCodeAsync(currency);
+
+            var result = await _IncomeExpenseHandler.GetSummary(range, currency);
 
             if (result is OperationResult<IncomeExpenseummaryViewModel> summaryResult)
             {
                 var model = summaryResult.Data;
                 return Json(new
                 {
-                    totalIncomeFormatted = $"{model.TotalIncome:N0} đ",
-                    totalExpenseFormatted = $"{model.TotalExpense:N0} đ",
-                    remainingBalanceFormatted = $"{model.Balance:N0} đ"
+                    totalIncomeFormatted = $"{model.TotalIncome:N0} {symbol}",
+                    totalExpenseFormatted = $"{model.TotalExpense:N0} {symbol}",
+                    remainingBalanceFormatted = $"{model.Balance:N0} {symbol}"
                 });
             }
 
             return Json(new
             {
-                totalIncomeFormatted = "0 đ",
-                totalExpenseFormatted = "0 đ",
-                remainingBalanceFormatted = "0 đ"
+                totalIncomeFormatted = $"0 {symbol}",
+                totalExpenseFormatted = $"0 {symbol}",
+                remainingBalanceFormatted = $"0 {symbol}"
             });
         }
 

@@ -23,13 +23,15 @@ namespace CSharpSoChiTieu.Business.Services
         /// </summary>
         /// <param name="userId">ID của người dùng</param>
         /// <returns>Cài đặt của người dùng</returns>
-        SettingViewModel GetUserSettings(Guid userId);
+        SettingViewModel GetUserSettings();
 
         /// <summary>
         /// Tạo cài đặt mặc định cho người dùng mới
         /// </summary>
         /// <param name="userId">ID của người dùng</param>
         /// <returns>True nếu tạo thành công, False nếu thất bại</returns>
-        bool CreateDefaultSettings(Guid userId);
+        bool CreateDefaultSettings();
+
+        bool UpdateCurrency(string currencyCode);
     }
 }

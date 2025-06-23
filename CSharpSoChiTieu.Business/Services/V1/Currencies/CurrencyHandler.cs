@@ -30,5 +30,18 @@ namespace CSharpSoChiTieu.Business.Services
                 return new OperationResultError(HttpStatusCode.InternalServerError, "Đã xảy ra lỗi: " + ex.Message);
             }
         }
+
+        public async Task<SettingViewModel> GetSetting(Guid userId)
+        {
+            var setting = await _context.ct_UserSettings.FirstOrDefaultAsync(s => s.UserId == userId);
+            return _mapper.Map<SettingViewModel>(setting);
+        }
+
+        public async Task<string> GetSymbolByCodeAsync(string code)
+        {
+            if (string.IsNullOrEmpty(code)) return string.Empty;
+            var currency = await _context.ct_Currencies.FirstOrDefaultAsync(c => c.Code == code);
+            return currency?.Symbol ?? string.Empty;
+        }
     }
 }

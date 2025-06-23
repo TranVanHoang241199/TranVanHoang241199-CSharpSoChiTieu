@@ -2,9 +2,9 @@
 
 namespace API_HotelManagement.common
 {
-    public class GetExtensions
+    public static class GetExtensions
     {
-        public static Guid GetUserId(IHttpContextAccessor httpContextAccessor)
+        public static Guid GetUserId(this IHttpContextAccessor httpContextAccessor)
         {
             var userIdClaim = httpContextAccessor.HttpContext?.User?.FindFirst("UserId");
 

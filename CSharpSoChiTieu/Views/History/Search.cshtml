@@ -2,6 +2,7 @@
 @using CSharpSoChiTieu.common;
 @{
     Layout = null;
+    var currencySymbols = ViewBag.Symbols as Dictionary<string, string> ?? new Dictionary<string, string>();
 }
 
 <div class="card h-100 shadow-sm">
@@ -43,7 +44,7 @@
                                     </div>
                                 </div>
                                 <div class="@amountClass text-gradient text-sm fw-bold ms-2 text-nowrap">
-                                    @(item.Type == IncomeExpenseType.Income ? "+" : "-")@item.Amount.ToString("N0") @item.Currency
+                                    @(item.Type == IncomeExpenseType.Income ? "+" : "-")@item.Amount.ToString("N0") @(currencySymbols.ContainsKey(item.Currency) ? currencySymbols[item.Currency] : item.Currency)
                                 </div>
                             </li>
                         }

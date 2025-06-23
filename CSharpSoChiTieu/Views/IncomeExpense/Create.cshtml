@@ -59,20 +59,17 @@
                             name="Currency"
                             id="transaction-currency"
                             style="max-width: 90px;">
-                        @* <option value="VND" selected>VNĐ</option>
-                        <option value="USD">USD</option>
-                        <option value="LAK">LAK</option>
-                        <option value="EUR">EUR</option>
-                        <option value="JPY">JPY</option> *@
                         @if (ViewBag.Currencies != null)
                         {
+                            var selectedCurrency = ViewBag.SelectedCurrency as string;
                             foreach (var currency in (List<CurrencyViewModel>)ViewBag.Currencies)
                             {
-                                <option value="@currency.Code" selected="@(currency.Code == "VND" ? "selected" : null)">
+                                <option value="@currency.Code" selected="@(currency.Code == selectedCurrency ? "selected" : null)">
                                     @currency.Code
                                 </option>
                             }
                         }
+
                     </select>
                 </div>
             </div>
@@ -140,6 +137,27 @@
             if (!/^\d*$/.test(pastedText)) {
                 return false;
             }
+        });
+
+        $("#transaction-currency").on("change", function() {
+            var selectedCurrency = $(this).val();
+            $.ajax({
+                url: '/Setting/UpdateCurrency',
+                type: 'POST',
+                data: { currencyCode: selectedCurrency },
+                success: function(res) {
+                    // Sau khi đổi đơn vị tiền tệ, gọi lại loadFormHistory và updateSummary
+                    if (typeof loadFormHistory === 'function') {
+                        loadFormHistory("@ViewBag.RangeType");
+                    }
+                    if (typeof updateSummary === 'function') {
+                        updateSummary("@ViewBag.RangeType");
+                    }
+                },
+                error: function() {
+                    alert('Cập nhật đơn vị tiền tệ thất bại!');
+                }
+            });
         });
     });
 

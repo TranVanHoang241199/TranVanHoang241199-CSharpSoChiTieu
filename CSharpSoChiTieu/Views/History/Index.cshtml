@@ -1,4 +1,5 @@
-﻿@model CSharpSoChiTieu.Models.PaginationHistorySearchInput
+﻿@using CSharpSoChiTieu.Business.Services
+@model CSharpSoChiTieu.Models.PaginationHistorySearchInput
 
 @{
     var totalIncomeFormatted = ViewData["TotalIncomeFormatted"]?.ToString() ?? "0 đ";
@@ -38,7 +39,22 @@
                                                 <i class="fas fa-filter me-1"></i> Bộ lọc
                                             </button>
                                         </div>
+                                        <div class="mb-2 mb-md-0 me-md-2 w-100 w-md-auto">
+                                            <select id="currency-filter" name="currency" class="btn btn-outline-success w-100 w-md-auto">
+                                                <option value="">Tiền tệ</option>
+                                                @if (ViewBag.Currencies != null)
+                                                {
+                                                    var selectedCurrency = ViewBag.SelectedCurrency as string;
+                                                    foreach (var currency in (List<CurrencyViewModel>)ViewBag.Currencies)
+                                                    {
+                                                        <option value="@currency.Code" selected="@(currency.Code == selectedCurrency ? "selected" : null)">
+                                                            @currency.Code
+                                                        </option>
+                                                    }
+                                                }
 
+                                            </select>
+                                        </div>
                                         <div class="mb-2 mb-md-0 me-md-2 w-100 w-md-auto">
                                             <select id="yearSelect" name="year" class="btn btn-outline-success w-100 w-md-auto">
                                                 <option value="">Chọn năm</option>
@@ -183,11 +199,12 @@
             const month = $('#monthSelect').val();
             const day = $('#daySelect').val();
             const searchValue = $('input[name="searchValue"]').val();
+            const currency = $('#currency-filter').val();
 
             $.ajax({
                 url: '@Url.Action("GetSummary", "History")',
                 type: 'GET',
-                data: { year, month, day, searchValue },
+                data: { year, month, day, searchValue, currency },
                 success: function (data) {
                     $("#total-income").text(data.totalIncomeFormatted);
                     $("#total-expense").text(data.totalExpenseFormatted);
@@ -274,6 +291,11 @@
 
             $('#formSearch').submit(function (e) {
                 e.preventDefault();
+                doSearch(1);
+                updateSummaryHistory();
+            });
+
+            $('#currency-filter').change(function() {
                 doSearch(1);
                 updateSummaryHistory();
             });
