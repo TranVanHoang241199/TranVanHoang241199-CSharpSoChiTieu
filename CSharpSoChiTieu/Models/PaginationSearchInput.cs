@@ -1,5 +1,4 @@
-﻿
-namespace CSharpSoChiTieu.Models
+﻿namespace CSharpSoChiTieu.Models
 {
     public class PaginationSearchInput
     {
@@ -41,5 +40,19 @@ namespace CSharpSoChiTieu.Models
         public int? Month { get; set; }
         public int? Day { get; set; }
         public string currency { get; set; } = null;
+
+        // Filter theo loại giao dịch
+        public string? Type { get; set; }
+
+        // Filter theo khoảng tiền
+        public decimal? AmountFrom { get; set; }
+        public decimal? AmountTo { get; set; }
+
+        // Filter theo khoảng ngày
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+
+        // Filter nhanh theo thời gian
+        public string? QuickDate { get; set; }
     }
 }

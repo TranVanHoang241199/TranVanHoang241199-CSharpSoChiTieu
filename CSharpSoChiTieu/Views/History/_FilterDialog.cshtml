@@ -48,11 +48,23 @@
                                 Lọc theo khoảng tiền
                             </label>
                         </div>
-                        <input type="range" class="form-range" min="0" max="100000000" step="100000"
-                               id="amountRange" oninput="updateAmountLabel(this.value)" disabled>
-                        <div class="text-end"><small>Số tiền đến: <span id="amountLabel">0</span> đ</small></div>
-                        <input type="hidden" id="amountTo" name="amountTo" value="0" />
+                        <div class="range-slider-container" style="display: none;">
+                            <div class="range-slider position-relative">
+                                <input type="range" class="form-range range-slider__range" min="0" max="100000000" step="100000"
+                                       id="amountRangeFrom" oninput="updateAmountLabels()" disabled>
+                                <input type="range" class="form-range range-slider__range" min="0" max="100000000" step="100000"
+                                       id="amountRangeTo" oninput="updateAmountLabels()" disabled>
+                            </div>
+                            <div class="range-labels d-flex justify-content-between mt-2">
+                                <small>Từ: <span id="amountLabelFrom">0</span> đ</small>
+                                <small>Đến: <span id="amountLabelTo">0</span> đ</small>
+                            </div>
+                            <input type="hidden" id="amountFrom" name="amountFrom" value="0" />
+                            <input type="hidden" id="amountTo" name="amountTo" value="100000000" />
+                        </div>
                     </div>
+
+
 
                     <!-- Ngày từ / đến -->
                     <div class="col-md-6 border rounded p-2">
@@ -76,11 +88,56 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button type="submit" class="btn btn-primary" form="formSearch">Áp dụng lọc</button>
+                <button type="button" class="btn btn-primary" onclick="applyFilters()">Áp dụng lọc</button>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .range-slider {
+        position: relative;
+        height: 40px;
+    }
+
+    .range-slider__range {
+        position: absolute;
+        width: 100%;
+        pointer-events: none;
+        -webkit-appearance: none;
+        background: transparent;
+    }
+
+        .range-slider__range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #5e72e4;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            pointer-events: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .range-slider__range::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #5e72e4;
+            border: 2px solid white;
+            cursor: pointer;
+            pointer-events: auto;
+            z-index: 2;
+        }
+
+    .range-labels small {
+        font-weight: bold;
+    }
+
+</style>
 
 <script>
     $(document).ready(function () {
@@ -90,21 +147,129 @@
         });
 
         $('#filterAmountEnabled').change(function () {
-            $('#amountRange').prop('disabled', !this.checked);
+            const isChecked = this.checked;
+            $('#amountRangeFrom, #amountRangeTo').prop('disabled', !isChecked);
+            $('.range-slider-container').toggle(isChecked);
+
+            if (isChecked) {
+                // Khởi tạo giá trị mặc định
+                $('#amountRangeFrom').val(0);
+                $('#amountRangeTo').val(100000000);
+                updateAmountLabels();
+            }
         });
 
         $('#filterDateEnabled').change(function () {
-            $('#fromDate, #toDate').prop('disabled', !this.checked);
+            const isChecked = this.checked;
+            $('#fromDate, #toDate').prop('disabled', !isChecked);
+
+            if (isChecked) {
+                const today = new Date();
+                const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+
+                // Chuyển định dạng sang yyyy-MM-dd để gán vào input type="date"
+                const formatDate = date => date.toISOString().split('T')[0];
+
+                $('#fromDate').val(formatDate(firstDay));
+                $('#toDate').val(formatDate(today));
+            } else {
+                // Nếu bỏ chọn thì xóa giá trị
+                $('#fromDate').val('');
+                $('#toDate').val('');
+            }
         });
+
 
         $('#filterQuickDateEnabled').change(function () {
             $('#quickDateSelect').prop('disabled', !this.checked);
         });
+
+
+        // Khởi tạo range slider
+        initializeRangeSlider();
     });
 
-    function updateAmountLabel(value) {
-        const formatted = parseInt(value).toLocaleString('vi-VN');
-        $('#amountLabel').text(formatted);
-        $('#amountTo').val(value);
+    function initializeRangeSlider() {
+        const fromSlider = document.getElementById('amountRangeFrom');
+        const toSlider = document.getElementById('amountRangeTo');
+
+        const minGap = 1000000; // Khoảng tối thiểu giữa 2 điểm
+
+        fromSlider.addEventListener('input', function () {
+            let fromValue = parseInt(fromSlider.value);
+            let toValue = parseInt(toSlider.value);
+
+            if (fromValue + minGap > toValue) {
+                fromSlider.value = toValue - minGap;
+                fromValue = parseInt(fromSlider.value);
+            }
+
+            updateAmountLabels();
+        });
+
+        toSlider.addEventListener('input', function () {
+            let fromValue = parseInt(fromSlider.value);
+            let toValue = parseInt(toSlider.value);
+
+            if (toValue - minGap < fromValue) {
+                toSlider.value = fromValue + minGap;
+                toValue = parseInt(toSlider.value);
+            }
+
+            updateAmountLabels();
+        });
+    }
+
+
+    function updateAmountLabels() {
+        const fromValue = parseInt($('#amountRangeFrom').val());
+        const toValue = parseInt($('#amountRangeTo').val());
+
+        $('#amountLabelFrom').text(fromValue.toLocaleString('vi-VN'));
+        $('#amountLabelTo').text(toValue.toLocaleString('vi-VN'));
+
+        $('#amountFrom').val(fromValue);
+        $('#amountTo').val(toValue);
+    }
+
+    function applyFilters() {
+        // Lấy dữ liệu từ form search chính
+        const formData = new FormData(document.getElementById('formSearch'));
+
+        // Thêm các filter mới
+        if ($('#filterTypeEnabled').is(':checked')) {
+            formData.set('Type', $('#typeSelect').val());
+        }
+
+        if ($('#filterAmountEnabled').is(':checked')) {
+            formData.set('AmountFrom', $('#amountFrom').val());
+            formData.set('AmountTo', $('#amountTo').val());
+        }
+
+        if ($('#filterDateEnabled').is(':checked')) {
+            formData.set('FromDate', $('#fromDate').val());
+            formData.set('ToDate', $('#toDate').val());
+        }
+
+        if ($('#filterQuickDateEnabled').is(':checked')) {
+            formData.set('QuickDate', $('#quickDateSelect').val());
+        }
+
+        // Chuyển FormData thành object
+        const searchData = {};
+        for (let [key, value] of formData.entries()) {
+            searchData[key] = value;
+        }
+
+        // Gọi function doSearch từ trang chính
+        if (typeof doSearch === 'function') {
+            doSearch(1, searchData);
+        }
+
+        // Đóng modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('filterModal'));
+        if (modal) {
+            modal.hide();
+        }
     }
 </script> 

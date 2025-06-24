@@ -35,7 +35,7 @@
                                 <div class="col-12 col-md-6 d-flex align-items-start align-items-md-center">
                                     <div class="d-flex flex-column flex-md-row w-100 justify-content-start align-items-start align-items-md-center">
                                         <div class="mb-2 mb-md-0 me-md-2 w-100 w-md-auto">
-                                            <button type="button" class="btn btn-outline-primary w-100 w-md-auto" data-bs-toggle="modal" data-bs-target="#filterModal">
+                                            <button type="button" class="btn btn-outline-primary w-100 w-md-auto" onclick="openFilterDialog()">
                                                 <i class="fas fa-filter me-1"></i> Bộ lọc
                                             </button>
                                         </div>
@@ -109,6 +109,14 @@
     <script>
         var filterModal = null;
 
+        function openFilterDialog() {
+            if (!filterModal) {
+                loadFilterDialog();
+            } else {
+                filterModal.show();
+            }
+        }
+
         function loadFilterDialog() {
             if (!$('#filterModal').length) {
                 $.ajax({
@@ -117,6 +125,7 @@
                     success: function(data) {
                         $('body').append(data);
                         filterModal = new bootstrap.Modal(document.getElementById('filterModal'));
+                        filterModal.show();
                     },
                     error: function() {
                         console.error('Không thể tải filter dialog');
@@ -124,6 +133,7 @@
                 });
             } else {
                 filterModal = new bootstrap.Modal(document.getElementById('filterModal'));
+                filterModal.show();
             }
         }
 
@@ -134,10 +144,33 @@
             const searchValue = $('input[name="searchValue"]').val();
             const currency = $('#currency-filter').val();
 
+            // Thêm các filter mới
+            const additionalParams = {};
+
+            if ($('#filterTypeEnabled').is(':checked')) {
+                additionalParams.Type = $('#typeSelect').val();
+            }
+
+            if ($('#filterAmountEnabled').is(':checked')) {
+                additionalParams.AmountFrom = $('#amountFrom').val();
+                additionalParams.AmountTo = $('#amountTo').val();
+            }
+
+            if ($('#filterDateEnabled').is(':checked')) {
+                additionalParams.FromDate = $('#fromDate').val();
+                additionalParams.ToDate = $('#toDate').val();
+            }
+
+            if ($('#filterQuickDateEnabled').is(':checked')) {
+                additionalParams.QuickDate = $('#quickDateSelect').val();
+            }
+
+            const requestData = { year, month, day, searchValue, currency, ...additionalParams };
+
             $.ajax({
                 url: '@Url.Action("GetSummary", "History")',
                 type: 'GET',
-                data: { year, month, day, searchValue, currency },
+                data: requestData,
                 success: function (data) {
                     $("#total-income").text(data.totalIncomeFormatted);
                     $("#total-expense").text(data.totalExpenseFormatted);
@@ -162,6 +195,33 @@
                     daySelect.append(`<option value="${day}" ${selected}>${day}</option>`);
                 }
             }
+        }
+
+        function getAllFilterData() {
+            const year = $('#yearSelect').val();
+            const month = $('#monthSelect').val();
+            const day = $('#daySelect').val();
+            const searchValue = $('input[name="searchValue"]').val();
+            const currency = $('#currency-filter').val();
+
+            const additionalParams = {};
+
+            if ($('#filterTypeEnabled').is(':checked')) {
+                additionalParams.Type = $('#typeSelect').val();
+            }
+            if ($('#filterAmountEnabled').is(':checked')) {
+                additionalParams.AmountFrom = $('#amountFrom').val();
+                additionalParams.AmountTo = $('#amountTo').val();
+            }
+            if ($('#filterDateEnabled').is(':checked')) {
+                additionalParams.FromDate = $('#fromDate').val();
+                additionalParams.ToDate = $('#toDate').val();
+            }
+            if ($('#filterQuickDateEnabled').is(':checked')) {
+                additionalParams.QuickDate = $('#quickDateSelect').val();
+            }
+
+            return { year, month, day, searchValue, currency, ...additionalParams };
         }
 
         $(document).ready(function () {
@@ -190,16 +250,13 @@
             updateDaysDropdown(modelYear, modelMonth, modelDay);
 
             // Sự kiện thay đổi
-            $('#yearSelect, #monthSelect').change(function () {
+            $('#yearSelect, #monthSelect, #daySelect, #currency-filter').change(function () {
                 const year = parseInt($('#yearSelect').val());
                 const month = parseInt($('#monthSelect').val());
                 updateDaysDropdown(year, month, null);
-                doSearch(1);
-                updateSummaryHistory();
-            });
 
-            $('#daySelect').change(function () {
-                doSearch(1);
+                const allFilterData = getAllFilterData();
+                doSearch(1, allFilterData);
                 updateSummaryHistory();
             });
 
@@ -210,8 +267,17 @@
             });
 
             $('#currency-filter').change(function() {
-                doSearch(1);
+                const allFilterData = getAllFilterData();
+                doSearch(1, allFilterData);
                 updateSummaryHistory();
+
+                // Gọi API lưu currency mặc định, chú ý tên tham số là currencyCode
+                const currency = $(this).val();
+                $.post('/Setting/UpdateCurrency', { currencyCode: currency }, function(res) {
+                    if(res.success) {
+                        // alert('Đã lưu tiền tệ mặc định!');
+                    }
+                });
             });
 
             // Event cho nút mở filter dialog
@@ -228,10 +294,19 @@
             updateSummaryHistory();
         });
 
-        function doSearch(page) {
+        function doSearch(page, additionalData = null) {
             const url = $("#formSearch").prop("action");
             const postData = $("#formSearch").serializeArray();
             postData.push({ "name": "page", "value": page });
+
+            // Thêm dữ liệu filter nếu có
+            if (additionalData) {
+                for (let key in additionalData) {
+                    if (additionalData[key] !== null && additionalData[key] !== undefined && additionalData[key] !== '') {
+                        postData.push({ "name": key, "value": additionalData[key] });
+                    }
+                }
+            }
 
             $.ajax({
                 url: url,
@@ -239,6 +314,7 @@
                 data: postData,
                 success: function (data) {
                     $("#searchResult").html(data);
+                    updateSummaryHistory();
                 },
                 error: function () {
                     alert("Không thể tải dữ liệu, vui lòng thử lại.");
