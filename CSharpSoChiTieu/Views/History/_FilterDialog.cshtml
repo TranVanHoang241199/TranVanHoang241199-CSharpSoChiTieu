@@ -1,71 +1,110 @@
-﻿<!-- Small Action Dialog -->
-<div id="actionDialog" class="position-fixed bg-white shadow-sm rounded" style="display: none; z-index: 1000; min-width: 120px;">
-	<ul class="list-group list-group-flush">
-		<li class="list-group-item py-1 px-2 action-edit" style="cursor: pointer; font-size: 0.875rem;">
-			<i class="material-symbols-rounded align-middle me-1" style="font-size: 1rem;">edit</i>
-			Chỉnh sửa
-		</li>
-		<li class="list-group-item py-1 px-2 action-delete" style="cursor: pointer; font-size: 0.875rem;">
-			<i class="material-symbols-rounded align-middle me-1" style="font-size: 1rem;">delete</i>
-			Xóa
-		</li>
-	</ul>
+﻿@* Dialog lọc *@
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content shadow">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="filterModalLabel"><i class="fas fa-filter me-2"></i>Lọc nâng cao</h5>
+                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <!-- Lọc theo loại -->
+                    <div class="col-md-6 border rounded p-2">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="filterTypeEnabled">
+                            <label class="form-check-label fw-bold text-primary" for="filterTypeEnabled">
+                                Lọc theo loại giao dịch
+                            </label>
+                        </div>
+                        <select id="typeSelect" name="type" class="form-select" disabled>
+                            <option value="">Tất cả</option>
+                            <option value="Income">Thu</option>
+                            <option value="Expense">Chi</option>
+                        </select>
+                    </div>
+
+                    <!-- Lọc theo tuần -->
+                    <div class="col-md-6 border rounded p-2">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="filterQuickDateEnabled">
+                            <label class="form-check-label fw-bold text-primary" for="filterQuickDateEnabled">
+                                Lọc nhanh theo thời gian
+                            </label>
+                        </div>
+                        <select id="quickDateSelect" name="quickDate" class="form-select" disabled>
+                            <option value="">-- Chọn --</option>
+                            <option value="today">Hôm nay</option>
+                            <option value="thisWeek">Tuần này</option>
+                            <option value="thisMonth">Tháng này</option>
+                            <option value="thisYear">Năm này</option>
+                        </select>
+                    </div>
+
+                    <!-- Khoảng tiền -->
+                    <div class="col-md-6 border rounded p-2">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="filterAmountEnabled">
+                            <label class="form-check-label fw-bold text-primary" for="filterAmountEnabled">
+                                Lọc theo khoảng tiền
+                            </label>
+                        </div>
+                        <input type="range" class="form-range" min="0" max="100000000" step="100000"
+                               id="amountRange" oninput="updateAmountLabel(this.value)" disabled>
+                        <div class="text-end"><small>Số tiền đến: <span id="amountLabel">0</span> đ</small></div>
+                        <input type="hidden" id="amountTo" name="amountTo" value="0" />
+                    </div>
+
+                    <!-- Ngày từ / đến -->
+                    <div class="col-md-6 border rounded p-2">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="filterDateEnabled">
+                            <label class="form-check-label fw-bold text-primary" for="filterDateEnabled">
+                                Lọc theo khoảng ngày
+                            </label>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col">
+                                <input type="date" id="fromDate" name="fromDate" class="form-control" disabled />
+                            </div>
+                            <div class="col">
+                                <input type="date" id="toDate" name="toDate" class="form-control" disabled />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary" form="formSearch">Áp dụng lọc</button>
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- Modal Dialog -->
-<div class="modal fade" id="incomeExpenseModal" tabindex="-1" aria-labelledby="incomeExpenseModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="incomeExpenseModalLabel">Chỉnh sửa</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<form id="incomeExpenseForm">
-					<input type="hidden" id="itemId" name="id" />
+<script>
+    $(document).ready(function () {
+        // tick bộ lọc
+        $('#filterTypeEnabled').change(function () {
+            $('#typeSelect').prop('disabled', !this.checked);
+        });
 
-					<div class="d-flex align-items-center mb-3">
-						<label for="income-date" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ngày <span class="text-danger">*</span></label>
-						<div class="input-group input-group-static flex-grow-1">
-							<span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
-							<input type="date" class="form-control" id="income-date" name="IncomeDate" required value="@DateTime.UtcNow.ToString("yyyy-MM-dd")">
-						</div>
-					</div>
+        $('#filterAmountEnabled').change(function () {
+            $('#amountRange').prop('disabled', !this.checked);
+        });
 
-					@* Ghi chú *@
-					<div class="d-flex align-items-center mb-3">
-						<label for="income-note" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ghi chú </label>
-						<div class="input-group input-group-static flex-grow-1">
-							<span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
-							<input type="text" class="form-control" id="income-note" name="Note" placeholder="Ghi chú">
-						</div>
-					</div>
+        $('#filterDateEnabled').change(function () {
+            $('#fromDate, #toDate').prop('disabled', !this.checked);
+        });
 
-					@* Số tiền *@
-					<div class="d-flex align-items-center mb-3">
-						<label for="income-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Số tiền <span class="text-danger">*</span></label>
-						<div class="input-group input-group-static flex-grow-1">
-							<input type="text" class="form-control" id="income-amount" name="Amount" placeholder="0" required inputmode="decimal" onkeyup="formatNumber(this)">
-							<span class="input-group-text">VNĐ</span>
-						</div>
-					</div>
+        $('#filterQuickDateEnabled').change(function () {
+            $('#quickDateSelect').prop('disabled', !this.checked);
+        });
+    });
 
-					@* <div id="IncomeExpenseCateogry"></div> *@
-
-					<div class="d-flex align-items-center mb-3">
-						<label for="income-category" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Danh mục <span class="text-danger">*</span></label>
-						<div class="input-group input-group-static flex-grow-1">
-							<select class="form-select" id="income-category" name="CategoryId" required>
-								@* <option value="">Chọn danh mục</option> *@
-							</select>
-						</div>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-				<button type="button" class="btn btn-primary" id="btnSave">Lưu</button>
-			</div>
-		</div>
-	</div>
-</div> 
+    function updateAmountLabel(value) {
+        const formatted = parseInt(value).toLocaleString('vi-VN');
+        $('#amountLabel').text(formatted);
+        $('#amountTo').val(value);
+    }
+</script> 

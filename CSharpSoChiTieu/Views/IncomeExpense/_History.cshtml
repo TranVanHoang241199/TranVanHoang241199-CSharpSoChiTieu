@@ -49,6 +49,8 @@
 							data-amount="@item.Amount"
 							data-description="@item.Description"
 							data-date="@item.Date?.ToString("yyyy-MM-dd")"
+							data-currency="@item.Currency"
+							data-category-id="@item.CategoryId"
 							style="cursor: pointer;">
 							<div class="d-flex align-items-center">
 								<div class="icon icon-shape icon-xs text-center rounded-circle me-2" style="background-color: @item.CategoryColor; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">
@@ -72,140 +74,12 @@
 
 </div>
 
-<!-- Small Action Dialog -->
-<div id="actionDialog" class="position-fixed bg-white shadow-sm rounded" style="display: none; z-index: 1000; min-width: 120px;">
-	<ul class="list-group list-group-flush">
-		<li class="list-group-item py-1 px-2 action-edit" style="cursor: pointer; font-size: 0.875rem;">
-			<i class="material-symbols-rounded align-middle me-1" style="font-size: 1rem;">edit</i>
-			Chỉnh sửa
-		</li>
-		<li class="list-group-item py-1 px-2 action-delete" style="cursor: pointer; font-size: 0.875rem;">
-			<i class="material-symbols-rounded align-middle me-1" style="font-size: 1rem;">delete</i>
-			Xóa
-		</li>
-	</ul>
-</div>
-
-<!-- Modal Dialog -->
-<div class="modal fade" id="incomeExpenseModal" tabindex="-1" aria-labelledby="incomeExpenseModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="incomeExpenseModalLabel">Chỉnh sửa</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<form id="incomeExpenseForm">
-					<input type="hidden" id="itemId" name="id" />
-
-					<div class="d-flex align-items-center mb-3">
-						<label for="income-date" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ngày <span class="text-danger">*</span></label>
-						<div class="input-group input-group-static flex-grow-1">
-							<span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
-							<input type="date" class="form-control" id="income-date" name="IncomeDate" required value="@DateTime.UtcNow.ToString("yyyy-MM-dd")">
-						</div>
-					</div>
-
-					@* Ghi chú *@
-					<div class="d-flex align-items-center mb-3">
-						<label for="income-note" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ghi chú </label>
-						<div class="input-group input-group-static flex-grow-1">
-							<span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
-							<input type="text" class="form-control" id="income-note" name="Note" placeholder="Ghi chú">
-						</div>
-					</div>
-
-					@* Số tiền *@
-					<div class="d-flex align-items-center mb-3">
-						<label for="income-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Số tiền <span class="text-danger">*</span></label>
-						<div class="input-group input-group-static flex-grow-1">
-							<input type="text" class="form-control" id="income-amount" name="Amount" placeholder="0" required inputmode="decimal" onkeyup="formatNumber(this)">
-							<span class="input-group-text">VNĐ</span>
-						</div>
-					</div>
-
-					@* <div id="IncomeExpenseCateogry"></div> *@
-
-					<div class="d-flex align-items-center mb-3">
-						<label for="income-category" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Danh mục <span class="text-danger">*</span></label>
-						<div class="input-group input-group-static flex-grow-1">
-							<select class="form-select" id="income-category" name="CategoryId" required>
-								@* <option value="">Chọn danh mục</option> *@
-							</select>
-						</div>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-				<button type="button" class="btn btn-primary" id="btnSave">Lưu</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-<style>
-	.action-edit:hover {
-		background-color: #f8f9fa;
-	}
-
-	.action-delete:hover {
-		background-color: #f8f9fa;
-		color: #dc3545;
-	}
-
-	#actionDialog {
-		border: 1px solid rgba(0,0,0,.1);
-	}
-
-		#actionDialog .list-group-item {
-			border: none;
-			border-radius: 0;
-		}
-
-			#actionDialog .list-group-item:first-child {
-				border-top-left-radius: 0.25rem;
-				border-top-right-radius: 0.25rem;
-			}
-
-			#actionDialog .list-group-item:last-child {
-				border-bottom-left-radius: 0.25rem;
-				border-bottom-right-radius: 0.25rem;
-			}
-
-	#income-category {
-		padding-left: 2.5rem;
-	}
-
-		#income-category option {
-			padding-left: 2.5rem;
-			position: relative;
-		}
-
-			#income-category option::before {
-				content: attr(data-icon);
-				position: absolute;
-				left: 0.5rem;
-				top: 50%;
-				transform: translateY(-50%);
-				width: 1.5rem;
-				height: 1.5rem;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				background-color: var(--category-color);
-				border-radius: 50%;
-				color: white;
-				font-size: 0.875rem;
-			}
-</style>
-
 <script>
 	$(document).ready(function () {
 		// Khởi tạo các biến global
-		var modal = new bootstrap.Modal(document.getElementById('incomeExpenseModal'));
+		var modal = null;
 		var currentItemId = null;
-		var actionDialog = $('#actionDialog');
+		var actionDialog = null;
 		var currentItem = null;
 
 		// Khởi tạo các event handlers
@@ -225,7 +99,9 @@
 
 			// Event cho click ra ngoài dialog
 			$(document).click(function() {
-				actionDialog.hide();
+				if (actionDialog) {
+					actionDialog.hide();
+				}
 			});
 
 			// Event cho nút edit
@@ -235,10 +111,10 @@
 			$(document).on('click', '.action-delete', handleDeleteClick);
 
 			// Event cho nút save trong modal
-			$('#btnSave').click(handleSaveClick);
+			$(document).on('click', '#btnSave', handleSaveClick);
 
 			// Thêm vào phần initializeEventHandlers
-			$('#income-amount').on('input', function(e) {
+			$(document).on('input', '#income-amount', function(e) {
 				let value = $(this).val().replace(/[^\d]/g, '');
 				if (!/^\d*$/.test(value)) {
 					$(this).val('');
@@ -250,13 +126,50 @@
 				}
 			});
 
-			$('#income-amount').on('paste', function(e) {
+			$(document).on('paste', '#income-amount', function(e) {
 				e.preventDefault();
 				let pastedText = (e.originalEvent.clipboardData || window.clipboardData).getData('text');
 				if (!/^\d*$/.test(pastedText)) {
 					return false;
 				}
 			});
+
+			// Event cho thay đổi loại thu chi
+			$(document).on('change', '#typeSelect', function() {
+				var selectedType = $(this).val();
+				if (selectedType) {
+					loadCategories(selectedType);
+				}
+			});
+		}
+
+		// Function load action dialog
+		function loadActionDialog() {
+			if (!$('#actionDialog').length) {
+				$.ajax({
+					url: '/IncomeExpense/Dialogs',
+					type: 'GET',
+					success: function(data) {
+						$('body').append(data);
+						actionDialog = $('#actionDialog');
+						modal = new bootstrap.Modal(document.getElementById('incomeExpenseModal'));
+					},
+					error: function() {
+						console.error('Không thể tải dialogs');
+					}
+				});
+			} else {
+				actionDialog = $('#actionDialog');
+				modal = new bootstrap.Modal(document.getElementById('incomeExpenseModal'));
+			}
+		}
+
+		// Function load modal dialog
+		function loadModalDialog() {
+			// Modal đã được load cùng với action dialog
+			if (!modal && $('#incomeExpenseModal').length) {
+				modal = new bootstrap.Modal(document.getElementById('incomeExpenseModal'));
+			}
 		}
 
 		// Function xử lý click vào item
@@ -265,8 +178,15 @@
 			currentItem = $(this);
 			currentItemId = currentItem.data('id');
 
+			// Load action dialog nếu chưa có
+			if (!actionDialog) {
+				loadActionDialog();
+			}
+
 			// Đóng dialog cũ nếu có
-			actionDialog.hide();
+			if (actionDialog) {
+				actionDialog.hide();
+			}
 
 			// Tính toán vị trí hiển thị dialog
 			var rect = currentItem[0].getBoundingClientRect();
@@ -280,11 +200,18 @@
 		// Function xử lý click nút edit
 		function handleEditClick(e) {
 			e.stopPropagation();
-			actionDialog.hide();
+			if (actionDialog) {
+				actionDialog.hide();
+			}
+
+			// Load modal dialog nếu chưa có
+			if (!modal) {
+				loadModalDialog();
+			}
 
 			// Lấy thông tin item hiện tại
 			var itemType = currentItem.data('type');
-			var itemCategoryId = currentItem.find('.icon').data('category-id');
+			var itemCategoryId = currentItem.data('category-id');
 
 			// Load danh mục và điền form
 			loadCategories(itemType, function() {
@@ -296,7 +223,9 @@
 		// Function xử lý click nút delete
 		function handleDeleteClick(e) {
 			e.stopPropagation();
-			actionDialog.hide();
+			if (actionDialog) {
+				actionDialog.hide();
+			}
 
 			if (confirm('Bạn có chắc chắn muốn xóa khoản này?')) {
 				deleteItem(currentItemId);
@@ -314,6 +243,8 @@
 
 		// Function load danh mục
 		function loadCategories(type, callback) {
+			console.log('Loading categories for type:', type);
+
 			$.ajax({
 				url: "/IncomeExpense/Category?type=" + type,
 				type: "GET",
@@ -341,7 +272,12 @@
 						select.append(option);
 					});
 
-					if (callback) callback();
+					console.log('Loaded categories:', categories.length);
+
+					if (callback) {
+						// Đảm bảo DOM đã được cập nhật trước khi gọi callback
+						setTimeout(callback, 50);
+					}
 				},
 				error: function () {
 					alert("Không tải được danh mục.");
@@ -351,18 +287,34 @@
 
 		// Function điền form edit
 		function fillEditForm(categoryId) {
+			console.log('Filling form with categoryId:', categoryId);
+
 			$('#itemId').val(currentItemId);
 			$('#income-date').val(currentItem.data('date'));
 			$('#income-note').val(currentItem.data('description'));
 
-				// Sửa lại cách format số tiền
+			// Sửa lại cách format số tiền
 			var amount = currentItem.data('amount');
 			// Đảm bảo đây là số nguyên trước khi định dạng
 			var integerAmount = parseInt(amount); // Chuyển đổi thành số nguyên, bỏ qua phần thập phân
 			var formattedAmount = integerAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 			$('#income-amount').val(formattedAmount);
 
-			$('#income-category').val(categoryId);
+			// Set loại thu chi
+			var itemType = currentItem.data('type');
+			$('#typeSelect').val(itemType);
+
+			// Set tiền tệ (nếu có)
+			var itemCurrency = currentItem.data('currency');
+			if (itemCurrency) {
+				$('#transaction-currency').val(itemCurrency);
+			}
+
+			// Set danh mục sau khi đã load xong
+			setTimeout(function() {
+				$('#income-category').val(categoryId);
+				console.log('Set category to:', categoryId, 'Current value:', $('#income-category').val());
+			}, 100);
 		}
 
 		// Function lấy dữ liệu form
@@ -377,13 +329,14 @@
 				Description: $('#income-note').val(),
 				Amount: amount,
 				CategoryId: $('#income-category').val(),
-				Type: currentItem.data('type')
+				Type: $('#typeSelect').val(),
+				Currency: $('#transaction-currency').val()
 			};
 		}
 
 		// Function validate form
 		function validateFormData(formData) {
-			if (!formData.Date || !formData.Amount || !formData.CategoryId) {
+			if (!formData.Date || !formData.Amount || !formData.CategoryId || !formData.Type || !formData.Currency) {
 				alert('Vui lòng điền đầy đủ thông tin bắt buộc');
 				return false;
 			}

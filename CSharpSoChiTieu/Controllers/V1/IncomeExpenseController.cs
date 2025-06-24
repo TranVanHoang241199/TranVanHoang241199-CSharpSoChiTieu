@@ -123,7 +123,19 @@ namespace CSharpSoChiTieu.Controllers
             return PartialView("_History", data);
         }
 
+        public async Task<IActionResult> Dialogs()
+        {
+            // Lấy danh sách tiền tệ
+            var currencyResult = await _currencyHandler.GetAll();
+            var currencies = (currencyResult as OperationResultList<CurrencyViewModel>)?.Data ?? new List<CurrencyViewModel>();
+            ViewBag.Currencies = currencies;
 
+            // Lấy đơn vị tiền tệ đang lưu trong user setting
+            var userSetting = _settingHandler.GetUserSettings();
+            ViewBag.SelectedCurrency = userSetting?.Currency ?? "VND";
+
+            return PartialView("_Dialogs");
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetSummary(string? range = "month")

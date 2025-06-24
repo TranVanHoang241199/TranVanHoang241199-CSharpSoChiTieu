@@ -114,5 +114,10 @@ namespace CSharpSoChiTieu.Controllers
                 remainingBalanceFormatted = $"0 {symbol}"
             });
         }
+
+        public IActionResult FilterDialog()
+        {
+            return PartialView("_FilterDialog");
+        }
     }
 }
