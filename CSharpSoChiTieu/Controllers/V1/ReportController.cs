@@ -1,8 +1,7 @@
-﻿using CSharpSoChiTieu.Business.Services;
+﻿using API_HotelManagement.common;
+using CSharpSoChiTieu.Business.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Globalization;
 
 namespace CSharpSoChiTieu.Controllers
 {
@@ -10,42 +9,37 @@ namespace CSharpSoChiTieu.Controllers
     public class ReportController : Controller
     {
         private readonly IReportHandler _reportHandler;
+        private readonly ICurrencyHandler _currencyHandler;
+        private readonly ISettingHandler _settingHandler;
 
-        public ReportController(IReportHandler reportHandler)
+        public ReportController(IReportHandler reportHandler, ICurrencyHandler currencyHandler, ISettingHandler settingHandler)
         {
             _reportHandler = reportHandler;
+            _currencyHandler = currencyHandler;
+            _settingHandler = settingHandler;
         }
 
         public async Task<IActionResult> Index()
         {
-            var result = await _reportHandler.GetReportData();
+            var result = await _reportHandler.GetReportData(new ReportFilterModel());
+
+            // Lấy danh sách tiền tệ
+            var currencyResult = await _currencyHandler.GetAll();
+            var currencies = (currencyResult as OperationResultList<CurrencyViewModel>)?.Data ?? new List<CurrencyViewModel>();
+            ViewBag.Currencies = currencies;
+
+            // Lấy đơn vị tiền tệ đang lưu trong user setting
+            var userSetting = _settingHandler.GetUserSettings();
+            ViewBag.SelectedCurrency = userSetting?.Currency ?? "VND";
+
             return View(result);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetChartData(string period)
+        [HttpPost]
+        public async Task<IActionResult> FilterReport([FromBody] ReportFilterModel filter)
         {
-            if (period == "week")
-            {
-                // Lấy năm và tuần hiện tại
-                var now = DateTime.Now;
-                var weekNumber = GetIso8601WeekOfYear(now);
-                period = $"{now.Year}-W{weekNumber}";
-            }
-            var result = await _reportHandler.GetChartData(period);
+            var result = await _reportHandler.GetReportData(filter);
             return Json(result);
-        }
-
-        private int GetIso8601WeekOfYear(DateTime time)
-        {
-            // Lấy tuần theo chuẩn ISO 8601
-            DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
-            if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
-            {
-                time = time.AddDays(3);
-            }
-
-            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
         }
     }
 }

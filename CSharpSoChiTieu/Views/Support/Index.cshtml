@@ -1,0 +1,71 @@
+﻿<div class="container py-4">
+
+	<!-- Phần 1: Mã QR và lời kêu gọi -->
+	<div class="qr-container">
+		<h4 class="mb-3 text-primary">Ủng hộ nhà phát triển</h4>
+		<p>Trần Văn Hoàng – MB Bank<br>Số tài khoản: <strong>66624111999666</strong></p>
+		<img src="https://img.vietqr.io/image/MB-66624111999666-compact.png?accountName=TRAN%20VAN%20HOANG" alt="QR Code MB Bank" class="img-fluid" style="max-width: 300px;">
+		<p class="mt-3 text-muted">Ủng hộ nhà phát triển ứng dụng có kinh phí phát triển ứng dụng ngày càng tốt hơn, chúng tôi ghi nhận đóng góp của bạn và chân thành cảm ơn bạn rất nhiều 🙌</p>
+	</div>
+
+	<!-- Phần 2: Góp ý -->
+	<div class="feedback-container">
+		<h5 class="mb-3 text-success">Đóng góp ý kiến</h5>
+		<form id="feedbackForm">
+			<div class="mb-3">
+				<label for="senderName" class="form-label">Tên của bạn</label>
+				<input type="text" class="form-control" id="senderName" placeholder="Nhập tên của bạn (không bắt buộc)">
+			</div>
+			<div class="mb-3">
+				<label for="feedbackContent" class="form-label">Nội dung góp ý <span class="text-danger">*</span></label>
+				<textarea class="form-control" id="feedbackContent" rows="4" placeholder="Viết ý kiến của bạn..." required></textarea>
+			</div>
+			<button type="submit" class="btn btn-primary">Gửi góp ý</button>
+		</form>
+	</div>
+
+</div>
+
+<script>
+	document.getElementById('feedbackForm').addEventListener('submit', function (e) {
+		e.preventDefault();
+		const name = document.getElementById('senderName').value.trim();
+		const content = document.getElementById('feedbackContent').value.trim();
+
+		if (!content) {
+			alert('Vui lòng nhập nội dung góp ý.');
+			return;
+		}
+
+		alert(`Cảm ơn bạn${name ? ', ' + name : ''} đã đóng góp ý kiến!`);
+		this.reset();
+	});
+</script>
+
+
+<style>
+	body {
+		background-color: #f8f9fa;
+		font-family: 'Segoe UI', sans-serif;
+	}
+
+	.container {
+		max-width: 700px;
+	}
+
+	.qr-container {
+		text-align: center;
+		padding: 2rem;
+		background-color: white;
+		border-radius: 1rem;
+		box-shadow: 0 0 10px rgba(0,0,0,0.05);
+	}
+
+	.feedback-container {
+		margin-top: 2rem;
+		padding: 2rem;
+		background-color: white;
+		border-radius: 1rem;
+		box-shadow: 0 0 10px rgba(0,0,0,0.05);
+	}
+</style>

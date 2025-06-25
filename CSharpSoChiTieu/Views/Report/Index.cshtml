@@ -1,29 +1,82 @@
 ﻿@model CSharpSoChiTieu.Business.Services.ReportViewModel
+@using CSharpSoChiTieu.Business.Services
 @using CSharpSoChiTieu.common;
+@using System.Text.Json;
+
+@{
+    var currencies = (List<CurrencyViewModel>)ViewBag.Currencies;
+    var selectedCurrencyCode = ViewBag.SelectedCurrency as string;
+    var selectedCurrencyObject = currencies?.FirstOrDefault(c => c.Code == selectedCurrencyCode);
+    var selectedCurrencySymbol = selectedCurrencyObject?.Symbol ?? selectedCurrencyCode;
+    // Helper for displaying type as Vietnamese
+    Func<IncomeExpenseType, string> getTypeText = t => t == IncomeExpenseType.Income ? "Khoản thu" : "Khoản chi";
+}
 
 <div class="container-fluid py-4">
-    <!-- Select box để lọc -->
+    <!-- Khối lọc dữ liệu -->
     <div class="row mb-4">
         <div class="col-12">
             <div class="card shadow-sm">
                 <div class="card-body p-3">
-                    <div class="row align-items-center">
-                        <div class="col-md-4">
-                            <div class="form-group d-flex align-items-center">
-                                <label class="form-label fw-bold mb-0 me-2" style="min-width: 100px;">Lọc:</label>
-                                <select id="typeFilter" class="form-select form-select-sm" onchange="filterByType(this.value)">
-                                    <option value="all">Tất cả</option>
-                                    <option value="income">Khoản thu</option>
-                                    <option value="expense">Khoản chi</option>
-                                </select>
-                                <input type="date" class="btn btn-outline-primary w-100 w-md-auto"/>
-                            </div>
+                    <form class="row g-3 align-items-center">
+
+                        <!-- Loại giao dịch: thu/chi -->
+                        <div class="col-12 col-md-3">
+                            <label for="typeFilter" class="form-label fw-bold mb-1">Loại giao dịch</label>
+                            <select id="typeFilter" class="form-select form-select-sm" onchange="applyFilters()">
+                                <option value="all">Tất cả</option>
+                                <option value="income">Khoản thu</option>
+                                <option value="expense">Khoản chi</option>
+                            </select>
                         </div>
-                    </div>
+
+                        <!-- Tiền tệ -->
+                        <div class="col-12 col-md-3">
+                            <label for="currency-filter" class="form-label fw-bold mb-1">Đơn vị tiền tệ</label>
+                            <select id="currency-filter" name="currency" class="form-select form-select-sm" onchange="applyFilters()">
+                                @if (ViewBag.Currencies != null)
+                                {
+                                    var selectedCurrency = ViewBag.SelectedCurrency as string;
+                                    foreach (var currency in (List<CurrencyViewModel>)ViewBag.Currencies)
+                                    {
+                                        <option value="@currency.Code" data-symbol="@currency.Symbol" selected="@(currency.Code == selectedCurrency ? "selected" : null)">
+                                            @currency.Code
+                                        </option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <!-- Từ ngày -->
+                        <div class="col-6 col-md-2">
+                            <label for="dateFrom" class="form-label fw-bold mb-1">Từ ngày</label>
+                            <input type="date" id="dateFrom" class="form-control form-control-sm" onchange="applyFilters()" />
+                        </div>
+
+                        <!-- Đến ngày -->
+                        <div class="col-6 col-md-2">
+                            <label for="dateTo" class="form-label fw-bold mb-1">Đến ngày</label>
+                            <input type="date" id="dateTo" class="form-control form-control-sm" onchange="applyFilters()" />
+                        </div>
+
+                        <!-- Khoảng thời gian -->
+                        <div class="col-12 col-md-2">
+                            <label for="select-range" class="form-label fw-bold mb-1">Thời gian</label>
+                            <select id="select-range" class="form-select form-select-sm" onchange="handleDateRangeChange()">
+                                <option value="all" selected>Tùy chọn</option>
+                                <option value="today">Hôm nay</option>
+                                <option value="week">Tuần này</option>
+                                <option value="month">Tháng này</option>
+                                <option value="year">Năm này</option>
+                            </select>
+                        </div>
+
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Thống kê tổng quan -->
     <div class="row">
@@ -34,8 +87,8 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng thu</p>
-                                <h5 class="font-weight-bolder text-success">
-                                    @Model.TotalIncome.ToString("N0") đ
+                                <h5 class="font-weight-bolder text-success" id="totalIncome">
+                                    @Model.TotalIncome.ToString("N0") @selectedCurrencySymbol
                                 </h5>
                             </div>
                         </div>
@@ -55,8 +108,8 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng chi</p>
-                                <h5 class="font-weight-bolder text-danger">
-                                    @Model.TotalExpense.ToString("N0") đ
+                                <h5 class="font-weight-bolder text-danger" id="totalExpense">
+                                    @Model.TotalExpense.ToString("N0") @selectedCurrencySymbol
                                 </h5>
                             </div>
                         </div>
@@ -76,8 +129,8 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-uppercase font-weight-bold">Số dư</p>
-                                <h5 class="font-weight-bolder @(Model.Balance >= 0 ? "text-success" : "text-danger")">
-                                    @Model.Balance.ToString("N0") đ
+                                <h5 class="font-weight-bolder" id="balance">
+                                    @Model.Balance.ToString("N0") @selectedCurrencySymbol
                                 </h5>
                             </div>
                         </div>
@@ -97,7 +150,7 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-uppercase font-weight-bold">Số giao dịch</p>
-                                <h5 class="font-weight-bolder" id="transactionCount" data-all="@Model.TotalTransactions" data-income="@Model.IncomeTransactions" data-expense="@Model.ExpenseTransactions">
+                                <h5 class="font-weight-bolder" id="transactionCount">
                                     @Model.TotalTransactions
                                 </h5>
                             </div>
@@ -116,24 +169,10 @@
     <!-- Biểu đồ và bảng thống kê -->
     <div class="row mt-4">
         <!-- Biểu đồ thu chi theo tháng -->
-        <div class="col-lg-8 mb-lg-0 mb-4">
+        <div class="col-lg-7 mb-lg-0 mb-4">
             <div class="card">
                 <div class="card-header pb-0 p-3">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="mb-2" id="chartTitle">Thống kê thu chi theo tuần</h6>
-                        <div class="dropdown">
-                            <button class="btn btn-link text-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span id="currentPeriod">Tuần hiện tại</span>
-                                <i class="material-symbols-rounded">more_vert</i>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="javascript:void(0)" onclick="updateChartPeriod('week')">Theo tuần</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)" onclick="updateChartPeriod('month')">Theo tháng</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)" onclick="updateChartPeriod('quarter')">Theo quý</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0)" onclick="updateChartPeriod('year')">Theo năm</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <h6 class="mb-2">Biểu đồ thu chi</h6>
                 </div>
                 <div class="card-body p-3">
                     <div class="chart">
@@ -144,10 +183,10 @@
         </div>
 
         <!-- Biểu đồ tròn phân bố chi tiêu -->
-        <div class="col-lg-4">
+        <div class="col-lg-5">
             <div class="card">
                 <div class="card-header pb-0 p-3">
-                    <h6 class="mb-0">Phân bố chi tiêu theo danh mục</h6>
+                    <h6 class="mb-0">Phân bố theo danh mục</h6>
                 </div>
                 <div class="card-body p-3">
                     <div class="chart">
@@ -176,7 +215,7 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tỷ lệ</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="category-stats-body">
                                 @foreach (var item in Model.CategoryStats)
                                 {
                                     <tr class="category-row" data-type="@(item.Type == IncomeExpenseType.Income ? "income" : "expense")">
@@ -189,12 +228,12 @@
                                         </td>
                                         <td>
                                             <span class="badge badge-sm @(item.Type == IncomeExpenseType.Income ? "bg-success" : "bg-danger")">
-                                                @item.Type
+                                                @getTypeText(item.Type)
                                             </span>
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <span class="text-@(item.Type == IncomeExpenseType.Income ? "success" : "danger") font-weight-bold">
-                                                @item.Amount.ToString("N0") đ
+                                                @item.Amount.ToString("N0") @selectedCurrencySymbol
                                             </span>
                                         </td>
                                         <td class="align-middle text-center">
@@ -226,234 +265,200 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
 @section scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Dữ liệu cho biểu đồ
-        var lineChartData = {
-            labels: @Html.Raw(Json.Serialize(Model.MonthlyStats.Select(x => x.Month))),
-            datasets: [
+        // Biến toàn cục cho biểu đồ
+        var lineChart, pieChart;
+        var selectedCurrency = '@selectedCurrencySymbol';
+
+        // Helper function to get type text in Vietnamese
+        function getTypeTextVN(type) {
+            // 0: Income, 1: Expense
+            return type === 1 ? 'Khoản thu' : 'Khoản chi';
+        }
+
+        // Khởi tạo ban đầu
+        $(document).ready(function() {
+            initializeCharts();
+            applyFilters();
+        });
+
+        // Hàm khởi tạo biểu đồ
+        function initializeCharts() {
+            var lineCtx = document.getElementById('chart-line').getContext('2d');
+            lineChart = new Chart(lineCtx, {
+                type: 'line',
+                data: { labels: [], datasets: [] },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                }
+            });
+
+            var pieCtx = document.getElementById('chart-pie').getContext('2d');
+            pieChart = new Chart(pieCtx, {
+                type: 'pie',
+                data: { labels: [], datasets: [] },
+                options: {
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        }
+                    }
+                }
+            });
+        }
+
+        // Hàm xử lý khi thay đổi khoảng thời gian
+        function handleDateRangeChange() {
+            const range = $('#select-range').val();
+            const now = new Date();
+            let from, to;
+
+            switch (range) {
+                case 'today':
+                    from = to = now;
+                    break;
+                case 'week':
+                    from = new Date(now.setDate(now.getDate() - now.getDay() + 1));
+                    to = new Date(now.setDate(now.getDate() - now.getDay() + 7));
+                    break;
+                case 'month':
+                    from = new Date(now.getFullYear(), now.getMonth(), 1);
+                    to = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                    break;
+                case 'year':
+                    from = new Date(now.getFullYear(), 0, 1);
+                    to = new Date(now.getFullYear(), 11, 31);
+                    break;
+                default: // 'all'
+                    $('#dateFrom').val('');
+                    $('#dateTo').val('');
+                    applyFilters();
+                    return;
+            }
+
+            // Format YYYY-MM-DD
+            $('#dateFrom').val(from.toISOString().split('T')[0]);
+            $('#dateTo').val(to.toISOString().split('T')[0]);
+
+            applyFilters();
+        }
+
+        // Hàm áp dụng bộ lọc
+        function applyFilters() {
+            var currencyDropdown = $('#currency-filter');
+            var selectedOption = currencyDropdown.find('option:selected');
+
+            var filters = {
+                type: $('#typeFilter').val(),
+                currency: currencyDropdown.val(),
+                dateFrom: $('#dateFrom').val() ? $('#dateFrom').val() : null,
+                dateTo: $('#dateTo').val() ? $('#dateTo').val() : null,
+            };
+            selectedCurrency = selectedOption.data('symbol') || filters.currency;
+
+            $.ajax({
+                url: '/Report/FilterReport',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(filters),
+                success: function(data) {
+                    updatePage(data);
+                },
+                error: function(error) {
+                    console.error("Lỗi khi lọc dữ liệu:", error);
+                }
+            });
+        }
+
+        // Hàm cập nhật toàn bộ trang với dữ liệu mới
+        function updatePage(data) {
+            // Cập nhật thẻ thống kê
+            $('#totalIncome').text(data.totalIncome.toLocaleString('vi-VN') + ' ' + selectedCurrency);
+            $('#totalExpense').text(data.totalExpense.toLocaleString('vi-VN') + ' ' + selectedCurrency);
+            $('#balance').text(data.balance.toLocaleString('vi-VN') + ' ' + selectedCurrency);
+            $('#transactionCount').text(data.totalTransactions);
+            $('#balance').removeClass('text-success text-danger').addClass(data.balance >= 0 ? 'text-success' : 'text-danger');
+
+
+            // Cập nhật biểu đồ đường
+            lineChart.data.labels = data.monthlyStats.map(s => s.month);
+            var filterType = $('#typeFilter').val();
+            lineChart.data.datasets = [
                 {
                     label: 'Thu',
-                    data: @Html.Raw(Json.Serialize(Model.MonthlyStats.Select(x => x.Income))),
+                    data: data.monthlyStats.map(s => s.income),
                     borderColor: '#2dce89',
-                    tension: 0.4
+                    tension: 0.4,
+                    hidden: filterType === 'expense'
                 },
                 {
                     label: 'Chi',
-                    data: @Html.Raw(Json.Serialize(Model.MonthlyStats.Select(x => x.Expense))),
+                    data: data.monthlyStats.map(s => s.expense),
                     borderColor: '#f5365c',
-                    tension: 0.4
+                    tension: 0.4,
+                    hidden: filterType === 'income'
                 }
-            ]
-        };
-
-        var pieChartData = {
-            labels: @Html.Raw(Json.Serialize(Model.CategoryStats.Select(x => x.CategoryName))),
-            datasets: [{
-                data: @Html.Raw(Json.Serialize(Model.CategoryStats.Select(x => x.Amount))),
-                backgroundColor: [
-                    '#2dce89', '#f5365c', '#fb6340', '#11cdef', '#5e72e4', '#8898aa'
-                ]
-            }]
-        };
-
-        // Khởi tạo biểu đồ
-        var lineChart = new Chart(
-            document.getElementById('chart-line'),
-            {
-                type: 'bar',
-                data: lineChartData,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        }
-                    },
-                    scales: {
-                        x: {
-                            ticks: {
-                                maxRotation: 45,
-                                minRotation: 45
-                            }
-                        }
-                    }
-                }
-            }
-        );
-
-        var pieChart = new Chart(
-            document.getElementById('chart-pie'),
-            {
-                type: 'pie',
-                data: pieChartData,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        }
-                    }
-                }
-            }
-        );
-
-        // Hàm lọc theo loại
-        function filterByType(type) {
-            // Lọc các hàng trong bảng
-            $('.category-row').each(function() {
-                var rowType = $(this).data('type');
-                if (type === 'all' || rowType === type) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-
-            // Lọc các card thống kê
-            if (type === 'all') {
-                $('.income-card, .expense-card, .balance-card, .transaction-card').show();
-            } else if (type === 'income') {
-                $('.income-card, .balance-card, .transaction-card').show();
-                $('.expense-card').hide();
-            } else if (type === 'expense') {
-                $('.expense-card, .balance-card, .transaction-card').show();
-                $('.income-card').hide();
-            }
-
-            // Cập nhật số lượng giao dịch
-            var transactionCount = $('#transactionCount');
-            transactionCount.text(transactionCount.data(type));
-
-            // Cập nhật biểu đồ
-            updateCharts(type);
-        }
-
-        // Hàm cập nhật biểu đồ
-        function updateCharts(type) {
-            if (type === 'all') {
-                lineChart.data.datasets[0].hidden = false;
-                lineChart.data.datasets[1].hidden = false;
-            } else if (type === 'income') {
-                lineChart.data.datasets[0].hidden = false;
-                lineChart.data.datasets[1].hidden = true;
-            } else if (type === 'expense') {
-                lineChart.data.datasets[0].hidden = true;
-                lineChart.data.datasets[1].hidden = false;
-            }
+            ];
             lineChart.update();
 
             // Cập nhật biểu đồ tròn
-            var filteredData = pieChartData;
-            if (type !== 'all') {
-                filteredData = {
-                    labels: pieChartData.labels.filter((_, index) => {
-                        var categoryType = $('.category-row').eq(index).data('type');
-                        return categoryType === type;
-                    }),
-                    datasets: [{
-                        data: pieChartData.datasets[0].data.filter((_, index) => {
-                            var categoryType = $('.category-row').eq(index).data('type');
-                            return categoryType === type;
-                        }),
-                        backgroundColor: pieChartData.datasets[0].backgroundColor
-                    }]
-                };
-            }
-            pieChart.data = filteredData;
+            var pieLabels = data.categoryStats.map(cs => cs.categoryName);
+            var pieData = data.categoryStats.map(cs => cs.amount);
+            pieChart.data.labels = pieLabels;
+            pieChart.data.datasets = [{
+                data: pieData,
+                backgroundColor: [
+                    '#2dce89', '#f5365c', '#fb6340', '#11cdef', '#5e72e4', '#8898aa',
+                     '#ffd600', '#ff6b6b', '#6b48ff', '#ff9f40'
+                ]
+            }];
             pieChart.update();
+
+            // Cập nhật bảng thống kê chi tiết
+            var tableBody = $('#category-stats-body');
+            tableBody.empty();
+            if (data.categoryStats.length === 0) {
+                 tableBody.append('<tr><td colspan="4" class="text-center">Không có dữ liệu</td></tr>');
+            } else {
+                data.categoryStats.forEach(function(item) {
+                    var typeClass = item.type === 1 ? 'success' : 'danger'; // 0: Income, 1: Expense
+                    var typeText = getTypeTextVN(item.type); // Sử dụng tiếng Việt
+                    var row = `
+                        <tr>
+                            <td>
+                                <div class="d-flex px-2 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm">${item.categoryName}</h6>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="badge badge-sm bg-${typeClass}">${typeText}</span></td>
+                            <td class="align-middle text-center text-sm">
+                                <span class="text-${typeClass} font-weight-bold">${item.amount.toLocaleString('vi-VN')} ${selectedCurrency}</span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <div class="progress-wrapper w-75 mx-auto">
+                                    <div class="progress-info">
+                                        <div class="progress-percentage">
+                                            <span class="text-xs font-weight-bold">${item.percentage}%</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-${typeClass}" role="progressbar" aria-valuenow="${item.percentage}"
+                                             aria-valuemin="0" aria-valuemax="100" style="width: ${item.percentage}%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>`;
+                    tableBody.append(row);
+                });
+            }
         }
-
-        // Hàm cập nhật biểu đồ theo thời gian
-        function updateChartPeriod(period) {
-            // Gửi request để lấy dữ liệu mới
-            $.ajax({
-                url: '/Report/GetChartData',
-                type: 'GET',
-                data: { period: period },
-                success: function(response) {
-                    // Cập nhật labels và data cho biểu đồ
-                    lineChart.data.labels = response.labels;
-                    lineChart.data.datasets[0].data = response.income;
-                    lineChart.data.datasets[1].data = response.expense;
-
-                    // Cập nhật cấu hình biểu đồ dựa trên period
-                    if (period === 'week') {
-                        lineChart.config.type = 'bar';
-                        lineChart.options.scales.x.ticks.maxRotation = 0;
-                        lineChart.options.scales.x.ticks.minRotation = 0;
-                        lineChart.options.scales.x.maxTicksLimit = 7;
-                    } else {
-                        lineChart.config.type = 'line';
-                        lineChart.options.scales.x.ticks.maxRotation = 0;
-                        lineChart.options.scales.x.ticks.minRotation = 0;
-                        lineChart.options.scales.x.maxTicksLimit = undefined;
-                    }
-
-                    // Cập nhật biểu đồ
-                    lineChart.update();
-
-                    // Cập nhật tiêu đề và text của dropdown button
-                    var titleText = '';
-                    var buttonText = '';
-                    var now = new Date();
-                    var weekNumber = getWeekNumber(now);
-
-                    switch(period) {
-                        case 'week':
-                            // Tính ngày đầu và cuối của tuần
-                            var startOfWeek = new Date(now);
-                            startOfWeek.setDate(now.getDate() - now.getDay() + 1); // Thứ 2
-                            var endOfWeek = new Date(startOfWeek);
-                            endOfWeek.setDate(startOfWeek.getDate() + 6); // Chủ nhật
-
-                            titleText = `Thống kê thu chi tuần ${weekNumber} (${formatDate(startOfWeek)} - ${formatDate(endOfWeek)})`;
-                            buttonText = `Tuần ${weekNumber} (${formatDate(startOfWeek)} - ${formatDate(endOfWeek)})`;
-                            break;
-                        case 'month':
-                            titleText = 'Thống kê thu chi theo tháng';
-                            buttonText = 'Theo tháng';
-                            break;
-                        case 'quarter':
-                            titleText = 'Thống kê thu chi theo quý';
-                            buttonText = 'Theo quý';
-                            break;
-                        case 'year':
-                            titleText = 'Thống kê thu chi theo năm';
-                            buttonText = 'Theo năm';
-                            break;
-                    }
-                    $('#chartTitle').text(titleText);
-                    $('#currentPeriod').text(buttonText);
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error fetching chart data:', error);
-                }
-            });
-        }
-
-        // Hàm format ngày
-        function formatDate(date) {
-            return date.getDate() + '/' + (date.getMonth() + 1);
-        }
-
-        // Hàm lấy số tuần theo ISO 8601
-        function getWeekNumber(d) {
-            d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-            d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
-            var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-            var weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-            return weekNo;
-        }
-
-        // Khởi tạo biểu đồ với dữ liệu tuần hiện tại
-        $(document).ready(function() {
-            updateChartPeriod('week');
-        });
     </script>
 }

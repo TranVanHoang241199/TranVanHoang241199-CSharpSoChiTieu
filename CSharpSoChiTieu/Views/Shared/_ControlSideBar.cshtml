@@ -80,6 +80,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Support" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="Support" asp-action="Index">
+                    <i class="fas fa-comment-dots opacity-5"></i>
+                    <span class="nav-link-text ms-1">Hỗ trợ nhà phát triển <span style="color: gold; font-size: 1rem;">★</span></span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Setting" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="Setting" asp-action="index">
                     <i class="material-symbols-rounded opacity-5">settings</i>
                     <span class="nav-link-text ms-1">Cài đặt</span>

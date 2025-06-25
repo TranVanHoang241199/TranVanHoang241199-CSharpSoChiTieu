@@ -15,7 +15,7 @@ namespace CSharpSoChiTieu.Business.Services
         public int IncomeTransactions { get; set; }
         public int ExpenseTransactions { get; set; }
         public int TotalTransactions { get; set; }
-        
+
         public List<MonthlyStatViewModel> MonthlyStats { get; set; }
         public List<CategoryStatViewModel> CategoryStats { get; set; }
     }
@@ -41,5 +41,14 @@ namespace CSharpSoChiTieu.Business.Services
         public List<string> Labels { get; set; }
         public List<decimal> Income { get; set; }
         public List<decimal> Expense { get; set; }
+    }
+
+    public class ReportFilterModel
+    {
+        public string? Type { get; set; }
+        public string? Currency { get; set; }
+        public DateTime? DateFrom { get; set; }
+        public DateTime? DateTo { get; set; }
+        public string? Period { get; set; }
     }
 }
