@@ -1,4 +1,4 @@
-﻿@using CSharpSoChiTieu.Business.Services
+﻿﻿@using CSharpSoChiTieu.Business.Services
 
 
 <!-- Small Action Dialog -->
@@ -59,10 +59,21 @@
 
 					@* Số tiền và tiền tệ *@
 					<div class="d-flex align-items-center mb-3">
-						<label for="income-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Số tiền <span class="text-danger">*</span></label>
-						<div class="input-group input-group-static flex-grow-1">
-							<input type="text" class="form-control" id="income-amount" name="Amount" placeholder="0" required inputmode="decimal" onkeyup="formatNumber(this)">
-							<select class="form-select border-start-0 rounded-start-0"
+						<label for="income-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">
+							Số tiền <span class="text-danger">*</span>
+						</label>
+
+						<div class="input-group flex-grow-1">
+							<input type="text" 
+								   class="form-control" 
+								   id="income-amount" 
+								   name="Amount" 
+								   placeholder="0" 
+								   required 
+								   inputmode="decimal" 
+								   onkeyup="formatNumber(this)" />
+
+							<select class="form-select"
 									name="Currency"
 									id="transaction-currency"
 									style="max-width: 90px;">
@@ -80,13 +91,13 @@
 						</div>
 					</div>
 
+
 					@* Danh mục *@
 					<div class="d-flex align-items-center mb-3">
 						<label for="income-category" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Danh mục <span class="text-danger">*</span></label>
 						<div class="input-group input-group-static flex-grow-1">
 							<span class="input-group-text"><i class="fas fa-tags"></i></span>
 							<select class="form-select" id="income-category" name="CategoryId" required>
-								<option value="">Chọn danh mục</option>
 							</select>
 						</div>
 					</div>

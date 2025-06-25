@@ -234,12 +234,12 @@
 
 		// Function xử lý click nút save
 		function handleSaveClick() {
-			var formData = getFormData();
+				var formData = getFormData();
 
-			if (validateFormData(formData)) {
-				saveItem(formData);
+				if (validateFormData(formData)) {
+					saveItem(formData);
+				}
 			}
-		}
 
 		// Function load danh mục
 		function loadCategories(type, callback) {
@@ -252,13 +252,18 @@
 					var categories = $(data).find('.btn-category');
 					var select = $('#income-category');
 
-					// Xóa các option cũ
-					select.find('option:not(:first)').remove();
+					// Xóa tất cả option cũ
+					//select.html('<option value="">-- Chọn danh mục --</option>');
+					select.html('');
 
 					// Thêm các option mới
-					categories.each(function() {
+					categories.each(function () {
 						var categoryId = $(this).data('category-id');
 						var categoryName = $(this).data('category-name');
+
+						// Bỏ qua nếu thiếu dữ liệu
+						if (!categoryId || !categoryName) return;
+
 						var categoryIcon = $(this).find('.icon span').text();
 						var categoryColor = $(this).find('.icon').css('background-color');
 
@@ -272,10 +277,10 @@
 						select.append(option);
 					});
 
+
 					console.log('Loaded categories:', categories.length);
 
 					if (callback) {
-						// Đảm bảo DOM đã được cập nhật trước khi gọi callback
 						setTimeout(callback, 50);
 					}
 				},
@@ -284,6 +289,7 @@
 				}
 			});
 		}
+
 
 		// Function điền form edit
 		function fillEditForm(categoryId) {

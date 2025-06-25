@@ -33,6 +33,8 @@
                                 data-amount="@item.Amount"
                                 data-description="@item.Description"
                                 data-date="@item.Date?.ToString("yyyy-MM-dd")"
+                                data-currency="@item.Currency"
+                                data-category-id="@item.CategoryId"
                                 style="cursor: pointer;">
                                 <div class="d-flex align-items-center">
                                     <div class="icon icon-shape icon-xs text-center rounded-circle me-2" style="background-color: @item.CategoryColor; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">
@@ -107,6 +109,326 @@
 }
 
 <script>
+    $(document).ready(function () {
+        // Khởi tạo các biến global
+        var modal = null;
+        var currentItemId = null;
+        var actionDialog = null;
+        var currentItem = null;
+
+        // Khởi tạo các event handlers
+        initializeEventHandlers();
+
+        // Các function xử lý chính
+        function initializeEventHandlers() {
+            // Event cho click vào item
+            $(document).on('click', '.income-item', handleItemClick);
+
+            // Event cho click ra ngoài dialog
+            $(document).click(function() {
+                if (actionDialog) {
+                    actionDialog.hide();
+                }
+            });
+
+            // Event cho nút edit
+            $(document).on('click', '.action-edit', handleEditClick);
+
+            // Event cho nút delete
+            $(document).on('click', '.action-delete', handleDeleteClick);
+
+            // Event cho nút save trong modal
+            $(document).on('click', '#btnSave', handleSaveClick);
+
+            // Thêm vào phần initializeEventHandlers
+            $(document).on('input', '#income-amount', function(e) {
+                let value = $(this).val().replace(/[^\d]/g, '');
+                if (!/^\d*$/.test(value)) {
+                    $(this).val('');
+                    return;
+                }
+                if (value) {
+                    value = parseInt(value).toLocaleString('vi-VN');
+                    $(this).val(value);
+                }
+            });
+
+            $(document).on('paste', '#income-amount', function(e) {
+                e.preventDefault();
+                let pastedText = (e.originalEvent.clipboardData || window.clipboardData).getData('text');
+                if (!/^\d*$/.test(pastedText)) {
+                    return false;
+                }
+            });
+
+            // Event cho thay đổi loại thu chi
+            $(document).on('change', '#typeSelect', function() {
+                var selectedType = $(this).val();
+                if (selectedType) {
+                    loadCategories(selectedType);
+                }
+            });
+        }
+
+        // Function load action dialog
+        function loadActionDialog() {
+            if (!$('#actionDialog').length) {
+                $.ajax({
+                    url: '/IncomeExpense/Dialogs',
+                    type: 'GET',
+                    success: function(data) {
+                        $('body').append(data);
+                        actionDialog = $('#actionDialog');
+                        modal = new bootstrap.Modal(document.getElementById('incomeExpenseModal'));
+                    },
+                    error: function() {
+                        console.error('Không thể tải dialogs');
+                    }
+                });
+            } else {
+                actionDialog = $('#actionDialog');
+                modal = new bootstrap.Modal(document.getElementById('incomeExpenseModal'));
+            }
+        }
+
+        // Function load modal dialog
+        function loadModalDialog() {
+            // Modal đã được load cùng với action dialog
+            if (!modal && $('#incomeExpenseModal').length) {
+                modal = new bootstrap.Modal(document.getElementById('incomeExpenseModal'));
+            }
+        }
+
+        // Function xử lý click vào item
+        function handleItemClick(e) {
+            e.stopPropagation();
+            currentItem = $(this);
+            currentItemId = currentItem.data('id');
+
+            // Load action dialog nếu chưa có
+            if (!actionDialog) {
+                loadActionDialog();
+            }
+
+            // Đóng dialog cũ nếu có
+            if (actionDialog) {
+                actionDialog.hide();
+            }
+
+            // Tính toán vị trí hiển thị dialog
+            var rect = currentItem[0].getBoundingClientRect();
+            actionDialog.css({
+                'top': rect.bottom + 'px',
+                'left': rect.left + 'px',
+                'min-width': rect.width + 'px'
+            }).show();
+        }
+
+        // Function xử lý click nút edit
+        function handleEditClick(e) {
+            e.stopPropagation();
+            if (actionDialog) {
+                actionDialog.hide();
+            }
+
+            // Load modal dialog nếu chưa có
+            if (!modal) {
+                loadModalDialog();
+            }
+
+            // Lấy thông tin item hiện tại
+            var itemType = currentItem.data('type');
+            var itemCategoryId = currentItem.data('category-id');
+
+            // Load danh mục và điền form
+            loadCategories(itemType, function() {
+                fillEditForm(itemCategoryId);
+                modal.show();
+            });
+        }
+
+        // Function xử lý click nút delete
+        function handleDeleteClick(e) {
+            e.stopPropagation();
+            if (actionDialog) {
+                actionDialog.hide();
+            }
+
+            if (confirm('Bạn có chắc chắn muốn xóa khoản này?')) {
+                deleteItem(currentItemId);
+            }
+        }
+
+        // Function xử lý click nút save
+        function handleSaveClick() {
+            var formData = getFormData();
+
+            if (validateFormData(formData)) {
+                saveItem(formData);
+            }
+        }
+
+        // Function load danh mục
+        function loadCategories(type, callback) {
+            console.log('Loading categories for type:', type);
+
+            $.ajax({
+                url: "/IncomeExpense/Category?type=" + type,
+                type: "GET",
+                success: function (data) {
+                    var categories = $(data).find('.btn-category');
+                    var select = $('#income-category');
+
+                    // Xóa tất cả option cũ
+                    select.html('');
+
+                    // Thêm các option mới
+                    categories.each(function () {
+                        var categoryId = $(this).data('category-id');
+                        var categoryName = $(this).data('category-name');
+
+                        // Bỏ qua nếu thiếu dữ liệu
+                        if (!categoryId || !categoryName) return;
+
+                        var categoryIcon = $(this).find('.icon span').text();
+                        var categoryColor = $(this).find('.icon').css('background-color');
+
+                        var option = $('<option>', {
+                            value: categoryId,
+                            text: categoryName,
+                            'data-icon': categoryIcon,
+                            'data-color': categoryColor
+                        });
+
+                        select.append(option);
+                    });
+
+                    console.log('Loaded categories:', categories.length);
+
+                    if (callback) {
+                        setTimeout(callback, 50);
+                    }
+                },
+                error: function () {
+                    alert("Không tải được danh mục.");
+                }
+            });
+        }
+
+        // Function điền form edit
+        function fillEditForm(categoryId) {
+            console.log('Filling form with categoryId:', categoryId);
+
+            $('#itemId').val(currentItemId);
+            $('#income-date').val(currentItem.data('date'));
+            $('#income-note').val(currentItem.data('description'));
+
+            // Sửa lại cách format số tiền
+            var amount = currentItem.data('amount');
+            // Đảm bảo đây là số nguyên trước khi định dạng
+            var integerAmount = parseInt(amount); // Chuyển đổi thành số nguyên, bỏ qua phần thập phân
+            var formattedAmount = integerAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            $('#income-amount').val(formattedAmount);
+
+            // Set loại thu chi
+            var itemType = currentItem.data('type');
+            $('#typeSelect').val(itemType);
+
+            // Set tiền tệ (nếu có)
+            var itemCurrency = currentItem.data('currency');
+            if (itemCurrency) {
+                $('#transaction-currency').val(itemCurrency);
+            }
+
+            // Set danh mục sau khi đã load xong
+            setTimeout(function() {
+                $('#income-category').val(categoryId);
+                console.log('Set category to:', categoryId, 'Current value:', $('#income-category').val());
+            }, 100);
+        }
+
+        // Function lấy dữ liệu form
+        function getFormData() {
+            // Lấy số tiền và chuyển đổi format
+            var amountStr = $('#income-amount').val().replace(/\./g, '');
+            var amount = parseInt(amountStr);
+
+            return {
+                Id: $('#itemId').val(),
+                Date: $('#income-date').val(),
+                Description: $('#income-note').val(),
+                Amount: amount,
+                CategoryId: $('#income-category').val(),
+                Type: $('#typeSelect').val(),
+                Currency: $('#transaction-currency').val()
+            };
+        }
+
+        // Function validate form
+        function validateFormData(formData) {
+            if (!formData.Date || !formData.Amount || !formData.CategoryId || !formData.Type || !formData.Currency) {
+                alert('Vui lòng điền đầy đủ thông tin bắt buộc');
+                return false;
+            }
+            return true;
+        }
+
+        // Function lưu item
+        function saveItem(formData) {
+            $.ajax({
+                url: '/IncomeExpense/Save',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    if (response.success) {
+                        modal.hide();
+                        refreshData();
+                    } else {
+                        alert(response.message || 'Có lỗi xảy ra khi lưu dữ liệu');
+                    }
+                },
+                error: function() {
+                    alert('Có lỗi xảy ra khi lưu dữ liệu');
+                }
+            });
+        }
+
+        // Function xóa item
+        function deleteItem(id) {
+            $.ajax({
+                url: '/IncomeExpense/Delete',
+                type: 'DELETE',
+                data: { id: id },
+                success: function(response) {
+                    if (response.success) {
+                        refreshData();
+                    } else {
+                        alert(response.message || 'Có lỗi xảy ra khi xóa dữ liệu');
+                    }
+                },
+                error: function() {
+                    alert('Có lỗi xảy ra khi xóa dữ liệu');
+                }
+            });
+        }
+
+        // Function refresh dữ liệu - gọi lại search với trang hiện tại
+        function refreshData() {
+            // Gọi lại search với trang hiện tại
+            if (typeof doSearch === 'function') {
+                doSearch(@Model.Page);
+            }
+        }
+
+        // Function format số
+        function formatNumber(input) {
+            let value = input.value.replace(/[^\d]/g, '');
+            value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            input.value = value;
+        }
+    });
+
+    // Function xóa item cũ (giữ lại để tương thích)
     function deleteItem(id) {
         if (confirm('Bạn có chắc chắn muốn xóa mục này?')) {
             $.ajax({
