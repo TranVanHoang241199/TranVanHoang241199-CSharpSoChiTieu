@@ -187,6 +187,13 @@
 
         // Khởi tạo range slider
         initializeRangeSlider();
+
+        // Gọi cập nhật badge khi dialog mở
+        notifyFilterBadge();
+        // Lắng nghe sự kiện thay đổi checkbox
+        $('#filterTypeEnabled, #filterAmountEnabled, #filterDateEnabled, #filterQuickDateEnabled').change(function () {
+            notifyFilterBadge();
+        });
     });
 
     function initializeRangeSlider() {
@@ -270,6 +277,21 @@
         const modal = bootstrap.Modal.getInstance(document.getElementById('filterModal'));
         if (modal) {
             modal.hide();
+        }
+    }
+
+    function countActiveFilters() {
+        let count = 0;
+        if ($('#filterTypeEnabled').is(':checked')) count++;
+        if ($('#filterAmountEnabled').is(':checked')) count++;
+        if ($('#filterDateEnabled').is(':checked')) count++;
+        if ($('#filterQuickDateEnabled').is(':checked')) count++;
+        return count;
+    }
+
+    function notifyFilterBadge() {
+        if (window.updateFilterBadge) {
+            window.updateFilterBadge(countActiveFilters());
         }
     }
 </script> 

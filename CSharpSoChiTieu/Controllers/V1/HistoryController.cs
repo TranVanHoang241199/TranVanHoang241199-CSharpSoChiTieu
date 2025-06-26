@@ -39,7 +39,7 @@ namespace CSharpSoChiTieu.Controllers
                     SearchValue = "",
                     Year = DateTime.UtcNow.Year,
                     Month = DateTime.UtcNow.Month,
-                    Day = DateTime.UtcNow.Day
+                    Day = 0
 
                 };
             }
@@ -85,7 +85,7 @@ namespace CSharpSoChiTieu.Controllers
             }
 
             // Đếm số lượng
-            var operationResultCount = await _IncomeExpenseHandler.Count(condition.SearchValue, condition.Year, condition.Month, condition.Day);
+            var operationResultCount = await _IncomeExpenseHandler.Count(condition.SearchValue, condition.Year, condition.Month, condition.Day, condition.currency);
             int rowCount = (operationResultCount as OperationResult<int>)?.Data ?? 0;
 
             // Lấy danh sách group theo ngày
@@ -94,6 +94,9 @@ namespace CSharpSoChiTieu.Controllers
 
             // Áp dụng các filter bổ sung
             var filteredData = ApplyFilters(data, condition);
+
+            // Đếm lại số khoản thu chi thực tế sau khi lọc nâng cao
+            int filteredRowCount = filteredData.Sum(g => g.Items.Count);
 
             // Lấy toàn bộ symbol cho các loại currency
             var allCurrencies = await _currencyHandler.GetAll() as OperationResultList<CurrencyViewModel>;
@@ -106,7 +109,7 @@ namespace CSharpSoChiTieu.Controllers
                 Page = condition.Page,
                 PageSize = condition.PageSize,
                 SearchValue = condition.SearchValue,
-                RowCount = rowCount,
+                RowCount = filteredRowCount,
                 Year = condition.Year,
                 Month = condition.Month,
                 Day = condition.Day,

@@ -35,11 +35,17 @@
                                 <div class="col-12 col-md-6 d-flex align-items-start align-items-md-center">
                                     <div class="d-flex flex-column flex-md-row w-100 justify-content-start align-items-start align-items-md-center">
                                         @* Bộ lọc *@
-                                        <div class="mb-2 mb-md-0 me-md-2 w-100 w-md-auto">
+                                        <div class="mb-2 mb-md-0 me-md-2 w-100 w-md-auto position-relative">
                                             <button type="button" class="btn btn-outline-primary w-100 w-md-auto" onclick="openFilterDialog()">
                                                 <i class="fas fa-filter me-1"></i> Bộ lọc
                                             </button>
+                                            <span id="filterBadge"
+                                                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                                  style="display:none; font-size:0.75em;">
+                                                0
+                                            </span>
                                         </div>
+
 
                                         @* Đơn vị tiền tệ *@
                                         <div class="mb-2 mb-md-0 me-md-2 w-100 w-md-auto">
@@ -61,17 +67,17 @@
                                         @* Chọn ngày tháng năm *@
                                         <div class="mb-2 mb-md-0 me-md-2 w-100 w-md-auto">
                                             <select id="yearSelect" name="year" class="btn btn-outline-success w-100 w-md-auto">
-                                                <option value="">Chọn năm</option>
+                                                <option value="">Tất cả năm</option>
                                             </select>
                                         </div>
                                         <div class="mb-2 mb-md-0 me-md-2 w-100 w-md-auto">
                                             <select id="monthSelect" name="month" class="btn btn-outline-success w-100 w-md-auto">
-                                                <option value="">Chọn tháng</option>
+                                                <option value="">Tất cả tháng</option>
                                             </select>
                                         </div>
                                         <div class="w-100 w-md-auto">
                                             <select id="daySelect" name="day" class="btn btn-outline-success w-100 w-md-auto">
-                                                <option value="">Chọn ngày</option>
+                                                <option value="">Tất cả ngày</option>
                                             </select>
                                         </div>
                                     </div>
@@ -100,7 +106,7 @@
                             </div>
                         </form>
                     </div>
-                    
+
                 </div>
             </div>
             <div id="searchResult" class="table-responsive p-0">
@@ -110,6 +116,14 @@
         </div>
     </div>
 </div>
+
+<style>
+    #filterBadge {
+        transform: translate(-50%, -30%); /* Điều chỉnh cụ thể nếu lệch */
+        z-index: 10; /* Đảm bảo hiển thị nổi bật */
+    }
+
+</style>
 
 @section scripts {
     <script>
@@ -192,13 +206,16 @@
 
         function updateDaysDropdown(year, month, selectedDay) {
             const daySelect = $('#daySelect');
-            daySelect.empty().append('<option value="">Chọn ngày</option>');
+            daySelect.empty().append('<option value="">Tất cả ngày</option>');
 
             if (year && month) {
                 const daysInMonth = new Date(year, month, 0).getDate();
                 for (let day = 1; day <= daysInMonth; day++) {
                     const selected = selectedDay == day ? 'selected' : '';
-                    daySelect.append(`<option value="${day}" ${selected}>${day}</option>`);
+                    if (selected)
+                        daySelect.append(`<option value="${day}" ${selected}>Ngày ${day}</option>`);
+                    else
+                        daySelect.append(`<option value="${day}">Ngày ${day}</option>`);
                 }
             }
         }
@@ -232,31 +249,51 @@
 
         $(document).ready(function () {
             const currentYear = new Date().getFullYear();
+            const currentMonth = new Date().getMonth() + 1;
             const yearSelect = $('#yearSelect');
             const monthSelect = $('#monthSelect');
 
-            const modelYear = @Model.Year ?? currentYear;
-            const modelMonth = @Model.Month ?? (new Date().getMonth() + 1);
-            const modelDay = null;
-            // const modelDay = @Model.Day ?? null;
+            // Khi mới đầu loading, mặc định năm và tháng là hiện tại
+            let modelYear = currentYear;
+            let modelMonth = currentMonth;
+            let modelDay = null;
+
+            // Nếu Model.Year hoặc Model.Month có giá trị thì dùng, không thì lấy năm/tháng hiện tại
+            @* Chỉ lấy giá trị Model nếu có, còn không thì để mặc định năm/tháng hiện tại *@
+            @if (Model.Year != null)
+            {
+                        <text>modelYear = @Model.Year;</text>
+            }
+            @if (Model.Month != null)
+            {
+                        <text>modelMonth = @Model.Month;</text>
+            }
+            @if (Model.Day != null)
+            {
+                        <text>modelDay = @Model.Day;</text>
+            }
 
             // Fill year dropdown
             for (let year = currentYear; year >= currentYear - 10; year--) {
                 const selected = (year === modelYear) ? 'selected' : '';
-                yearSelect.append(`<option value="${year}" ${selected}>${year}</option>`);
+                yearSelect.append(`<option value="${year}" ${selected}>Năm ${year}</option>`);
             }
 
             // Fill month dropdown
             for (let month = 1; month <= 12; month++) {
                 const selected = (month === modelMonth) ? 'selected' : '';
-                monthSelect.append(`<option value="${month}" ${selected}>${month}</option>`);
+                monthSelect.append(`<option value="${month}" ${selected}>Tháng ${month}</option>`);
             }
 
             // Fill day dropdown sau khi month/year đã gán
             updateDaysDropdown(modelYear, modelMonth, modelDay);
 
-            // Sự kiện thay đổi
-            $('#yearSelect, #monthSelect, #daySelect, #currency-filter').change(function () {
+            // Set lại giá trị cho yearSelect và monthSelect nếu chưa có (trường hợp reload không có Model)
+            yearSelect.val(modelYear);
+            monthSelect.val(modelMonth);
+
+            // Sự kiện thay đổi năm hoặc tháng thì cập nhật lại dropdown ngày và reset ngày về null
+            $('#yearSelect, #monthSelect').change(function () {
                 const year = parseInt($('#yearSelect').val());
                 const month = parseInt($('#monthSelect').val());
                 updateDaysDropdown(year, month, null);
@@ -266,12 +303,14 @@
                 updateSummaryHistory();
             });
 
-            $('#formSearch').submit(function (e) {
-                e.preventDefault();
-                doSearch(1);
+            // Sự kiện thay đổi ngày thì chỉ lọc lại dữ liệu, không reset dropdown ngày
+            $('#daySelect').change(function () {
+                const allFilterData = getAllFilterData();
+                doSearch(1, allFilterData);
                 updateSummaryHistory();
             });
 
+            // Sự kiện thay đổi tiền tệ
             $('#currency-filter').change(function() {
                 const allFilterData = getAllFilterData();
                 doSearch(1, allFilterData);
@@ -284,6 +323,12 @@
                         // alert('Đã lưu tiền tệ mặc định!');
                     }
                 });
+            });
+
+            $('#formSearch').submit(function (e) {
+                e.preventDefault();
+                doSearch(1);
+                updateSummaryHistory();
             });
 
             // Event cho nút mở filter dialog
@@ -326,6 +371,18 @@
                     alert("Không thể tải dữ liệu, vui lòng thử lại.");
                 }
             });
+        }
+
+        function updateFilterBadge(count) {
+            var badge = document.getElementById('filterBadge');
+            if (badge) {
+                if (count > 0) {
+                    badge.textContent = count;
+                    badge.style.display = 'inline-block';
+                } else {
+                    badge.style.display = 'none';
+                }
+            }
         }
     </script>
 }

@@ -62,7 +62,7 @@ namespace CSharpSoChiTieu.Business.Services
         /// <param name="month"></param>
         /// <param name="day"></param>
         /// <returns></returns>
-        public async Task<OperationResult> Count(string searchValue = "", int? year = null, int? month = null, int? day = null)
+        public async Task<OperationResult> Count(string searchValue = "", int? year = null, int? month = null, int? day = null, string currency = null)
         {
             try
             {
@@ -75,6 +75,9 @@ namespace CSharpSoChiTieu.Business.Services
                 {
                     query = query.Where(x => x.Description.Contains(searchValue));
                 }
+
+                if (!string.IsNullOrEmpty(currency))
+                    query = query.Where(o => o.Currency == currency);
 
                 // Apply date filtering based on provided parameters
                 if (year.HasValue)

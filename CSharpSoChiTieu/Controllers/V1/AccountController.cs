@@ -208,6 +208,8 @@ namespace CSharpSoChiTieu.Controllers
         /// <returns></returns>
         public async Task<IActionResult> Logout()
         {
+            HttpContext.Session.Clear();
+
             await HttpContext.SignOutAsync("MyCookieAuth");
 
             return RedirectToAction("Login");
