@@ -35,7 +35,7 @@
                 <label for="transaction-description" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ghi chú &nbsp; :</label>
                 <div class="input-group input-group-static flex-grow-1">
                     <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
-                    <input type="text" class="form-control" id="transaction-description" name="Description" placeholder="Đã thu chi ..." value="@(Model?.Description ?? "")">
+                    <input type="text" class="form-control" id="transaction-description" name="Description" placeholder="Hãy mô tả khoản @(isIncome ? "thu" : "chi") của mình..." value="@(Model?.Description ?? "")">
                 </div>
             </div>
 
@@ -46,7 +46,7 @@
 
                 <div class="input-group border-bottom flex-grow-1">
                     <input type="text"
-                           class="form-control"
+                           class="form-control fw-bold"
                            id="transaction-amount"
                            name="Amount"
                            placeholder="0"

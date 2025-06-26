@@ -37,7 +37,7 @@
 		@foreach (var group in Model)
 		{
 			<div class="" style="border-top: 1px solid #73737338;">
-				<label>Ngày @group.Date.ToString("dd/MM/yyyy")</label>
+				<label> <i><span class="fw-bold">Ngày</span> @group.Date.ToString("dd-MM-yyyy")</i></label>
 				<div class="income-list-container mb-3">
 					<ul class="list-group list-group-flush">
 						@foreach (var item in group.Items)
@@ -304,7 +304,6 @@
 			});
 		}
 
-
 		// Function điền form edit
 		function fillEditForm(categoryId) {
 			console.log('Filling form with categoryId:', categoryId);
@@ -335,6 +334,9 @@
 				$('#income-category').val(categoryId);
 				console.log('Set category to:', categoryId, 'Current value:', $('#income-category').val());
 			}, 100);
+
+			// loading màu cho dialog
+			updateIncomeExpenseUI()
 		}
 
 		// Function lấy dữ liệu form
