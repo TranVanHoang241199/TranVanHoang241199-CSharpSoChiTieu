@@ -14,11 +14,11 @@
     <table class="table align-items-center mb-0">
         <thead>
             <tr>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thứ tự hiển thị</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên danh mục</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Loại</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Icon</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Màu sắc</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thứ tự</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Mô tả</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thao tác</th>
             </tr>
@@ -29,6 +29,9 @@
                 foreach (var item in Model.Data)
                 {
                     <tr id="category-row-@item.Id">
+                        <td class="align-middle text-center text-sm">
+                            @item.Order
+                        </td>
                         <td>
                             <div class="d-flex px-2 py-1">
                                 <div class="d-flex flex-column justify-content-center">
@@ -48,9 +51,7 @@
                         <td class="align-middle text-center">
                             <div class="color-preview" style="width: 24px; height: 24px; border-radius: 4px; background-color:@item.Color; margin: 0 auto; border: 1px solid #ccc;"></div>
                         </td>
-                        <td class="align-middle text-center text-sm">
-                            @item.Order
-                        </td>
+                        
                         <td>
                             <p class="text-xs text-secondary mb-0">@item.Text</p>
                         </td>

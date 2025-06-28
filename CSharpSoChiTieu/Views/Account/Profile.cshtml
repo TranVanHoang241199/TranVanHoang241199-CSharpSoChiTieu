@@ -4,15 +4,13 @@
 @model CSharpSoChiTieu.Business.Services.ProfileViewModel
 @{
     ViewData["Title"] = "Thông tin cá nhân";
-    Layout = "_AccountLayout";
 }
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mt-2">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">
-                    <h3 class="text-center">Thông tin cá nhân</h3>
+                <div class="card-header bg-primary">
+                    <h3 class="text-center text-white">Thông tin cá nhân</h3>
                 </div>
                 <div class="card-body">
                     <form id="profileForm" method="post" action="@Url.Action("UpdateProfile", "Account")">
@@ -22,14 +20,14 @@
                                 <div class="position-relative">
                                     @if (!string.IsNullOrEmpty(Model.Image))
                                     {
-                                        <img src="@Model.Image" alt="Profile Image" class="img-fluid rounded-circle" style="max-width: 200px;" id="profileImage" />
+                                        <img src="@Model.Image" alt="Profile Image" class="img-fluid rounded-circle" style="width: 200px; height: 200px;" id="profileImage" />
                                     }
                                     else
                                     {
-                                        <img src="~/images/default-avatar.png" alt="Default Avatar" class="img-fluid rounded-circle" style="max-width: 200px;" id="profileImage" />
+                                        <img src="~/images/default-avatar.png" alt="Default Avatar" class="img-fluid rounded-circle" style="width: 200px; height: 200px;" id="profileImage" />
                                     }
                                     <div class="position-absolute bottom-0 end-0">
-                                        <label for="imageUpload" class="btn btn-sm btn-primary rounded-circle">
+                                        <label for="imageUpload" class="btn fw-bold btn-primary" style="font-size: 0.7rem;">
                                             <i class="fas fa-camera"></i> Đổi hình nền
                                         </label>
                                         <input type="file" id="imageUpload" accept="image/*" style="display: none;" />
@@ -44,37 +42,36 @@
                             <div class="col-md-8">
                                 <div class="mb-3">
                                     <label class="form-label">Tên đăng nhập:</label>
-                                    <p class="form-control-static">@Model.UserName</p>
+                                    <p class="form-control border ps-2 bg-light">@Model.UserName</p>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Họ và tên:</label>
-                                    <input type="text" class="form-control" name="FullName" value="@Model.FullName" />
+                                    <input type="text" class="form-control border ps-2" name="FullName" value="@Model.FullName" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Email:</label>
-                                    <input type="email" class="form-control" name="Email" value="@(Model.Email ?? "")" />
+                                    <input type="email" class="form-control border ps-2" name="Email" value="@(Model.Email ?? "")" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Số điện thoại:</label>
-                                    <input type="tel" class="form-control" name="Phone" value="@(Model.Phone ?? "")" />
+                                    <input type="tel" class="form-control border ps-2" name="Phone" value="@(Model.Phone ?? "")" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Vai trò:</label>
-                                    <p class="form-control-static">@(Model.Role == "admin" ? "Quản trị viên" : "Người dùng")</p>
+                                    <p class="form-control border ps-2 bg-light">@(Model.Role == "admin" ? "Quản trị viên" : "Người dùng")</p>
                                 </div>
                             </div>
                         </div>
                         <div class="text-center" id="actionButtons">
-                            <a href="@Url.Action("Index", "IncomeExpense")" class="btn btn-secondary">Quay lại</a>
-                            <button type="button" class="btn btn-primary" id="editButton">Chỉnh sửa</button>
-                            <button type="submit" class="btn btn-success" id="saveButton" style="display: none;">Lưu</button>
+                            <a href="@Url.Action("Index", "IncomeExpense")" class="btn btn-secondary fw-bold">Quay lại</a>
+                            <button type="button" class="btn btn-primary fw-bold" id="editButton">Chỉnh sửa</button>
+                            <button type="submit" class="btn btn-success fw-bold" id="saveButton" style="display: none;">Lưu</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 @section Scripts {
     <script>

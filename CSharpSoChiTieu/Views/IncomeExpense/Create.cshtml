@@ -27,7 +27,7 @@
                 <label for="transaction-date" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ngày &nbsp; <span class="text-danger">*</span>:</label>
                 <div class="input-group input-group-static flex-grow-1">
                     <span class="input-group-text">@* <i class="fas fa-calendar-day"></i> *@</span>
-                    <input type="date" class="form-control border-0" id="transaction-date" name="Date" required value="@(Model?.Date == default ? DateTime.UtcNow.ToString("yyyy-MM-dd") : Model.Date.ToString("yyyy-MM-dd"))">
+                    <input type="date" class="form-control border-0 fw-bold" id="transaction-date" name="Date" required value="@(Model?.Date == default ? DateTime.UtcNow.ToString("yyyy-MM-dd") : Model.Date.ToString("yyyy-MM-dd"))">
                 </div>
             </div>
 
@@ -35,11 +35,11 @@
                 <label for="transaction-description" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">Ghi chú &nbsp; :</label>
                 <div class="input-group input-group-static flex-grow-1">
                     <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
-                    <input type="text" class="form-control" id="transaction-description" name="Description" placeholder="Hãy mô tả khoản @(isIncome ? "thu" : "chi") của mình..." value="@(Model?.Description ?? "")">
+                    <input type="text" class="form-control" id="transaction-description" name="Description" placeholder="Mô tả khoản @(isIncome ? "thu" : "chi")..." value="@(Model?.Description ?? "")">
                 </div>
             </div>
 
-            <div class="d-flex  align-items-center mb-1">
+            <div class="d-flex align-items-center mb-1">
                 <label for="transaction-amount" class="form-label small fw-bold mb-0 me-3 text-nowrap flex-shrink-0" style="width: 70px;">
                     Số tiền <span class="text-danger">*</span>:
                 </label>

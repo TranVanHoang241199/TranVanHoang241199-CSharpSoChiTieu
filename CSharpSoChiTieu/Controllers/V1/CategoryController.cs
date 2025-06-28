@@ -159,19 +159,24 @@ namespace CSharpSoChiTieu.Controllers
         [HttpPost]
         public async Task<ActionResult> Save(CategoryInputModel data)
         {
-            //Kiểm tra dữ liệu đầu vào
-            if (string.IsNullOrWhiteSpace(data.Name))
-                ModelState.AddModelError(nameof(data.Name), "Tên loại sản phẩm không được để trống");
-
-            //Kiểm tra dữ liệu đầu vào
-            if (!Enum.IsDefined(typeof(IncomeExpenseType), data.Type))
-                ModelState.AddModelError(nameof(data.Type), "Loại sản phẩm không hợp lệ");
-
-
             if (ModelState.IsValid == false)
             {
                 ViewBag.Title = data.Id == Guid.Empty ? "Bổ sung loại sản phẩm" : "Cập nhật loại sản phẩm";
-                return View("Edit", data);
+
+                // Chuyển đổi CategoryInputModel thành CategoryViewModel để phù hợp với view
+                var viewModel = new CategoryViewModel
+                {
+                    Id = data.Id,
+                    Name = data.Name,
+                    Text = data.Text,
+                    Icon = data.Icon,
+                    Color = data.Color,
+                    Order = data.Order,
+                    Type = data.Type
+                };
+
+                await ShowViewBag();
+                return View("Edit", viewModel);
             }
 
             if (data.Id == Guid.Empty)

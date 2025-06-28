@@ -23,17 +23,17 @@
                         <!-- Loại giao dịch: thu/chi -->
                         <div class="col-12 col-md-3">
                             <label for="typeFilter" class="form-label fw-bold mb-1">Loại giao dịch</label>
-                            <select id="typeFilter" class="form-select form-select-sm" onchange="applyFilters()">
+                            <select id="typeFilter" class="form-select form-select-sm border" onchange="applyFilters()">
                                 <option value="all">Tất cả</option>
                                 <option value="income">Khoản thu</option>
-                                <option value="expense">Khoản chi</option>
+                                <option selected value="expense">Khoản chi</option>
                             </select>
                         </div>
 
                         <!-- Tiền tệ -->
                         <div class="col-12 col-md-3">
                             <label for="currency-filter" class="form-label fw-bold mb-1">Đơn vị tiền tệ</label>
-                            <select id="currency-filter" name="currency" class="form-select form-select-sm" onchange="applyFilters()">
+                            <select id="currency-filter" name="currency" class="form-select form-select-sm border" onchange="applyFilters()">
                                 @if (ViewBag.Currencies != null)
                                 {
                                     var selectedCurrency = ViewBag.SelectedCurrency as string;
@@ -50,19 +50,19 @@
                         <!-- Từ ngày -->
                         <div class="col-6 col-md-2">
                             <label for="dateFrom" class="form-label fw-bold mb-1">Từ ngày</label>
-                            <input type="date" id="dateFrom" class="form-control form-control-sm" onchange="applyFilters()" />
+                            <input type="date" id="dateFrom" class="form-control form-control-sm border" onchange="applyFilters()" />
                         </div>
 
                         <!-- Đến ngày -->
                         <div class="col-6 col-md-2">
                             <label for="dateTo" class="form-label fw-bold mb-1">Đến ngày</label>
-                            <input type="date" id="dateTo" class="form-control form-control-sm" onchange="applyFilters()" />
+                            <input type="date" id="dateTo" class="form-control form-control-sm border" onchange="applyFilters()" />
                         </div>
 
                         <!-- Khoảng thời gian -->
                         <div class="col-12 col-md-2">
                             <label for="select-range" class="form-label fw-bold mb-1">Thời gian</label>
-                            <select id="select-range" class="form-select form-select-sm" onchange="handleDateRangeChange()">
+                            <select id="select-range" class="form-select form-select-sm border" onchange="handleDateRangeChange()">
                                 <option value="all" selected>Tùy chọn</option>
                                 <option value="today">Hôm nay</option>
                                 <option value="week">Tuần này</option>
