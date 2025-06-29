@@ -321,6 +321,7 @@ wwwroot\css\income-expenses.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\img\avatar.jpg
+wwwroot\img\logo_title.jpg
 wwwroot\img\logo1.jpg
 wwwroot\img\QC\Bia_lao.jfif
 wwwroot\img\QC\nhau.webp

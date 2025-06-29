@@ -240,6 +240,16 @@
     }
 
     function applyFilters() {
+        // Reset các select ngày tháng năm về "Tất cả"
+        $('#yearSelect').val('');
+        $('#monthSelect').val('');
+        $('#daySelect').val('');
+
+        // Cập nhật lại dropdown ngày
+        if (typeof updateDaysDropdown === 'function') {
+            updateDaysDropdown(null, null, null);
+        }
+
         // Lấy dữ liệu từ form search chính
         const formData = new FormData(document.getElementById('formSearch'));
 
@@ -271,6 +281,16 @@
         // Gọi function doSearch từ trang chính
         if (typeof doSearch === 'function') {
             doSearch(1, searchData);
+        }
+
+        // Cập nhật summary
+        if (typeof updateSummaryHistory === 'function') {
+            updateSummaryHistory();
+        }
+
+        // Cập nhật filter badge
+        if (typeof updateFilterBadge === 'function') {
+            updateFilterBadge(countActiveFilters());
         }
 
         // Đóng modal

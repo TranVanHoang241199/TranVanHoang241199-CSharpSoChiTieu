@@ -11,73 +11,131 @@
         </p>
     </div>
 
-    <table class="table align-items-center mb-0">
-        <thead>
-            <tr>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thứ tự hiển thị</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên danh mục</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Loại</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Icon</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Màu sắc</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Mô tả</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thao tác</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.Data != null && Model.Data.Any())
-            {
-                foreach (var item in Model.Data)
+    <!-- Desktop View (Table) - Ẩn trên mobile -->
+    <div class="d-none d-lg-block">
+        <table class="table align-items-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thứ tự hiển thị</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên danh mục</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Loại</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Icon</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Màu sắc</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Mô tả</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Data != null && Model.Data.Any())
                 {
-                    <tr id="category-row-@item.Id">
-                        <td class="align-middle text-center text-sm">
-                            @item.Order
-                        </td>
-                        <td>
-                            <div class="d-flex px-2 py-1">
-                                <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="mb-0 text-sm">@item.Name</h6>
+                    foreach (var item in Model.Data)
+                    {
+                        <tr id="category-row-@item.Id">
+                            <td class="align-middle text-center text-sm">
+                                @item.Order
+                            </td>
+                            <td>
+                                <div class="d-flex px-2 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm">@item.Name</h6>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="badge badge-sm @(item.Type == IncomeExpenseType.Income ? "bg-gradient-success" : "bg-gradient-danger")">
-                                @(item.Type == IncomeExpenseType.Income ? "Khoản thu" : "Khoản chi")
-                            </span>
-                        </td>
-                        <td class="align-middle text-center text-sm">
-                            <i class="material-symbols-rounded">@item.Icon</i>
-                            <i class="@item.Icon"></i>
-                        </td>
-                        <td class="align-middle text-center">
-                            <div class="color-preview" style="width: 24px; height: 24px; border-radius: 4px; background-color:@item.Color; margin: 0 auto; border: 1px solid #ccc;"></div>
-                        </td>
-                        
-                        <td>
-                            <p class="text-xs text-secondary mb-0">@item.Text</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <a href="~/Category/Edit/@item.Id" class="btn btn-link text-primary text-gradient px-3 mb-0" title="Chỉnh sửa">
-                                <i class="material-symbols-rounded">edit</i>
-                            </a>
-                            <button type="button" class="btn btn-link text-danger text-gradient px-3 mb-0 delete-category"
-                                    data-id="@item.Id" data-name="@item.Name" title="Xóa">
-                                <i class="material-symbols-rounded">delete</i>
-                            </button>
+                            </td>
+                            <td>
+                                <span class="badge badge-sm @(item.Type == IncomeExpenseType.Income ? "bg-gradient-success" : "bg-gradient-danger")">
+                                    @(item.Type == IncomeExpenseType.Income ? "Khoản thu" : "Khoản chi")
+                                </span>
+                            </td>
+                            <td class="align-middle text-center text-sm">
+                                <i class="material-symbols-rounded">@item.Icon</i>
+                                <i class="@item.Icon"></i>
+                            </td>
+                            <td class="align-middle text-center">
+                                <div class="color-preview" style="width: 24px; height: 24px; border-radius: 4px; background-color:@item.Color; margin: 0 auto; border: 1px solid #ccc;"></div>
+                            </td>
+
+                            <td>
+                                <p class="text-xs text-secondary mb-0">@item.Text</p>
+                            </td>
+                            <td class="align-middle text-center">
+                                <a href="~/Category/Edit/@item.Id" class="btn btn-link text-primary text-gradient px-3 mb-0" title="Chỉnh sửa">
+                                    <i class="material-symbols-rounded">edit</i>
+                                </a>
+                                <button type="button" class="btn btn-link text-danger text-gradient px-3 mb-0 delete-category"
+                                        data-id="@item.Id" data-name="@item.Name" title="Xóa">
+                                    <i class="material-symbols-rounded">delete</i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" class="text-center text-muted py-4">
+                            <i class="material-symbols-rounded opacity-5">search_off</i>
+                            <p class="mt-2 mb-0">Không tìm thấy dữ liệu</p>
                         </td>
                     </tr>
                 }
-            }
-            else
-            {
-                <tr>
-                    <td colspan="7" class="text-center text-muted py-4">
-                        <i class="material-symbols-rounded opacity-5">search_off</i>
-                        <p class="mt-2 mb-0">Không tìm thấy dữ liệu</p>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Mobile View (Cards) - Chỉ hiển thị trên mobile -->
+    <div class="d-lg-none">
+        @if (Model.Data != null && Model.Data.Any())
+        {
+            <div class="row">
+                @foreach (var item in Model.Data)
+                {
+                    <div class="col-12 mb-3" id="category-card-@item.Id">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center">
+                                    <!-- Icon với màu nền tròn -->
+                                    <div class="category-icon-wrapper me-3" style="background-color: @item.Color;">
+                                        <span class="category-icon">@item.Icon</span>
+                                    </div>
+
+                                    <!-- Thông tin danh mục -->
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <h6 class="mb-1 text-sm font-weight-bold">@item.Name</h6>
+                                                <p class="text-xs text-secondary mb-0">@item.Text</p>
+                                                <span class="badge badge-sm @(item.Type == IncomeExpenseType.Income ? "bg-gradient-success" : "bg-gradient-danger") mt-1">
+                                                    @(item.Type == IncomeExpenseType.Income ? "Khoản thu" : "Khoản chi")
+                                                </span>
+                                            </div>
+
+                                            <!-- Nút thao tác -->
+                                            <div class="d-flex flex-column">
+                                                <a href="~/Category/Edit/@item.Id" class="btn btn-link text-primary text-gradient p-1 mb-1" title="Chỉnh sửa">
+                                                    <i class="material-symbols-rounded" style="font-size: 18px;">edit</i>
+                                                </a>
+                                                <button type="button" class="btn btn-link text-danger text-gradient p-1 delete-category"
+                                                        data-id="@item.Id" data-name="@item.Name" title="Xóa">
+                                                    <i class="material-symbols-rounded" style="font-size: 18px;">delete</i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="text-center text-muted py-4">
+                <i class="material-symbols-rounded opacity-5" style="font-size: 48px;">search_off</i>
+                <p class="mt-2 mb-0">Không tìm thấy dữ liệu</p>
+            </div>
+        }
+    </div>
 
     @if (Model.PageCount > 1)
     {
@@ -106,30 +164,11 @@
 </div>
 
 <!-- Modal Xác nhận xóa -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Xác nhận xóa</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Bạn có chắc chắn muốn xóa danh mục "<span id="categoryName"></span>"?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-danger" id="confirmDelete">
-                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                    <span class="btn-text">Xóa</span>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="modal fade" id="deleteModal">...</div>
 
 <style>
+
+    /* Desktop styles */
     .color-preview {
         transition: transform 0.2s;
     }
@@ -138,6 +177,28 @@
             transform: scale(1.2);
         }
 
+    /* Mobile styles */
+    .category-icon-wrapper {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .category-icon {
+        font-size: 24px;
+        color: white;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        font-family: 'Noto Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Apple Color Emoji', sans-serif;
+        line-height: 1;
+        display: block;
+    }
+
+    /* Pagination styles */
     .pagination-info .page-link {
         color: #344767;
     }
@@ -147,6 +208,7 @@
         border-color: #344767;
     }
 
+    /* Loading styles */
     .loading-overlay {
         position: fixed;
         top: 0;
@@ -170,13 +232,16 @@
     }
 
     @@keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
+        0%
 
-        100% {
-            transform: rotate(360deg);
-        }
+    {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
     }
 
     .search-btn {
@@ -197,65 +262,118 @@
         .search-btn.loading .spinner-border {
             display: inline-block !important;
         }
+
+    /* Mobile card hover effects */
+    .card {
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+        }
+
+    /* Responsive adjustments */
+    @@media (max-width: 575.98px) {
+        .category-icon-wrapper
+
+    {
+        width: 45px;
+        height: 45px;
+    }
+
+    .category-icon {
+        font-size: 20px;
+    }
+
+    .card-body {
+        padding: 0.75rem !important;
+    }
+
+    }
 </style>
 
 <script>
-    $(document).ready(function() {
-        let categoryIdToDelete = null;
-        const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    let deleteModalInstance;
+    const currentPage = @Model.Page;
 
-        // Xử lý click nút xóa
-        $('.delete-category').click(function() {
-            const id = $(this).data('id');
-            const name = $(this).data('name');
-            categoryIdToDelete = id;
-            $('#categoryName').text(name);
-            deleteModal.show();
-        });
+    function showDeleteModal(id, name) {
+        // Nếu đã có modal, thì xóa trước
+        $('#deleteModal').remove();
 
-        // Xử lý xác nhận xóa
-        $('#confirmDelete').click(function() {
-            if (categoryIdToDelete) {
-                const $btn = $(this);
-                const $spinner = $btn.find('.spinner-border');
-                const $btnText = $btn.find('.btn-text');
+        // Tạo lại modal
+        const modalHtml = `
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Xác nhận xóa</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Bạn có chắc chắn muốn xóa danh mục "<strong>${name}</strong>"?</p>
+                        <input type="hidden" name="__RequestVerificationToken" value="${$('input[name="__RequestVerificationToken"]').val()}"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-danger" id="confirmDelete">
+                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                            <span class="btn-text">Xóa</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>`;
 
-                // Disable nút và hiển thị loading
-                $btn.prop('disabled', true);
-                $spinner.removeClass('d-none');
-                $btnText.text('Đang xóa...');
+        $('body').append(modalHtml);
+        const modalEl = document.getElementById('deleteModal');
+        deleteModalInstance = new bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: false });
+        deleteModalInstance.show();
 
-                $.ajax({
-                    url: '/Category/Delete/' + categoryIdToDelete,
-                    type: 'POST',
-                    success: function(response) {
-                        console.log("đã vào1" + response.status);
-                        if (response.success) { // HttpStatusCode.OK = 200
-                            console.log("đã vào2" + response.status);
-                            // Hiển thị thông báo thành công
-                            //toastr.success(response.message);
+        $('#confirmDelete').on('click', function () {
+            const $btn = $(this);
+            const $spinner = $btn.find('.spinner-border');
+            const $btnText = $btn.find('.btn-text');
 
-                            // Ẩn modal xóa
-                            deleteModal.hide();
-                            categoryIdToDelete = null;
+            $btn.prop('disabled', true);
+            $spinner.removeClass('d-none');
+            $btnText.text('Đang xóa...');
 
-                            window.parent.doSearch(@Model.Page);
-                            
-                        } else {
-                            toastr.error(response.message || 'Có lỗi xảy ra khi xóa danh mục');
+            $.ajax({
+                url: '/Category/Delete/' + id,
+                type: 'POST',
+                headers: {
+                    'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function (response) {
+                    if (response.success) {
+                        if (typeof doSearch === 'function') {
+                            doSearch(@Model.Page);
                         }
-                    },
-                    error: function() {
-                        toastr.error('Có lỗi xảy ra khi xóa danh mục');
-                    },
-                    complete: function() {
-                        // Reset trạng thái nút xóa
-                        $btn.prop('disabled', false);
-                        $spinner.addClass('d-none');
-                        $btnText.text('Xóa');
+                    } else {
+                        toastr.error(response.message || 'Có lỗi xảy ra khi xóa');
                     }
-                });
-            }
+                },
+                error: function () {
+                    toastr.error('Xảy ra lỗi trong quá trình xóa');
+                },
+                complete: function () {
+                    $btn.prop('disabled', false);
+                    $spinner.addClass('d-none');
+                    $btnText.text('Xóa');
+                    deleteModalInstance.hide();
+                    $('#deleteModal').remove(); // Xóa modal khỏi DOM
+                }
+            });
         });
+    }
+
+    $(document).on('click', '.delete-category', function (e) {
+        e.preventDefault();
+        const id = $(this).data('id');
+        const name = $(this).data('name');
+        showDeleteModal(id, name);
     });
+
+
 </script>
