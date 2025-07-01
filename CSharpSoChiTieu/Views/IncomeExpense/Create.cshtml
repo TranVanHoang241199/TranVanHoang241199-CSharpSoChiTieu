@@ -134,6 +134,7 @@
 <script>
     $(document).ready(function() {
         addDataIE();
+        // Chỉ gắn event một lần, không bị lặp khi load lại danh mục
         EventDoiMauCategory();
         loadFormCategoryEI("@ViewBag.Type");
 
@@ -185,6 +186,9 @@
             type: "GET",
             success: function (data) {
                 $("#IncomeExpenseCateogry").html(data);
+
+                // Sau khi load lại danh mục, KHÔNG gắn lại EventDoiMauCategory ở đây
+                // vì đã gắn 1 lần duy nhất ở $(document).ready
             },
             error: function () {
                 alert("Không tải được danh mục.");
@@ -192,7 +196,10 @@
         });
     }
 
+    // Đảm bảo chỉ gắn event 1 lần duy nhất
     function EventDoiMauCategory() {
+        // Trước khi gắn event, bỏ event cũ để tránh lặp
+        $(document).off("click", ".btn-category");
         $(document).on("click", ".btn-category", function () {
             var categoryId = $(this).data("category-id");
             $("#IncomeExpense-category-id").val(categoryId);
@@ -200,8 +207,9 @@
             $("#category-validation-feedback").hide();
             $("#validation-errors").hide();
 
-            $(".btn-category").removeClass("@(isIncome ? "btn-success" : "btn-danger")").addClass("btn-light");
-            $(this).removeClass("btn-light").addClass("@(isIncome ? "btn-success" : "btn-danger")");
+            $(".btn-category").removeClass("btn-success btn-danger").addClass("btn-white");
+            $(this).removeClass("btn-white").addClass("@(categoryBtnClass)");
+
         });
     }
 

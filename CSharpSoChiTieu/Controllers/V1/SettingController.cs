@@ -1,7 +1,7 @@
-﻿using CSharpSoChiTieu.Business.Services;
+﻿using API_HotelManagement.common;
+using CSharpSoChiTieu.Business.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace CSharpSoChiTieu.Controllers
 {
@@ -10,15 +10,26 @@ namespace CSharpSoChiTieu.Controllers
     {
         private readonly ISettingHandler _settingHandler;
         private readonly ILogger<SettingController> _logger;
+        private readonly ICurrencyHandler _currencyHandler;
 
-        public SettingController(ISettingHandler settingHandler, ILogger<SettingController> logger)
+        public SettingController(ISettingHandler settingHandler, ILogger<SettingController> logger, ICurrencyHandler currencyHandler)
         {
             _settingHandler = settingHandler;
             _logger = logger;
+            _currencyHandler = currencyHandler;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            // Lấy danh sách tiền tệ
+            var currencyResult = await _currencyHandler.GetAll();
+            var currencies = (currencyResult as OperationResultList<CurrencyViewModel>)?.Data ?? new List<CurrencyViewModel>();
+            ViewBag.Currencies = currencies;
+
+            // Lấy đơn vị tiền tệ đang lưu trong user setting
+            var userSetting = _settingHandler.GetUserSettings();
+            ViewBag.SelectedCurrency = userSetting?.Currency ?? "VND";
+
             var userIdClaim = User.FindFirst("UserId")?.Value;
             if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out Guid userId))
             {
@@ -110,6 +121,27 @@ namespace CSharpSoChiTieu.Controllers
             {
                 _logger.LogError(ex, $"Lỗi khi cập nhật tiền tệ");
                 return Json(new { success = false, message = "Có lỗi xảy ra khi cập nhật tiền tệ" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ToggleDarkMode()
+        {
+            try
+            {
+                var result = await _settingHandler.ToggleDarkModeAsync();
+                if (result)
+                {
+                    // Lấy trạng thái dark mode mới nhất
+                    var settings = _settingHandler.GetUserSettings();
+                    return Json(new { success = true, message = "Cập nhật chế độ tối thành công", darkMode = settings.DarkMode });
+                }
+                return Json(new { success = false, message = "Cập nhật chế độ tối thất bại" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi cập nhật chế độ tối");
+                return Json(new { success = false, message = "Có lỗi xảy ra khi cập nhật chế độ tối" });
             }
         }
     }

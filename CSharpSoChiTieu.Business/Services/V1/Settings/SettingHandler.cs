@@ -4,6 +4,8 @@ using CSharpSoChiTieu.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
 namespace CSharpSoChiTieu.Business.Services
 {
@@ -170,7 +172,6 @@ namespace CSharpSoChiTieu.Business.Services
 
         public bool UpdateCurrency(string currencyCode)
         {
-
             var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
 
             var setting = _context.ct_UserSettings.FirstOrDefault(s => s.UserId == currentUserId);
@@ -182,6 +183,41 @@ namespace CSharpSoChiTieu.Business.Services
             setting.Currency = currencyCode;
             _context.SaveChanges();
             return true;
+        }
+
+        public async Task<bool> ToggleDarkModeAsync()
+        {
+            try
+            {
+                var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
+                if (currentUserId == Guid.Empty)
+                {
+                    _logger.LogWarning("Could not find user ID from HttpContext.");
+                    return false;
+                }
+
+                var userSetting = await _context.ct_UserSettings
+                    .FirstOrDefaultAsync(s => s.UserId == currentUserId);
+
+                if (userSetting == null)
+                {
+                    _logger.LogWarning($"User settings not found for user {currentUserId}.");
+                    return false;
+                }
+
+                userSetting.DarkMode = !userSetting.DarkMode;
+                userSetting.ModifiedDate = DateTime.UtcNow;
+                userSetting.ModifiedBy = currentUserId;
+
+                _context.ct_UserSettings.Update(userSetting);
+                var result = await _context.SaveChangesAsync();
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error toggling dark mode.");
+                return false;
+            }
         }
     }
 }

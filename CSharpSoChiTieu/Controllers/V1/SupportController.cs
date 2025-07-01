@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace CSharpSoChiTieu.Controllers.V1
+namespace CSharpSoChiTieu.Controllers
 {
     public class SupportController : Controller
     {

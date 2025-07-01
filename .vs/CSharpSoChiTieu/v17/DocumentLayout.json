@@ -3,16 +3,104 @@
   "WorkspaceRootPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\category\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\category\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\incomeexpense\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\incomeexpense\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\report\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\report\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\controllers\\v1\\supportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\controllers\\v1\\supportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\controllers\\v1\\settingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\controllers\\v1\\settingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\controllers\\v1\\historycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\controllers\\v1\\historycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\controllers\\v1\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\controllers\\v1\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\controllers\\v1\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\controllers\\v1\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\setting\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\setting\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\shared\\_controlfooter.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\shared\\_controlfooter.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\shared\\_controlsidebar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\shared\\_controlsidebar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\controllers\\v1\\historycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\controllers\\v1\\historycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.business\\services\\v1\\settings\\isettinghandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|solutionrelative:csharpsochitieu.business\\services\\v1\\settings\\isettinghandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.business\\services\\v1\\settings\\settinghandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|solutionrelative:csharpsochitieu.business\\services\\v1\\settings\\settinghandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.business\\services\\v1\\settings\\settingmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|solutionrelative:csharpsochitieu.business\\services\\v1\\settings\\settingmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.business\\services\\v1\\categorys\\categoryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|solutionrelative:csharpsochitieu.business\\services\\v1\\categorys\\categoryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\support\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\support\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\category\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\category\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\history\\_filterdialog.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -25,14 +113,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\category\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\category\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\controllers\\v1\\incomeexpensecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\controllers\\v1\\incomeexpensecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\report\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\report\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\account\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -59,40 +139,8 @@
       "RelativeMoniker": "D:0:0:{827124CE-0731-4EBF-8162-B1D38CB5F3D5}|CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj|solutionrelative:csharpsochitieu.data\\data\\ctdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\support\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\support\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\controllers\\v1\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\controllers\\v1\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\shared\\_controlsidebar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\shared\\_controlsidebar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\shared\\_controlfooter.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\shared\\_controlfooter.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\incomeexpense\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\incomeexpense\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{827124CE-0731-4EBF-8162-B1D38CB5F3D5}|CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.data\\data\\datevalues\\iconendcolorcategory.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{827124CE-0731-4EBF-8162-B1D38CB5F3D5}|CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj|solutionrelative:csharpsochitieu.data\\data\\datevalues\\iconendcolorcategory.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{827124CE-0731-4EBF-8162-B1D38CB5F3D5}|CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.data\\data\\datevalues\\save_donvitiente.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{827124CE-0731-4EBF-8162-B1D38CB5F3D5}|CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj|solutionrelative:csharpsochitieu.data\\data\\datevalues\\save_donvitiente.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\incomeexpense\\_history.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -101,10 +149,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\incomeexpense\\_dialogs.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\incomeexpense\\_dialogs.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\incomeexpense\\_category.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\incomeexpense\\_category.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.business\\services\\v1\\incomeexpenses\\incomeexpensehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -119,10 +163,6 @@
       "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\account\\_navbaraccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\controllers\\v1\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\controllers\\v1\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.business\\services\\v1\\report\\reporthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|solutionrelative:csharpsochitieu.business\\services\\v1\\report\\reporthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -131,32 +171,12 @@
       "RelativeMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|solutionrelative:csharpsochitieu.business\\services\\v1\\report\\reportmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.business\\services\\v1\\report\\ireporthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|solutionrelative:csharpsochitieu.business\\services\\v1\\report\\ireporthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\setting\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\setting\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\controllers\\v1\\supportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\controllers\\v1\\supportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.business\\services\\v1\\settings\\settinghandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|solutionrelative:csharpsochitieu.business\\services\\v1\\settings\\settinghandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\models\\paginationsearchinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\models\\paginationsearchinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\controllers\\v1\\settingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\controllers\\v1\\settingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.business\\services\\v1\\currencies\\currencyhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -179,10 +199,6 @@
       "RelativeMoniker": "D:0:0:{4D87B230-F10F-4489-A9DB-343CF803DC1A}|CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj|solutionrelative:csharpsochitieu.common\\utils\\getextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.business\\services\\v1\\categorys\\categoryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|solutionrelative:csharpsochitieu.business\\services\\v1\\categorys\\categoryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.business\\services\\v1\\accounts\\accounthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{971C1DAF-F34B-4AE2-84E4-54B541B9F04F}|CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj|solutionrelative:csharpsochitieu.business\\services\\v1\\accounts\\accounthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -201,10 +217,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{827124CE-0731-4EBF-8162-B1D38CB5F3D5}|CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.data\\data\\entitys\\ct_emoji.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{827124CE-0731-4EBF-8162-B1D38CB5F3D5}|CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj|solutionrelative:csharpsochitieu.data\\data\\entitys\\ct_emoji.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Migrations\\20250622033343_UpdateUserSettingTableFix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -259,10 +271,6 @@
       "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\wwwroot\\assets\\css\\material-dashboard.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\shared\\_accountlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\shared\\_accountlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -273,10 +281,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu\\CSharpSoChiTieu.csproj|solutionrelative:csharpsochitieu\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{827124CE-0731-4EBF-8162-B1D38CB5F3D5}|CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.data\\migrations\\20250601092120_addtableemoji.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -294,180 +298,212 @@
       "DocumentGroups": [
         {
           "DockedWidth": 248,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Search.cshtml",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Category\\Search.cshtml",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Category\\Search.cshtml",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Category\\Search.cshtml",
-              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Category\\Search.cshtml",
-              "ViewState": "AgIAAIYAAAAAAAAAAAAqwJUAAABPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-28T14:36:53.335Z",
+              "DocumentIndex": 3,
+              "Title": "SettingController.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\SettingController.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Controllers\\V1\\SettingController.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\SettingController.cs",
+              "RelativeToolTip": "CSharpSoChiTieu\\Controllers\\V1\\SettingController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-01T13:55:30.593Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Category\\Index.cshtml",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Category\\Index.cshtml",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Category\\Index.cshtml",
-              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Category\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-18T09:29:39.444Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Category\\Edit.cshtml",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Category\\Edit.cshtml",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Category\\Edit.cshtml",
-              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Category\\Edit.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-03T03:09:51.553Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\History\\Index.cshtml",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\History\\Index.cshtml",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\History\\Index.cshtml",
-              "RelativeToolTip": "CSharpSoChiTieu\\Views\\History\\Index.cshtml",
-              "ViewState": "AgIAAFEBAAAAAAAAAAAqwIQBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-25T10:04:17.674Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "_FilterDialog.cshtml",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\History\\_FilterDialog.cshtml",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\History\\_FilterDialog.cshtml",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\History\\_FilterDialog.cshtml",
-              "RelativeToolTip": "CSharpSoChiTieu\\Views\\History\\_FilterDialog.cshtml",
-              "ViewState": "AgIAAAkBAAAAAAAAAAAqwBgBAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-24T02:55:58.101Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "HistoryController.cs",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\HistoryController.cs",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Controllers\\V1\\HistoryController.cs",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\HistoryController.cs",
-              "RelativeToolTip": "CSharpSoChiTieu\\Controllers\\V1\\HistoryController.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAQwCMAAAARAAAAAAAAAA==",
+              "Title": "SupportController.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\SupportController.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Controllers\\V1\\SupportController.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\SupportController.cs",
+              "RelativeToolTip": "CSharpSoChiTieu\\Controllers\\V1\\SupportController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T03:04:28.001Z"
+              "WhenOpened": "2025-06-25T07:26:07.582Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAA0AAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-10T02:37:53.2Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\IncomeExpense\\Index.cshtml",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\IncomeExpense\\Index.cshtml",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\IncomeExpense\\Index.cshtml",
-              "RelativeToolTip": "CSharpSoChiTieu\\Views\\IncomeExpense\\Index.cshtml",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAAEsAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-01T09:16:18.279Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "IncomeExpenseController.cs",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\IncomeExpenseController.cs",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Controllers\\V1\\IncomeExpenseController.cs",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\IncomeExpenseController.cs",
-              "RelativeToolTip": "CSharpSoChiTieu\\Controllers\\V1\\IncomeExpenseController.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAuwFAAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-28T08:10:58.074Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Profile.cshtml",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Account\\Profile.cshtml",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Account\\Profile.cshtml",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Account\\Profile.cshtml",
-              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Account\\Profile.cshtml",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAADEAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-10T02:13:01.892Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Report\\Index.cshtml",
               "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Report\\Index.cshtml",
               "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Report\\Index.cshtml",
               "RelativeToolTip": "CSharpSoChiTieu\\Views\\Report\\Index.cshtml",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAADgAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAABAAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-12T01:51:08.901Z"
+              "WhenOpened": "2025-06-12T01:51:08.901Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\IncomeExpense\\Create.cshtml",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\IncomeExpense\\Create.cshtml",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\IncomeExpense\\Create.cshtml",
+              "RelativeToolTip": "CSharpSoChiTieu\\Views\\IncomeExpense\\Create.cshtml",
+              "ViewState": "AgIAALwAAAAAAAAAAAAqwM4AAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-27T01:31:43.381Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "HistoryController.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\HistoryController.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Controllers\\V1\\HistoryController.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\HistoryController.cs",
+              "RelativeToolTip": "CSharpSoChiTieu\\Controllers\\V1\\HistoryController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T03:04:28.001Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\AccountController.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Controllers\\V1\\AccountController.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\AccountController.cs",
+              "RelativeToolTip": "CSharpSoChiTieu\\Controllers\\V1\\AccountController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T08:33:32.511Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ReportController.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\ReportController.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Controllers\\V1\\ReportController.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\ReportController.cs",
+              "RelativeToolTip": "CSharpSoChiTieu\\Controllers\\V1\\ReportController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T14:17:26.586Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Setting\\Index.cshtml",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Setting\\Index.cshtml",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Setting\\Index.cshtml",
+              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Setting\\Index.cshtml",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAAAJEAAABqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-10T03:01:12.159Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "site.css",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\wwwroot\\css\\site.css",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "CSharpSoChiTieu\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-30T13:59:16.928Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "Register.cshtml",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Account\\Register.cshtml",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Account\\Register.cshtml",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Account\\Register.cshtml",
-              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Account\\Register.cshtml",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAAEIAAABAAAAAAAAAAA==",
+              "Title": "_ControlFooter.cshtml",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Shared\\_ControlFooter.cshtml",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Shared\\_ControlFooter.cshtml",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Shared\\_ControlFooter.cshtml",
+              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Shared\\_ControlFooter.cshtml",
+              "ViewState": "AgIAACwBAAAAAAAAAAAqwDwBAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-10T02:23:09.892Z"
+              "WhenOpened": "2025-06-10T02:39:17.313Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "_ControlSideBar.cshtml",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Shared\\_ControlSideBar.cshtml",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Shared\\_ControlSideBar.cshtml",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Shared\\_ControlSideBar.cshtml",
+              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Shared\\_ControlSideBar.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEEAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-10T02:39:10.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-10T02:37:53.2Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
-              "Title": "CategoryModel.cs",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\CategoryModel.cs",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\CategoryModel.cs",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\CategoryModel.cs",
-              "RelativeToolTip": "CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\CategoryModel.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAmwA0AAABTAAAAAAAAAA==",
+              "Title": "ISettingHandler.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Settings\\ISettingHandler.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Settings\\ISettingHandler.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Settings\\ISettingHandler.cs",
+              "RelativeToolTip": "CSharpSoChiTieu.Business\\Services\\V1\\Settings\\ISettingHandler.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T08:03:45.466Z"
+              "WhenOpened": "2025-06-30T13:23:05.796Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "CTDbContext.cs",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Data\\CTDbContext.cs",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu.Data\\Data\\CTDbContext.cs",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Data\\CTDbContext.cs",
-              "RelativeToolTip": "CSharpSoChiTieu.Data\\Data\\CTDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "Title": "SettingHandler.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Settings\\SettingHandler.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Settings\\SettingHandler.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Settings\\SettingHandler.cs",
+              "RelativeToolTip": "CSharpSoChiTieu.Business\\Services\\V1\\Settings\\SettingHandler.cs",
+              "ViewState": "AgIAAKwAAAAAAAAAAAA8wLoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-01T03:32:32.479Z"
+              "WhenOpened": "2025-06-17T09:49:18.152Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 14,
+              "Title": "SettingModel.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Settings\\SettingModel.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Settings\\SettingModel.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Settings\\SettingModel.cs",
+              "RelativeToolTip": "CSharpSoChiTieu.Business\\Services\\V1\\Settings\\SettingModel.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAkwBQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T13:22:55.273Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Program.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Program.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Program.cs",
+              "RelativeToolTip": "CSharpSoChiTieu\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T03:17:56.28Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Support\\Index.cshtml",
               "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Support\\Index.cshtml",
@@ -479,31 +515,211 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\_ViewImports.cshtml",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "CSharpSoChiTieu\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-10T02:37:46.773Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "CSharpSoChiTieu\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T08:08:50.489Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\appsettings.json",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\appsettings.json",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\appsettings.json",
+              "RelativeToolTip": "CSharpSoChiTieu\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAACGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-29T09:55:11.69Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "CategoryHandler.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\CategoryHandler.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\CategoryHandler.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\CategoryHandler.cs",
+              "RelativeToolTip": "CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\CategoryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJ8AAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T09:36:08Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\appsettings.Development.json",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\appsettings.Development.json",
+              "RelativeToolTip": "CSharpSoChiTieu\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-29T03:19:06.171Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Search.cshtml",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Category\\Search.cshtml",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Category\\Search.cshtml",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Category\\Search.cshtml",
+              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Category\\Search.cshtml",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAqwK4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-28T14:36:53.335Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAqwCgAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-10T09:34:34.19Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
               "Title": "Login.cshtml",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Account\\Login.cshtml",
               "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Account\\Login.cshtml",
               "RelativeToolTip": "CSharpSoChiTieu\\Views\\Account\\Login.cshtml",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAhwIYAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAhwHoAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-06-10T03:25:13.201Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\AccountController.cs",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Controllers\\V1\\AccountController.cs",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\AccountController.cs",
-              "RelativeToolTip": "CSharpSoChiTieu\\Controllers\\V1\\AccountController.cs",
-              "ViewState": "AgIAAF0BAAAAAAAAAAAqwJABAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T08:33:32.511Z"
+              "DocumentIndex": 25,
+              "Title": "_FilterDialog.cshtml",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\History\\_FilterDialog.cshtml",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\History\\_FilterDialog.cshtml",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\History\\_FilterDialog.cshtml",
+              "RelativeToolTip": "CSharpSoChiTieu\\Views\\History\\_FilterDialog.cshtml",
+              "ViewState": "AgIAAAkBAAAAAAAAAAAqwBgBAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-24T02:55:58.101Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 26,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\History\\Index.cshtml",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\History\\Index.cshtml",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\History\\Index.cshtml",
+              "RelativeToolTip": "CSharpSoChiTieu\\Views\\History\\Index.cshtml",
+              "ViewState": "AgIAAFEBAAAAAAAAAAAqwIQBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-25T10:04:17.674Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Category\\Edit.cshtml",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Category\\Edit.cshtml",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Category\\Edit.cshtml",
+              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Category\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-03T03:09:51.553Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Category\\Index.cshtml",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Category\\Index.cshtml",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Category\\Index.cshtml",
+              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Category\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-18T09:29:39.444Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\IncomeExpense\\Index.cshtml",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\IncomeExpense\\Index.cshtml",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\IncomeExpense\\Index.cshtml",
+              "RelativeToolTip": "CSharpSoChiTieu\\Views\\IncomeExpense\\Index.cshtml",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAEsAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-01T09:16:18.279Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Profile.cshtml",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Account\\Profile.cshtml",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Account\\Profile.cshtml",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Account\\Profile.cshtml",
+              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Account\\Profile.cshtml",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAADEAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-10T02:13:01.892Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Account\\Register.cshtml",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Account\\Register.cshtml",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Account\\Register.cshtml",
+              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Account\\Register.cshtml",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAAEIAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-10T02:23:09.892Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "CategoryModel.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\CategoryModel.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\CategoryModel.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\CategoryModel.cs",
+              "RelativeToolTip": "CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\CategoryModel.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAmwA0AAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T08:03:45.466Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "CTDbContext.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Data\\CTDbContext.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu.Data\\Data\\CTDbContext.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Data\\CTDbContext.cs",
+              "RelativeToolTip": "CSharpSoChiTieu.Data\\Data\\CTDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-01T03:32:32.479Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
               "Title": "_ValidationScriptsPartial.cshtml",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
               "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
@@ -515,67 +731,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "_ControlSideBar.cshtml",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Shared\\_ControlSideBar.cshtml",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Shared\\_ControlSideBar.cshtml",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Shared\\_ControlSideBar.cshtml",
-              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Shared\\_ControlSideBar.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-10T02:39:10.076Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "_ControlFooter.cshtml",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Shared\\_ControlFooter.cshtml",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Shared\\_ControlFooter.cshtml",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Shared\\_ControlFooter.cshtml",
-              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Shared\\_ControlFooter.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-10T02:39:17.313Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\IncomeExpense\\Create.cshtml",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\IncomeExpense\\Create.cshtml",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\IncomeExpense\\Create.cshtml",
-              "RelativeToolTip": "CSharpSoChiTieu\\Views\\IncomeExpense\\Create.cshtml",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-27T01:31:43.381Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "IconEndColorCategory.txt",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Data\\DateValues\\IconEndColorCategory.txt",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu.Data\\Data\\DateValues\\IconEndColorCategory.txt",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Data\\DateValues\\IconEndColorCategory.txt",
-              "RelativeToolTip": "CSharpSoChiTieu.Data\\Data\\DateValues\\IconEndColorCategory.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-06-28T03:18:43.331Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "SAVE_DonViTienTe.txt",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Data\\DateValues\\SAVE_DonViTienTe.txt",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu.Data\\Data\\DateValues\\SAVE_DonViTienTe.txt",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Data\\DateValues\\SAVE_DonViTienTe.txt",
-              "RelativeToolTip": "CSharpSoChiTieu.Data\\Data\\DateValues\\SAVE_DonViTienTe.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-06-28T03:15:57.096Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 35,
               "Title": "_History.cshtml",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\IncomeExpense\\_History.cshtml",
               "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\IncomeExpense\\_History.cshtml",
@@ -587,7 +743,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 36,
               "Title": "_Dialogs.cshtml",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\IncomeExpense\\_Dialogs.cshtml",
               "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\IncomeExpense\\_Dialogs.cshtml",
@@ -599,19 +755,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "_Category.cshtml",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\IncomeExpense\\_Category.cshtml",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\IncomeExpense\\_Category.cshtml",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\IncomeExpense\\_Category.cshtml",
-              "RelativeToolTip": "CSharpSoChiTieu\\Views\\IncomeExpense\\_Category.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-26T03:53:01.072Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 37,
               "Title": "IncomeExpenseHandler.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\IncomeExpenses\\IncomeExpenseHandler.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\IncomeExpenses\\IncomeExpenseHandler.cs",
@@ -623,7 +767,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 38,
               "Title": "IIncomeExpenseHandler.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\IncomeExpenses\\IIncomeExpenseHandler.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\IncomeExpenses\\IIncomeExpenseHandler.cs",
@@ -635,7 +779,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 39,
               "Title": "_NavbarAccount.cshtml",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Account\\_NavbarAccount.cshtml",
               "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Account\\_NavbarAccount.cshtml",
@@ -647,7 +791,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 41,
               "Title": "ReportModel.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Report\\ReportModel.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Report\\ReportModel.cs",
@@ -659,7 +803,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 40,
               "Title": "ReportHandler.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Report\\ReportHandler.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Report\\ReportHandler.cs",
@@ -671,19 +815,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "ReportController.cs",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\ReportController.cs",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Controllers\\V1\\ReportController.cs",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\ReportController.cs",
-              "RelativeToolTip": "CSharpSoChiTieu\\Controllers\\V1\\ReportController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAACAAAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T14:17:26.586Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 42,
               "Title": "IReportHandler.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Report\\IReportHandler.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Report\\IReportHandler.cs",
@@ -695,55 +827,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Home\\Index.cshtml",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-10T09:34:34.19Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Setting\\Index.cshtml",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Setting\\Index.cshtml",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Setting\\Index.cshtml",
-              "RelativeToolTip": "CSharpSoChiTieu\\Views\\Setting\\Index.cshtml",
-              "ViewState": "AgIAADMBAAAAAAAAAAAgwDwBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-10T03:01:12.159Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "SupportController.cs",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\SupportController.cs",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Controllers\\V1\\SupportController.cs",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\SupportController.cs",
-              "RelativeToolTip": "CSharpSoChiTieu\\Controllers\\V1\\SupportController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-25T07:26:07.582Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "SettingHandler.cs",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Settings\\SettingHandler.cs",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Settings\\SettingHandler.cs",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Settings\\SettingHandler.cs",
-              "RelativeToolTip": "CSharpSoChiTieu.Business\\Services\\V1\\Settings\\SettingHandler.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAgwFEAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T09:49:18.152Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 43,
               "Title": "PaginationSearchInput.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Models\\PaginationSearchInput.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu\\Models\\PaginationSearchInput.cs",
@@ -755,19 +839,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "SettingController.cs",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\SettingController.cs",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Controllers\\V1\\SettingController.cs",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\V1\\SettingController.cs",
-              "RelativeToolTip": "CSharpSoChiTieu\\Controllers\\V1\\SettingController.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAA1wFEAAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T03:02:51.174Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 44,
               "Title": "CurrencyHandler.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Currencies\\CurrencyHandler.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Currencies\\CurrencyHandler.cs",
@@ -779,7 +851,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 45,
               "Title": "ICurrencyHandler.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Currencies\\ICurrencyHandler.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Currencies\\ICurrencyHandler.cs",
@@ -791,7 +863,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 46,
               "Title": "ICategoryHandler.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\ICategoryHandler.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\ICategoryHandler.cs",
@@ -803,7 +875,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 47,
               "Title": "CurrencyViewModel.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Currencies\\CurrencyViewModel.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Currencies\\CurrencyViewModel.cs",
@@ -815,7 +887,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 48,
               "Title": "GetExtensions.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.common\\Utils\\GetExtensions.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.common\\Utils\\GetExtensions.cs",
@@ -827,19 +899,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
-              "Title": "CategoryHandler.cs",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\CategoryHandler.cs",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\CategoryHandler.cs",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\CategoryHandler.cs",
-              "RelativeToolTip": "CSharpSoChiTieu.Business\\Services\\V1\\Categorys\\CategoryHandler.cs",
-              "ViewState": "AgIAAMMAAAAAAAAAAAAmwAcBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-01T09:36:08Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 49,
               "Title": "AccountHandler.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Accounts\\AccountHandler.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Accounts\\AccountHandler.cs",
@@ -851,7 +911,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 50,
               "Title": "20250622035739_UpdateUserSettingTableL2.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Migrations\\20250622035739_UpdateUserSettingTableL2.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Data\\Migrations\\20250622035739_UpdateUserSettingTableL2.cs",
@@ -863,7 +923,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 71,
               "Title": "20250622040121_UpdateUserSettingTable.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Migrations\\20250622040121_UpdateUserSettingTable.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Data\\Migrations\\20250622040121_UpdateUserSettingTable.cs",
@@ -875,7 +935,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 51,
               "Title": "CTDbContextModelSnapshot.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Migrations\\CTDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Data\\Migrations\\CTDbContextModelSnapshot.cs",
@@ -887,7 +947,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 52,
               "Title": "ct_User.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Data\\Entitys\\ct_User.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Data\\Data\\Entitys\\ct_User.cs",
@@ -899,7 +959,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 53,
               "Title": "ct_Emoji.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Data\\Entitys\\ct_Emoji.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Data\\Data\\Entitys\\ct_Emoji.cs",
@@ -911,19 +971,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Program.cs",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Program.cs",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Program.cs",
-              "RelativeToolTip": "CSharpSoChiTieu\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T03:17:56.28Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 54,
               "Title": "20250622033343_UpdateUserSettingTableFix.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Migrations\\20250622033343_UpdateUserSettingTableFix.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Data\\Migrations\\20250622033343_UpdateUserSettingTableFix.cs",
@@ -935,7 +983,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 55,
               "Title": "20250622031709_UpdateUserSettingTable.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Migrations\\20250622031709_UpdateUserSettingTable.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Data\\Migrations\\20250622031709_UpdateUserSettingTable.cs",
@@ -947,7 +995,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 56,
               "Title": "ct_Currency.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Data\\Entitys\\ct_Currency.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Data\\Data\\Entitys\\ct_Currency.cs",
@@ -959,7 +1007,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 58,
               "Title": "ct_IncomeExpenseCategory.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Data\\Entitys\\ct_IncomeExpenseCategory.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Data\\Data\\Entitys\\ct_IncomeExpenseCategory.cs",
@@ -971,7 +1019,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 59,
               "Title": "ct_IncomeExpense.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Data\\Entitys\\ct_IncomeExpense.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Data\\Data\\Entitys\\ct_IncomeExpense.cs",
@@ -983,7 +1031,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 57,
               "Title": "EmojiModel.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Emojis\\EmojiModel.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Emojis\\EmojiModel.cs",
@@ -995,7 +1043,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 60,
               "Title": "EmojiHandler.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\Services\\V1\\Emojis\\EmojiHandler.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Business\\Services\\V1\\Emojis\\EmojiHandler.cs",
@@ -1007,7 +1055,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 61,
               "Title": "PaginationSearchOutput.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Models\\PaginationSearchOutput.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu\\Models\\PaginationSearchOutput.cs",
@@ -1019,7 +1067,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 62,
               "Title": "_Footer.cshtml",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Shared\\_Footer.cshtml",
               "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Shared\\_Footer.cshtml",
@@ -1031,7 +1079,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 63,
               "Title": "20250414091202_Init.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Migrations\\20250414091202_Init.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Data\\Migrations\\20250414091202_Init.cs",
@@ -1043,7 +1091,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 64,
               "Title": "chartjs.min.js",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\wwwroot\\assets\\js\\plugins\\chartjs.min.js",
               "RelativeDocumentMoniker": "CSharpSoChiTieu\\wwwroot\\assets\\js\\plugins\\chartjs.min.js",
@@ -1055,7 +1103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 65,
               "Title": "material-dashboard.min.css",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\wwwroot\\assets\\css\\material-dashboard.min.css",
               "RelativeDocumentMoniker": "CSharpSoChiTieu\\wwwroot\\assets\\css\\material-dashboard.min.css",
@@ -1067,7 +1115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 66,
               "Title": "material-dashboard.css",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\wwwroot\\assets\\css\\material-dashboard.css",
               "RelativeDocumentMoniker": "CSharpSoChiTieu\\wwwroot\\assets\\css\\material-dashboard.css",
@@ -1079,19 +1127,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Controllers\\HomeController.cs",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "CSharpSoChiTieu\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T08:08:50.489Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 67,
               "Title": "_AccountLayout.cshtml",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Shared\\_AccountLayout.cshtml",
               "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Shared\\_AccountLayout.cshtml",
@@ -1103,7 +1139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 68,
               "Title": "ForgotPassword.cshtml",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Account\\ForgotPassword.cshtml",
               "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Account\\ForgotPassword.cshtml",
@@ -1115,7 +1151,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 69,
               "Title": "_LoginPartial.cshtml",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\Shared\\_LoginPartial.cshtml",
               "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\Shared\\_LoginPartial.cshtml",
@@ -1127,19 +1163,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
-              "Title": "_ViewImports.cshtml",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\_ViewImports.cshtml",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu\\Views\\_ViewImports.cshtml",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu\\Views\\_ViewImports.cshtml",
-              "RelativeToolTip": "CSharpSoChiTieu\\Views\\_ViewImports.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-10T02:37:46.773Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 70,
               "Title": "20250601092120_AddTableEmoji.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\Migrations\\20250601092120_AddTableEmoji.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Data\\Migrations\\20250601092120_AddTableEmoji.cs",

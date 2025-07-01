@@ -137,17 +137,25 @@ namespace CSharpSoChiTieu.Controllers
 
             ViewBag.ColorList = new List<SelectListItem>
             {
-                new SelectListItem { Text = "🔴 Đỏ", Value = "#ff0000" },
-                new SelectListItem { Text = "🟢 Xanh lá", Value = "#00ff00" },
-                new SelectListItem { Text = "🔵 Xanh dương", Value = "#0000ff" },
-                new SelectListItem { Text = "🟡 Vàng", Value = "#ffff00" },
-                new SelectListItem { Text = "🟠 Cam", Value = "#ffa500" },
-                new SelectListItem { Text = "🟣 Tím", Value = "#800080" },
-                new SelectListItem { Text = "⚫ Đen", Value = "#000000" },
-                new SelectListItem { Text = "⚪ Trắng", Value = "#ffffff" },
-                new SelectListItem { Text = "🟤 Nâu", Value = "#8B4513" },
-                new SelectListItem { Text = "🩵 Xanh ngọc", Value = "#40E0D0" }
+                new SelectListItem { Text = "🔴 Đỏ", Value = "#FF3B30" },
+                new SelectListItem { Text = "🟢 Xanh lá", Value = "#34C759" },
+                new SelectListItem { Text = "🔵 Xanh dương", Value = "#007AFF" },
+                new SelectListItem { Text = "🟡 Vàng", Value = "#FFCC00" },
+                new SelectListItem { Text = "🟠 Cam", Value = "#FF9500" },
+                new SelectListItem { Text = "🟣 Tím", Value = "#AF52DE" },
+                new SelectListItem { Text = "⚫ Đen", Value = "#1C1C1E" },
+                new SelectListItem { Text = "⚪ Trắng", Value = "#FFFFFF" },
+                new SelectListItem { Text = "🟤 Nâu", Value = "#A0522D" },
+                new SelectListItem { Text = "🌸 Hồng pastel", Value = "#FFB6C1" },
+                new SelectListItem { Text = "🌿 Xanh bạc hà", Value = "#98FF98" },
+                new SelectListItem { Text = "🌊 Xanh biển", Value = "#00CED1" },
+                new SelectListItem { Text = "🧁 Hồng kem", Value = "#FADADD" },
+                new SelectListItem { Text = "🧊 Xanh băng", Value = "#D0F0FD" },
+                new SelectListItem { Text = "🌫️ Xám nhẹ", Value = "#E0E0E0" },
+                new SelectListItem { Text = "⛰️ Nâu đá", Value = "#8B8680" },
+                new SelectListItem { Text = "🌅 Cam hoàng hôn", Value = "#FFA07A" }
             };
+
         }
 
         /// <summary>

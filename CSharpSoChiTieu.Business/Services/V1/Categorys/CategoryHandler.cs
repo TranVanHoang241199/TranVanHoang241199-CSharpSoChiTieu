@@ -60,18 +60,18 @@ namespace CSharpSoChiTieu.Business.Services
                 var defaultCategories = new List<CategoryInputModel>
                 {
                     // Income (Thu nhập)
-                    new CategoryInputModel { Name = "Lương", Text = "Thu nhập từ lương", Type = IncomeExpenseType.Income, Icon = "💰", Color = "#4CAF50", Order = 1 },
-                    new CategoryInputModel { Name = "Thưởng", Text = "Tiền thưởng", Type = IncomeExpenseType.Income, Icon = "🎉", Color = "#8BC34A", Order = 2 },
-                    new CategoryInputModel { Name = "Đầu tư", Text = "Lãi đầu tư", Type = IncomeExpenseType.Income, Icon = "📈", Color = "#009688", Order = 3 },
-                    new CategoryInputModel { Name = "Bán hàng", Text = "Thu nhập bán hàng", Type = IncomeExpenseType.Income, Icon = "🛒", Color = "#2196F3", Order = 4 },
-                    new CategoryInputModel { Name = "Lãi", Text = "Tiền lã", Type = IncomeExpenseType.Income, Icon = "🛍️", Color = "#3F51B5", Order = 5 },
+                    new CategoryInputModel { Name = "Lương", Text = "Thu nhập từ lương", Type = IncomeExpenseType.Income, Icon = "💵", Color = "#4CAF50", Order = 1 },
+                    new CategoryInputModel { Name = "Thưởng", Text = "Tiền thưởng", Type = IncomeExpenseType.Income, Icon = "🏆", Color = "#8BC34A", Order = 2 },
+                    new CategoryInputModel { Name = "Thu nhập phụ", Text = "Thu nhập phụ", Type = IncomeExpenseType.Income, Icon = "💸", Color = "#CDDC39", Order = 3 },
+                    new CategoryInputModel { Name = "Đầu tư", Text = "Lãi đầu tư", Type = IncomeExpenseType.Income, Icon = "📈", Color = "#009688", Order = 4 },
+                    new CategoryInputModel { Name = "Bán hàng", Text = "Thu nhập bán hàng", Type = IncomeExpenseType.Income, Icon = "🛍️", Color = "#2196F3", Order = 5 },
 
                     // Expense (Chi tiêu)
-                    new CategoryInputModel { Name = "Ăn uống", Text = "Chi cho ăn uống", Type = IncomeExpenseType.Expense, Icon = "🍔", Color = "#FF5722", Order = 1 },
-                    new CategoryInputModel { Name = "Đi lại", Text = "Chi phí di chuyển", Type = IncomeExpenseType.Expense, Icon = "🚗", Color = "#795548", Order = 2 },
-                    new CategoryInputModel { Name = "Mua sắm", Text = "Chi phí mua đồ", Type = IncomeExpenseType.Expense, Icon = "🛍️", Color = "#9C27B0", Order = 3 },
-                    new CategoryInputModel { Name = "Hóa đơn", Text = "Điện nước, Internet...", Type = IncomeExpenseType.Expense, Icon = "💡", Color = "#FFC107", Order = 4 },
-                    new CategoryInputModel { Name = "Giải trí", Text = "Xem phim, du lịch...", Type = IncomeExpenseType.Expense, Icon = "🎮", Color = "#E91E63", Order = 5 },
+                    new CategoryInputModel { Name = "Ăn uống", Text = "Chi cho ăn uống", Type = IncomeExpenseType.Expense, Icon = "🍽️", Color = "#FF5722", Order = 1 },
+                    new CategoryInputModel { Name = "Đi lại", Text = "Chi phí di chuyển", Type = IncomeExpenseType.Expense, Icon = "🚌", Color = "#795548", Order = 2 },
+                    new CategoryInputModel { Name = "Mua sắm", Text = "Chi phí mua đồ", Type = IncomeExpenseType.Expense, Icon = "🛒", Color = "#9C27B0", Order = 3 },
+                    new CategoryInputModel { Name = "Hóa đơn", Text = "Điện nước, Internet...", Type = IncomeExpenseType.Expense, Icon = "🧾", Color = "#FFC107", Order = 4 },
+                    new CategoryInputModel { Name = "Giải trí", Text = "Xem phim, du lịch...", Type = IncomeExpenseType.Expense, Icon = "🎬", Color = "#E91E63", Order = 5 },
                 };
 
                 var entities = _mapper.Map<List<ct_IncomeExpenseCategory>>(defaultCategories);

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
 namespace CSharpSoChiTieu.Business.Services
 {
@@ -21,17 +22,26 @@ namespace CSharpSoChiTieu.Business.Services
         /// <summary>
         /// Lấy cài đặt của người dùng
         /// </summary>
-        /// <param name="userId">ID của người dùng</param>
         /// <returns>Cài đặt của người dùng</returns>
         SettingViewModel GetUserSettings();
 
         /// <summary>
         /// Tạo cài đặt mặc định cho người dùng mới
         /// </summary>
-        /// <param name="userId">ID của người dùng</param>
         /// <returns>True nếu tạo thành công, False nếu thất bại</returns>
         bool CreateDefaultSettings();
 
+        /// <summary>
+        /// Cập nhật đơn vị tiền tệ
+        /// </summary>
+        /// <param name="currencyCode"></param>
+        /// <returns></returns>
         bool UpdateCurrency(string currencyCode);
+
+        /// <summary>
+        /// Chuyển đổi chế độ tối
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> ToggleDarkModeAsync();
     }
 }

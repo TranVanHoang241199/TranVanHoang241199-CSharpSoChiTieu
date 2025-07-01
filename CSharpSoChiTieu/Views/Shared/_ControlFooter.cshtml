@@ -264,85 +264,73 @@
 </style>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const menuButton = document.getElementById('navbarDropdownDetails');
-        const settingsPanel = document.querySelector('.settings-panel');
-
-        menuButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            settingsPanel.classList.toggle('show');
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!menuButton.contains(e.target) && !settingsPanel.contains(e.target)) {
-                settingsPanel.classList.remove('show');
-            }
-        });
-
-
-        const navPositionSwitch = document.getElementById('navPositionSwitch');
-        const navbar = document.querySelector('.bottom-nav');
-
-        // Đọc trạng thái từ localStorage (nếu có)
-        if (localStorage.getItem('navPosition') === 'top') {
-            navbar.classList.add('top-nav');
-        }
-
-        // Xử lý khi chuyển đổi công tắc
-        navPositionSwitch.checked = navbar.classList.contains('top-nav');
-
-        navPositionSwitch.addEventListener('change', function () {
-            if (this.checked) {
-                navbar.classList.add('top-nav');
-                localStorage.setItem('navPosition', 'top');
-            } else {
-                navbar.classList.remove('top-nav');
-                localStorage.setItem('navPosition', 'bottom');
-            }
-        });
-
-            document.addEventListener('DOMContentLoaded', function () {
+    $(document).ready(function () {
+        // --- LOGIC MỞ MENU & VỊ TRÍ THANH ĐIỀU HƯỚNG (GIỮ NGUYÊN TỪ BẠN) ---
         const menuButton = document.getElementById('navbarDropdownDetails');
         const settingsPanel = document.querySelector('.settings-panel');
         const navPositionSwitch = document.getElementById('navPositionSwitch');
         const navbar = document.querySelector('.bottom-nav');
 
-        // Gán vị trí menu từ localStorage
-        if (localStorage.getItem('navPosition') === 'top') {
-            navbar.classList.add('top-nav');
+        if (menuButton && settingsPanel) {
+            menuButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                settingsPanel.classList.toggle('show');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!menuButton.contains(e.target) && !settingsPanel.contains(e.target)) {
+                    settingsPanel.classList.remove('show');
+                }
+            });
         }
 
-        // Khởi tạo trạng thái switch
-        navPositionSwitch.checked = navbar.classList.contains('top-nav');
-
-        // Toggle menu hiển thị
-        menuButton.addEventListener('click', function (e) {
-            e.preventDefault();
-            settingsPanel.classList.toggle('show');
-        });
-
-        // Đóng khi click ngoài
-        document.addEventListener('click', function (e) {
-            if (!menuButton.contains(e.target) && !settingsPanel.contains(e.target)) {
-                settingsPanel.classList.remove('show');
-            }
-        });
-
-        // Xử lý chuyển đổi vị trí menu
-        navPositionSwitch.addEventListener('change', function () {
-            if (this.checked) {
+        if (navPositionSwitch && navbar) {
+            if (localStorage.getItem('navPosition') === 'top') {
                 navbar.classList.add('top-nav');
-                localStorage.setItem('navPosition', 'top');
-            } else {
-                navbar.classList.remove('top-nav');
-                localStorage.setItem('navPosition', 'bottom');
             }
+            navPositionSwitch.checked = navbar.classList.contains('top-nav');
+            navPositionSwitch.addEventListener('change', function () {
+                if (this.checked) {
+                    navbar.classList.add('top-nav');
+                    localStorage.setItem('navPosition', 'top');
+                } else {
+                    navbar.classList.remove('top-nav');
+                    localStorage.setItem('navPosition', 'bottom');
+                }
+            });
+        }
+
+        // --- LOGIC CHO CHẾ ĐỘ TỐI ---
+        var isDarkMode = $('body').hasClass('dark-version');
+        $('#darkModeSwitch').prop('checked', isDarkMode);
+
+        $('#darkModeSwitch').on('change', function () {
+            var darkModeSwitch = $(this);
+            var isChecked = darkModeSwitch.is(':checked');
+
+            $.ajax({
+                url: '@Url.Action("ToggleDarkMode", "Setting")',
+                type: 'POST',
+                success: function (response) {
+                    if (response.success) {
+                        //toastr.success(response.message);
+                        if (response.darkMode) {
+                            $('body').addClass('dark-version');
+                        } else {
+                            $('body').removeClass('dark-version');
+                        }
+                        $('#darkModeSwitch').prop('checked', response.darkMode);
+                        $('#darkMode').prop('checked', response.darkMode);
+                    } else {
+                        toastr.error(response.message);
+                        darkModeSwitch.prop('checked', !isChecked);
+                    }
+                },
+                error: function () {
+                    toastr.error('Có lỗi xảy ra khi chuyển chế độ tối.');
+                    darkModeSwitch.prop('checked', !isChecked);
+                }
+            });
         });
     });
-
-
-    });
-
-
 </script>

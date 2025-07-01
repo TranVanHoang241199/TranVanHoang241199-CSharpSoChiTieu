@@ -238,7 +238,7 @@ namespace CSharpSoChiTieu.Controllers
             sessionModel.FormType = formType;
             HttpContext.Session.SetObjectAsJson(IE_SESSION_KEY, sessionModel);
 
-            return Json(new { success = true, formType = formType });
+            return Json(new { success = true, formType });
         }
 
     }

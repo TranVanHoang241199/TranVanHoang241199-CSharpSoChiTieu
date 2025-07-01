@@ -34,10 +34,10 @@
                         <div class="col-12 col-md-3">
                             <label for="currency-filter" class="form-label fw-bold mb-1">Đơn vị tiền tệ</label>
                             <select id="currency-filter" name="currency" class="form-select form-select-sm border" onchange="applyFilters()">
-                                @if (ViewBag.Currencies != null)
+                                @if (currencies != null)
                                 {
                                     var selectedCurrency = ViewBag.SelectedCurrency as string;
-                                    foreach (var currency in (List<CurrencyViewModel>)ViewBag.Currencies)
+                                    foreach (var currency in currencies)
                                     {
                                         <option value="@currency.Code" data-symbol="@currency.Symbol" selected="@(currency.Code == selectedCurrency ? "selected" : null)">
                                             @currency.Code
@@ -383,7 +383,7 @@
             $('#totalExpense').text(data.totalExpense.toLocaleString('vi-VN') + ' ' + selectedCurrency);
             $('#balance').text(data.balance.toLocaleString('vi-VN') + ' ' + selectedCurrency);
             $('#transactionCount').text(data.totalTransactions);
-            $('#balance').removeClass('text-success text-danger').addClass(data.balance >= 0 ? 'text-success' : 'text-danger');
+            $('#balance').removeClass('text-success text-warning').addClass(data.balance >= 0 ? 'text-success' : 'text-warning');
 
 
             // Cập nhật biểu đồ đường

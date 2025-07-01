@@ -1,1 +1,58 @@
-﻿
+﻿/* Custom Dark Mode Styles */
+body.dark-version {
+    background-color: #1a1a1a !important;
+    color: #f0f2f5 !important;
+}
+
+.dark-version .card {
+    background-color: #2d2d2d !important;
+    border-color: #404040 !important;
+    color: #f0f2f5 !important;
+}
+
+    .dark-version .card .card-header {
+        background-color: #343a40 !important;
+        border-bottom: 1px solid #404040 !important;
+    }
+
+.dark-version .bg-white {
+    background-color: #2d2d2d !important;
+}
+
+.dark-version .form-control,
+.dark-version .form-select {
+    background-color: #404040 !important;
+    border-color: #505050 !important;
+    color: #f0f2f5 !important;
+}
+
+.dark-version .table {
+    color: #f0f2f5 !important;
+}
+
+    .dark-version .table thead th {
+        color: #f8f9fa !important;
+    }
+
+.dark-version .table-striped > tbody > tr:nth-of-type(odd) > * {
+    --bs-table-accent-bg: rgba(255, 255, 255, 0.05);
+}
+
+.dark-version .text-dark {
+    color: #f0f2f5 !important;
+}
+
+.dark-version .text-secondary {
+    color: #adb5bd !important;
+}
+
+.dark-version .icon {
+    color: #f0f2f5 !important;
+}
+
+.dark-version .bottom-nav {
+    background-color: #2d2d2d !important;
+    border-top: 1px solid #404040 !important;
+}
+
+
