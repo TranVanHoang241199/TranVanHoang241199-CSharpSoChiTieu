@@ -167,6 +167,7 @@
                 var selectedType = $(this).val();
                 if (selectedType) {
                     loadCategories(selectedType);
+                    updateIncomeExpenseUI();
                 }
             });
         }
@@ -338,7 +339,7 @@
             // Set tiền tệ (nếu có)
             var itemCurrency = currentItem.data('currency');
             if (itemCurrency) {
-                $('#transaction-currency').val(itemCurrency);
+                $('#transaction').val(itemCurrency);
             }
 
             // Set danh mục sau khi đã load xong
@@ -346,6 +347,9 @@
                 $('#income-category').val(categoryId);
                 console.log('Set category to:', categoryId, 'Current value:', $('#income-category').val());
             }, 100);
+
+            // loading màu cho dialog
+            updateIncomeExpenseUI();
         }
 
         // Function lấy dữ liệu form
@@ -361,7 +365,7 @@
                 Amount: amount,
                 CategoryId: $('#income-category').val(),
                 Type: $('#typeSelect').val(),
-                Currency: $('#transaction-currency').val()
+                Currency: $('#transaction').val()
             };
         }
 
@@ -426,6 +430,41 @@
             let value = input.value.replace(/[^\d]/g, '');
             value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
             input.value = value;
+        }
+
+        // Function update UI cho dialog
+        function updateIncomeExpenseUI() {
+            const isIncome = $('#typeSelect').val() === 'Income';
+
+            // Header
+            $('#modalHeader')
+                .toggleClass('bg-success', isIncome)
+                .toggleClass('bg-danger', !isIncome);
+
+            // Select Loại
+            $('#typeSelect')
+                .toggleClass('text-success', isIncome)
+                .toggleClass('text-danger', !isIncome);
+
+            // Tiền tệ
+            $('#transaction')
+                .toggleClass('bg-success', isIncome)
+                .toggleClass('bg-danger', !isIncome);
+
+            // Nút Lưu
+            $('#btnSave')
+                .toggleClass('bg-success', isIncome)
+                .toggleClass('bg-danger', !isIncome);
+
+            // Ghi chú
+            $('#income-note').attr('placeholder', isIncome
+                ? 'Hãy mô tả khoản thu của mình...'
+                : 'Hãy mô tả khoản chi của mình...');
+
+            // Select Danh mục
+            $('#income-category')
+                .toggleClass('income', isIncome)
+                .toggleClass('expense', !isIncome);
         }
     });
 

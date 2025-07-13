@@ -529,11 +529,16 @@ namespace CSharpSoChiTieu.Business.Services
                 }
 
                 // Tính toán trực tiếp trên DB, không cần ToList()
-                var summaryData = await _context.ct_IncomeExpense
+                var query = _context.ct_IncomeExpense
                     .Where(o => o.CreatedBy == currentUserId &&
                                 o.Date >= startDate &&
-                                o.Date <= endDate && 
-                                o.Currency == currency)
+                                o.Date <= endDate);
+
+                // Filter theo currency nếu có
+                if (!string.IsNullOrEmpty(currency))
+                    query = query.Where(o => o.Currency == currency);
+
+                var summaryData = await query
                     .GroupBy(o => 1) // Gom tất cả vào 1 nhóm
                     .Select(g => new
                     {

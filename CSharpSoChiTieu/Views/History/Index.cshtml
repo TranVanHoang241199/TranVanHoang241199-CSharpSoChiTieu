@@ -50,6 +50,7 @@
                                         @* Đơn vị tiền tệ *@
                                         <div class="mb-2 mb-md-0 me-md-2 w-100 w-md-auto">
                                             <select id="currency-filter" name="currency" class="btn btn-outline-success w-100 w-md-auto">
+                                                <option value="">Tất cả</option>
                                                 @if (ViewBag.Currencies != null)
                                                 {
                                                     var selectedCurrency = ViewBag.SelectedCurrency as string;
@@ -60,7 +61,6 @@
                                                         </option>
                                                     }
                                                 }
-
                                             </select>
                                         </div>
 
@@ -262,15 +262,15 @@
             @* Chỉ lấy giá trị Model nếu có, còn không thì để mặc định năm/tháng hiện tại *@
             @if (Model.Year != null)
             {
-                        <text>modelYear = @Model.Year;</text>
+                            <text>modelYear = @Model.Year;</text>
             }
             @if (Model.Month != null)
             {
-                        <text>modelMonth = @Model.Month;</text>
+                            <text>modelMonth = @Model.Month;</text>
             }
             @if (Model.Day != null)
             {
-                        <text>modelDay = @Model.Day;</text>
+                            <text>modelDay = @Model.Day;</text>
             }
 
             // Fill year dropdown
@@ -318,11 +318,14 @@
 
                 // Gọi API lưu currency mặc định, chú ý tên tham số là currencyCode
                 const currency = $(this).val();
-                $.post('/Setting/UpdateCurrency', { currencyCode: currency }, function(res) {
-                    if(res.success) {
-                        // alert('Đã lưu tiền tệ mặc định!');
-                    }
-                });
+                // Chỉ lưu currency mặc định nếu không phải là "Tất cả đơn vị tiền tệ"
+                if (currency && currency.trim() !== '') {
+                    $.post('/Setting/UpdateCurrency', { currencyCode: currency }, function(res) {
+                        if(res.success) {
+                            // alert('Đã lưu tiền tệ mặc định!');
+                        }
+                    });
+                }
             });
 
             $('#formSearch').submit(function (e) {

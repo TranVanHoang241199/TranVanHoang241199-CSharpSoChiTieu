@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CSharpSoChiTieu.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7e57557efb94262a1b7522a9a2c010595b0000c7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f1959eee1e7cb53d2edf9fc7ae63fb95c6ec731")]
 [assembly: System.Reflection.AssemblyProductAttribute("CSharpSoChiTieu.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CSharpSoChiTieu.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
