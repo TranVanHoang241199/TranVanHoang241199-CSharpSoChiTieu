@@ -82,6 +82,10 @@
                     <i class="material-symbols-rounded">account_circle</i> Thêm danh mục
                 </a>
 
+                <a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">
+                    <i class="material-symbols-rounded">lock</i> Đổi mật khẩu
+                </a>
+
                 <div class="settings-footer">
                     @if (User.Identity.IsAuthenticated)
                     {

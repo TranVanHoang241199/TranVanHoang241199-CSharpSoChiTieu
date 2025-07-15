@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using CSharpSoChiTieu.common;
 using CSharpSoChiTieu.Data;
 
 namespace CSharpSoChiTieu.Business.Services
@@ -160,12 +161,15 @@ namespace CSharpSoChiTieu.Business.Services
     {
         public Guid Id { get; set; }
         public string UserName { get; set; }
+        public string Password { get; set; }
         public string FullName { get; set; }
         public string? Phone { get; set; }
         public string? Email { get; set; }
         public string? Image { get; set; }
         public string? Role { get; set; }
     }
+
+    
 
     public class UserAutoMapper : Profile
     {

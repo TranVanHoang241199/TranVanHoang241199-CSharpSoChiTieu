@@ -22,5 +22,6 @@ namespace CSharpSoChiTieu.Business.Services
         /// <param name="userId"></param>
         /// <returns></returns>
         ProfileViewModel GetProfile(Guid userId);
+        void ChangePassword(Guid userId, string newPassword);
     }
 }

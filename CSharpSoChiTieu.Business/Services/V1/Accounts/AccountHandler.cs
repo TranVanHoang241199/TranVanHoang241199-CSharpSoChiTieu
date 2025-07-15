@@ -199,6 +199,16 @@ namespace CSharpSoChiTieu.Business.Services
             return _mapper.Map<ProfileViewModel>(user);
         }
 
+        public void ChangePassword(Guid userId, string newPassword)
+        {
+            var user = _context.ct_Users.FirstOrDefault(u => u.Id == userId);
+            if (user != null)
+            {
+                user.Password = PasswordHasher.Hash(newPassword);
+                user.PasswordUpdatedDate = DateTime.UtcNow;
+                _context.SaveChanges();
+            }
+        }
     }
 
 }

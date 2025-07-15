@@ -215,6 +215,47 @@ namespace CSharpSoChiTieu.Controllers
             return RedirectToAction("Login");
         }
 
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ChangePassword(string currentPassword, string newPassword, string confirmPassword)
+        {
+            if (string.IsNullOrWhiteSpace(currentPassword) || string.IsNullOrWhiteSpace(newPassword) || string.IsNullOrWhiteSpace(confirmPassword))
+            {
+                ModelState.AddModelError("", "Vui lòng nhập đầy đủ thông tin.");
+                return View();
+            }
+            if (newPassword != confirmPassword)
+            {
+                ModelState.AddModelError("", "Mật khẩu xác nhận không khớp.");
+                return View();
+            }
+            var userIdClaim = User.FindFirst("UserId");
+            if (userIdClaim == null)
+            {
+                return RedirectToAction("Login");
+            }
+            var userId = Guid.Parse(userIdClaim.Value);
+            var user = _accountHandler.GetProfile(userId);
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Không tìm thấy người dùng.");
+                return View();
+            }
+            if (user.Password != PasswordHasher.Hash(currentPassword))
+            {
+                ModelState.AddModelError("", "Mật khẩu hiện tại không đúng.");
+                return View();
+            }
+            _accountHandler.ChangePassword(userId, newPassword);
+            ViewBag.Success = "Đổi mật khẩu thành công!";
+            return View();
+        }
 
         // Action yêu cầu quyền admin
         [Authorize(Roles = "admin")]
