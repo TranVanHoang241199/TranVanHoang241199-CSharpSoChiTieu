@@ -1,0 +1,492 @@
+﻿@model HistorySearchOutput
+@using CSharpSoChiTieu.common;
+@{
+    Layout = null;
+    var currencySymbols = ViewBag.Symbols as Dictionary<string, string> ?? new Dictionary<string, string>();
+}
+
+<div class="card h-100 shadow-sm">
+    <div class="card-header pb-0 px-3">
+        <div class="row align-items-center mb-2">
+            <div class="col-12">
+                <h6 class="mb-0 text-primary">
+                    <i class="fas fa-history me-2"></i>Trả về @Model.RowCount khoản thu chi
+                </h6>
+            </div>
+        </div>
+    </div>
+    <div class="card-body pt-2 p-3" id="history_id">
+        @if (Model.Groups != null && Model.Groups.Any())
+        {
+            foreach (var group in Model.Groups)
+            {
+                <div class="" style="border-top: 1px solid #73737338;">
+                    <label> <i><span class="fw-bold">Ngày</span> @group.Date.ToString("dd-MM-yyyy")</i></label>
+                    <div class="income-list-container mb-3">
+                        <ul class="list-group list-group-flush">
+                            @foreach (var item in group.Items)
+                            {
+                                var amountClass = item.Type == IncomeExpenseType.Income ? "text-success" : "text-danger";
+                                <li class="list-group-item rounded d-flex justify-content-between align-items-center ps-2 pe-2 mb-1 income-item"
+                                    data-id="@item.Id"
+                                    data-type="@item.Type"
+                                    data-amount="@item.Amount"
+                                    data-description="@item.Description"
+                                    data-date="@item.Date?.ToString("yyyy-MM-dd")"
+                                    data-currency="@item.Currency"
+                                    data-category-id="@item.CategoryId"
+                                    style="cursor: pointer; border-radius: 2px; background-color: #ebebeb66;  border: 1px solid #73737338;">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon icon-shape icon-xs text-center rounded-circle me-2" style="background-color: @item.CategoryColor; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">
+                                            @item.CategoryIcon
+                                        </div>
+                                        <div class="d-flex flex-column text-truncate">
+                                            <h6 class="mb-0 text-dark text-sm">@item.CategoryName</h6>
+                                            <span class="text-xs text-muted">@item.Description</span>
+                                        </div>
+                                    </div>
+                                    <div class="@amountClass text-gradient text-sm fw-bold ms-2 text-nowrap">
+                                        @(item.Type == IncomeExpenseType.Income ? "+" : "-")@item.Amount.ToString("N0") @(currencySymbols.ContainsKey(item.Currency) ? currencySymbols[item.Currency] : item.Currency)
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="text-center py-4">
+                <div class="text-muted">
+                    <i class="material-symbols-rounded">search_off</i>
+                    <p class="mt-2">Không tìm thấy dữ liệu</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@if (Model.Data != null && Model.Data.Any())
+{
+    <div class="d-flex justify-content-center mt-4">
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination pagination-info">
+                @{
+                    var totalPages = (int)Math.Ceiling((double)Model.RowCount / Model.PageSize);
+                    var startPage = Math.Max(1, Model.Page - 2);
+                    var endPage = Math.Min(totalPages, startPage + 4);
+                    startPage = Math.Max(1, endPage - 4);
+                }
+
+                @if (Model.Page > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="javascript:void(0)" onclick="doSearch(@(Model.Page - 1))">
+                            <i class="material-symbols-rounded">chevron_left</i>
+                        </a>
+                    </li>
+                }
+
+                @for (int i = startPage; i <= endPage; i++)
+                {
+                    <li class="page-item @(i == Model.Page ? "active" : "")">
+                        <a class="page-link" href="javascript:void(0)" onclick="doSearch(@i)">@i</a>
+                    </li>
+                }
+
+                @if (Model.Page < totalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="javascript:void(0)" onclick="doSearch(@(Model.Page + 1))">
+                            <i class="material-symbols-rounded">chevron_right</i>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        // Khởi tạo các biến global
+        var modal = null;
+        var currentItemId = null;
+        var actionDialog = null;
+        var currentItem = null;
+
+        // Khởi tạo các event handlers
+        initializeEventHandlers();
+
+        // Các function xử lý chính
+        function initializeEventHandlers() {
+            // Event cho click vào item
+            $(document).on('click', '.income-item', handleItemClick);
+
+            // Event cho click ra ngoài dialog
+            $(document).click(function() {
+                if (actionDialog) {
+                    actionDialog.hide();
+                }
+            });
+
+            // Event cho nút edit
+            $(document).on('click', '.action-edit', handleEditClick);
+
+            // Event cho nút delete
+            $(document).on('click', '.action-delete', handleDeleteClick);
+
+            // Event cho nút save trong modal
+            $(document).on('click', '#btnSave', handleSaveClick);
+
+            // Thêm vào phần initializeEventHandlers
+            $(document).on('input', '#income-amount', function(e) {
+                let value = $(this).val().replace(/[^\d]/g, '');
+                if (!/^\d*$/.test(value)) {
+                    $(this).val('');
+                    return;
+                }
+                if (value) {
+                    value = parseInt(value).toLocaleString('vi-VN');
+                    $(this).val(value);
+                }
+            });
+
+            $(document).on('paste', '#income-amount', function(e) {
+                e.preventDefault();
+                let pastedText = (e.originalEvent.clipboardData || window.clipboardData).getData('text');
+                if (!/^\d*$/.test(pastedText)) {
+                    return false;
+                }
+            });
+
+            // Event cho thay đổi loại thu chi
+            $(document).on('change', '#typeSelect', function() {
+                var selectedType = $(this).val();
+                if (selectedType) {
+                    loadCategories(selectedType);
+                    updateIncomeExpenseUI();
+                }
+            });
+        }
+
+        // Function load action dialog
+        function loadActionDialog() {
+            if (!$('#actionDialog').length) {
+                $.ajax({
+                    url: '/IncomeExpense/Dialogs',
+                    type: 'GET',
+                    success: function(data) {
+                        $('body').append(data);
+                        actionDialog = $('#actionDialog');
+                        modal = new bootstrap.Modal(document.getElementById('incomeExpenseModal'));
+                    },
+                    error: function() {
+                        console.error('Không thể tải dialogs');
+                    }
+                });
+            } else {
+                actionDialog = $('#actionDialog');
+                modal = new bootstrap.Modal(document.getElementById('incomeExpenseModal'));
+            }
+        }
+
+        // Function load modal dialog
+        function loadModalDialog() {
+            // Modal đã được load cùng với action dialog
+            if (!modal && $('#incomeExpenseModal').length) {
+                modal = new bootstrap.Modal(document.getElementById('incomeExpenseModal'));
+            }
+        }
+
+        // Function xử lý click vào item
+        function handleItemClick(e) {
+            e.stopPropagation();
+            currentItem = $(this);
+            currentItemId = currentItem.data('id');
+
+            // Load action dialog nếu chưa có
+            if (!actionDialog) {
+                loadActionDialog();
+            }
+
+            // Đóng dialog cũ nếu có
+            if (actionDialog) {
+                actionDialog.hide();
+            }
+
+            // Tính toán vị trí hiển thị dialog
+            var rect = currentItem[0].getBoundingClientRect();
+            actionDialog.css({
+                'top': rect.bottom + 'px',
+                'left': rect.left + 'px',
+                'min-width': rect.width + 'px'
+            }).show();
+        }
+
+        // Function xử lý click nút edit
+        function handleEditClick(e) {
+            e.stopPropagation();
+            if (actionDialog) {
+                actionDialog.hide();
+            }
+
+            // Load modal dialog nếu chưa có
+            if (!modal) {
+                loadModalDialog();
+            }
+
+            // Lấy thông tin item hiện tại
+            var itemType = currentItem.data('type');
+            var itemCategoryId = currentItem.data('category-id');
+
+            // Load danh mục và điền form
+            loadCategories(itemType, function() {
+                fillEditForm(itemCategoryId);
+                modal.show();
+            });
+        }
+
+        // Function xử lý click nút delete
+        function handleDeleteClick(e) {
+            e.stopPropagation();
+            if (actionDialog) {
+                actionDialog.hide();
+            }
+
+            if (confirm('Bạn có chắc chắn muốn xóa khoản này?')) {
+                deleteItem(currentItemId);
+            }
+        }
+
+        // Function xử lý click nút save
+        function handleSaveClick() {
+            var formData = getFormData();
+
+            if (validateFormData(formData)) {
+                saveItem(formData);
+            }
+        }
+
+        // Function load danh mục
+        function loadCategories(type, callback) {
+            console.log('Loading categories for type:', type);
+
+            $.ajax({
+                url: "/IncomeExpense/Category?type=" + type,
+                type: "GET",
+                success: function (data) {
+                    var categories = $(data).find('.btn-category');
+                    var select = $('#income-category');
+
+                    // Xóa tất cả option cũ
+                    select.html('');
+
+                    // Thêm các option mới
+                    categories.each(function () {
+                        var categoryId = $(this).data('category-id');
+                        var categoryName = $(this).data('category-name');
+
+                        // Bỏ qua nếu thiếu dữ liệu
+                        if (!categoryId || !categoryName) return;
+
+                        var categoryIcon = $(this).find('.icon span').text();
+                        var categoryColor = $(this).find('.icon').css('background-color');
+
+                        var option = $('<option>', {
+                            value: categoryId,
+                            text: categoryName,
+                            'data-icon': categoryIcon,
+                            'data-color': categoryColor
+                        });
+
+                        select.append(option);
+                    });
+
+                    console.log('Loaded categories:', categories.length);
+
+                    if (callback) {
+                        setTimeout(callback, 50);
+                    }
+                },
+                error: function () {
+                    alert("Không tải được danh mục.");
+                }
+            });
+        }
+
+        // Function điền form edit
+        function fillEditForm(categoryId) {
+            console.log('Filling form with categoryId:', categoryId);
+
+            $('#itemId').val(currentItemId);
+            $('#income-date').val(currentItem.data('date'));
+            $('#income-note').val(currentItem.data('description'));
+
+            // Sửa lại cách format số tiền
+            var amount = currentItem.data('amount');
+            // Đảm bảo đây là số nguyên trước khi định dạng
+            var integerAmount = parseInt(amount); // Chuyển đổi thành số nguyên, bỏ qua phần thập phân
+            var formattedAmount = integerAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            $('#income-amount').val(formattedAmount);
+
+            // Set loại thu chi
+            var itemType = currentItem.data('type');
+            $('#typeSelect').val(itemType);
+
+            // Set tiền tệ (nếu có)
+            var itemCurrency = currentItem.data('currency');
+            if (itemCurrency) {
+                $('#transaction').val(itemCurrency);
+            }
+
+            // Set danh mục sau khi đã load xong
+            setTimeout(function() {
+                $('#income-category').val(categoryId);
+                console.log('Set category to:', categoryId, 'Current value:', $('#income-category').val());
+            }, 100);
+
+            // loading màu cho dialog
+            updateIncomeExpenseUI();
+        }
+
+        // Function lấy dữ liệu form
+        function getFormData() {
+            // Lấy số tiền và chuyển đổi format
+            var amountStr = $('#income-amount').val().replace(/\./g, '');
+            var amount = parseInt(amountStr);
+
+            return {
+                Id: $('#itemId').val(),
+                Date: $('#income-date').val(),
+                Description: $('#income-note').val(),
+                Amount: amount,
+                CategoryId: $('#income-category').val(),
+                Type: $('#typeSelect').val(),
+                Currency: $('#transaction').val()
+            };
+        }
+
+        // Function validate form
+        function validateFormData(formData) {
+            if (!formData.Date || !formData.Amount || !formData.CategoryId || !formData.Type || !formData.Currency) {
+                alert('Vui lòng điền đầy đủ thông tin bắt buộc');
+                return false;
+            }
+            return true;
+        }
+
+        // Function lưu item
+        function saveItem(formData) {
+            $.ajax({
+                url: '/IncomeExpense/Save',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    if (response.success) {
+                        modal.hide();
+                        refreshData();
+                    } else {
+                        alert(response.message || 'Có lỗi xảy ra khi lưu dữ liệu');
+                    }
+                },
+                error: function() {
+                    alert('Có lỗi xảy ra khi lưu dữ liệu');
+                }
+            });
+        }
+
+        // Function xóa item
+        function deleteItem(id) {
+            $.ajax({
+                url: '/IncomeExpense/Delete',
+                type: 'DELETE',
+                data: { id: id },
+                success: function(response) {
+                    if (response.success) {
+                        refreshData();
+                    } else {
+                        alert(response.message || 'Có lỗi xảy ra khi xóa dữ liệu');
+                    }
+                },
+                error: function() {
+                    alert('Có lỗi xảy ra khi xóa dữ liệu');
+                }
+            });
+        }
+
+        // Function refresh dữ liệu - gọi lại search với trang hiện tại
+        function refreshData() {
+            // Gọi lại search với trang hiện tại
+            if (typeof doSearch === 'function') {
+                doSearch(@Model.Page);
+            }
+        }
+
+        // Function format số
+        function formatNumber(input) {
+            let value = input.value.replace(/[^\d]/g, '');
+            value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            input.value = value;
+        }
+
+        // Function update UI cho dialog
+        function updateIncomeExpenseUI() {
+            const isIncome = $('#typeSelect').val() === 'Income';
+
+            // Header
+            $('#modalHeader')
+                .toggleClass('bg-success', isIncome)
+                .toggleClass('bg-danger', !isIncome);
+
+            // Select Loại
+            $('#typeSelect')
+                .toggleClass('text-success', isIncome)
+                .toggleClass('text-danger', !isIncome);
+
+            // Tiền tệ
+            $('#transaction')
+                .toggleClass('bg-success', isIncome)
+                .toggleClass('bg-danger', !isIncome);
+
+            // Nút Lưu
+            $('#btnSave')
+                .toggleClass('bg-success', isIncome)
+                .toggleClass('bg-danger', !isIncome);
+
+            // Ghi chú
+            $('#income-note').attr('placeholder', isIncome
+                ? 'Hãy mô tả khoản thu của mình...'
+                : 'Hãy mô tả khoản chi của mình...');
+
+            // Select Danh mục
+            $('#income-category')
+                .toggleClass('income', isIncome)
+                .toggleClass('expense', !isIncome);
+        }
+    });
+
+    // Function xóa item cũ (giữ lại để tương thích)
+    function deleteItem(id) {
+        if (confirm('Bạn có chắc chắn muốn xóa mục này?')) {
+            $.ajax({
+                url: '/History/Delete/' + id,
+                type: 'POST',
+                success: function (result) {
+                    if (result.success) {
+                        doSearch(@Model.Page);
+                    } else {
+                        alert('Có lỗi xảy ra khi xóa mục này.');
+                    }
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra khi xóa mục này.');
+                }
+            });
+        }
+    }
+</script>
+
+

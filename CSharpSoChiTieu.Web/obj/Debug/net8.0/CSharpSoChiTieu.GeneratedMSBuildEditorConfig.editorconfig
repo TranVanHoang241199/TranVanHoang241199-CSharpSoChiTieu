@@ -1,0 +1,161 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = CSharpSoChiTieu
+build_property.RootNamespace = CSharpSoChiTieu
+build_property.ProjectDir = D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Account/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Account/ForgotPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Account/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Account/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Account/_NavbarAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxfTmF2YmFyQWNjb3VudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Category/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Category/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Category/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcU2VhcmNoLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/History/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGlzdG9yeVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/History/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGlzdG9yeVxTZWFyY2guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/History/_FilterDialog.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGlzdG9yeVxfRmlsdGVyRGlhbG9nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/IncomeExpense/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lRXhwZW5zZVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/IncomeExpense/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lRXhwZW5zZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/IncomeExpense/_Category.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lRXhwZW5zZVxfQ2F0ZWdvcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/IncomeExpense/_Dialogs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lRXhwZW5zZVxfRGlhbG9ncy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/IncomeExpense/_History.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lRXhwZW5zZVxfSGlzdG9yeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Report/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Setting/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2V0dGluZ1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Shared/_AccountLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BY2NvdW50TGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Shared/_ControlFooter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Db250cm9sRm9vdGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Shared/_ControlSideBar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Db250cm9sU2lkZUJhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Shared/_Footer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Gb290ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Support/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcG9ydFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/developer/C\#_dotnet/WEB/CS_MVC_QuanLyTien/TranVanHoang241199-CSharpSoChiTieu/CSharpSoChiTieu/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-wflgw7tej7

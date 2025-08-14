@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35919.96 d17.13
+VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpSoChiTieu", "CSharpSoChiTieu\CSharpSoChiTieu.csproj", "{2316CF35-D234-4180-8444-1A0DDA98E2FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpSoChiTieu.Web", "CSharpSoChiTieu.Web\CSharpSoChiTieu.Web.csproj", "{2316CF35-D234-4180-8444-1A0DDA98E2FB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject

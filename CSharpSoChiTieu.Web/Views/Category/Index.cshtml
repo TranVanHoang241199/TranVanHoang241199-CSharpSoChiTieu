@@ -1,0 +1,76 @@
+﻿@model PaginationSearchInput
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col-6 d-flex align-items-center">
+                            <h5 class="mb-0 text-primary">Quản lý danh mục</h5>
+                        </div>
+                        <div class="col-6 text-end">
+                            <a href="~/Category/Create" class="btn btn-primary btn-sm mb-0 fw-bold">
+                                <i class="material-symbols-rounded fw-bold">add</i> Thêm mới
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="p-3">
+                        <form id="formSearch" action="~/Category/Search">
+                            <input type="hidden" name="PageSize" value="@Model.PageSize" />
+                            
+                            <div class="input-group input-group-outline">
+                                <input type="text" class="form-control" placeholder="Tìm kiếm danh mục..."
+                                       name="searchValue" value="@Model.SearchValue" autofocus>
+                                <button class="btn btn-outline-primary mb-0" type="submit">
+                                    <i class="material-symbols-rounded">search</i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="searchResult" class="table-responsive p-0">
+                        <!-- Kết quả tìm kiếm sẽ được load vào đây -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#formSearch").submit(function (e) {
+                e.preventDefault();
+                doSearch(1);
+                return;
+            });
+            doSearch(@Model.Page);
+        })
+        function doSearch(page) {
+            var url = $("#formSearch").prop("action");
+            var postData = $("#formSearch").serializeArray();
+            postData.push({ "name": "page", "value": page });
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: postData,
+                error: function () {
+                    alert("Your request is not valid!");
+                },
+                success: function (data) {
+                    $("#searchResult").html(data);
+                }
+            });
+
+            return;
+        }
+    </script>
+}
+
+
+
+
