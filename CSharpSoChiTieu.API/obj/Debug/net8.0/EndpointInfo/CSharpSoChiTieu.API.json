@@ -6,7 +6,7 @@
     "version": "v1"
   },
   "paths": {
-    "/api/Account/login": {
+    "/api/account/login": {
       "post": {
         "tags": [
           "Account"
@@ -37,7 +37,7 @@
         }
       }
     },
-    "/api/Account/register": {
+    "/api/account/register": {
       "post": {
         "tags": [
           "Account"
@@ -68,7 +68,7 @@
         }
       }
     },
-    "/api/Account/forgot-password": {
+    "/api/account/forgot-password": {
       "post": {
         "tags": [
           "Account"
@@ -99,7 +99,7 @@
         }
       }
     },
-    "/api/Account/reset-password": {
+    "/api/account/reset-password": {
       "post": {
         "tags": [
           "Account"
@@ -130,7 +130,7 @@
         }
       }
     },
-    "/api/Account/change-password": {
+    "/api/account/change-password": {
       "post": {
         "tags": [
           "Account"
@@ -161,7 +161,7 @@
         }
       }
     },
-    "/api/Account/profile": {
+    "/api/account/profile": {
       "get": {
         "tags": [
           "Account"
@@ -202,7 +202,7 @@
         }
       }
     },
-    "/api/Account/refresh-token": {
+    "/api/account/refresh-token": {
       "post": {
         "tags": [
           "Account"
@@ -214,7 +214,7 @@
         }
       }
     },
-    "/api/Category": {
+    "/api/category": {
       "get": {
         "tags": [
           "Category"
@@ -280,7 +280,7 @@
         }
       }
     },
-    "/api/Category/by-type/{type}": {
+    "/api/category/by-type/{type}": {
       "get": {
         "tags": [
           "Category"
@@ -303,7 +303,7 @@
         }
       }
     },
-    "/api/Category/{id}": {
+    "/api/category/{id}": {
       "get": {
         "tags": [
           "Category"
@@ -387,7 +387,7 @@
         }
       }
     },
-    "/api/Category/emojis/{type}": {
+    "/api/category/emojis/{type}": {
       "get": {
         "tags": [
           "Category"
@@ -410,7 +410,7 @@
         }
       }
     },
-    "/api/Category/colors": {
+    "/api/category/colors": {
       "get": {
         "tags": [
           "Category"
@@ -422,7 +422,7 @@
         }
       }
     },
-    "/api/Category/{id}/in-use": {
+    "/api/category/{id}/in-use": {
       "get": {
         "tags": [
           "Category"
@@ -445,7 +445,7 @@
         }
       }
     },
-    "/api/IncomeExpense": {
+    "/api/income-expense": {
       "get": {
         "tags": [
           "IncomeExpense"
@@ -511,7 +511,7 @@
         }
       }
     },
-    "/api/IncomeExpense/filter": {
+    "/api/income-expense/filter": {
       "post": {
         "tags": [
           "IncomeExpense"
@@ -542,7 +542,7 @@
         }
       }
     },
-    "/api/IncomeExpense/by-type/{type}": {
+    "/api/income-expense/by-type/{type}": {
       "get": {
         "tags": [
           "IncomeExpense"
@@ -573,7 +573,7 @@
         }
       }
     },
-    "/api/IncomeExpense/{id}": {
+    "/api/income-expense/{id}": {
       "get": {
         "tags": [
           "IncomeExpense"
@@ -657,7 +657,7 @@
         }
       }
     },
-    "/api/IncomeExpense/summary": {
+    "/api/income-expense/summary": {
       "get": {
         "tags": [
           "IncomeExpense"
@@ -686,7 +686,7 @@
         }
       }
     },
-    "/api/IncomeExpense/summary/filter": {
+    "/api/income-expense/summary/filter": {
       "post": {
         "tags": [
           "IncomeExpense"
@@ -717,7 +717,7 @@
         }
       }
     },
-    "/api/IncomeExpense/categories/{type}": {
+    "/api/income-expense/categories/{type}": {
       "get": {
         "tags": [
           "IncomeExpense"
@@ -740,7 +740,7 @@
         }
       }
     },
-    "/api/IncomeExpense/currencies": {
+    "/api/income-expense/currencies": {
       "get": {
         "tags": [
           "IncomeExpense"
@@ -752,7 +752,7 @@
         }
       }
     },
-    "/api/Setting": {
+    "/api/setting": {
       "get": {
         "tags": [
           "Setting"
@@ -793,7 +793,7 @@
         }
       }
     },
-    "/api/Setting/currency": {
+    "/api/setting/currency": {
       "put": {
         "tags": [
           "Setting"
@@ -824,7 +824,7 @@
         }
       }
     },
-    "/api/Setting/toggle-dark-mode": {
+    "/api/setting/toggle-dark-mode": {
       "post": {
         "tags": [
           "Setting"
@@ -836,7 +836,7 @@
         }
       }
     },
-    "/api/Setting/language": {
+    "/api/setting/language": {
       "put": {
         "tags": [
           "Setting"
@@ -867,7 +867,7 @@
         }
       }
     },
-    "/api/Setting/timezone": {
+    "/api/setting/timezone": {
       "put": {
         "tags": [
           "Setting"
@@ -898,7 +898,7 @@
         }
       }
     },
-    "/api/Setting/currencies": {
+    "/api/setting/currencies": {
       "get": {
         "tags": [
           "Setting"
@@ -910,7 +910,7 @@
         }
       }
     },
-    "/api/Setting/languages": {
+    "/api/setting/languages": {
       "get": {
         "tags": [
           "Setting"
@@ -922,7 +922,7 @@
         }
       }
     },
-    "/api/Setting/timezones": {
+    "/api/setting/timezones": {
       "get": {
         "tags": [
           "Setting"
@@ -934,7 +934,7 @@
         }
       }
     },
-    "/api/Setting/reset": {
+    "/api/setting/reset": {
       "post": {
         "tags": [
           "Setting"

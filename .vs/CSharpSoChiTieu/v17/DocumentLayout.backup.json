@@ -3,20 +3,32 @@
   "WorkspaceRootPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|solutionrelative:csharpsochitieu.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.api\\controllers\\settingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|solutionrelative:csharpsochitieu.api\\controllers\\settingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.api\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|solutionrelative:csharpsochitieu.api\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.api\\controllers\\incomeexpensecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|solutionrelative:csharpsochitieu.api\\controllers\\incomeexpensecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.api\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|solutionrelative:csharpsochitieu.api\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.api\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|solutionrelative:csharpsochitieu.api\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|solutionrelative:csharpsochitieu.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|solutionrelative:csharpsochitieu.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu.Web\\CSharpSoChiTieu.Web.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{2316CF35-D234-4180-8444-1A0DDA98E2FB}|CSharpSoChiTieu.Web\\CSharpSoChiTieu.Web.csproj|solutionrelative:csharpsochitieu.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|solutionrelative:csharpsochitieu.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.api\\csharpsochitieu.api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
@@ -25,10 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.api\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|solutionrelative:csharpsochitieu.api\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.api\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|solutionrelative:csharpsochitieu.api\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C9C85675-E093-402B-A95C-07CC84CE85E6}|CSharpSoChiTieu.API\\CSharpSoChiTieu.API.csproj|d:\\developer\\c#_dotnet\\web\\cs_mvc_quanlytien\\csharpsochitieu\\csharpsochitieu.api\\csharpsochitieu_api.postman_collection.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -45,70 +53,64 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 79,
+          "DockedWidth": 127,
           "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Web\\appsettings.json",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu.Web\\appsettings.json",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Web\\appsettings.json",
-              "RelativeToolTip": "CSharpSoChiTieu.Web\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-21T03:54:21.031Z",
+              "DocumentIndex": 0,
+              "Title": "SettingController.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Controllers\\SettingController.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu.API\\Controllers\\SettingController.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Controllers\\SettingController.cs",
+              "RelativeToolTip": "CSharpSoChiTieu.API\\Controllers\\SettingController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T07:28:27.566Z",
               "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 178,
-          "SelectedChildIndex": 2,
-          "Children": [
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "CategoryController.cs",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Controllers\\CategoryController.cs",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu.API\\Controllers\\CategoryController.cs",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Controllers\\CategoryController.cs",
-              "RelativeToolTip": "CSharpSoChiTieu.API\\Controllers\\CategoryController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Title": "ReportController.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Controllers\\ReportController.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu.API\\Controllers\\ReportController.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Controllers\\ReportController.cs",
+              "RelativeToolTip": "CSharpSoChiTieu.API\\Controllers\\ReportController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T03:55:33.863Z",
+              "WhenOpened": "2025-08-21T07:28:17.335Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\appsettings.json",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu.API\\appsettings.json",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\appsettings.json",
-              "RelativeToolTip": "CSharpSoChiTieu.API\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-21T03:53:03.527Z",
+              "Title": "IncomeExpenseController.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Controllers\\IncomeExpenseController.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu.API\\Controllers\\IncomeExpenseController.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Controllers\\IncomeExpenseController.cs",
+              "RelativeToolTip": "CSharpSoChiTieu.API\\Controllers\\IncomeExpenseController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T07:27:52.412Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Program.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.API\\Program.cs",
               "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Program.cs",
               "RelativeToolTip": "CSharpSoChiTieu.API\\Program.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAkwBsAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-21T03:24:02.481Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "CSharpSoChiTieu.API.http",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\CSharpSoChiTieu.API.http",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.API\\CSharpSoChiTieu.API.http",
@@ -116,12 +118,11 @@
               "RelativeToolTip": "CSharpSoChiTieu.API\\CSharpSoChiTieu.API.http",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-08-21T03:53:58.927Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-21T03:53:58.927Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "JwtService.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Services\\JwtService.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.API\\Services\\JwtService.cs",
@@ -129,12 +130,11 @@
               "RelativeToolTip": "CSharpSoChiTieu.API\\Services\\JwtService.cs",
               "ViewState": "AgIAAGwAAAAAAAAAAAAkwJoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T03:47:03.097Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-21T03:47:03.097Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "CSharpSoChiTieu_API.postman_collection.json",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\CSharpSoChiTieu_API.postman_collection.json",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.API\\CSharpSoChiTieu_API.postman_collection.json",
@@ -142,12 +142,49 @@
               "RelativeToolTip": "CSharpSoChiTieu.API\\CSharpSoChiTieu_API.postman_collection.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-21T03:36:25.56Z",
+              "WhenOpened": "2025-08-21T03:36:25.56Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu.API\\Controllers\\AccountController.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "CSharpSoChiTieu.API\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T03:23:30.351Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu.API\\Controllers\\CategoryController.cs",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "CSharpSoChiTieu.API\\Controllers\\CategoryController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T03:55:33.863Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\appsettings.json",
+              "RelativeDocumentMoniker": "CSharpSoChiTieu.API\\appsettings.json",
+              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\appsettings.json",
+              "RelativeToolTip": "CSharpSoChiTieu.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-21T03:53:03.527Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Web\\Program.cs",
               "RelativeDocumentMoniker": "CSharpSoChiTieu.Web\\Program.cs",
@@ -155,21 +192,7 @@
               "RelativeToolTip": "CSharpSoChiTieu.Web\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T03:28:07.732Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "CSharpSoChiTieu.API\\Controllers\\AccountController.cs",
-              "ToolTip": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.API\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "CSharpSoChiTieu.API\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAcwEQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T03:23:30.351Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-21T03:28:07.732Z"
             }
           ]
         }

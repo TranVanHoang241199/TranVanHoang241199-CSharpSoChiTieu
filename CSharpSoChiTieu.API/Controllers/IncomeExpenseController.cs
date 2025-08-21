@@ -10,7 +10,7 @@ using System.Security.Claims;
 namespace CSharpSoChiTieu.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/income-expense")]
     [Authorize]
     public class IncomeExpenseController : ControllerBase
     {

@@ -9,7 +9,7 @@ using System.Net;
 namespace CSharpSoChiTieu.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/category")]
     [Authorize]
     public class CategoryController : ControllerBase
     {

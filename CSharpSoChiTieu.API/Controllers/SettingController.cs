@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CSharpSoChiTieu.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/setting")]
     [Authorize]
     public class SettingController : ControllerBase
     {

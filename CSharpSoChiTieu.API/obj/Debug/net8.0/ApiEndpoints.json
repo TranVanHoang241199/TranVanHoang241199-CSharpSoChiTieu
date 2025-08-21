@@ -2,7 +2,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.AccountController",
     "Method": "ChangePassword",
-    "RelativePath": "api/Account/change-password",
+    "RelativePath": "api/account/change-password",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -18,7 +18,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.AccountController",
     "Method": "ForgotPassword",
-    "RelativePath": "api/Account/forgot-password",
+    "RelativePath": "api/account/forgot-password",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -34,7 +34,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.AccountController",
     "Method": "Login",
-    "RelativePath": "api/Account/login",
+    "RelativePath": "api/account/login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -50,7 +50,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.AccountController",
     "Method": "GetProfile",
-    "RelativePath": "api/Account/profile",
+    "RelativePath": "api/account/profile",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -60,7 +60,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.AccountController",
     "Method": "UpdateProfile",
-    "RelativePath": "api/Account/profile",
+    "RelativePath": "api/account/profile",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -76,7 +76,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.AccountController",
     "Method": "RefreshToken",
-    "RelativePath": "api/Account/refresh-token",
+    "RelativePath": "api/account/refresh-token",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -86,7 +86,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.AccountController",
     "Method": "Register",
-    "RelativePath": "api/Account/register",
+    "RelativePath": "api/account/register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -102,7 +102,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.AccountController",
     "Method": "ResetPassword",
-    "RelativePath": "api/Account/reset-password",
+    "RelativePath": "api/account/reset-password",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -118,7 +118,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.CategoryController",
     "Method": "GetCategories",
-    "RelativePath": "api/Category",
+    "RelativePath": "api/category",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -144,7 +144,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.CategoryController",
     "Method": "CreateCategory",
-    "RelativePath": "api/Category",
+    "RelativePath": "api/category",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -160,7 +160,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.CategoryController",
     "Method": "GetCategoryById",
-    "RelativePath": "api/Category/{id}",
+    "RelativePath": "api/category/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -176,7 +176,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.CategoryController",
     "Method": "UpdateCategory",
-    "RelativePath": "api/Category/{id}",
+    "RelativePath": "api/category/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -197,7 +197,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.CategoryController",
     "Method": "DeleteCategory",
-    "RelativePath": "api/Category/{id}",
+    "RelativePath": "api/category/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -213,7 +213,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.CategoryController",
     "Method": "CheckCategoryInUse",
-    "RelativePath": "api/Category/{id}/in-use",
+    "RelativePath": "api/category/{id}/in-use",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -229,7 +229,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.CategoryController",
     "Method": "GetCategoriesByType",
-    "RelativePath": "api/Category/by-type/{type}",
+    "RelativePath": "api/category/by-type/{type}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -245,7 +245,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.CategoryController",
     "Method": "GetColors",
-    "RelativePath": "api/Category/colors",
+    "RelativePath": "api/category/colors",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -255,7 +255,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.CategoryController",
     "Method": "GetEmojisByType",
-    "RelativePath": "api/Category/emojis/{type}",
+    "RelativePath": "api/category/emojis/{type}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -271,7 +271,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.IncomeExpenseController",
     "Method": "GetIncomeExpenses",
-    "RelativePath": "api/IncomeExpense",
+    "RelativePath": "api/income-expense",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -297,7 +297,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.IncomeExpenseController",
     "Method": "CreateIncomeExpense",
-    "RelativePath": "api/IncomeExpense",
+    "RelativePath": "api/income-expense",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -313,7 +313,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.IncomeExpenseController",
     "Method": "GetIncomeExpenseById",
-    "RelativePath": "api/IncomeExpense/{id}",
+    "RelativePath": "api/income-expense/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -329,7 +329,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.IncomeExpenseController",
     "Method": "UpdateIncomeExpense",
-    "RelativePath": "api/IncomeExpense/{id}",
+    "RelativePath": "api/income-expense/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -350,7 +350,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.IncomeExpenseController",
     "Method": "DeleteIncomeExpense",
-    "RelativePath": "api/IncomeExpense/{id}",
+    "RelativePath": "api/income-expense/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -366,7 +366,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.IncomeExpenseController",
     "Method": "GetIncomeExpensesByType",
-    "RelativePath": "api/IncomeExpense/by-type/{type}",
+    "RelativePath": "api/income-expense/by-type/{type}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -387,7 +387,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.IncomeExpenseController",
     "Method": "GetCategories",
-    "RelativePath": "api/IncomeExpense/categories/{type}",
+    "RelativePath": "api/income-expense/categories/{type}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -403,7 +403,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.IncomeExpenseController",
     "Method": "GetCurrencies",
-    "RelativePath": "api/IncomeExpense/currencies",
+    "RelativePath": "api/income-expense/currencies",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -413,7 +413,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.IncomeExpenseController",
     "Method": "GetIncomeExpensesByFilter",
-    "RelativePath": "api/IncomeExpense/filter",
+    "RelativePath": "api/income-expense/filter",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -429,7 +429,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.IncomeExpenseController",
     "Method": "GetSummary",
-    "RelativePath": "api/IncomeExpense/summary",
+    "RelativePath": "api/income-expense/summary",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -450,7 +450,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.IncomeExpenseController",
     "Method": "GetSummaryByFilter",
-    "RelativePath": "api/IncomeExpense/summary/filter",
+    "RelativePath": "api/income-expense/summary/filter",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -466,7 +466,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.SettingController",
     "Method": "GetUserSettings",
-    "RelativePath": "api/Setting",
+    "RelativePath": "api/setting",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -476,7 +476,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.SettingController",
     "Method": "UpdateSettings",
-    "RelativePath": "api/Setting",
+    "RelativePath": "api/setting",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -492,7 +492,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.SettingController",
     "Method": "GetCurrencies",
-    "RelativePath": "api/Setting/currencies",
+    "RelativePath": "api/setting/currencies",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -502,7 +502,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.SettingController",
     "Method": "UpdateCurrency",
-    "RelativePath": "api/Setting/currency",
+    "RelativePath": "api/setting/currency",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -518,7 +518,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.SettingController",
     "Method": "UpdateLanguage",
-    "RelativePath": "api/Setting/language",
+    "RelativePath": "api/setting/language",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -534,7 +534,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.SettingController",
     "Method": "GetLanguages",
-    "RelativePath": "api/Setting/languages",
+    "RelativePath": "api/setting/languages",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -544,7 +544,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.SettingController",
     "Method": "ResetSettings",
-    "RelativePath": "api/Setting/reset",
+    "RelativePath": "api/setting/reset",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -554,7 +554,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.SettingController",
     "Method": "UpdateTimeZone",
-    "RelativePath": "api/Setting/timezone",
+    "RelativePath": "api/setting/timezone",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -570,7 +570,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.SettingController",
     "Method": "GetTimeZones",
-    "RelativePath": "api/Setting/timezones",
+    "RelativePath": "api/setting/timezones",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -580,7 +580,7 @@
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.SettingController",
     "Method": "ToggleDarkMode",
-    "RelativePath": "api/Setting/toggle-dark-mode",
+    "RelativePath": "api/setting/toggle-dark-mode",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
