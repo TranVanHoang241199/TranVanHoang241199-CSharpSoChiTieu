@@ -1,4 +1,4 @@
-﻿@inject CSharpSoChiTieu.Business.Services.ISettingHandler SettingHandler
+﻿@inject ISettingHandler SettingHandler
 @{
     var settings = SettingHandler.GetUserSettings();
     var darkModeClass = settings != null && settings.DarkMode ? "dark-version" : "";

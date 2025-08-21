@@ -185,7 +185,7 @@ namespace CSharpSoChiTieu.Business.Services
 
                 // Đầu tiên bạn tạo query:
                 var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
-                 query = query.Where(o => o.CreatedBy.Equals(currentUserId));
+                query = query.Where(o => o.CreatedBy.Equals(currentUserId));
 
 
                 if (!string.IsNullOrWhiteSpace(searchValue))

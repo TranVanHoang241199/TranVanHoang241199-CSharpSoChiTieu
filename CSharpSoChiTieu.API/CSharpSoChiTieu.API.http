@@ -1,0 +1,6 @@
+@CSharpSoChiTieu.API_HostAddress = http://localhost:5241
+
+GET {{CSharpSoChiTieu.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
