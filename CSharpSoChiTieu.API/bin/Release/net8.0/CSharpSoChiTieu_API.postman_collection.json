@@ -1,0 +1,331 @@
+{
+  "info": {
+    "_postman_id": "csharp-so-chi-tieu-api",
+    "name": "CSharpSoChiTieu API",
+    "description": "API collection cho ứng dụng quản lý chi tiêu",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"testuser\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/account/login",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "account", "login" ]
+            }
+          }
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"newuser\",\n  \"email\": \"newuser@example.com\",\n  \"password\": \"123456\",\n  \"fullName\": \"New User\",\n  \"phone\": \"0123456789\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/account/register",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "account", "register" ]
+            }
+          }
+        },
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/account/profile",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "account", "profile" ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Income Expense",
+      "item": [
+        {
+          "name": "Get Income Expenses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/incomeexpense?page=1&pageSize=10",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "incomeexpense" ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Income Expense",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": 2,\n  \"amount\": 100000,\n  \"date\": \"2024-01-15T00:00:00Z\",\n  \"categoryId\": \"{{categoryId}}\",\n  \"note\": \"Chi tiêu test\",\n  \"currency\": \"VND\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/incomeexpense",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "incomeexpense" ]
+            }
+          }
+        },
+        {
+          "name": "Get Summary",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/incomeexpense/summary?range=month",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "incomeexpense", "summary" ],
+              "query": [
+                {
+                  "key": "range",
+                  "value": "month"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Category",
+      "item": [
+        {
+          "name": "Get Categories",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/category?page=1&pageSize=10",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "category" ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ăn uống\",\n  \"text\": \"Chi phí ăn uống\",\n  \"icon\": \"🍽️\",\n  \"color\": \"#FF3B30\",\n  \"order\": 1,\n  \"type\": 2\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/category",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "category" ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Report",
+      "item": [
+        {
+          "name": "Get Report Data",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/report",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "report" ]
+            }
+          }
+        },
+        {
+          "name": "Get Monthly Report",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/report/monthly/2024/1",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "report", "monthly", "2024", "1" ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Settings",
+      "item": [
+        {
+          "name": "Get User Settings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/setting",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "setting" ]
+            }
+          }
+        },
+        {
+          "name": "Update Currency",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currency\": \"USD\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/setting/currency",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "setting", "currency" ]
+            }
+          }
+        },
+        {
+          "name": "Toggle Dark Mode",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/setting/toggle-dark-mode",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "setting", "toggle-dark-mode" ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://localhost:7001",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "your_jwt_token_here",
+      "type": "string"
+    },
+    {
+      "key": "categoryId",
+      "value": "category_guid_here",
+      "type": "string"
+    }
+  ]
+} 
