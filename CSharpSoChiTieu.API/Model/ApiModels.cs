@@ -96,6 +96,8 @@ namespace CSharpSoChiTieu.API.Models
     public class IncomeExpenseFilterRequest
     {
         public int? Type { get; set; } // 1: Income, 2: Expense
+        public int Page { get; set; } = 1;
+        public int PageSize { get; set; } = 100; // Set to large number (e.g., 999999) to get all records
         public string? Search { get; set; }
         public string? Range { get; set; } = "month"; // day, week, month, year
         public string? Currency { get; set; }

@@ -96,7 +96,9 @@ namespace CSharpSoChiTieu.API.Controllers
                 var currency = request.Currency ?? userSetting?.Currency ?? "VND";
 
                 var result = await _incomeExpenseHandler.Gets(
-                    0, 0, "",
+                    request.Page,
+                    request.PageSize, 
+                    "",
                     request.Year,
                     request.Month,
                     request.Day,
@@ -127,6 +129,49 @@ namespace CSharpSoChiTieu.API.Controllers
                 {
                     Success = false,
                     Message = "Có lỗi xảy ra khi lấy danh sách thu chi"
+                });
+            }
+        }
+
+        /// <summary>
+        /// Lấy lịch sử thu chi
+        /// </summary>
+        [HttpGet("history")]
+        public async Task<IActionResult> GetHistory([FromQuery] string? range = "month", [FromQuery] string? currency = null, [FromQuery] string? search = "")
+        {
+            try
+            {
+                var userSetting = _settingHandler.GetUserSettings();
+                var selectedCurrency = currency ?? userSetting?.Currency ?? "VND";
+                var currentRange = range ?? "month";
+
+                var result = await _incomeExpenseHandler.Gets(0, search ?? "", currentRange, selectedCurrency);
+
+                if (result.Status != HttpStatusCode.OK)
+                {
+                    return BadRequest(new ApiResponse
+                    {
+                        Success = false,
+                        Message = result.Message ?? "Lỗi khi lấy lịch sử thu chi"
+                    });
+                }
+
+                var data = (result as OperationResultList<IEGroupViewModel>)?.Data ?? new List<IEGroupViewModel>();
+
+                return Ok(new ApiResponse<List<IEGroupViewModel>>
+                {
+                    Success = true,
+                    Message = "Lấy lịch sử thu chi thành công",
+                    Data = data
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi lấy lịch sử thu chi");
+                return StatusCode(500, new ApiResponse
+                {
+                    Success = false,
+                    Message = "Có lỗi xảy ra khi lấy lịch sử thu chi"
                 });
             }
         }

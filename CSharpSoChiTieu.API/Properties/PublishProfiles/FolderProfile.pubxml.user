@@ -3,7 +3,7 @@
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\publish\sochitieu_API</_PublishTargetUrl>
-    <History>True|2025-08-26T07:57:10.9413628Z||;True|2025-08-26T14:56:54.8704132+07:00||;True|2025-08-26T14:42:20.9980323+07:00||;True|2025-08-26T14:10:19.0982302+07:00||;</History>
+    <History>True|2026-03-22T02:42:31.6218615Z||;True|2026-03-13T16:57:55.3010996+07:00||;True|2025-08-26T14:57:10.9413628+07:00||;True|2025-08-26T14:56:54.8704132+07:00||;True|2025-08-26T14:42:20.9980323+07:00||;True|2025-08-26T14:10:19.0982302+07:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

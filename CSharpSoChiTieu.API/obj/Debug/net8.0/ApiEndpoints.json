@@ -428,6 +428,32 @@
   },
   {
     "ContainingType": "CSharpSoChiTieu.API.Controllers.IncomeExpenseController",
+    "Method": "GetHistory",
+    "RelativePath": "api/income-expense/history",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "range",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "currency",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "search",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CSharpSoChiTieu.API.Controllers.IncomeExpenseController",
     "Method": "GetSummary",
     "RelativePath": "api/income-expense/summary",
     "HttpMethod": "GET",

@@ -194,3 +194,8 @@ D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.API
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.API\obj\Release\net8.0\CSharpSoChiTieu.API.pdb
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.API\obj\Release\net8.0\CSharpSoChiTieu.API.genruntimeconfig.cache
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.API\obj\Release\net8.0\ref\CSharpSoChiTieu.API.dll
+D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.API\obj\Release\net8.0\rpswa.dswa.cache.json
+D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.API\obj\Release\net8.0\rjimswa.dswa.cache.json
+D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.API\obj\Release\net8.0\rjsmrazor.dswa.cache.json
+D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.API\obj\Release\net8.0\rjsmcshtml.dswa.cache.json
+D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.API\obj\Release\net8.0\swae.build.ex.cache

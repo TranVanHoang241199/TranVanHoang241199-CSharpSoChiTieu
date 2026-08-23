@@ -542,6 +542,43 @@
         }
       }
     },
+    "/api/income-expense/history": {
+      "get": {
+        "tags": [
+          "IncomeExpense"
+        ],
+        "parameters": [
+          {
+            "name": "range",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "month"
+            }
+          },
+          {
+            "name": "currency",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/income-expense/by-type/{type}": {
       "get": {
         "tags": [
@@ -1060,6 +1097,14 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
           },
           "search": {
             "type": "string",
