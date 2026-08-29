@@ -77,6 +77,70 @@ namespace CSharpSoChiTieu.Business.Services
                 Expense = x.Expense
             }).ToList();
 
+            // Thống kê theo ngày (dùng cho view tuần): nhóm theo ngày
+            var dayData = await query
+                .GroupBy(x => new { x.Date.Year, x.Date.Month, x.Date.Day })
+                .Select(g => new
+                {
+                    Year = g.Key.Year,
+                    Month = g.Key.Month,
+                    Day = g.Key.Day,
+                    Income = g.Where(x => x.Type == IncomeExpenseType.Income).Sum(x => x.Amount),
+                    Expense = g.Where(x => x.Type == IncomeExpenseType.Expense).Sum(x => x.Amount)
+                })
+                .OrderBy(x => x.Year).ThenBy(x => x.Month).ThenBy(x => x.Day)
+                .ToListAsync();
+
+            result.DayStats = dayData.Select(x => new DayStatViewModel
+            {
+                DayLabel = new DateTime(x.Year, x.Month, x.Day).DayOfWeek == DayOfWeek.Sunday ? "CN" : "T" + (((int)new DateTime(x.Year, x.Month, x.Day).DayOfWeek + 1).ToString()),
+                Income = x.Income,
+                Expense = x.Expense
+            }).ToList();
+
+            // Thống kê theo tuần trong tháng (chia tuần theo khối 7 ngày: 1-7,8-14,...)
+            var weekData = await query
+                .GroupBy(x => new { x.Date.Year, x.Date.Month, Week = ((x.Date.Day - 1) / 7) + 1 })
+                .Select(g => new
+                {
+                    Year = g.Key.Year,
+                    Month = g.Key.Month,
+                    Week = g.Key.Week,
+                    Income = g.Where(x => x.Type == IncomeExpenseType.Income).Sum(x => x.Amount),
+                    Expense = g.Where(x => x.Type == IncomeExpenseType.Expense).Sum(x => x.Amount)
+                })
+                .OrderBy(x => x.Year).ThenBy(x => x.Month).ThenBy(x => x.Week)
+                .ToListAsync();
+
+            result.WeekStats = weekData.Select(x => new WeekStatViewModel
+            {
+                Week = $"Tuần {x.Week}",
+                Income = x.Income,
+                Expense = x.Expense
+            }).ToList();
+
+            // Thống kê theo giờ (dùng cho view ngày): nhóm theo giờ
+            var hourlyData = await query
+                .GroupBy(x => new { x.Date.Year, x.Date.Month, x.Date.Day, Hour = x.Date.Hour })
+                .Select(g => new
+                {
+                    Year = g.Key.Year,
+                    Month = g.Key.Month,
+                    Day = g.Key.Day,
+                    Hour = g.Key.Hour,
+                    Income = g.Where(x => x.Type == IncomeExpenseType.Income).Sum(x => x.Amount),
+                    Expense = g.Where(x => x.Type == IncomeExpenseType.Expense).Sum(x => x.Amount)
+                })
+                .OrderBy(x => x.Year).ThenBy(x => x.Month).ThenBy(x => x.Day).ThenBy(x => x.Hour)
+                .ToListAsync();
+
+            result.HourlyStats = hourlyData.Select(x => new HourlyStatViewModel
+            {
+                Hour = x.Hour + ":00",
+                Income = x.Income,
+                Expense = x.Expense
+            }).ToList();
+
             // Lấy thống kê theo danh mục từ query đã lọc
             var categoryStatsQuery = query
     .Join(_context.ct_IncomeExpenseCategories,

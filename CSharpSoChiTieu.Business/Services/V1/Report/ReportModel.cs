@@ -16,13 +16,39 @@ namespace CSharpSoChiTieu.Business.Services
         public int ExpenseTransactions { get; set; }
         public int TotalTransactions { get; set; }
 
+        // Aggregations for different periods
         public List<MonthlyStatViewModel> MonthlyStats { get; set; }
+        public List<WeekStatViewModel> WeekStats { get; set; }
+        public List<DayStatViewModel> DayStats { get; set; }
+        public List<HourlyStatViewModel> HourlyStats { get; set; }
+
         public List<CategoryStatViewModel> CategoryStats { get; set; }
     }
 
     public class MonthlyStatViewModel
     {
         public string Month { get; set; }
+        public decimal Income { get; set; }
+        public decimal Expense { get; set; }
+    }
+
+    public class WeekStatViewModel
+    {
+        public string Week { get; set; }
+        public decimal Income { get; set; }
+        public decimal Expense { get; set; }
+    }
+
+    public class DayStatViewModel
+    {
+        public string DayLabel { get; set; }
+        public decimal Income { get; set; }
+        public decimal Expense { get; set; }
+    }
+
+    public class HourlyStatViewModel
+    {
+        public string Hour { get; set; }
         public decimal Income { get; set; }
         public decimal Expense { get; set; }
     }

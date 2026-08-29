@@ -49,10 +49,10 @@
                         <div class="col-12 col-md-2">
                             <label for="select-range" class="form-label fw-bold mb-1">Thời gian</label>
                             <select id="select-range" class="form-select form-select-sm border" onchange="handleDateRangeChange()">
-                                <option value="all" selected>Tùy chọn</option>
+                                <option value="all">Tùy chọn</option>
                                 <option value="today">Hôm nay</option>
                                 <option value="week">Tuần này</option>
-                                <option value="month">Tháng này</option>
+                                <option selected value="month">Tháng này</option>
                                 <option value="year">Năm này</option>
                             </select>
                         </div>
@@ -265,6 +265,13 @@
 
 @section scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Dim unselected summary cards */
+        .muted {
+            opacity: 0.35 !important;
+            filter: grayscale(60%);
+        }
+    </style>
     <script>
         // Biến toàn cục cho biểu đồ
         var lineChart, pieChart;
@@ -276,10 +283,34 @@
             return type === 1 ? 'Khoản thu' : 'Khoản chi';
         }
 
+        // Update visual state of total cards based on selected type
+        function updateCardVisuals(filterType) {
+            // filterType: 'all' | 'income' | 'expense'
+            var $incomeCard = $('.income-card');
+            var $expenseCard = $('.expense-card');
+
+            if (!filterType || filterType === 'all') {
+                $incomeCard.removeClass('muted');
+                $expenseCard.removeClass('muted');
+                return;
+            }
+
+            if (filterType === 'income') {
+                $incomeCard.removeClass('muted');
+                $expenseCard.addClass('muted');
+            } else if (filterType === 'expense') {
+                $expenseCard.removeClass('muted');
+                $incomeCard.addClass('muted');
+            }
+        }
+
         // Khởi tạo ban đầu
         $(document).ready(function() {
             initializeCharts();
-            applyFilters();
+            // default to 'month'
+            try { $('#select-range').val('month'); } catch (e) { }
+            // handleDateRangeChange will set date inputs and call applyFilters()
+            handleDateRangeChange();
         });
 
         // Hàm khởi tạo biểu đồ
@@ -295,19 +326,54 @@
             });
 
             var pieCtx = document.getElementById('chart-pie').getContext('2d');
+            // register datalabels plugin if available
+            try { if (Chart && Chart.register && typeof ChartDataLabels !== 'undefined') Chart.register(ChartDataLabels); } catch (e) { }
             pieChart = new Chart(pieCtx, {
                 type: 'pie',
                 data: { labels: [], datasets: [] },
                 options: {
                     responsive: true,
-
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
                             position: 'bottom',
+                        },
+                        tooltip: {
+                            enabled: true,
+                            callbacks: {
+                                label: function(context) {
+                                    var label = context.label || '';
+                                    var value = context.raw || 0;
+                                    var dataArr = context.dataset.data || [];
+                                    var sum = dataArr.reduce(function(a, b) { return a + b; }, 0);
+                                    var percent = sum ? ((value / sum) * 100).toFixed(1) : '0';
+                                    var formatted = value.toLocaleString('vi-VN');
+                                    return label + ': ' + formatted + ' (' + percent + '%)';
+                                }
+                            }
+                        },
+                        datalabels: {
+                            color: '#ffffff',
+                            formatter: function(value, ctx) {
+                                var dataArr = ctx.chart.data.datasets[0].data;
+                                var sum = dataArr.reduce(function(a, b) { return a + b; }, 0);
+                                if (!sum) return '';
+                                var percentage = (value / sum) * 100;
+                                if (percentage >= 1) return Math.round(percentage) + '%';
+                                return (percentage.toFixed(1)) + '%';
+                            },
+                            font: {
+                                weight: 'bold',
+                                size: 14
+                            },
+                            anchor: 'center',
+                            align: 'center',
+                            clamp: true,
+                            clip: true
                         }
                     }
-                }
+                },
+                plugins: (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : []
             });
         }
 
@@ -322,8 +388,15 @@
                     from = to = now;
                     break;
                 case 'week':
-                    from = new Date(now.setDate(now.getDate() - now.getDay() + 1));
-                    to = new Date(now.setDate(now.getDate() - now.getDay() + 7));
+                    // Compute week range: Monday..Sunday without mutating `now` twice
+                    var tmp = new Date();
+                    var day = tmp.getDay(); // 0 (Sun) .. 6 (Sat)
+                    // Calculate Monday: if Sunday (0) then Monday is -6 days from tmp
+                    var diffToMonday = (day === 0) ? -6 : (1 - day);
+                    from = new Date(tmp);
+                    from.setDate(tmp.getDate() + diffToMonday);
+                    to = new Date(from);
+                    to.setDate(from.getDate() + 6);
                     break;
                 case 'month':
                     from = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -355,10 +428,14 @@
             var filters = {
                 type: $('#typeFilter').val(),
                 currency: currencyDropdown.val(),
+                period: $('#select-range').val(),
                 dateFrom: $('#dateFrom').val() ? $('#dateFrom').val() : null,
                 dateTo: $('#dateTo').val() ? $('#dateTo').val() : null,
             };
             selectedCurrency = selectedOption.data('symbol') || filters.currency;
+
+            // Update totals visual immediately for better UX
+            updateCardVisuals(filters.type);
 
             $.ajax({
                 url: '/Report/FilterReport',
@@ -366,6 +443,7 @@
                 contentType: 'application/json',
                 data: JSON.stringify(filters),
                 success: function(data) {
+                    console.log('Report response', data);
                     updatePage(data);
                 },
                 error: function(error) {
@@ -383,21 +461,47 @@
             $('#transactionCount').text(data.totalTransactions);
             $('#balance').removeClass('text-success text-warning').addClass(data.balance >= 0 ? 'text-success' : 'text-warning');
 
+            // Update visual state of totals based on selected type
+            updateCardVisuals($('#typeFilter').val());
 
-            // Cập nhật biểu đồ đường
-            lineChart.data.labels = data.monthlyStats.map(s => s.month);
+
+            // Cập nhật biểu đồ đường theo period được chọn
+            var period = $('#select-range').val();
             var filterType = $('#typeFilter').val();
+            var labels = [];
+            var incomeData = [];
+            var expenseData = [];
+
+            if (period === 'today' && data.hourlyStats && data.hourlyStats.length > 0) {
+                labels = data.hourlyStats.map(s => s.hour);
+                incomeData = data.hourlyStats.map(s => s.income);
+                expenseData = data.hourlyStats.map(s => s.expense);
+            } else if (period === 'week' && data.dayStats && data.dayStats.length > 0) {
+                labels = data.dayStats.map(s => s.dayLabel || s.daylabel);
+                incomeData = data.dayStats.map(s => s.income);
+                expenseData = data.dayStats.map(s => s.expense);
+            } else if (period === 'month' && data.weekStats && data.weekStats.length > 0) {
+                labels = data.weekStats.map(s => s.week || s.Week || s.weekLabel);
+                incomeData = data.weekStats.map(s => s.income);
+                expenseData = data.weekStats.map(s => s.expense);
+            } else { // default -> year / monthly
+                labels = (data.monthlyStats || []).map(s => s.month);
+                incomeData = (data.monthlyStats || []).map(s => s.income);
+                expenseData = (data.monthlyStats || []).map(s => s.expense);
+            }
+
+            lineChart.data.labels = labels;
             lineChart.data.datasets = [
                 {
                     label: 'Thu',
-                    data: data.monthlyStats.map(s => s.income),
+                    data: incomeData,
                     borderColor: '#2dce89',
                     tension: 0.4,
                     hidden: filterType === 'expense'
                 },
                 {
                     label: 'Chi',
-                    data: data.monthlyStats.map(s => s.expense),
+                    data: expenseData,
                     borderColor: '#f5365c',
                     tension: 0.4,
                     hidden: filterType === 'income'
