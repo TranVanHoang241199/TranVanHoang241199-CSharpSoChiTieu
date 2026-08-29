@@ -9,7 +9,9 @@
     var userImage = userProfile?.Image ?? "~/img/default-avatar.jpg";
 }
 
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2 bg-white my-2 d-none d-lg-block" id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2 bg-white my-2 d-none d-lg-block d-flex flex-column h-100" id="sidenav-main">
+
+    <!-- Header Logo -->
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <a class="" height="100px" width="100%" asp-controller="IncomeExpense" asp-action="Index">
@@ -17,6 +19,7 @@
         </a>
     </div>
 
+    <!-- User Profile -->
     <div class="px-4 py-3 user-profile">
         @if (User.Identity.IsAuthenticated)
         {
@@ -29,8 +32,8 @@
             </div>
             <div class="mt-3 d-flex justify-content-between">
                 <a asp-controller="Account" asp-action="Profile" class="btn btn-sm btn-outline-dark mb-0 w-48">Hồ sơ</a>
-                <form asp-controller="Account" asp-action="Logout" method="post">
-                    <button type="submit" class="btn btn-sm btn-outline-danger mb-0 w-48">Đăng xuất</button>
+                <form asp-controller="Account" asp-action="Logout" method="post" class="w-48">
+                    <button type="submit" class="btn btn-sm btn-outline-danger mb-0 w-100">Đăng xuất</button>
                 </form>
             </div>
         }
@@ -48,50 +51,55 @@
 
     <hr class="horizontal dark mt-0 mb-2">
 
-    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+    <!-- Danh sách Menu (Sử dụng flex-grow-1 để tự co dãn và overflow-y-auto để cuộn mượt) -->
+    <div class="collapse navbar-collapse w-auto flex-grow-1 overflow-y-auto" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "IncomeExpense" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="IncomeExpense" asp-action="Index">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "IncomeExpense" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="IncomeExpense" asp-action="Index">
                     <i class="material-symbols-rounded opacity-5">dashboard</i>
                     <span class="nav-link-text ms-1">Nhập vào</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "History" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="History" asp-action="Index">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "History" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="History" asp-action="Index">
                     <i class="material-symbols-rounded opacity-5">payments</i>
                     <span class="nav-link-text ms-1">Lịch sử</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Report" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="Report" asp-action="Index">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Report" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="Report" asp-action="Index">
                     <i class="material-symbols-rounded opacity-5">analytics</i>
                     <span class="nav-link-text ms-1">Báo cáo</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Category" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="Category" asp-action="Index">
+                    <i class="material-symbols-rounded opacity-5">receipt_long</i>
+                    <span class="nav-link-text ms-1">Thêm danh mục</span>
                 </a>
             </li>
 
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-5">Quản lý</h6>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Category" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="Category" asp-action="Index">
-                    <i class="material-symbols-rounded opacity-5">receipt_long</i>
-                    <span class="nav-link-text ms-1">Thêm danh mục</span>
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Feedback" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="Feedback" asp-action="Index">
+                    <i class="material-symbols-rounded opacity-5">feedback</i>
+                    <span class="nav-link-text ms-1">Góp ý & Báo lỗi</span>
                 </a>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Account" && ViewContext.RouteData.Values["Action"].ToString() == "ChangePassword" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="Account" asp-action="ChangePassword">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Account" && ViewContext.RouteData.Values["Action"]?.ToString() == "ChangePassword" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="Account" asp-action="ChangePassword">
                     <i class="material-symbols-rounded opacity-5">lock</i>
                     <span class="nav-link-text ms-1">Đổi mật khẩu</span>
                 </a>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Support" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="Support" asp-action="Index">
-                    <i class="fas fa-comment-dots opacity-5"></i>
-                    <span class="nav-link-text ms-1">Hỗ trợ nhà phát triển <span style="color: gold; font-size: 1rem;">★</span></span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Setting" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="Setting" asp-action="index">
+                <a class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Setting" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active bg-gradient-dark text-white" : "text-dark")" asp-controller="Setting" asp-action="Index">
                     <i class="material-symbols-rounded opacity-5">settings</i>
                     <span class="nav-link-text ms-1">Cài đặt</span>
                 </a>
@@ -99,11 +107,11 @@
         </ul>
     </div>
 
-    <div class="sidenav-footer position-absolute w-100 bottom-0">
-        <div class="mx-3">
-            <div class="text-center text-xs text-muted mb-2">
-                Phiên bản 1.0.0
-            </div>
+    <!-- Footer dính dưới cùng tự nhiên -->
+    <div class="sidenav-footer w-100 py-3 mt-auto">
+        <div class="mx-3 text-center">
+            <span class="text-xs text-muted">Phiên bản 1.0.0</span>
         </div>
     </div>
+
 </aside>

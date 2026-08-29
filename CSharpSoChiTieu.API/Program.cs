@@ -47,9 +47,15 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // Đăng ký AutoMapper
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddAutoMapper(typeof(Program).Assembly, typeof(SettingAutoMapper).Assembly);
+//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+//builder.Services.AddAutoMapper(typeof(Program).Assembly, typeof(SettingAutoMapper).Assembly);
 
+
+// Đăng ký AutoMapper quét các Profile từ Assembly của dự án
+//builder.Services.AddAutoMapper(typeof(Program).Assembly, typeof(SettingAutoMapper).Assembly);
+builder.Services.AddAutoMapper(cfg => {
+    cfg.AddMaps(typeof(Program).Assembly, typeof(SettingAutoMapper).Assembly);
+});
 
 // Add DbContext
 builder.Services.AddScoped<CTDbContext>();

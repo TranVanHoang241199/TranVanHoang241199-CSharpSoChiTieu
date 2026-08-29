@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj": {}
+    "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj": {}
   },
   "projects": {
-    "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj": {
+    "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj",
+        "projectUniqueName": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj",
         "projectName": "CSharpSoChiTieu.common",
-        "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj",
+        "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj",
         "packagesPath": "C:\\Users\\vanho\\.nuget\\packages\\",
-        "outputPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.common\\obj\\",
+        "outputPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -54,23 +54,23 @@
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
-              "version": "[14.0.0, )"
+              "version": "[16.2.0, )"
             },
             "Google.Apis.Gmail.v1": {
               "target": "Package",
-              "version": "[1.68.0.3427, )"
+              "version": "[1.75.0.4225, )"
             },
             "Microsoft.AspNetCore.Http": {
               "target": "Package",
-              "version": "[2.3.0, )"
+              "version": "[2.3.12, )"
             },
             "Microsoft.AspNetCore.Session": {
               "target": "Package",
-              "version": "[2.3.0, )"
+              "version": "[2.3.12, )"
             },
             "MimeKit": {
               "target": "Package",
-              "version": "[4.11.0, )"
+              "version": "[4.17.0, )"
             }
           },
           "imports": [

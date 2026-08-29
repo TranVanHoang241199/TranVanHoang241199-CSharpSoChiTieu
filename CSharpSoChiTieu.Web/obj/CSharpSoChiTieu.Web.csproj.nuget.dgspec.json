@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Web\\CSharpSoChiTieu.Web.csproj": {}
+    "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Web\\CSharpSoChiTieu.Web.csproj": {}
   },
   "projects": {
-    "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj": {
+    "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj",
+        "projectUniqueName": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj",
         "projectName": "CSharpSoChiTieu.Business",
-        "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj",
+        "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj",
         "packagesPath": "C:\\Users\\vanho\\.nuget\\packages\\",
-        "outputPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\obj\\",
+        "outputPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,11 +33,11 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj": {
-                "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj"
+              "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj": {
+                "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj"
               },
-              "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj": {
-                "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj"
+              "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj": {
+                "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj"
               }
             }
           }
@@ -61,7 +61,7 @@
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
-              "version": "[14.0.0, )"
+              "version": "[16.2.0, )"
             },
             "Microsoft.Extensions.Identity.Core": {
               "target": "Package",
@@ -73,7 +73,7 @@
             },
             "MimeKit": {
               "target": "Package",
-              "version": "[4.11.0, )"
+              "version": "[4.17.0, )"
             }
           },
           "imports": [
@@ -370,14 +370,14 @@
         }
       }
     },
-    "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj": {
+    "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj",
+        "projectUniqueName": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj",
         "projectName": "CSharpSoChiTieu.common",
-        "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj",
+        "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj",
         "packagesPath": "C:\\Users\\vanho\\.nuget\\packages\\",
-        "outputPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.common\\obj\\",
+        "outputPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -420,23 +420,23 @@
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
-              "version": "[14.0.0, )"
+              "version": "[16.2.0, )"
             },
             "Google.Apis.Gmail.v1": {
               "target": "Package",
-              "version": "[1.68.0.3427, )"
+              "version": "[1.75.0.4225, )"
             },
             "Microsoft.AspNetCore.Http": {
               "target": "Package",
-              "version": "[2.3.0, )"
+              "version": "[2.3.12, )"
             },
             "Microsoft.AspNetCore.Session": {
               "target": "Package",
-              "version": "[2.3.0, )"
+              "version": "[2.3.12, )"
             },
             "MimeKit": {
               "target": "Package",
-              "version": "[4.11.0, )"
+              "version": "[4.17.0, )"
             }
           },
           "imports": [
@@ -733,14 +733,14 @@
         }
       }
     },
-    "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj": {
+    "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj",
+        "projectUniqueName": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj",
         "projectName": "CSharpSoChiTieu.Data",
-        "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj",
+        "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj",
         "packagesPath": "C:\\Users\\vanho\\.nuget\\packages\\",
-        "outputPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\obj\\",
+        "outputPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -762,8 +762,8 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj": {
-                "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj"
+              "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj": {
+                "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj"
               }
             }
           }
@@ -1104,14 +1104,14 @@
         }
       }
     },
-    "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Web\\CSharpSoChiTieu.Web.csproj": {
+    "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Web\\CSharpSoChiTieu.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Web\\CSharpSoChiTieu.Web.csproj",
+        "projectUniqueName": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Web\\CSharpSoChiTieu.Web.csproj",
         "projectName": "CSharpSoChiTieu.Web",
-        "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Web\\CSharpSoChiTieu.Web.csproj",
+        "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Web\\CSharpSoChiTieu.Web.csproj",
         "packagesPath": "C:\\Users\\vanho\\.nuget\\packages\\",
-        "outputPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Web\\obj\\",
+        "outputPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1133,14 +1133,14 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj": {
-                "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj"
+              "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj": {
+                "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Business\\CSharpSoChiTieu.Business.csproj"
               },
-              "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj": {
-                "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj"
+              "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj": {
+                "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.common\\CSharpSoChiTieu.common.csproj"
               },
-              "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj": {
-                "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\CSharpSoChiTieu\\CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj"
+              "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj": {
+                "projectPath": "D:\\developer\\C#_dotnet\\WEB\\CS_MVC_QuanLyTien\\TranVanHoang241199-CSharpSoChiTieu\\CSharpSoChiTieu.Data\\CSharpSoChiTieu.Data.csproj"
               }
             }
           }
@@ -1164,7 +1164,7 @@
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.Cookies": {
               "target": "Package",
-              "version": "[2.3.0, )"
+              "version": "[2.3.12, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",

@@ -38,14 +38,19 @@ builder.Services.AddAuthentication("MyCookieAuth")
     });
 
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 /***
  * AutoMapper
  */
-builder.Services.AddAutoMapper(typeof(UserAutoMapper));
-builder.Services.AddAutoMapper(typeof(IncomeExpenseAutoMapper));
+//builder.Services.AddAutoMapper(typeof(UserAutoMapper));
+//builder.Services.AddAutoMapper(typeof(IncomeExpenseAutoMapper));
+
+// Đăng ký toàn bộ Profile AutoMapper cho Web
+builder.Services.AddAutoMapper(cfg => {
+    cfg.AddMaps(typeof(UserAutoMapper), typeof(IncomeExpenseAutoMapper));
+});
 
 var app = builder.Build();
 

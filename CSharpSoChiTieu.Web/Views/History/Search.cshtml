@@ -5,16 +5,16 @@
 }
 
 <div class="card h-100 shadow-sm">
-    <div class="card-header pb-0 px-3">
-        <div class="row align-items-center mb-2">
+    <div class="card-header pt-3 ps-3 pb-0 px-3">
+        <div class="row align-items-center">
             <div class="col-12">
-                <h6 class="mb-0 text-primary">
+                <h10 class="mb-0 text-bold text-primary">
                     <i class="fas fa-history me-2"></i>Trả về @Model.RowCount khoản thu chi
-                </h6>
+                </h10>
             </div>
         </div>
     </div>
-    <div class="card-body pt-2 p-3" id="history_id">
+    <div class="card-body pt-3 p-3" id="history_id">
         @if (Model.Groups != null && Model.Groups.Any())
         {
             foreach (var group in Model.Groups)
