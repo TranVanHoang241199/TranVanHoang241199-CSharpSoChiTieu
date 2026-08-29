@@ -369,15 +369,46 @@
             color: #a0a0a0 !important;
         }
 
+    /* Custom switch styling: replace default to ensure single knob */
     .form-switch .form-check-input {
-        width: 3em;
-        height: 1.5em;
+        -webkit-appearance: none;
+        appearance: none;
+        width: 2.6em;
+        height: 1.3em;
+        background-color: #e9ecef;
+        border-radius: 1.3rem;
+        position: relative;
+        border: 1px solid rgba(0,0,0,0.08);
+        transition: background-color .15s ease-in-out, border-color .15s ease-in-out;
+        cursor: pointer;
     }
 
-        .form-switch .form-check-input:checked {
-            background-color: #0d6efd;
-            border-color: #0d6efd;
-        }
+    .form-switch .form-check-input::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0.14rem;
+        transform: translateY(-50%);
+        width: 1.0rem;
+        height: 1.0rem;
+        background: #fff;
+        border-radius: 50%;
+        box-shadow: 0 .12rem .28rem rgba(0,0,0,0.18);
+        transition: left .15s ease-in-out, transform .15s ease-in-out;
+    }
+
+    .form-switch .form-check-input:focus {
+        box-shadow: 0 0 0 .2rem rgba(13,110,253,0.15);
+    }
+
+    .form-switch .form-check-input:checked {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+
+    .form-switch .form-check-input:checked::after {
+        left: calc(100% - 0.14rem - 1.0rem);
+    }
 
     .form-check-label {
         cursor: pointer;

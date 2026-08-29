@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CSharpSoChiTieu.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f4b9d6addfa4b3020e9c3e50c72065c387a24423")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9cbc4e5826affad2b96af950cf715740a8861e23")]
 [assembly: System.Reflection.AssemblyProductAttribute("CSharpSoChiTieu.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CSharpSoChiTieu.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

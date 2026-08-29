@@ -73,13 +73,13 @@
                     Tùy chỉnh hiển thị icon màu sắc<span class="text-danger">*</span>:
                 </label>
                 <div class="col-sm-9 d-flex gap-3 flex-wrap">
-                    <div class="input-group icon-color-group flex-grow-1" style="max-width: 140px;">
-                        <span class="input-group-text" id="selectedIcon" style="font-size: 18px;"></span>
-                        <select id="IconSelect" asp-for="Icon" class="form-select icon-select ps-2 fw-bold" aria-label="Chọn icon" style="font-size: 16px;"></select>
+                    <div class="input-group icon-color-group" style="flex: 1 1 420px; min-width:280px;">
+                        <span class="input-group-text" id="selectedIcon" style="font-size: 18px; width:48px; display:flex; align-items:center; justify-content:center"></span>
+                        <select id="IconSelect" asp-for="Icon" class="form-select icon-select ps-2 fw-bold" aria-label="Chọn icon" style="font-size: 16px; min-width:220px;"></select>
                     </div>
-                    <div class="input-group icon-color-group flex-grow-1" style="max-width: 140px;">
+                    <div class="input-group icon-color-group" style="flex: 0 0 220px; min-width:160px;">
                         <span class="input-group-text p-1">
-                            <div id="colorPreview" style="width: 24px; height: 24px; border-radius: 4px; border: 1px solid #ccc;"></div>
+                            <div id="colorPreview" style="width: 28px; height: 28px; border-radius: 6px; border: 1px solid #ccc;"></div>
                         </span>
                         @Html.DropDownListFor(m => m.Color, (IEnumerable<SelectListItem>)ViewBag.ColorList, new {
                         @class = "form-select fw-bold",
@@ -149,6 +149,25 @@
 
     .card-title {
         font-weight: 600;
+    }
+    /* helper when auto-filling name from icon */
+    input.autofill-by-icon { opacity: 0.85; }
+
+    /* Make typed input text black, keep placeholder color lighter */
+    .form-control, .form-select, textarea.form-control {
+        color: #000; /* default text color */
+    }
+
+    /* Ensure placeholders remain muted */
+    .form-control::placeholder, textarea::placeholder {
+        color: #9aa0a6;
+        opacity: 1; /* keep visible across browsers */
+    }
+
+    /* If browser supports :placeholder-shown, keep placeholder visible color
+       and ensure when user has typed (not placeholder-shown) text is black */
+    .form-control:not(:placeholder-shown), textarea:not(:placeholder-shown) {
+        color: #000;
     }
 </style>
 
@@ -285,5 +304,67 @@
                 $(this).removeClass('is-invalid is-valid');
             });
         });
+    </script>
+    <script>
+        (function(){
+            function updateIconPreview(val) {
+                var el = document.getElementById('selectedIcon');
+                if (!el) return;
+                if (!val) { el.textContent = ''; return; }
+                // If value contains non-ascii characters (emoji), print directly
+                if (/[^\x00-\x7F]/.test(val)) {
+                    el.textContent = val;
+                } else {
+                    // fallback: show text
+                    el.textContent = val;
+                }
+            }
+
+            $(function(){
+                var $icon = $('#IconSelect');
+                var $name = $('#Name');
+
+                // initial preview and optional autofill
+                if ($icon.length) {
+                    updateIconPreview($icon.val());
+                var selectedText = $icon.find('option:selected').text().trim();
+                function stripLeadingIcons(text) {
+                    if (!text) return text;
+                    try {
+                        // remove any leading symbols/emojis until first letter or number
+                        return text.replace(/^[^\p{L}\p{N}]+/u, '').trim();
+                    } catch (e) {
+                        // fallback for older browsers: remove leading non-alphanumerics
+                        return text.replace(/^[^A-Za-z0-9]+/, '').trim();
+                    }
+                }
+                var cleaned = stripLeadingIcons(selectedText);
+                if ($name.length && !$name.val().trim() && cleaned) {
+                    $name.val(cleaned).addClass('autofill-by-icon');
+                }
+                }
+
+                $icon.on('change', function(){
+                    var val = $(this).val();
+                var txt = $(this).find('option:selected').text().trim();
+                updateIconPreview(val);
+                var cleanedTxt = (function(t){
+                    try { return t.replace(/^[^\p{L}\p{N}]+/u, '').trim(); }
+                    catch(e) { return t.replace(/^[^A-Za-z0-9]+/, '').trim(); }
+                })(txt);
+                if ($name.length) {
+                    // Always set the name to the selected icon label (cleaned) when user selects an icon
+                    $name.val(cleanedTxt).addClass('autofill-by-icon');
+                }
+                });
+
+                // If user types into name, remove autofill marker so we don't overwrite
+                $name.on('input', function(){
+                    if ($(this).val().trim()) {
+                        $(this).removeClass('autofill-by-icon');
+                    }
+                });
+            });
+        })();
     </script>
 }

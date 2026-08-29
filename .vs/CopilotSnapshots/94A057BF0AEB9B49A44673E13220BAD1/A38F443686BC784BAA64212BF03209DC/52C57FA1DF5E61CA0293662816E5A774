@@ -1,0 +1,369 @@
+﻿@using Newtonsoft.Json
+@model CategoryViewModel
+
+<div class="card shadow-sm border-0 rounded">
+    <div class="card-header bg-primary border-bottom">
+        <h4 class="card-title text-white mb-0">@ViewBag.Title</h4>
+    </div>
+    <div class="card-body">
+        <form asp-action="Save" asp-controller="Category" method="post" class="needs-validation" novalidate>
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="Id" value="@Model.Id" />
+
+            <!-- Validation Summary -->
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Lỗi!</strong> Vui lòng kiểm tra lại các thông tin bên dưới.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                @Html.ValidationSummary(false, "", new { @class = "alert alert-danger" })
+            }
+
+            <!-- Loại khoản -->
+            <div class="row mb-3">
+                <label for="Type" class="col-sm-3 col-form-label fw-bold text-nowrap">
+                    Loại khoản <span class="text-danger">*</span>:
+                </label>
+                <div class="col-sm-9">
+                    <select id="TypeSelect" class="form-select fw-bold ps-2 border" name="Type" required>
+                        <option value="1" class="text-success" selected="@(Model.Type == IncomeExpenseType.Income ? "selected" : null)">Khoản thu</option>
+                        <option value="2" class="text-primary" selected="@(Model.Type == IncomeExpenseType.Expense ? "selected" : null)">Khoản chi</option>
+                    </select>
+                    @Html.ValidationMessageFor(m => m.Type, "", new { @class = "text-danger mt-1" })
+                </div>
+            </div>
+
+            <!-- Tên danh mục -->
+            <div class="row mb-3">
+                <label for="Name" class="col-sm-3 col-form-label fw-bold text-nowrap">
+                    Tên danh mục <span class="text-danger">*</span>:
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" id="Name" name="Name" value="@Model.Name" class="form-control ps-2 border" placeholder="Tên danh mục" required autofocus />
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger mt-1" })
+                </div>
+            </div>
+
+            <!-- Mô tả -->
+            <div class="row mb-3">
+                <label for="Text" class="col-sm-3 col-form-label fw-bold text-nowrap">
+                    Mô tả:
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" id="Text" name="Text" value="@Model.Text" class="form-control ps-2 border" placeholder="Ghi chú" />
+                    @Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger mt-1" })
+                </div>
+            </div>
+
+            <!-- Thứ tự hiển thị -->
+            <div class="row mb-3">
+                <label for="Order" class="col-sm-3 col-form-label fw-bold text-nowrap">
+                    Thứ tự hiển thị <span class="text-danger">*</span>:
+                </label>
+                <div class="col-sm-9">
+                    <input type="number" id="Order" name="Order" value="@Model.Order" class="form-control ps-2 border" placeholder="Thứ tự hiển thị" />
+                    @Html.ValidationMessageFor(m => m.Order, "", new { @class = "text-danger mt-1" })
+                </div>
+            </div>
+
+            <!-- Icon và màu -->
+            <div class="row mb-4">
+                <label class="col-sm-3 col-form-label fw-bold text-nowrap">
+                    Tùy chỉnh hiển thị icon màu sắc<span class="text-danger">*</span>:
+                </label>
+                <div class="col-sm-9 d-flex gap-3 flex-wrap">
+                    <div class="input-group icon-color-group" style="flex: 1 1 420px; min-width:280px;">
+                        <span class="input-group-text" id="selectedIcon" style="font-size: 18px; width:48px; display:flex; align-items:center; justify-content:center"></span>
+                        <select id="IconSelect" asp-for="Icon" class="form-select icon-select ps-2 fw-bold" aria-label="Chọn icon" style="font-size: 16px; min-width:220px;"></select>
+                    </div>
+                    <div class="input-group icon-color-group" style="flex: 0 0 220px; min-width:160px;">
+                        <span class="input-group-text p-1">
+                            <div id="colorPreview" style="width: 28px; height: 28px; border-radius: 6px; border: 1px solid #ccc;"></div>
+                        </span>
+                        @Html.DropDownListFor(m => m.Color, (IEnumerable<SelectListItem>)ViewBag.ColorList, new {
+                        @class = "form-select fw-bold",
+                                                aria_label = "Chọn màu sắc",
+                                                style = "font-size: 16px;"
+                                                })
+                    </div>
+                </div>
+                <div class="col-sm-9 offset-sm-3 mt-1">
+                    @Html.ValidationMessageFor(m => m.Icon, "", new { @class = "text-danger me-3" })
+                    @Html.ValidationMessageFor(m => m.Color, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!-- Nút -->
+            <div class="row mb-0">
+                <div class="col-sm-9 offset-sm-3 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary d-flex align-items-center gap-1">
+                        <i class="fas fa-save"></i> Lưu dữ liệu
+                    </button>
+                    <a href="~/Category" class="btn btn-secondary d-flex align-items-center gap-1">
+                        <i class="fas fa-arrow-left"></i> Quay lại
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<style>
+    .icon-select {
+        font-family: 'Segoe UI Emoji', 'Segoe UI Symbol', 'Segoe UI', sans-serif;
+        font-size: 20px;
+        padding: 6px 8px;
+    }
+
+        .icon-select option {
+            font-family: 'Segoe UI Emoji', 'Segoe UI Symbol', 'Segoe UI', sans-serif;
+            font-size: 20px;
+            padding: 6px 8px;
+        }
+
+    .icon-color-group {
+        border: 1px solid #ced4da;
+        border-radius: 0.375rem;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+    }
+
+        .icon-color-group .input-group-text {
+            background-color: #f8f9fa;
+            border: none;
+            border-right: 1px solid #ced4da;
+            padding: 0 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 48px;
+        }
+
+        .icon-color-group .form-select {
+            border: none;
+            padding-left: 0.5rem;
+        }
+
+    .card-title {
+        font-weight: 600;
+    }
+    /* helper when auto-filling name from icon */
+    input.autofill-by-icon { opacity: 0.85; }
+
+    /* Make typed input text black, keep placeholder color lighter */
+    .form-control, .form-select, textarea.form-control {
+        color: #000; /* default text color */
+    }
+
+    /* Ensure placeholders remain muted */
+    .form-control::placeholder, textarea::placeholder {
+        color: #9aa0a6;
+        opacity: 1; /* keep visible across browsers */
+    }
+
+    /* If browser supports :placeholder-shown, keep placeholder visible color
+       and ensure when user has typed (not placeholder-shown) text is black */
+    .form-control:not(:placeholder-shown), textarea:not(:placeholder-shown) {
+        color: #000;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        const iconLists = {
+            '@((int)IncomeExpenseType.Income)': @Html.Raw(JsonConvert.SerializeObject(ViewBag.IconIncomeList)),
+            '@((int)IncomeExpenseType.Expense)': @Html.Raw(JsonConvert.SerializeObject(ViewBag.IconExpenseList))
+        };
+
+        function updateIconPreview(icon) {
+            const selectedIcon = document.getElementById('selectedIcon');
+            selectedIcon.textContent = icon || '';
+        }
+
+        function updateColorPreview(color) {
+            const colorPreview = document.getElementById('colorPreview');
+            colorPreview.style.backgroundColor = color || 'transparent';
+        }
+
+        function populateIcons(typeValue) {
+            const iconSelect = document.getElementById('IconSelect');
+            iconSelect.innerHTML = '';
+            const list = iconLists[typeValue] || [];
+
+            // Model.Icon có thể chứa emoji trực tiếp rồi, không cần convert HTML entity
+            const modelIcon = '@Model.Icon';
+
+            list.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.Icon;
+                option.textContent = `${item.Icon} ${item.Name}`;
+                if (item.Icon === modelIcon) {
+                    option.selected = true;
+                }
+                iconSelect.appendChild(option);
+            });
+
+            updateIconPreview(iconSelect.value);
+        }
+
+        document.getElementById('TypeSelect').addEventListener('change', e => {
+            populateIcons(e.target.value);
+        });
+
+        document.getElementById('IconSelect').addEventListener('change', e => {
+            updateIconPreview(e.target.value);
+        });
+
+        document.getElementById('Color').addEventListener('change', e => {
+            updateColorPreview(e.target.value);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const typeSelect = document.getElementById('TypeSelect');
+            populateIcons(typeSelect.value);
+            updateColorPreview(document.getElementById('Color').value);
+        });
+
+        $(document).ready(function () {
+            function updateSelectColor() {
+                const type = $('#TypeSelect').val();
+                const $select = $('#TypeSelect');
+
+                // Xóa các class màu cũ
+                $select.removeClass('text-success text-primary');
+
+                // Thêm class mới tương ứng giá trị
+                if (type === '1') {
+                    $select.addClass('text-success'); // Khoản thu
+                } else if (type === '2') {
+                    $select.addClass('text-primary'); // Khoản chi
+                }
+            }
+
+            // Gọi hàm khi trang load và khi thay đổi
+            updateSelectColor();
+            $('#TypeSelect').on('change', updateSelectColor);
+
+            // Client-side validation
+            $('form').on('submit', function(e) {
+                let isValid = true;
+
+                // Kiểm tra tên danh mục
+                const name = $('#Name').val().trim();
+                if (!name) {
+                    $('#Name').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#Name').removeClass('is-invalid').addClass('is-valid');
+                }
+
+                // Kiểm tra icon
+                const icon = $('#IconSelect').val();
+                if (!icon) {
+                    $('#IconSelect').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#IconSelect').removeClass('is-invalid').addClass('is-valid');
+                }
+
+                // Kiểm tra màu sắc
+                const color = $('#Color').val();
+                if (!color) {
+                    $('#Color').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#Color').removeClass('is-invalid').addClass('is-valid');
+                }
+
+                // Kiểm tra thứ tự hiển thị
+                const order = $('#Order').val();
+                if (order < 0) {
+                    $('#Order').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#Order').removeClass('is-invalid').addClass('is-valid');
+                }
+
+                if (!isValid) {
+                    e.preventDefault();
+                    // Hiển thị thông báo lỗi
+                    if (!$('.alert-danger').length) {
+                        $('.card-body').prepend('<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
+                            '<strong>Lỗi!</strong> Vui lòng kiểm tra lại các thông tin bắt buộc.' +
+                            '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
+                            '</div>');
+                    }
+                }
+            });
+
+            // Xóa validation khi user nhập
+            $('input, select').on('input change', function() {
+                $(this).removeClass('is-invalid is-valid');
+            });
+        });
+    </script>
+    <script>
+        (function(){
+            function updateIconPreview(val) {
+                var el = document.getElementById('selectedIcon');
+                if (!el) return;
+                if (!val) { el.textContent = ''; return; }
+                // If value contains non-ascii characters (emoji), print directly
+                if (/[^\x00-\x7F]/.test(val)) {
+                    el.textContent = val;
+                } else {
+                    // fallback: show text
+                    el.textContent = val;
+                }
+            }
+
+            $(function(){
+                var $icon = $('#IconSelect');
+                var $name = $('#Name');
+
+                // initial preview and optional autofill
+                if ($icon.length) {
+                    updateIconPreview($icon.val());
+                var selectedText = $icon.find('option:selected').text().trim();
+                function stripLeadingIcons(text) {
+                    if (!text) return text;
+                    try {
+                        // remove any leading symbols/emojis until first letter or number
+                        return text.replace(/^[^\p{L}\p{N}]+/u, '').trim();
+                    } catch (e) {
+                        // fallback for older browsers: remove leading non-alphanumerics
+                        return text.replace(/^[^A-Za-z0-9]+/, '').trim();
+                    }
+                }
+                var cleaned = stripLeadingIcons(selectedText);
+                if ($name.length && !$name.val().trim() && cleaned) {
+                    $name.val(cleaned).addClass('autofill-by-icon');
+                }
+                }
+
+                $icon.on('change', function(){
+                    var val = $(this).val();
+                var txt = $(this).find('option:selected').text().trim();
+                updateIconPreview(val);
+                var cleanedTxt = (function(t){
+                    try { return t.replace(/^[^\p{L}\p{N}]+/u, '').trim(); }
+                    catch(e) { return t.replace(/^[^A-Za-z0-9]+/, '').trim(); }
+                })(txt);
+                if ($name.length && !$name.val().trim()) {
+                    $name.val(cleanedTxt).addClass('autofill-by-icon');
+                }
+                });
+
+                // If user types into name, remove autofill marker so we don't overwrite
+                $name.on('input', function(){
+                    if ($(this).val().trim()) {
+                        $(this).removeClass('autofill-by-icon');
+                    }
+                });
+            });
+        })();
+    </script>
+}
