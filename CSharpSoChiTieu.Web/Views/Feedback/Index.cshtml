@@ -1,5 +1,211 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-12">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-gradient-primary text-white p-3">
+                    <h5 class="mb-0 text-white">
+                        <i class="material-symbols-rounded align-middle me-2">feedback</i>Gửi Góp Ý & Báo Lỗi
+                    </h5>
+                    <p class="text-xs text-white opacity-8 mb-0 mt-1">Ý kiến đóng góp của bạn giúp chúng tôi hoàn thiện phần mềm tốt hơn mỗi ngày.</p>
+                </div>
+
+                <div class="card-body p-4">
+                    <form id="feedbackForm" enctype="multipart/form-data">
+                        <!-- Loại phản hồi -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-dark text-sm">Loại phản hồi <span class="text-danger">*</span></label>
+                            <div class="d-flex gap-3">
+                                <div class="form-check ps-0 me-3">
+                                    <input class="form-check-input" type="radio" name="Type" id="typeFeedback" value="Feedback" checked>
+                                    <label class="form-check-label text-sm fw-semibold" for="typeFeedback">
+                                        💡 Góp ý cải tiến
+                                    </label>
+                                </div>
+                                <div class="form-check ps-0">
+                                    <input class="form-check-input" type="radio" name="Type" id="typeBug" value="Bug">
+                                    <label class="form-check-label text-sm fw-semibold text-danger" for="typeBug">
+                                        🐛 Báo lỗi / Sự cố
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mức độ ưu tiên -->
+                        <div class="mb-3">
+                            <label for="priority" class="form-label fw-bold text-dark text-sm">Mức độ ảnh hưởng</label>
+                            <select class="form-select form-select-sm" id="priority" name="Priority" style="border-radius: 0.5rem;">
+                                <option value="Low">Thấp - Không ảnh hưởng nhiều đến trải nghiệm</option>
+                                <option value="Medium" selected>Trung bình - Cần cải tiến / Sửa chữa</option>
+                                <option value="High">Cao - Lỗi nghiêm trọng, không thể sử dụng chức năng</option>
+                            </select>
+                        </div>
+
+                        <!-- Tiêu đề -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label fw-bold text-dark text-sm">Tiêu đề <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="title" name="Title" placeholder="Ví dụ: Không thể lưu khoản chi tiêu..." required>
+                        </div>
+
+                        <!-- Mô tả chi tiết -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label fw-bold text-dark text-sm">Nội dung chi tiết <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="description" name="Description" rows="4" placeholder="Mô tả chi tiết sự cố hoặc ý tưởng của bạn..." required></textarea>
+                        </div>
+
+                        @* <!-- Tải ảnh màn hình (Chọn nhiều ảnh + Preview) -->
+                        <div class="mb-4">
+                            <label for="attachments" class="form-label fw-bold text-dark text-sm">Hình ảnh minh họa (nếu có)</label>
+                            <input class="form-control" type="file" id="attachments" name="Attachments" accept="image/*" multiple>
+                            <span class="text-xs text-muted">Có thể chọn nhiều ảnh đính kèm để kỹ thuật kiểm tra nhanh hơn.</span>
+
+                            <!-- Khu vực hiển thị danh sách ảnh xem trước -->
+                            <div id="imagePreviewContainer" class="d-flex flex-wrap gap-2 mt-3"></div>
+                        </div> *@
+
+                        <!-- Tải ảnh màn hình (Nút bấm custom + Preview) -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark text-sm d-block">Hình ảnh minh họa (nếu có)</label>
+
+                            <!-- Nút upload custom -->
+                            <div>
+                                <label for="attachments" class="btn btn-outline-primary btn-sm mb-1 cursor-pointer">
+                                    <i class="material-symbols-rounded text-sm align-middle me-1">add_photo_alternate</i> Chọn hình ảnh
+                                </label>
+                                <input type="file" id="attachments" name="Attachments" accept="image/*" multiple style="display: none;">
+                            </div>
+
+                            <span class="text-xs text-muted d-block">Có thể chọn nhiều ảnh đính kèm để kỹ thuật kiểm tra nhanh hơn.</span>
+
+                            <!-- Khu vực hiển thị danh sách ảnh xem trước -->
+                            <div id="imagePreviewContainer" class="d-flex flex-wrap gap-2 mt-3"></div>
+                        </div>
+
+                        @* <!-- Tải ảnh màn hình -->
+                        <div class="mb-4">
+                            <label for="attachment" class="form-label fw-bold text-dark text-sm">Hình ảnh minh họa (nếu có)</label>
+                            <input class="form-control" type="file" id="attachment" name="Attachment" accept="image/*">
+                            <span class="text-xs text-muted">Đính kèm ảnh đúp màn hình bị lỗi để giúp kỹ thuật kiểm tra nhanh hơn.</span>
+                        </div> *@
+
+                        <!-- Button Gửi -->
+                        <div class="d-flex justify-content-end gap-2">
+                            <button type="reset" class="btn btn-light btn-sm mb-0">Làm mới</button>
+                            <button type="submit" id="btnSubmitFeedback" class="btn btn-primary btn-sm mb-0 fw-bold">
+                                <i class="material-symbols-rounded text-sm align-middle me-1">send</i> Gửi ý kiến
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            // Khởi tạo đối tượng DataTransfer để quản lý danh sách file linh hoạt
+            var selectedFilesContainer = new DataTransfer();
+
+            // Khi người dùng chọn file
+            $('#attachments').on('change', function(e) {
+                var files = e.target.files;
+
+                // Thêm các file mới chọn vào DataTransfer
+                for (var i = 0; i < files.length; i++) {
+                    if (files[i].type.match('image.*')) {
+                        selectedFilesContainer.items.add(files[i]);
+                    }
+                }
+
+                // Cập nhật lại input file và render preview
+                this.files = selectedFilesContainer.files;
+                renderPreview();
+            });
+
+            // Hàm render danh sách ảnh xem trước kèm nút X
+            function renderPreview() {
+                var $container = $('#imagePreviewContainer');
+                $container.empty();
+
+                Array.from(selectedFilesContainer.files).forEach(function(file, index) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        var imgHtml = `
+                                    <div class="position-relative d-inline-block me-2 mb-2 preview-item" data-index="${index}">
+                                        <img src="${e.target.result}" class="rounded border shadow-sm" style="width: 80px; height: 80px; object-fit: cover;">
+                                        <button type="button" class="btn btn-danger btn-sm p-0 position-absolute btn-remove-img"
+                                                style="top: -6px; right: -6px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px;"
+                                                data-index="${index}">
+                                            &times;
+                                        </button>
+                                    </div>`;
+                        $container.append(imgHtml);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            // Xử lý sự kiện click vào dấu X để xóa 1 ảnh
+            $(document).on('click', '.btn-remove-img', function() {
+                var indexToRemove = $(this).data('index');
+
+                // Tạo mới DataTransfer để loại bỏ file tại index tương ứng
+                var updatedContainer = new DataTransfer();
+                var currentFiles = selectedFilesContainer.files;
+
+                for (var i = 0; i < currentFiles.length; i++) {
+                    if (i !== indexToRemove) {
+                        updatedContainer.items.add(currentFiles[i]);
+                    }
+                }
+
+                selectedFilesContainer = updatedContainer;
+                document.getElementById('attachments').files = selectedFilesContainer.files;
+
+                // Render lại preview
+                renderPreview();
+            });
+
+            // Reset form
+            $('#feedbackForm').on('reset', function() {
+                selectedFilesContainer = new DataTransfer();
+                $('#imagePreviewContainer').empty();
+            });
+
+            // Gửi AJAX
+            $('#feedbackForm').submit(function(e) {
+                e.preventDefault();
+
+                var formData = new FormData(this);
+                var $btn = $('#btnSubmitFeedback');
+
+                $btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-1"></span> Đang gửi...');
+
+                $.ajax({
+                    url: '/Feedback/Send',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(res) {
+                        if (res.success) {
+                            alert('Cảm ơn bạn đã đóng góp ý kiến!');
+                            $('#feedbackForm')[0].reset();
+                            selectedFilesContainer = new DataTransfer();
+                            $('#imagePreviewContainer').empty();
+                        } else {
+                            alert(res.message || 'Không thể gửi phản hồi.');
+                        }
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra khi kết nối máy chủ!');
+                    },
+                    complete: function() {
+                        $btn.prop('disabled', false).html('<i class="material-symbols-rounded text-sm align-middle me-1">send</i> Gửi ý kiến');
+                    }
+                });
+            });
+        });
+    </script>
 }

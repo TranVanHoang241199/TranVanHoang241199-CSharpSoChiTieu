@@ -426,6 +426,7 @@ wwwroot\assets\scss\material-dashboard\variables\_virtual-reality.scss
 wwwroot\css\income-expenses.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\img\Bg_logo_Tran.jpg
 wwwroot\img\QC\Bia_lao.jfif
 wwwroot\img\QC\nhau.webp
 wwwroot\img\avatar.jpg
@@ -502,4 +503,8 @@ wwwroot\uploads\profiles\ba128080-ee05-4c8c-91e6-16208cd1fe2b_638866782663705380
 wwwroot\uploads\profiles\ba128080-ee05-4c8c-91e6-16208cd1fe2b_638866782786048957.jpg
 wwwroot\uploads\profiles\eeded51e-bb74-46ed-8b67-1b4ba23d6659_639230687101088141.png
 wwwroot\uploads\profiles\eeded51e-bb74-46ed-8b67-1b4ba23d6659_639234167978755549.jpg
+wwwroot\uploads\profiles\eeded51e-bb74-46ed-8b67-1b4ba23d6659_639236944739839238.jpg
+wwwroot\uploads\profiles\eeded51e-bb74-46ed-8b67-1b4ba23d6659_639236944788869252.jpg
+wwwroot\uploads\profiles\eeded51e-bb74-46ed-8b67-1b4ba23d6659_639236946073291246.jpg
+wwwroot\uploads\profiles\eeded51e-bb74-46ed-8b67-1b4ba23d6659_639236946099347535.jpg
 wwwroot\uploads\profiles\f4b69f24-819f-4fee-a1e0-c9bb3aacd8cb_639087209465380436.jpg

@@ -32,6 +32,7 @@ namespace CSharpSoChiTieu.Data
         public DbSet<ct_Emoji> ct_Emojis { get; set; }
         public DbSet<ct_Currency> ct_Currencies { get; set; }
         public DbSet<ct_UserSetting> ct_UserSettings { get; set; }
+        public DbSet<ct_Feedback> Feedbacks { get; set; }
         #endregion DBSet
 
 

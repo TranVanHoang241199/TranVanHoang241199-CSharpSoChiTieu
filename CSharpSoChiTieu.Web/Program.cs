@@ -20,6 +20,7 @@ builder.Services.AddScoped<IReportHandler, ReportHandler>();
 builder.Services.AddScoped<IEmojiHandler, EmojiHandler>();
 builder.Services.AddScoped<ISettingHandler, SettingHandler>();
 builder.Services.AddScoped<ICurrencyHandler, CurrencyHandler>();
+builder.Services.AddScoped<IFeedbackHandler, FeedbackHandler>();
 
 
 builder.Services.AddHttpContextAccessor();

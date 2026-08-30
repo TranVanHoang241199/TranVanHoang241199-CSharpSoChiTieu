@@ -24,7 +24,7 @@
                             <div class="input-group input-group-outline">
                                 <input type="text" class="form-control" placeholder="Tìm kiếm danh mục..."
                                        name="searchValue" value="@Model.SearchValue" autofocus>
-                                <button class="btn btn-outline-primary mb-0" type="submit">
+                                <button class="btn btn-primary mb-0 border-radius-lg" type="submit">
                                     <i class="material-symbols-rounded">search</i>
                                 </button>
                             </div>
@@ -71,6 +71,23 @@
     </script>
 }
 
+<style>
+    /* Tắt hiệu ứng hover cho ô tìm kiếm và nút bấm */
+    #formSearch .form-control:hover,
+    #formSearch .form-control:focus,
+    #formSearch .btn:hover,
+    .btn-primary:hover {
+        transform: none !important;
+        box-shadow: none !important;
+        transition: none !important;
+    }
+
+    /* Nếu muốn tắt hiệu ứng nổi lên cho toàn bộ card */
+    .card:hover {
+        transform: none !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    }
+</style>
 
 
 

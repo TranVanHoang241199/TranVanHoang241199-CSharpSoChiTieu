@@ -14,8 +14,8 @@
     <!-- Header Logo -->
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a class="" height="100px" width="100%" asp-controller="IncomeExpense" asp-action="Index">
-            <img src="~/img/logo1.jpg" class="" height="100%" width="100%" alt="main_logo">
+        <a class="d-block w-100 overflow-hidden" style="height: 100px;" asp-controller="IncomeExpense" asp-action="Index">
+            <img src="~/img/Bg_logo_Tran.jpg" class="w-100 h-100" style="object-fit: cover; object-position: center;" alt="main_logo">
         </a>
     </div>
 
@@ -24,7 +24,7 @@
         @if (User.Identity.IsAuthenticated)
         {
             <div class="d-flex align-items-center">
-                <img src="@Url.Content(userImage)" class="avatar avatar-md rounded-circle me-2" alt="avatar">
+                <img src="@Url.Content(userImage)" class="avatar avatar-md rounded-circle me-2" style="object-fit: cover;" alt="avatar">
                 <div>
                     <h6 class="mb-0 text-sm">@User.Identity.Name</h6>
                     @* <span class="text-xs text-muted">@(userProfile?.Role == "admin" ? "Quản trị viên" : "Người dùng")</span> *@

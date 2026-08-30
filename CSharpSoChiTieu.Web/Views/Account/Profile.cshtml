@@ -20,11 +20,11 @@
                             <div class="position-relative">
                                 @if (!string.IsNullOrEmpty(Model.Image))
                                 {
-                                    <img src="@Model.Image" alt="Profile Image" class="img-fluid rounded-circle" style="width: 200px; height: 200px;" id="profileImage" />
+                                    <img src="@Model.Image" alt="Profile Image" class="img-fluid rounded-circle" style="width: 200px; height: 200px; object-fit: cover;" id="profileImage">
                                 }
                                 else
                                 {
-                                    <img src="~/images/default-avatar.png" alt="Default Avatar" class="img-fluid rounded-circle" style="width: 200px; height: 200px;" id="profileImage" />
+                                    <img src="~/images/default-avatar.png" alt="Default Avatar" class="img-fluid rounded-circle" style="width: 200px; height: 200px; object-fit: cover;" id="profileImage">
                                 }
                                 <div class="position-absolute bottom-0 end-0">
                                     <label for="imageUpload" class="btn fw-bold btn-primary" style="font-size: 0.7rem;">
@@ -62,6 +62,7 @@
                             </div>
                         </div>
                     </div>
+                     
                     <div class="text-center" id="actionButtons">
                         <a href="@Url.Action("Index", "IncomeExpense")" class="btn btn-secondary fw-bold">Quay lại</a>
                         <button type="button" class="btn btn-primary fw-bold" id="editButton">Chỉnh sửa</button>
