@@ -1,2 +1,0 @@
-D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu.Web\wwwroot\uploads\feedback\6d9bea07-8e64-40c6-b2ff-7e9969c36bce_1787819978180_1839483192525484606_1450620044102293912_9831bbba2bf51f3dd736a8badab2ce43.jpg
-D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu.Web\wwwroot\uploads\feedback\7e228b77-2727-474d-9d7a-8a7aac723272_Bg_logo_Tran.jpg

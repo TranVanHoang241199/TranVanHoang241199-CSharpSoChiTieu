@@ -220,7 +220,7 @@ namespace CSharpSoChiTieu.Web.Controllers
         {
             return View();
         }
-
+/*
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult ChangePassword(string currentPassword, string newPassword, string confirmPassword)
@@ -255,6 +255,49 @@ namespace CSharpSoChiTieu.Web.Controllers
             _accountHandler.ChangePassword(userId, newPassword);
             ViewBag.Success = "Đổi mật khẩu thành công!";
             return View();
+        }*/
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            if (string.IsNullOrWhiteSpace(model.CurrentPassword) || string.IsNullOrWhiteSpace(model.NewPassword) || string.IsNullOrWhiteSpace(model.ConfirmPassword))
+            {
+                ModelState.AddModelError("", "Vui lòng nhập đầy đủ thông tin.");
+                return View(model);
+            }
+
+            if (model.NewPassword != model.ConfirmPassword)
+            {
+                ModelState.AddModelError("", "Mật khẩu xác nhận không khớp.");
+                return View(model);
+            }
+
+            var userIdClaim = User.FindFirst("UserId");
+            if (userIdClaim == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var userId = Guid.Parse(userIdClaim.Value);
+            var user = _accountHandler.GetProfile(userId);
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Không tìm thấy người dùng.");
+                return View(model);
+            }
+
+            if (user.Password != PasswordHasher.Hash(model.CurrentPassword))
+            {
+                ModelState.AddModelError("", "Mật khẩu hiện tại không đúng.");
+                return View(model);
+            }
+
+            _accountHandler.ChangePassword(userId, model.NewPassword);
+            ViewBag.Success = "Đổi mật khẩu thành công!";
+
+            // Đổi mật khẩu thành công thì xóa dữ liệu trên form
+            return View(new ChangePasswordViewModel());
         }
 
         // Action yêu cầu quyền admin

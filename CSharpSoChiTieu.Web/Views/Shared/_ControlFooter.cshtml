@@ -41,7 +41,8 @@
                         <img src="@Url.Content(userImage)" class="avatar avatar-sm rounded-circle me-2" alt="avatar">
                         <div>
                             <h6 class="mb-0 text-sm">@User.Identity.Name</h6>
-                            <span class="text-xs text-muted">@(userProfile?.Role == "admin" ? "Quản trị viên" : "Người dùng")</span>
+                           @*  <span class="text-xs text-muted">@(userProfile?.Role == "admin" ? "Quản trị viên" : "Người dùng")</span> *@
+                            <span class="text-xs text-muted">User free</span>
                         </div>
                     </div>
                 </div>
@@ -81,6 +82,8 @@
                     <i class="material-symbols-rounded">account_circle</i> Thêm danh mục
                 </a>
 
+                
+
                 <a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">
                     <i class="material-symbols-rounded">lock</i> Đổi mật khẩu
                 </a>
@@ -94,9 +97,13 @@
                         <a class="dropdown-item" asp-controller="Setting" asp-action="index">
                             <i class="material-symbols-rounded">settings</i> Cài đặt
                         </a>
-                        <a class="dropdown-item" asp-controller="Support" asp-action="index">
-                            <i class="fas fa-comment-dots me-1"></i> Hỗ trợ nhà phát triển <span style="color: gold; font-size: 1rem;">★</span>
+
+                        <a class="dropdown-item" asp-controller="Feedback" asp-action="Index">
+                            <i class="material-symbols-rounded">feedback</i> Góp ý & Báo lỗi
                         </a>
+                        @* <a class="dropdown-item" asp-controller="Support" asp-action="index">
+                            <i class="fas fa-comment-dots me-1"></i> Hỗ trợ nhà phát triển <span style="color: gold; font-size: 1rem;">★</span>
+                        </a> *@
                         <form class="dropdown-item-form" asp-controller="Account" asp-action="Logout" method="post">
                             <button type="submit" class="dropdown-item">
                                 <i class="material-symbols-rounded">logout</i> Đăng xuất
@@ -125,7 +132,7 @@
         padding: 0.1rem 0;
         height: 10vh;
         z-index: 1030;
-        margin-bottom: 10%; /* vài bựa nhớ xoá */
+        /* margin-bottom: 10%;  *//* vài bựa nhớ xoá */
     }
 
         .bottom-nav .nav-link {

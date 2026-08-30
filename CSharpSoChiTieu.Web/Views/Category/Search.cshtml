@@ -110,7 +110,11 @@
 
                                             <!-- Nút thao tác -->
                                             <div class="d-flex flex-column">
-                                                <a href="~/Category/Edit/@item.Id" class="btn btn-link text-primary text-gradient p-1 mb-1" title="Chỉnh sửa">
+                                                <a asp-controller="Category"
+                                                   asp-action="Edit"
+                                                   asp-route-id="@item.Id"
+                                                   class="btn btn-link text-primary text-gradient p-1 mb-1"
+                                                   title="Chỉnh sửa">
                                                     <i class="material-symbols-rounded" style="font-size: 18px;">edit</i>
                                                 </a>
                                                 <button type="button" class="btn btn-link text-danger text-gradient p-1 delete-category"
