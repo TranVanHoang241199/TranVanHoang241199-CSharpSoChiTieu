@@ -1,0 +1,109 @@
+﻿using API_HotelManagement.common;
+using CSharpSoChiTieu.Data;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
+
+namespace CSharpSoChiTieu.Business.Services
+{
+    public class FeedbackHandler : IFeedbackHandler
+    {
+        private readonly CTDbContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHostEnvironment _env;
+
+        public FeedbackHandler(CTDbContext context, IHttpContextAccessor httpContextAccessor, IHostEnvironment env)
+        {
+            _context = context;
+            _httpContextAccessor = httpContextAccessor;
+            _env = env;
+        }
+
+        public async Task<OperationResult> CreateFeedbackAsync(FeedbackCreateModel model)
+        {
+            try
+            {
+                var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
+
+                // Xử lý lưu các file ảnh đính kèm vào thư mục wwwroot/uploads/feedback
+                var savedImagePaths = new List<string>();
+                if (model.Attachments != null && model.Attachments.Count > 0)
+                {
+                    // Use ContentRootPath to locate wwwroot in a class library context
+                    string uploadFolder = Path.Combine(_env.ContentRootPath, "wwwroot", "uploads", "feedback");
+                    if (!Directory.Exists(uploadFolder))
+                    {
+                        Directory.CreateDirectory(uploadFolder);
+                    }
+
+                    foreach (var file in model.Attachments)
+                    {
+                        if (file.Length > 0)
+                        {
+                            string fileName = $"{Guid.NewGuid()}_{Path.GetFileName(file.FileName)}";
+                            string filePath = Path.Combine(uploadFolder, fileName);
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                await file.CopyToAsync(stream);
+                            }
+                            savedImagePaths.Add($"/uploads/feedback/{fileName}");
+                        }
+                    }
+                }
+
+                var entity = new ct_Feedback
+                {
+                    Id = Guid.NewGuid(),
+                    Type = model.Type,
+                    Priority = model.Priority,
+                    Title = model.Title,
+                    Description = model.Description,
+                    ImgUrl = savedImagePaths.Count > 0 ? string.Join(",", savedImagePaths) : null,
+                    IsResolved = false,
+                    CreatedBy = currentUserId,
+                    CreatedDate = DateTime.UtcNow
+                };
+
+                _context.Set<ct_Feedback>().Add(entity);
+                await _context.SaveChangesAsync();
+
+                return new OperationResult(true, "Gửi ý kiến đóng góp thành công!");
+            }
+            catch (Exception ex)
+            {
+                return new OperationResult(false, $"Lỗi lưu dữ liệu: {ex.Message}");
+            }
+        }
+
+        public async Task<OperationResult> GetUserFeedbacksAsync()
+        {
+            try
+            {
+                var currentUserId = GetExtensions.GetUserId(_httpContextAccessor);
+
+                var list = await _context.Set<ct_Feedback>()
+                    .Where(f => f.CreatedBy == currentUserId)
+                    .OrderByDescending(f => f.CreatedDate)
+                    .Select(f => new FeedbackViewModel
+                    {
+                        Id = f.Id,
+                        Type = f.Type,
+                        Priority = f.Priority,
+                        Title = f.Title,
+                        Description = f.Description,
+                        ImgUrl = f.ImgUrl,
+                        IsResolved = f.IsResolved,
+                        CreatedDate = f.CreatedDate,
+                        CreatedBy = f.CreatedBy
+                    })
+                    .ToListAsync();
+
+                return new OperationResult(true, "Thành công", list);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResult(false, ex.Message);
+            }
+        }
+    }
+}
+}

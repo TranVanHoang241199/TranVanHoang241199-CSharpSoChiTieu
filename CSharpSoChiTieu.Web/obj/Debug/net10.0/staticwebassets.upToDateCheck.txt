@@ -491,6 +491,8 @@ wwwroot\lib\jquery\LICENSE.txt
 wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
+wwwroot\uploads\feedback\6d9bea07-8e64-40c6-b2ff-7e9969c36bce_1787819978180_1839483192525484606_1450620044102293912_9831bbba2bf51f3dd736a8badab2ce43.jpg
+wwwroot\uploads\feedback\7e228b77-2727-474d-9d7a-8a7aac723272_Bg_logo_Tran.jpg
 wwwroot\uploads\profiles\64307852-9128-473f-88da-87d3273a6ee9_639085068375291398.jpg
 wwwroot\uploads\profiles\6e201923-6a01-48b8-914d-ef1a5a072765_638857491841828311.jfif
 wwwroot\uploads\profiles\6e201923-6a01-48b8-914d-ef1a5a072765_638857492149865803.webp

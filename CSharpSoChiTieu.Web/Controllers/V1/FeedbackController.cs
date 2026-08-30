@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using API_HotelManagement.common;
+using CSharpSoChiTieu.Business.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace CSharpSoChiTieu.Web.Controllers
 {
@@ -9,37 +12,47 @@ namespace CSharpSoChiTieu.Web.Controllers
     [Authorize]
     public class FeedbackController : Controller
     {
-        public IActionResult Index()
+        private readonly IFeedbackHandler _feedbackHandler;
+
+        public FeedbackController(IFeedbackHandler feedbackHandler)
         {
-            return View();
+            _feedbackHandler = feedbackHandler;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var result = await _feedbackHandler.GetUserFeedbacksAsync();
+
+            // Ép kiểu về OperationResultList để lấy thuộc tính Data
+            var listResult = result as OperationResultList<FeedbackViewModel>;
+            var model = listResult?.Data ?? new List<FeedbackViewModel>();
+
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Send(FeedbackInputModel model)
+        public async Task<IActionResult> Send(FeedbackCreateModel model)
         {
-            if (string.IsNullOrWhiteSpace(model.Title) || string.IsNullOrWhiteSpace(model.Description))
+            if (!ModelState.IsValid)
             {
-                return Json(new { success = false, message = "Vui lòng nhập đầy đủ tiêu đề và nội dung." });
+                return Json(new { success = false, message = "Dữ liệu nhập vào không hợp lệ!" });
             }
 
-            // TODO: Lưu thông tin góp ý vào CSDL hoặc gửi email trực tiếp cho Admin
-            /* 
-               Ví dụ:
-               - Lưu model vào db bảng Feedbacks
-               - Nếu model.Attachment != null -> Lưu file ảnh vào thư mục wwwroot/uploads/feedbacks
-            */
+            var result = await _feedbackHandler.CreateFeedbackAsync(model);
 
-            return Json(new { success = true });
+            // Kiểm tra Status == HttpStatusCode.OK thay vì result.Success
+            bool isSuccess = result.Status == HttpStatusCode.OK;
+
+            return Json(new { success = isSuccess, message = result.Message });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var result = await _feedbackHandler.DeleteFeedbackAsync(id);
+            bool isSuccess = result.Status == HttpStatusCode.OK;
+            return Json(new { success = isSuccess, message = result.Message });
         }
     }
-
-    public class FeedbackInputModel
-    {
-        public string Type { get; set; } // Feedback hoặc Bug
-        public string Priority { get; set; } // Low, Medium, High
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public IFormFile? Attachment { get; set; }
-    }
-
 }
