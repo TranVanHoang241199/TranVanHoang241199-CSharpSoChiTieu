@@ -7,22 +7,33 @@
 <div class="card h-100 shadow-sm">
 
 	@* Begin: header *@
-	<div class="card-header pb-0 px-3">
+	<div id="IE_HistoryTitle" class="card-header pb-0 px-3">
 		<div class="row align-items-center mb-2">
 			<div class="col-6">
 				<h6 class="mb-0 text-primary">
-					<i class="fas fa-history me-2"></i>Thu chi gần đây
+					<i class="fas fa-history me-2"></i>
+					@{
+						var totalCount = Model?.Sum(g => g.Items?.Count ?? 0) ?? 0;
+					}
+					@totalCount Thu chi gần đây
 				</h6>
 			</div>
 
+			
 			<div class="col-6 d-flex justify-content-end">
 				<select id="select-range" class="form-select form-select-sm shadow-none" style="border-radius: 0.5rem; min-width: 80px;">
+					<option value="today" selected="@(ViewBag.RangeType == "today")">Hôm nay</option>
+					<option value="week" selected="@(ViewBag.RangeType == "week")">Tuần này</option>
+					<option value="month" selected="@(string.IsNullOrEmpty(ViewBag.RangeType) || ViewBag.RangeType == "month")">Tháng này</option>
+					<option value="year" selected="@(ViewBag.RangeType == "year")">Năm này</option>
+				</select>
+				@* <select id="select-range" class="form-select form-select-sm shadow-none" style="border-radius: 0.5rem; min-width: 80px;">
 					<option value="today">Hôm nay</option>
 					<option value="week">Tuần này</option>
 					<option value="month" selected>Tháng này</option>
 					<option value="year">Năm này</option>
-				</select>
-			</div>
+				</select> *@
+			</div> 
 		</div>
 	</div>
 	@* End: header *@
@@ -96,6 +107,11 @@
 
 		// Khởi tạo các event handlers
 		initializeEventHandlers();
+
+		$("#select-range").val(range);
+
+		var newContent = $(result).find('#history_id').html();
+		$('#history_id').html(newContent);
 
 		// Các function xử lý chính
 		function initializeEventHandlers() {
@@ -421,6 +437,10 @@
 				success: function (result) {
 					var newContent = $(result).find('#history_id').html();
 					$('#history_id').html(newContent);
+
+					// Cập nhật lại số lượng trên Header sau khi chèn HTML mới
+					var count = $('#history_id .income-item').length;
+					$('#IE_HistoryTitle h6').html('<i class="fas fa-history me-2"></i>' + count + ' Thu chi gần đây');
 				},
 				error: function () {
 					$('#history_id').html('<div class="text-danger text-center p-4">Lỗi khi tải dữ liệu.</div>');

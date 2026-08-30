@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CSharpSoChiTieu.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f4b9d6addfa4b3020e9c3e50c72065c387a24423")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3cf68651237f4c9eab56c6a3fd82303486a859ae")]
 [assembly: System.Reflection.AssemblyProductAttribute("CSharpSoChiTieu.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CSharpSoChiTieu.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
