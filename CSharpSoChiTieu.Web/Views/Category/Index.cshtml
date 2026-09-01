@@ -19,11 +19,11 @@
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="p-3">
                         <form id="formSearch" action="~/Category/Search">
-                            <input type="hidden" name="PageSize" value="@Model.PageSize" />
+                            <input type="hidden" name="PageSize" value="@Model.PageSize" required />
                             
                             <div class="input-group input-group-outline">
                                 <input type="text" class="form-control" placeholder="Tìm kiếm danh mục..."
-                                       name="searchValue" value="@Model.SearchValue" autofocus>
+                                       name="searchValue" value="@Model.SearchValue">
                                 <button class="btn btn-primary mb-0 border-radius-lg" type="submit">
                                     <i class="material-symbols-rounded">search</i>
                                 </button>
@@ -41,14 +41,19 @@
 
 @section scripts {
     <script>
+
+        
+
         $(document).ready(function () {
             $("#formSearch").submit(function (e) {
                 e.preventDefault();
                 doSearch(1);
                 return;
             });
+
             doSearch(@Model.Page);
         })
+
         function doSearch(page) {
             var url = $("#formSearch").prop("action");
             var postData = $("#formSearch").serializeArray();
@@ -74,7 +79,7 @@
 <style>
     /* Tắt hiệu ứng hover cho ô tìm kiếm và nút bấm */
     #formSearch .form-control:hover,
-    #formSearch .form-control:focus,
+    /* #formSearch .form-control:focus, */
     #formSearch .btn:hover,
     .btn-primary:hover {
         transform: none !important;

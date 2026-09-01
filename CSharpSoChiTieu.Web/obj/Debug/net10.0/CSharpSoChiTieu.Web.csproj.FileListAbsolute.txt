@@ -559,10 +559,10 @@ D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Debug\net10.0\staticwebassets.development.json
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Debug\net10.0\swae.build.ex.cache
-D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Debug\net10.0\CSharpSo.4686ADA3.Up2Date
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Debug\net10.0\CSharpSoChiTieu.Web.dll
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Debug\net10.0\refint\CSharpSoChiTieu.Web.dll
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Debug\net10.0\CSharpSoChiTieu.Web.pdb
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Debug\net10.0\CSharpSoChiTieu.Web.genruntimeconfig.cache
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Debug\net10.0\ref\CSharpSoChiTieu.Web.dll
+D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

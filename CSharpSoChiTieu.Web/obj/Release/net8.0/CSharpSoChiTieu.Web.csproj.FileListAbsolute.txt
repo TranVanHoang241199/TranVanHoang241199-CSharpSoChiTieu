@@ -200,3 +200,6 @@ D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.Web
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Release\net8.0\rjsmrazor.dswa.cache.json
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Release\net8.0\rjsmcshtml.dswa.cache.json
 D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Release\net8.0\swae.build.ex.cache
+D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Release\net8.0\CSharpSoChiTieu.Web.dll
+D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Release\net8.0\refint\CSharpSoChiTieu.Web.dll
+D:\developer\C#_dotnet\WEB\CS_MVC_QuanLyTien\TranVanHoang241199-CSharpSoChiTieu\CSharpSoChiTieu.Web\obj\Release\net8.0\CSharpSoChiTieu.Web.pdb
